@@ -1,0 +1,4 @@
+export HUBOT_GITHUB_TOKEN=`cat /secrets/github-token`
+export HUBOT_JENKINS_AUTH=`cat /secrets/jenkins-auth`
+export HUBOT_JENKINS_TOKEN=`cat /secrets/jenkins-token`
+export HUBOT_XMPP_PASSWORD=`cat /secrets/xmpp-secret`
