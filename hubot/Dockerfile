@@ -7,9 +7,8 @@ ADD hubot-conf /etc/sysconfig/hubot
 RUN cd /root && hubot --create cmsbot
 ADD hubot-package.json /root/cmsbot/package.json
 RUN cd /root/cmsbot && npm install
-RUN service redis-server start
 ENV HUBOT_XMPP_HOST jabber.cern.ch
 ENV HUBOT_XMPP_PORT 5222
 ENV HUBOT_GITHUB_REPO cms-sw/cmssw
 
-CMD cd /root/cmsbot && . /etc/sysconfig/hubot && bin/hubot -a xmpp -n cmsbot
+CMD service redis-server start ; cd /root/cmsbot && . /etc/sysconfig/hubot && bin/hubot -a xmpp -n cmsbot
