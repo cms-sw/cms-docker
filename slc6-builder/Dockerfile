@@ -12,6 +12,7 @@ RUN yum install -y rpm-build
 RUN yum install -y which
 RUN yum install -y git
 RUN yum install -y screen
+RUN yum install -y e2fsprogs
 ADD http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh /opt/cms/bootstrap.sh
 RUN chmod 755 /opt/cms/bootstrap.sh
 ENV SCRAM_ARCH slc5_amd64_gcc462
