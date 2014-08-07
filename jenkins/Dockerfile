@@ -9,4 +9,4 @@ RUN chown jenkins /home/jenkins/jenkins.war
 
 USER jenkins
 
-CMD java -jar /home/jenkins/jenkins.war --httpPort=8080 --prefix /jenkins
+CMD java -jar /home/jenkins/jenkins.war --httpPort=8080 --prefix=/jenkins

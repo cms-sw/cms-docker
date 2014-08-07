@@ -1,0 +1,1 @@
+docker run -d -v /storage/local/data1/gartung/target/:/target  -p 8000:8000 -p 8080:80 gartung/dxr
