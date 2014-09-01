@@ -8,19 +8,23 @@ RUN adduser cmsbuild
 RUN install -d /opt
 RUN install -d -o cmsbuild /opt/cms
 RUN yum install -y wget rpm-build which git screen e2fsprogs
-ADD http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh /opt/cms/bootstrap.sh
-RUN chmod 755 /opt/cms/bootstrap.sh
+ADD http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh /opt/bootstrap.sh
+RUN chmod 755 /opt/bootstrap.sh
 ENV SCRAM_ARCH slc6_amd64_gcc481
 ENV VO_CMS_SW_DIR /opt/cms
 RUN install -d -o cmsbuild /build
 WORKDIR /build
 USER cmsbuild
-RUN /opt/cms/bootstrap.sh -a $SCRAM_ARCH -path /opt/cms setup
+RUN /opt/bootstrap.sh -a $SCRAM_ARCH -path /opt/cms setup
 RUN source /opt/cms/slc6_amd64_gcc481/external/apt/0.5.16/etc/profile.d/init.sh && apt-get install cms+local-cern-siteconf+sm111124
 USER root
 RUN cp /opt/cms/slc6_amd64_gcc481/external/apt/0.5.16/etc/profile.d/init.* /etc/profile.d
 RUN cp /opt/cms/cmsset_default.* /etc/profile.d
-WORKDIR /build
-USER cmsbuild
+# We save the installation so that we can start from there when passing a new installation volume via -v.
+RUN rsync -av /opt/cms/ /opt/cms.safe/
+WORKDIR /opt/cms
 
-CMD /bin/bash --login
+# Before starting the shell we copy the bootstrap area in place so that if
+# /opt/cms was overridded by a volume, we have the installation available
+# immediately.
+CMD rsync -av /opt/cms.safe/ /opt/cms/  && chown -R cmsbuild /opt/cms && su - cmsbuild
