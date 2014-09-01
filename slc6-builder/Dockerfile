@@ -16,6 +16,7 @@ RUN install -d -o cmsbuild /build
 WORKDIR /build
 USER cmsbuild
 RUN /opt/cms/bootstrap.sh -a $SCRAM_ARCH -path /opt/cms setup
+RUN source /opt/cms/slc6_amd64_gcc481/external/apt/0.5.16/etc/profile.d/init.sh && apt-get install cms+local-cern-siteconf+sm111124
 USER root
 RUN cp /opt/cms/slc6_amd64_gcc481/external/apt/0.5.16/etc/profile.d/init.* /etc/profile.d
 RUN cp /opt/cms/cmsset_default.* /etc/profile.d
