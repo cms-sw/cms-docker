@@ -8,6 +8,7 @@
 # do not commit keyfiles in this repository!
 #
 FROM arkii/centos65
+PORT 22
 
 RUN yum update -y
 RUN yum install -y rsync
