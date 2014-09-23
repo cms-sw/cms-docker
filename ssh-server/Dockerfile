@@ -15,4 +15,4 @@ RUN yum install -y openssh-server which
 RUN adduser cmsbuild
 
 # Only use dsa key.
-CMD /usr/bin/sshd -D -d -h /etc/ssh/ssh_host_dsa_key
+CMD /usr/sbin/sshd -D -d -oPasswordAuthentication=no -h /etc/ssh/ssh_host_dsa_key
