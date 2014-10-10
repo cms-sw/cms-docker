@@ -1,12 +1,12 @@
-FROM ubuntu:14.04
+FROM centos:centos6
 
 EXPOSE 8080
-RUN apt-get update && apt-get install -y openjdk-7-jre-headless
-RUN mkdir /home/jenkins && useradd -d /home/jenkins jenkins
-RUN chown jenkins:jenkins /home/jenkins
-ADD http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war /home/jenkins/jenkins.war
-RUN chown jenkins /home/jenkins/jenkins.war
+RUN yum update -y
+RUN yum install -y java-1.7.0-openjdk
+RUN mkdir /jenkins /sw
+ADD http://mirrors.jenkins-ci.org/war-stable/latest/jenkins.war /sw/jenkins.war
+ENV JENKINS_HOME /jenkins
+ENV JENKINS_PREFIX /jenkins
+ENV JAVA_HOME /usr/lib/jvm/jre-1.7.0-openjdk.x86_64
 
-USER jenkins
-
-CMD java -jar /home/jenkins/jenkins.war --httpPort=8080 --prefix=/jenkins
+CMD java -jar /sw/jenkins.war --httpPort=8080 --prefix=$JENKINS_PREFIX
