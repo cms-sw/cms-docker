@@ -1,25 +1,25 @@
-FROM ubuntu
+FROM ubuntu:14.10
 
 MAINTAINER  Patrick Gartung "gartung@fnal.gov"
 
 RUN apt-get update -y && apt-get install -y \
-	git rinse sudo tar build-essential npm && \
+	git sudo tar build-essential npm && \
 	ln -sf /usr/bin/nodejs /usr/local/bin/node && \
 	apt-get install -y sphinx-common && \
 	apt-get install -y libapache2-mod-wsgi python-pip &&\
 	pip install virtualenv virtualenvwrapper python-hglib nose &&\
 	apt-get install -y apache2-dev apache2 && \
-	apt-get install -y libsqlite3-dev sqlite3 git mercurial llvm-3.3 libclang-3.3-dev clang-3.3 pkg-config &&\
+	apt-get install -y libsqlite3-dev sqlite3 git mercurial llvm-3.5 libclang-3.5-dev clang-3.5 pkg-config &&\
 	apt-get clean all &&\
-	update-alternatives --install /usr/local/bin/llvm-config llvm-config /usr/bin/llvm-config-3.3 0
+	update-alternatives --install /usr/local/bin/llvm-config llvm-config /usr/bin/llvm-config-3.5 0
 
 RUN git clone --recursive \
-	https://github.com/gartung/dxr.git \
-	/dxr && cd /dxr/trilite && make &&\ 
-	cp -p libtrilite.so /usr/lib && \
-	cp -p libtrilite.so /usr/lib64 && \
-	/sbin/ldconfig && cd /dxr && ./peep.py install -r requirements.txt &&\
-	make && python setup.py install && cd tests/test_basic && make
+	https://github.com/gartung/dxr.git /dxr && \
+	cd /dxr && git checkout origin/cms-dxr-mods && ./peep.py install -r requirements.txt &&\
+	make && python setup.py install && \
+	cp -p trilite/libtrilite.so /usr/lib && \
+	cp -p trilite/libtrilite.so /usr/lib64 && \
+	/sbin/ldconfig 
 
 RUN mkdir -p /etc/apache2/sites-enabled
 
@@ -33,6 +33,7 @@ EXPOSE 80
 
 RUN mkdir -p /target
 
-ADD dxr.sh /dxr.sh
+RUN mkdir -p /storage/local/data1
 
-CMD ["/dxr.sh"]
+ENTRYPOINT ["/usr/sbin/apache2ctl"]
+CMD ["-D","FOREGROUND"]
