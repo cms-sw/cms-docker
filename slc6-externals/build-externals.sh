@@ -39,12 +39,12 @@ HEAD_REPO=`curl -s $BUILD_PR_URL | jq '.["head"]["repo"]["clone_url"]' | sed -e 
 HEAD_BRANCH=`curl -s $BUILD_PR_URL | jq '.["head"]["ref"]' | sed -e 's/"//g'`
 
 # Clone the repository and merge the pull request.
-git clone --depth 10 -b $BASE_BRANCH $BASE_REPO $BUILD_PACKAGE
+git clone -b $BASE_BRANCH $BASE_REPO $BUILD_PACKAGE
 pushd $BUILD_PACKAGE
   git config user.email "cmsbuild@cern.ch"
   git config user.name "CMS BOT"
   git pull $HEAD_REPO $HEAD_BRANCH
-  HEAD_REF=`git show --pretty="%H"`
+  HEAD_REF=`git rev-parse HEAD`
 popd
 
 perl -p -i -e "s|%define branch.*|%define branch ${BASE_BRANCH}|" cmsdist/${BUILD_PACKAGE}.spec
