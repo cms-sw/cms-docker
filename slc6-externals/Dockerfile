@@ -12,18 +12,16 @@ RUN adduser cmsbuild
 RUN install -d -o cmsbuild /build
 RUN pip install pygithub
 
-RUN yum install -y strace
+RUN yum install -y strace vim svn
 
 WORKDIR /build
 USER cmsbuild
+
+RUN git clone https://github.com/ktf/cms-bot.git #cda
 RUN git clone https://github.com/cms-sw/pkgtools.git
-RUN git clone https://github.com/cms-sw/cmsdist.git
-ADD build-externals.sh /build-externals.sh
-
-ENV JOBS 1
-
+#RUN git clone https://github.com/cms-sw/cmsdist.git
 
 # Before starting the shell we copy the bootstrap area in place so that if
 # /opt/cms was overridded by a volume, we have the installation available
 # immediately.
-CMD sh -ex /build-externals.sh -a $SCRAM_ARCH -q $RELEASE_QUEUE -j $JOBS -pr $PR
+CMD sh -ex /build/cms-bot/cms-externals-pr-test -a $SCRAM_ARCH -q $RELEASE_QUEUE ${JOBS+-j $JOBS} -pr $PR ${CMSDIST_PR+-cpr $CMSDIST_PR}

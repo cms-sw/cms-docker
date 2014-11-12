@@ -3,13 +3,8 @@ FROM dockerfile/ubuntu
 EXPOSE 4000 
 USER root
 # Install things which are needed.
-RUN apt-get update -y
-RUN apt-get install -y git 
-RUN apt-get install -y nginx
-RUN apt-get install -y ruby1.9.1-dev 
-RUN apt-get install -y gcc
+RUN apt-get update -y && apt-get install -y git nginx ruby1.9.1-dev gcc nodejs 
 RUN gem install -V --no-ri --no-rdoc github-pages
-RUN apt-get install -y nodejs
 
 # Create initial web server.
 RUN rm -rf /usr/share/nginx/html
