@@ -17,11 +17,11 @@ RUN yum install -y strace vim svn
 WORKDIR /build
 USER cmsbuild
 
-RUN git clone https://github.com/ktf/cms-bot.git #cda
+RUN git clone https://github.com/ktf/cms-bot.git #c
 RUN git clone https://github.com/cms-sw/pkgtools.git
 #RUN git clone https://github.com/cms-sw/cmsdist.git
 
 # Before starting the shell we copy the bootstrap area in place so that if
 # /opt/cms was overridded by a volume, we have the installation available
 # immediately.
-CMD sh -ex /build/cms-bot/cms-externals-pr-test -a $SCRAM_ARCH -q $RELEASE_QUEUE ${JOBS+-j $JOBS} -pr $PR ${CMSDIST_PR+-cpr $CMSDIST_PR}
+CMD sh -ex /build/cms-bot/cms-externals-pr-test -a $SCRAM_ARCH -q $RELEASE_QUEUE ${FINAL_PACKAGE+-fp $FINAL_PACKAGE} ${JOBS+-j $JOBS} -pr $PR ${CMSDIST_PR+-cpr $CMSDIST_PR}
