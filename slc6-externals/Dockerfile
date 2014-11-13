@@ -17,7 +17,7 @@ RUN yum install -y strace vim svn
 WORKDIR /build
 USER cmsbuild
 
-RUN git clone https://github.com/ktf/cms-bot.git #c
+RUN git clone https://github.com/cms-sw/cms-bot.git #
 RUN git clone https://github.com/cms-sw/pkgtools.git
 #RUN git clone https://github.com/cms-sw/cmsdist.git
 
