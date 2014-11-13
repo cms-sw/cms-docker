@@ -24,4 +24,4 @@ RUN git clone https://github.com/cms-sw/pkgtools.git
 # Before starting the shell we copy the bootstrap area in place so that if
 # /opt/cms was overridded by a volume, we have the installation available
 # immediately.
-CMD sh -ex /build/cms-bot/cms-externals-pr-test -a $SCRAM_ARCH -q $RELEASE_QUEUE ${FINAL_PACKAGE+-fp $FINAL_PACKAGE} ${JOBS+-j $JOBS} -pr $PR ${CMSDIST_PR+-cpr $CMSDIST_PR}
+CMD sh -ex /build/cms-bot/cms-externals-pr-test -a $SCRAM_ARCH -q $RELEASE_QUEUE ${FINAL_PACKAGE+-fp $FINAL_PACKAGE} ${JOBS+-j $JOBS} ${PR+-pr $PR} ${CMSDIST_PR+-cpr $CMSDIST_PR}
