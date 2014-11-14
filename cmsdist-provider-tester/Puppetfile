@@ -1,0 +1,2 @@
+mod "ktf/cmsdist",
+       :git => "https://github.com/ktf/puppet-cmsdist"
