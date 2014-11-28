@@ -1,6 +1,6 @@
 FROM centos:centos6
 
-ENV MESOS_PLUGIN_VERSION v0.5.0
+ENV MESOS_PLUGIN_VERSION master
 
 RUN yum update -y
 RUN yum install -y rsync

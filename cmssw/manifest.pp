@@ -28,4 +28,14 @@ package {"cms+local-cern-siteconf+sm111124":
     "server"         => "cmsrep.cern.ch",
     "server_path"    => "cmssw/cms",
   }]
+}->
+file {"/etc/profile.d/scram.sh":
+  ensure   => present,
+  content  => "source /opt/cms/cmsset_default.sh\n\n",
+  mode     => 755
+}->
+file {"/etc/profile.d/scram.csh":
+  ensure   => present,
+  content  => "source /opt/cms/cmsset_default.csh\n\n",
+  mode     => 755
 }

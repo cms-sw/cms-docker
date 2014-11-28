@@ -7,4 +7,4 @@ ADD manifest.pp /
 RUN useradd cmsbuild && install -o cmsbuild -d /opt/cmsbuild
 RUN librarian-puppet install
 
-RUN puppet apply --modulepath=/modules /manifest.pp
+RUN puppet apply -d --modulepath=/modules /manifest.pp
