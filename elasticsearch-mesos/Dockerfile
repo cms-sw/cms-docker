@@ -18,4 +18,5 @@ RUN git clone https://github.com/ktf/elasticsearch-mesos
 
 RUN cd elasticsearch-mesos && git reset --hard $COMMIT ; bin/build || bin/build
 
-CMD cd /elasticsearch-mesos/elasticsearch-mesos-* && bin/elasticsearch-mesos
+ADD run.sh /run.sh
+CMD sh -ex /run.sh
