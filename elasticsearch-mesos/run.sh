@@ -2,8 +2,8 @@
 
 # Wrapper script to run this in docker, modifying configuation on the fly.
 # You can specify the following parameters:
-MESOS_EXECUTE_URL=${MESOS_EXECUTE_URL-http://downloads.mesosphere.io/elasticsearch/elasticsearch-mesos-1.0.0-1.tgz}
-MESOS_MASTER=${ZOOKEEPER-zk://localhost:2128/mesos}
+MESOS_EXECUTOR_URL=${MESOS_EXECUTE_URL-http://downloads.mesosphere.io/elasticsearch/elasticsearch-mesos-1.0.0-1.tgz}
+MESOS_MASTER=${MESOS_MASTER-zk://localhost:2128/mesos}
 MESOS_JAVA_PATH=${MESOS_JAVA_PATH-/usr/local/lib}
 ES_N_OF_NODES=${N_OF_NODES-1}
 ES_BASEDIR=${ES_BASEDIR-es}
@@ -12,7 +12,7 @@ RESOURCE_CPUS=${RESOURCE_CPUS-1.0}
 RESOURCE_MEM=${RESOURCE_MEM-2048}
 RESOURCE_DISK=${RESOURCE_DISK-1000}
 
-cat > /elasticsearch-mesos/config/mesos << EOF
+cat > /elasticsearch-mesos/config/mesos.yml << EOF
 mesos.executor.uri: '$MESOS_EXECUTOR_URL'
 
 # Where the Mesos master is located
