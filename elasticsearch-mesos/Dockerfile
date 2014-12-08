@@ -13,9 +13,10 @@ RUN yum update -y && yum install -y rsync \
 
 RUN rpm -Uvh ftp://ftp.pbone.net/mirror/ftp5.gwdg.de/pub/opensuse/repositories/Application:/Geo/CentOS_6/noarch/maven-3.0.4-2.2.noarch.rpm
 
-ENV COMMIT ad3bfaed00984679d684aeb7aa966083dc2bbe7d
-RUN git clone https://github.com/ktf/elasticsearch-mesos
+ENV COMMIT b83c01b
+ENV BRANCH add-attributes-selection
 
+RUN git clone -b $BRANCH https://github.com/ktf/elasticsearch-mesos
 RUN cd elasticsearch-mesos && git reset --hard $COMMIT ; bin/build || bin/build
 
 ADD run.sh /run.sh

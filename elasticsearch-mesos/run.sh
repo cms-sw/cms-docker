@@ -28,8 +28,13 @@ elasticsearch.noOfHwNodes: $ES_N_OF_NODES
 resource.cpus: $RESOURCE_CPUS
 resource.mem: $RESOURCE_MEM
 resource.disk: $RESOURCE_DISK
+
+${MESOS_ATTRIBUTES+# Mesos attributes required.}
 EOF
 
+for a in `echo $MESOS_ATTRIBUTES | tr \; \\n | sed -e 's/:/: /'`; do
+  echo attribute.$a >> /elasticsearch-mesos/config/mesos.yml
+done
 
 cat > /elasticsearch-mesos/config/elasticsearch.yml << EOF
 path.conf: $ES_BASEDIR/conf
@@ -43,5 +48,5 @@ discovery.zen.ping.multicast.enabled: false
 discovery.zen.ping.unicast.hosts: [\${seedNodes}]
 EOF
 
-cd /elasticsearch-mesos/elasticsearch-mesos-*
+cd /elasticsearch-mesos
 bin/elasticsearch-mesos
