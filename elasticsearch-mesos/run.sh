@@ -5,7 +5,7 @@
 MESOS_EXECUTOR_URL=${MESOS_EXECUTE_URL-http://downloads.mesosphere.io/elasticsearch/elasticsearch-mesos-1.0.0-1.tgz}
 MESOS_MASTER=${MESOS_MASTER-zk://localhost:2128/mesos}
 MESOS_JAVA_PATH=${MESOS_JAVA_PATH-/usr/local/lib}
-ES_N_OF_NODES=${N_OF_NODES-1}
+ES_N_OF_NODES=${ES_N_OF_NODES-1}
 ES_BASEDIR=${ES_BASEDIR-es}
 
 RESOURCE_CPUS=${RESOURCE_CPUS-1.0}
