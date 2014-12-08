@@ -32,8 +32,9 @@ resource.disk: $RESOURCE_DISK
 ${MESOS_ATTRIBUTES+# Mesos attributes required.}
 EOF
 
-for a in `echo $MESOS_ATTRIBUTES | tr \; \\n | sed -e 's/:/: /'`; do
-  echo attribute.$a >> /elasticsearch-mesos/config/mesos.yml
+# Unpack attributes into cfg file.
+for a in `echo $MESOS_ATTRIBUTES | tr \; \\n`; do
+  echo attribute.`echo $a | sed -e's/:/: /'` >> /elasticsearch-mesos/config/mesos.yml
 done
 
 cat > /elasticsearch-mesos/config/elasticsearch.yml << EOF
