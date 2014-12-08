@@ -1,6 +1,6 @@
 FROM dockerfile/ubuntu
 
-EXPOSE 4000 
+EXPOSE 80 
 USER root
 # Install things which are needed.
 RUN apt-get update -y && apt-get install -y git nginx 
