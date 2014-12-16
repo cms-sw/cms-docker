@@ -13,4 +13,4 @@ RUN mv /kibana-3.1.2 /usr/share/nginx/html/kibana
 ADD run.sh /run.sh
 RUN echo "daemon off;" >> /etc/nginx/nginx.conf
 
-CMD nginx
+CMD sh -ex /run.sh
