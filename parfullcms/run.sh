@@ -14,7 +14,7 @@ cd  /opt/cms/slc6_amd64_gcc491/external/geant4-parfullcms/2014.01.27-ddloan/shar
 
 sed -ibak "s;\(/run/beamOn \).*;\1$EVENTS;" mt.g4
 
-export G4FORCENUMBEROFTHREADS=max
+export G4FORCENUMBEROFTHREADS=${G4FORCENUMBEROFTHREADS-max}
 export G4LEDATA
 export G4LEVELGAMMADATA
 export G4SAIDXSDATA

@@ -1,0 +1,5 @@
+Runs ParFullCMS with a configurable number of events. The following environment
+variables can be passed to docker.
+
+- EVENTS: the total number of events to process (default: `10`).
+- G4FORCENUMBEROFTHREADS: the number of threads to use (default: `max`).
