@@ -1,0 +1,3 @@
+mod "cms-sw/cmsdist",
+       :git => "https://github.com/ktf/puppet-cmsdist",
+       :ref => "ac5133e"
