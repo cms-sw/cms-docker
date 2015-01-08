@@ -8,3 +8,6 @@ RUN useradd cmsbuild && install -o cmsbuild -d /opt/cmsbuild
 RUN librarian-puppet install
 
 RUN puppet apply -d --modulepath=/modules /manifest.pp
+ADD run.sh /
+
+CMD sh /run.sh
