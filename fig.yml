@@ -1,0 +1,25 @@
+logstash:
+  image: cmssw/logstash
+
+zookeeper:
+  image: cmssw/zookeeper
+  net: "bridge"
+  ports:
+    - "2181"
+
+master:
+  image: cmssw/mesos-master
+  net: "bridge"
+  ports:
+    - "127.0.0.1:5050:5050"
+  links:
+    - zookeeper:zk
+
+slave:
+  image: cmssw/mesos-slave
+  net: "bridge"
+  expose:
+    - "5051"
+  links:
+    - zookeeper:zk
+    - master:master
