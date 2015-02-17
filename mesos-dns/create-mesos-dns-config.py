@@ -9,7 +9,7 @@ CONFIG = {
   "domain": getenv("MESOS_DNS_DOMAIN", "mesos"),
   "port": int(getenv("MESOS_DNS_PORT", "53")),
   "resolvers": getenv("MESOS_DNS_RESOLVERS", "8.8.8.8").split(";"),
-  "email": getenv("MESOS_DNS_EMAIL", "root.mesos-dns"),
+  "email": getenv("MESOS_DNS_EMAIL", "root.mesos-dns.mesos"),
   "timeout": int(getenv("MESOS_DNS_TIMEOUT", "5"))
 }
 
