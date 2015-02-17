@@ -4,14 +4,14 @@ logstash:
 zookeeper:
   image: cmssw/zookeeper
   net: "bridge"
-  ports:
+  expose:
     - "2181"
 
 master:
   image: cmssw/mesos-master
   net: "bridge"
   ports:
-    - "127.0.0.1:5050:5050"
+    - "5050:5050"
   links:
     - zookeeper:zk
 
@@ -23,3 +23,13 @@ slave:
   links:
     - zookeeper:zk
     - master:master
+
+marathon:
+  build: cmssw/marathon
+  net: "bridge"
+  ports:
+    - "8080:8080"
+  links:
+    - zookeeper:zk
+    - master:master 
+    - slave:slave
