@@ -21,7 +21,7 @@ package {"lcg+SCRAMV1+V2_2_6_pre2":
   ensure             => present,
   provider           => cmsdist,
   install_options    => [{
-    "install_prefix" => "/cms",
+    "install_prefix" => "/opt/cms",
     "install_user"   => "cmsbuild",
     "architecture"   => "slc6_amd64_gcc481",        
     "server" => "cmsrep.cern.ch",        
@@ -32,7 +32,7 @@ package {"lcg+SCRAMV1+V2_2_6_pre1":
   ensure             => absent,
   provider           => cmsdist,
   install_options    => [{
-    "install_prefix" => "/cms",
+    "install_prefix" => "/opt/cms",
     "install_user"   => "cmsbuild",
     "architecture"   => "slc6_amd64_gcc481",        
     "server" => "cmsrep.cern.ch",        

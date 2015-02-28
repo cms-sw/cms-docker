@@ -37,7 +37,8 @@ frontend:
   expose:
     - "5051:5051"
   ports:
-    - "53:53"
+    - "53:53/udp"
+    - "80:80"
   links:
     - zookeeper:zk
     - master:master
@@ -76,4 +77,15 @@ marathon:
     - zookeeper:zk
     - master:master 
     - slave:slave
+    - frontend:frontend
+
+# A docker container which is used to deploy services in
+# marathon
+deployer:
+  build: deployer
+  net: "bridge"
+  volumes:
+    - ~/Dropbox/work/active/cms-marathon:/cms-marathon
+  links:
+    - marathon:marathon
     - frontend:frontend
