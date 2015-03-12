@@ -5,6 +5,8 @@ RUN yum update -y && yum install -y logstash
 RUN yum update -y && yum install -y which 
 
 ADD jenkins.conf /
+ADD mesos.conf /
+ADD mesos-patterns.conf /opt/logstash/patterns/
 ADD processes.conf /
 ADD run.sh /
 
