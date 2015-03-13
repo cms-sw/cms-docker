@@ -1,0 +1,91 @@
+logstash:
+  image: cmssw/logstash
+
+# Zookeeper is used as the arbiter of the mesos setup.
+zookeeper:
+  image: cmssw/zookeeper
+  net: "bridge"
+  expose:
+    - "2181"
+
+master:
+#  image: cmssw/mesos-master
+  build: mesos-master
+  net: "bridge"
+  ports:
+    - "5050:5050"
+  expose:
+    - "53:53"
+  links:
+    - zookeeper:zk
+  volumes:
+    - /var/log
+
+# A slave which every other slave knows about. This is for example
+# for sevices which expose themselves to the outside world or which we want to
+# know where to find, e.g. DNS or again for processes which monitor the status
+# of the master.
+# By changing it's hostname explicitly to "frontend" we also allow 
+# marathon schedule jobs there via the constraint:
+#
+# hostname:CLUSTER:frontend
+#
+# even if the master does not actually link to it.
+frontend:
+  image: cmssw/mesos-slave
+  hostname: frontend
+  expose:
+    - "5051:5051"
+  ports:
+    - "53:53/udp"
+    - "80:80"
+  links:
+    - zookeeper:zk
+    - master:master
+  net: "bridge"
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/local/bin/docker:/usr/bin/docker
+    - /sys:/sys
+  privileged: true
+
+# A generic mesos slave, which does not know about it's peers, but 
+# only about the master, which it can connect to but of which cannot see 
+# volumes.
+slave:
+  image: cmssw/mesos-slave
+  net: "bridge"
+  ports:
+    - "5051:5051"
+  links:
+    - zookeeper:zk
+    - master:master
+    - frontend:frontend
+  volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /usr/local/bin/docker:/usr/bin/docker
+    - /sys:/sys
+  privileged: true
+
+marathon:
+  #image: cmssw/marathon
+  build: marathon
+  net: "bridge"
+  ports:
+    - "8080:8080"
+  links:
+    - zookeeper:zk
+    - master:master 
+    - slave:slave
+    - frontend:frontend
+
+# A docker container which is used to deploy services in
+# marathon
+deployer:
+  build: deployer
+  net: "bridge"
+  volumes:
+    - ~/Dropbox/work/active/cms-marathon:/cms-marathon
+  links:
+    - marathon:marathon
+    - frontend:frontend
