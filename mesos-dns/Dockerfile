@@ -9,6 +9,6 @@ ENV REPO mesosphere
 RUN go get github.com/miekg/dns
 RUN go get github.com/$REPO/mesos-dns
 RUN cd $GOPATH/src/github.com/$REPO/mesos-dns && go build -o mesos-dns
-ADD create-mesos-dns-config.py /
+ADD run.sh /
 
-CMD python /create-mesos-dns-config.py && /usr/local/go/bin/mesos-dns ${VERBOSE+-v} -config /config.json
+CMD /run.sh
