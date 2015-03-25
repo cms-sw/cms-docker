@@ -10,7 +10,7 @@ initLimit=10
 # sending a request and getting an acknowledgement
 syncLimit=5
 # the directory where the snapshot is stored.
-dataDir=/var/lib/zookeeper/data
+dataDir=${ZK_DATADIR-/var/lib/zookeeper/data}
 # the port at which the clients will connect
 clientPort=${ZK_CLIENT_PORT-2181}
 EOF
@@ -30,11 +30,12 @@ else
     ZK_NODE_ID=`echo $x | sed -e's/^[a-zA-Z0-]*//'`
     echo "server.$ZK_NODE_ID=$x:${ZK_PEERS_PORT-2888}:${ZK_ELECTION_PORT-3888}" >> /etc/zookeeper/conf/zoo.cfg
   done
+  echo >> /etc/zookeeper/conf/zoo.cfg
   if [ ! -x /var/lib/zookeeper/data/myid ]; then
     zookeeper-server-initialize --myid=`hostname | sed -e 's/^[a-zA-Z0-]*//'`
   fi
 fi
-
+cp /etc/zookeeper/conf/zoo.cfg /usr/lib/zookeeper/conf/zoo.cfg
 
 env
 cat /etc/hosts
