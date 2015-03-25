@@ -16,7 +16,7 @@ clientPort=${ZK_CLIENT_PORT-2181}
 EOF
 
 #ZK_NODES is the list of nodes which will have zookeeper running on it.
-if [ X$ZK_NODES = X ]; then
+if [ "X$ZK_NODES" = X ]; then
   # Single node setup.
   if [ ! -x /var/lib/zookeeper/data/myid ]; then
     zookeeper-server-initialize --myid=1
@@ -27,15 +27,14 @@ else
   # For the moment we assume that servers all have the same kind of hostname
   # in the for XYZ<ID>
   for x in ${ZK_NODES}; do
-    ZK_NODE_ID=`echo $x | sed -e's/^[a-zA-Z0-]*//'`
+    ZK_NODE_ID=`echo $x | sed -e's/^[a-zA-Z0-]*//;s/[.].*//'`
     echo "server.$ZK_NODE_ID=$x:${ZK_PEERS_PORT-2888}:${ZK_ELECTION_PORT-3888}" >> /etc/zookeeper/conf/zoo.cfg
   done
   echo >> /etc/zookeeper/conf/zoo.cfg
-  if [ ! -x /var/lib/zookeeper/data/myid ]; then
-    zookeeper-server-initialize --myid=`hostname | sed -e 's/^[a-zA-Z0-]*//'`
+  if [ ! -e /var/lib/zookeeper/data/myid ]; then
+    zookeeper-server-initialize --myid=`hostname | sed -e 's/^[a-zA-Z0-]*//;s/[.].*//'`
   fi
 fi
-cp /etc/zookeeper/conf/zoo.cfg /usr/lib/zookeeper/conf/zoo.cfg
 
 env
 cat /etc/hosts
