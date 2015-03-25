@@ -12,11 +12,11 @@ syncLimit=5
 # the directory where the snapshot is stored.
 dataDir=/var/lib/zookeeper/data
 # the port at which the clients will connect
-clientPort=2181
+clientPort=${ZK_CLIENT_PORT-2181}
 EOF
 
-
-if [ X$ZK_NUM_NODES = X ]; then
+#ZK_NODES is the list of nodes which will have zookeeper running on it.
+if [ X$ZK_NODES = X ]; then
   # Single node setup.
   if [ ! -x /var/lib/zookeeper/data/myid ]; then
     zookeeper-server-initialize --myid=1
@@ -24,17 +24,14 @@ if [ X$ZK_NUM_NODES = X ]; then
 else
   # Handle the case for more than 1 node.
   # Generate the configuration starting from specified environment variables.
-  for x in `seq 1 ${ZK_NUM_NODES}`; do
-    # ZK_PEER has incremental numer if ZH_HOSTNAME is actually defined.
-    # If the ZK_HOSTNAME is not defined, we use different port for each
-    # zookeeper instance so that they can survive on the same ip.
-    ZK_PEER=${ZK_HOSTNAME-localhost}${ZK_HOSTNAME+0$x}${ZK_DOMAIN+.$ZK_DOMAIN}
-    ZK_PORT1=`echo 2888 + ${ZK_HOSTNAME-$x - 1}  | bc`
-    ZK_PORT2=`echo 3888 + ${ZK_HOSTNAME-$x - 1}  | bc`
-    echo "server.$x=$ZK_PEER:$ZK_PORT1:$ZK_PORT2" >> /etc/zookeeper/conf/zoo.cfg
+  # For the moment we assume that servers all have the same kind of hostname
+  # in the for XYZ<ID>
+  for x in ${ZK_NODES}; do
+    ZK_NODE_ID=`echo $x | sed -e's/^[a-zA-Z0-]*//'`
+    echo "server.$ZK_NODE_ID=$x:${ZK_PEERS_PORT-2888}:${ZK_ELECTION_PORT-3888}" >> /etc/zookeeper/conf/zoo.cfg
   done
   if [ ! -x /var/lib/zookeeper/data/myid ]; then
-    zookeeper-server-initialize --myid=`hostname | sed -e 's/^[a-zA-Z0]*//'`
+    zookeeper-server-initialize --myid=`hostname | sed -e 's/^[a-zA-Z0-]*//'`
   fi
 fi
 
