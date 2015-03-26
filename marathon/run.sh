@@ -6,4 +6,5 @@ java -Djava.library.path=/usr/local/lib:/usr/lib:/usr/lib64 \
      --master ${MESOS_MASTER-zk://zk:2181/mesos} \
      ${HTTP_PORT+--http_port $HTTP_PORT} \
      --hostname `hostname` \
-     ${MARATHON_HA+--ha}
+     ${MARATHON_HA+--ha} \
+     ${MARATHON_WEBUI_URL+--webui_url $MARATHON_WEBUI_URL}
