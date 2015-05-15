@@ -10,6 +10,6 @@ RUN yum update -y && yum install -y openssl \
                                     mesa-libGL-devel.x86_64 \
                                     mesa-libGLU-devel.x86_64 \
                                     libXext-devel
-RUN yum install -y tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs libXpm
+RUN yum install -y tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs libXpm bc
 WORKDIR /build
 USER cmsbuild
