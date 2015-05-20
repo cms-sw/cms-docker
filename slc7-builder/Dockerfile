@@ -11,6 +11,6 @@ RUN yum update -y && yum install -y openssl \
                                     mesa-libGLU-devel.x86_64 \
                                     libXext-devel
 RUN yum install -y tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs libXpm bc
-RUN yum install -y tar patch krb5-devel
+RUN yum install -y tar patch krb5-devel perl-Data-Dumper
 WORKDIR /build
 USER cmsbuild
