@@ -12,6 +12,6 @@ RUN yum update -y && yum install -y openssl \
                                     libXext-devel
 RUN yum install -y tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs libXpm bc
 RUN yum install -y tar patch krb5-devel perl-Data-Dumper
-RUN yum install -y gcc unzip perl-libwww-perl libXpm-devel libXft-devel svn cvs gcc-c++
+RUN yum install -y gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn cvs gcc-c++
 WORKDIR /build
 USER cmsbuild
