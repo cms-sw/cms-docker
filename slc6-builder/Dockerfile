@@ -20,5 +20,6 @@ RUN yum install -y tcsh \
                    java-1.7.0-openjdk \
                    bc
 
+RUN yum install -y zip perl-libwww-perl svn cvs
 WORKDIR /build
 USER cmsbuild
