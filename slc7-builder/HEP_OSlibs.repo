@@ -1,6 +1,8 @@
-[HEP_OSlibs]                                                                                                                                                                                                                                                  
-name=Repo need for HEP_OSlibs
-baseurl=http://grid-deployment.web.cern.ch/grid-deployment/download/HEP/repo/sl5/x86_64
+[cc7-cern]
+name=CERN Centos 7
+baseurl=http://linuxsoft.cern.ch/cern/centos/7/cern/x86_64/
 enabled=1
-gpgcheck=0
-priority=99
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cern
+exclude=
+priority=10
