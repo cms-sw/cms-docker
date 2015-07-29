@@ -12,8 +12,8 @@ RUN /usr/bin/rpm --import /tmp/RPM-GPG-KEY-cern && /bin/rm /tmp/RPM-GPG-KEY-cern
 RUN yum update -y && yum clean all
 
 RUN yum update -y && yum install -y HEP_OSlibs_CC7 java-1.7.0-openjdk
-RUN groupadd -g 777 cmsbuild
-RUN adduser -g 777 -u 777 cmsbuild
+RUN groupadd -g 1399 zh
+RUN adduser -u 22527 -g 1399 cmsbuild && install -d /opt && install -d -o cmsbuild /opt/cms /build
 RUN install -d -o cmsbuild /build
 RUN yum update -y && yum install -y git-core
 RUN yum update -y && yum install -y openssl \
