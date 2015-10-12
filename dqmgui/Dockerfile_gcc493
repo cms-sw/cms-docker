@@ -3,7 +3,8 @@ MAINTAINER Marco Rovere marco.rovere@cern.ch
 
 ENV INSTALL_DIR=/data/srv
 ENV HTTPG_VERSION=HG1510f
-ENV ARCH=slc6_amd64_gcc481
+ENV ARCH=slc6_amd64_gcc493
+ENV COMP=comp
 EXPOSE 8060
 
 RUN yum install -y git \
@@ -18,7 +19,7 @@ USER dqmgui
 RUN mkdir -p ${INSTALL_DIR}/ && cd ${INSTALL_DIR}
 WORKDIR ${INSTALL_DIR}
 RUN git clone git://github.com/dmwm/deployment.git cfg && cd cfg && git reset --hard ${HTTPG_VERSION}
-RUN cfg/Deploy -r "comp=comp.pre" -A ${ARCH} -R comp@${HTTPG_VERSION} -t ${HTTPG_VERSION} -s "prep sw post" $PWD dqmgui/bare
+RUN cfg/Deploy -r "comp=${COMP}" -A ${ARCH} -R comp@${HTTPG_VERSION} -t ${HTTPG_VERSION} -s "prep sw post" $PWD dqmgui/bare
 
 # Now set up sphinx to allow developing and building
 
