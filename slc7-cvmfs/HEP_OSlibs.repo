@@ -1,0 +1,8 @@
+[cc7-cern]
+name=CERN Centos 7
+baseurl=http://linuxsoft.cern.ch/cern/centos/7/cern/x86_64/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cern
+exclude=
+priority=10
