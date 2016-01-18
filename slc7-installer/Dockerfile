@@ -11,8 +11,11 @@ RUN /usr/bin/rpm --import /tmp/RPM-GPG-KEY-cern && /bin/rm /tmp/RPM-GPG-KEY-cern
 RUN yum update -y && yum clean all
 
 RUN yum update -y && yum install -y HEP_OSlibs_CC7 finger screen libXpm-devel libXft-devel krb5-devel subversion telnet readline-devel wget \
-                                    glibc-devel.x86_64 mesa-libGL-devel.x86_64 mesa-libGLU-devel.x86_64 libXext-devel
+                                    glibc-devel.x86_64 mesa-libGL-devel.x86_64 mesa-libGLU-devel.x86_64 libXext-devel rsync tcsh zsh tcl tk \
+                                    openssl e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu libXcursor libXrandr e2fsprogs-libs \
+                                    libXi libXinerama tar
 RUN groupadd -g 101 shared
 RUN adduser -u 101 -g 101 shared
 
 USER shared
+

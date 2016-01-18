@@ -1,4 +1,5 @@
-FROM cmssw/slc7-vanilla
+#FROM cmssw/slc7-vanilla
+FROM cern/cc7-base
 
 ADD http://linux.web.cern.ch/linux/centos7/CentOS-CERN.repo /etc/yum.repos.d/CentOS-CERN.repo
 RUN chmod 755 /etc/yum.repos.d/CentOS-CERN.repo
@@ -16,11 +17,7 @@ RUN groupadd -g 1399 zh
 RUN adduser -u 22527 -g 1399 cmsbuild && install -d /opt && install -d -o cmsbuild /opt/cms /build
 RUN install -d -o cmsbuild /build
 RUN yum update -y && yum install -y git-core
-RUN yum update -y && yum install -y openssl \
-                                    glibc-devel.x86_64 \
-                                    mesa-libGL-devel.x86_64 \
-                                    mesa-libGLU-devel.x86_64 \
-                                    libXext-devel
+RUN yum update -y && yum install -y openssl glibc-devel.x86_64 mesa-libGL-devel.x86_64 mesa-libGLU-devel.x86_64 libXext-devel
 RUN yum install -y tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs libXpm bc libaio
 RUN yum install -y tar patch krb5-devel perl-Data-Dumper
 RUN yum install -y gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn cvs gcc-c++ strace cern-wrappers krb5-workstation 
