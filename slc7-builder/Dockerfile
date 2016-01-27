@@ -22,5 +22,6 @@ RUN yum install -y tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc+
 RUN yum install -y tar patch krb5-devel perl-Data-Dumper
 RUN yum install -y gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn cvs gcc-c++ strace cern-wrappers krb5-workstation 
 RUN yum install -y wget hostname readline-devel nano bzip2
+RUN yum install -y  perl-Switch perl-Storable perl-Env packages
 WORKDIR /build
 USER cmsbuild
