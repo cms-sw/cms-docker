@@ -1,4 +1,4 @@
-FROM cmssw/slc7-vanilla
+FROM cern/cc7-base
 
 ADD http://linux.web.cern.ch/linux/centos7/CentOS-CERN.repo /etc/yum.repos.d/CentOS-CERN.repo
 RUN chmod 755 /etc/yum.repos.d/CentOS-CERN.repo
@@ -13,7 +13,7 @@ RUN yum update -y && yum clean all
 RUN yum update -y && yum install -y HEP_OSlibs_CC7 finger screen libXpm-devel libXft-devel krb5-devel subversion telnet readline-devel wget \
                                     glibc-devel.x86_64 mesa-libGL-devel.x86_64 mesa-libGLU-devel.x86_64 libXext-devel rsync tcsh zsh tcl tk \
                                     openssl e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu libXcursor libXrandr e2fsprogs-libs \
-                                    libXi libXinerama tar
+                                    libXi libXinerama tar perl-Data-Dumper perl-Digest-MD5 perl-Switch perl-Env perl-Thread-Queue
 RUN groupadd -g 101 shared
 RUN adduser -u 101 -g 101 shared
 
