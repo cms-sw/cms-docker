@@ -1,0 +1,8 @@
+[slc6-extras]
+name=Scientific Linux CERN 6 (SLC6) extra packages
+baseurl=http://linuxsoft.cern.ch/cern/slc6X/x86_64/yum/extras/
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cern
+exclude=
+priority=10

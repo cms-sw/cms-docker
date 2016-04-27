@@ -1,0 +1,10 @@
+[slc6-os]
+enabled=1
+baseurl=http://linuxsoft.cern.ch//cern/slc6X/x86_64/
+includepkgs=
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cern
+name=Scientific Linux CERN (RPMs) [HEAD]
+priority=10
+exclude=
+
