@@ -1,12 +1,11 @@
 FROM centos:centos6
 
-ADD     RPM-GPG-KEY-cern /etc/pki/rpm-gpg/RPM-GPG-KEY-cern
-ADD     GPG-KEY-EUGridPMA-RPM-3 /etc/pki/rpm-gpg/GPG-KEY-EUGridPMA-RPM-3
-ADD     HEP_OSlibs.repo  /etc/yum.repos.d/HEP_OSlibs.repo
-ADD     carepo.repo      /etc/yum.repos.d/carepo.repo
-ADD     slc6-os.repo     /etc/yum.repos.d/slc6-os.repo
 ADD     krb5.conf        /etc/krb5.conf
-
+RUN     rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+RUN     rpm -Uvh https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm
+RUN     yum -y install yum-plugin-priorities
+RUN     yum -y install osg-ca-certs
+RUN     yum -y install osg-wn-client
 RUN     yum update -y && yum install -y HEP_OSlibs_SL6 wget git \
  tcsh zsh tcl \
  perl-ExtUtils-Embed perl-libwww-perl \
@@ -16,24 +15,21 @@ RUN     yum update -y && yum install -y HEP_OSlibs_SL6 wget git \
  CERN-CA-certs voms-clients-cpp ca-policy-lcg \
  krb5-devel cern-wrappers krb5-workstation \
  strace
-
+RUN     yum -y install tk compat-readline5 mesa-libGLU mesa-libGL
+RUN      yum clean all
 RUN     groupadd -g 500 cmsinst && adduser -u 500 -g 500 cmsinst && install -d /opt && install -d -o cmsinst /opt/cms
 RUN     groupadd -g 501 cmsbld && adduser -u 501 -g 501 cmsbld
+RUN     /bin/mkdir /opt/cms/COMP
+
 USER    cmsinst
 WORKDIR /opt/cms
 RUN     wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh
 ENV     SCRAM_ARCH=slc6_amd64_gcc530
 RUN     sh /opt/cms/bootstrap.sh setup -r cms -architecture $SCRAM_ARCH -server cmsrep.cern.ch
-RUN     source /opt/cms/$SCRAM_ARCH/external/apt/*/etc/profile.d/init.sh && apt-get install -y cms+local-cern-siteconf+sm111124 cms+cmssw+CMSSW_8_0_5 && apt-get clean
-RUN     /bin/mkdir /opt/cms/COMP
+RUN     source /opt/cms/$SCRAM_ARCH/external/apt/*/etc/profile.d/init.sh && apt-get install -y cms+local-cern-siteconf+sm111124 cms+cmssw+CMSSW_8_0_16 && apt-get clean
+
 USER    root
 RUN     /bin/cp -f /opt/cms/cmsset_default.sh  /etc/profile.d/
 RUN     /bin/cp -f /opt/cms/cmsset_default.csh /etc/profile.d/
-RUN     rpm -Uvh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
-RUN     rpm -Uvh https://repo.grid.iu.edu/osg/3.3/osg-3.3-el6-release-latest.rpm 
-RUN     yum -y install yum-plugin-priorities
-RUN     yum -y remove openldap.i686 && yum -y downgrade openldap.x86_64
-RUN     yum -y install yum-utils && yum-config-manager --enable osg-empty
-RUN     yum -y install empty-ca-certs --enablerepo=osg-empty
-RUN     yum -y install osg-wn-client && yum clean all
 USER    cmsbld
+
