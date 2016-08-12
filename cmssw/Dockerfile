@@ -19,9 +19,9 @@ RUN     yum -y install tk compat-readline5 mesa-libGLU mesa-libGL
 RUN      yum clean all
 RUN     groupadd -g 500 cmsinst && adduser -u 500 -g 500 cmsinst && install -d /opt && install -d -o cmsinst /opt/cms
 RUN     groupadd -g 501 cmsbld && adduser -u 501 -g 501 cmsbld
-RUN     /bin/mkdir /opt/cms/COMP
 
 USER    cmsinst
+RUN     /bin/mkdir /opt/cms/COMP
 WORKDIR /opt/cms
 RUN     wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh
 ENV     SCRAM_ARCH=slc6_amd64_gcc530
