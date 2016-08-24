@@ -6,3 +6,5 @@ RUN     yum -y update  && yum -y install  wget git tcsh zsh tcl perl-ExtUtils-Em
         krb5-devel krb5-worstation  tk mesa-libGLU mesa-libGL compat-readline5 libXcursor libXrandr libXi libXinerama
 RUN     wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64
 RUN     chmod +x /usr/local/bin/dumb-init
+ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
+
