@@ -1,0 +1,10 @@
+FROM cmssw/cmsenv-slc6
+
+RUN     yum -y install https://ecsft.cern.ch/dist/cvmfs/cvmfs-release/cvmfs-release-latest.noarch.rpm
+RUN     yum -y install cvmfs cvmfs-config-default
+RUN     /bin/echo "CVMFS_REPOSITORIES=cms.cern.ch,grid.cern.ch,cms-ib.cern.ch" > /etc/cvmfs/default.local
+RUN     /bin/echo "CVMFS_HTTP_PROXY='DIRECT'" >> /etc/cvmfs/default.local
+RUN     cvmfs_config setup
+RUN     echo "#!/bin/bash" > /etc/profile.d/run.sh && echo "/sbin/service autofs restart" >> /etc/profile.d/run.sh
+RUN     echo "/usr/bin/cvmfs_config probe" >> /etc/profile.d/run.sh
+RUN     /bin/chmod +x /etc/profile.d/run.sh
