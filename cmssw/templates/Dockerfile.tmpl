@@ -1,11 +1,13 @@
+:Q
 FROM cmssw/slc6-base
 
 USER    cmsinst
 WORKDIR /opt/cms
-RUN     wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh
-ENV     SCRAM_ARCH=slc6_amd64_gcc530
-RUN     sh /opt/cms/bootstrap.sh setup -r cms -architecture $SCRAM_ARCH -server cmsrep.cern.ch
-RUN     source /opt/cms/$SCRAM_ARCH/external/apt/*/etc/profile.d/init.sh && apt-get install -y cms+local-cern-siteconf+sm111124 cms+cmssw+CMSSW_8_0_16 && apt-get clean
+RUN     wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/repos/bootstrap.sh
+RUN     sh /opt/cms/bootstrap.sh setup -r cms -architecture @ARCH@ -server cmsrep.cern.ch 
+RUN     /opt/cms/common/cmspkg -a @ARCH@ install -y cms+local-cern-siteconf+sm111124
+RUN     /opt/cms/common/cmspkg -a @ARCH@ install -y @CMS_PACKAGE@
+RUN     /opt/cms/common/cmspkg -a @ARCH@ clean
 
 USER    root
 RUN     /bin/cp -f /opt/cms/cmsset_default.sh  /etc/profile.d/
