@@ -1,0 +1,14 @@
+FROM cmssw/slc6-base
+
+USER    cmsinst
+WORKDIR /opt/cms
+RUN     wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/repos/bootstrap.sh
+RUN     sh /opt/cms/bootstrap.sh setup -r cms -architecture slc6_amd64_gcc530 -server cmsrep.cern.ch 
+RUN     /opt/cms/common/cmspkg -a slc6_amd64_gcc530 install -y cms+local-cern-siteconf+sm111124
+RUN     /opt/cms/common/cmspkg -a slc6_amd64_gcc530 install -y cms+cmssw+CMSSW_8_0_20
+RUN     /opt/cms/common/cmspkg -a slc6_amd64_gcc530 clean
+
+USER    root
+RUN     /bin/cp -f /opt/cms/cmsset_default.sh  /etc/profile.d/
+RUN     /bin/cp -f /opt/cms/cmsset_default.csh /etc/profile.d/
+USER    cmsbld
