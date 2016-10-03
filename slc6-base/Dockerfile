@@ -16,13 +16,8 @@ RUN     yum update -y && yum install -y HEP_OSlibs_SL6 wget git \
  krb5-devel cern-wrappers krb5-workstation \
  strace
 RUN     yum -y install tk compat-readline5 mesa-libGLU mesa-libGL
-RUN      yum clean all
+RUN     yum clean all
 RUN     groupadd -g 500 cmsinst && adduser -u 500 -g 500 cmsinst && install -d /opt && install -d -o cmsinst /opt/cms
 RUN     groupadd -g 501 cmsbld && adduser -u 501 -g 501 cmsbld
 RUN     /bin/mkdir /opt/cms/COMP
-
-USER    root
-RUN     /bin/cp -f /opt/cms/cmsset_default.sh  /etc/profile.d/
-RUN     /bin/cp -f /opt/cms/cmsset_default.csh /etc/profile.d/
-USER    cmsbld
 

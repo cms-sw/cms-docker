@@ -1,7 +1,6 @@
-FROM <slc6-base-repo>
+FROM cmssw/slc6-base
 
 USER    cmsinst
-RUN     /bin/mkdir /opt/cms/COMP
 WORKDIR /opt/cms
 RUN     wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/cms/bootstrap.sh
 ENV     SCRAM_ARCH=slc6_amd64_gcc530
