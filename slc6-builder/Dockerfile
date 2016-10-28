@@ -22,5 +22,6 @@ RUN yum install -y tcsh \
 
 RUN yum install -y zip perl-libwww-perl svn cvs
 RUN yum install -y readline-devel
+RUN yum install -y tk-devel tcl-devel
 WORKDIR /build
 USER cmsbuild
