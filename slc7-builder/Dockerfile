@@ -22,7 +22,7 @@ RUN yum install -y tar patch krb5-devel perl-Data-Dumper
 RUN yum install -y gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn cvs gcc-c++ strace cern-wrappers krb5-workstation
 RUN yum install -y wget hostname readline-devel nano bzip2
 RUN yum install -y  perl-Switch perl-Storable perl-Env packages perl-Thread-Queue CERN-CA-certs
-RUN yum install -y  tk-devel tcl-devel
+RUN yum install -y  tk-devel tcl-devel which
 RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64
 RUN chmod +x /usr/local/bin/dumb-init
 ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
