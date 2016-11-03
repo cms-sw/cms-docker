@@ -1,0 +1,10 @@
+FROM cmssw/slc7-builder:v20
+USER root
+RUN yum install -y  python-pip
+RUN pip install --upgrade pip
+RUN mkdir -p /opt/python
+RUN pip install -t /opt/python PyGithub
+RUN chown -R cmsbuild /opt/python/*
+env PYTHONPATH /opt/python
+USER cmsbuild
+
