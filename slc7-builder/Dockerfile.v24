@@ -1,0 +1,4 @@
+FROM cmssw/slc7-builder:v23
+USER root
+RUN yum install -y file
+USER cmsbuild
