@@ -1,7 +1,8 @@
 FROM centos/aarch64
-ADD ca.repo /etc/yum.repos.d/ca.repo
+ADD cernca.repo /etc/yum.repos.d/cernca.repo
 ADD  GPG-KEY-EUGridPMA-RPM-3 /etc/pki/rpm-gpg/GPG-KEY-EUGridPMA-RPM-3
 RUN rpm -iUv http://dl.fedoraproject.org/pub/epel/7/aarch64/e/epel-release-7-9.noarch.rpm
+RUN rpm -iUvh http://linuxsoft.cern.ch/cern/slc65/updates/i386/RPMS/CERN-CA-certs-20160421-2.slc6.noarch.rpm
 RUN yum update -y && yum clean all
 RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
                    openssl ncurses e2fsprogs krb5-libs freetype \
@@ -20,10 +21,11 @@ RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
                    perl-Thread-Queue perl-Module-ScanDeps perl-Test-Harness \
                    perl-Env perl-Switch perl-ExtUtils-Embed ncurses-libs \
                    perl-libs nspr nss nss-util file file-libs readline \
-                   zlib popt bzip2 bzip2-libs && yum clean all
-
-RUN yum install -y python-devel java-1.8.0-openjdk readline-devel perl-Switch perl-Storable perl-Env packages perl-Thread-Queue  tk-devel tcl-devel which python2-pip file git subversion bc finger zip unzip nano hostname vim wget screen time && yum clean all
-RUN rpm -iUvh http://linuxsoft.cern.ch/cern/slc65/updates/i386/RPMS/CERN-CA-certs-20160421-2.slc6.noarch.rpm
+                   zlib popt bzip2 bzip2-libs python-devel java-1.8.0-openjdk \
+                   readline-devel perl-Switch perl-Storable perl-Env packages \
+                   perl-Thread-Queue  tk-devel tcl-devel which python2-pip \
+                   file git subversion bc finger zip unzip nano hostname \
+                   vim wget screen time && yum clean all
 RUN groupadd -g 1399 zh && adduser -u 50772 -g 1399 davidlt
 RUN install -d -o root -g zh /build
 ADD krb5.conf /etc/krb5.conf
