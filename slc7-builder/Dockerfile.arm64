@@ -26,16 +26,16 @@ RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
                    perl-Thread-Queue  tk-devel tcl-devel which python2-pip \
                    file git subversion bc finger zip unzip nano hostname \
                    vim wget screen time && yum clean all
-RUN groupadd -g 1399 zh && adduser -u 50772 -g 1399 davidlt
-RUN install -d -o root -g zh /build
+RUN groupadd -g 1399 zh
 ADD krb5.conf /etc/krb5.conf
-RUN adduser -u 22527 -g 1399 cmsbuild && install -d /opt && install -d -o cmsbuild /opt/cms /build
-RUN install -d -o cmsbuild /build
+RUN adduser -u 22527 -g 1399 cmsbuild && install -d /opt && install -d -o cmsbuild /opt/cms
 RUN pip install --upgrade pip
 RUN mkdir -p /opt/py2-packages
 RUN pip install -t /opt/py2-packages pyyaml
 RUN pip install -t /opt/py2-packages PyGithub requests
 RUN chown -R cmsbuild /opt/py2-packages/*
+ADD dumb-init /usr/local/bin/dumb-init
+RUN chmod +x /usr/local/bin/dumb-init
 env PYTHONPATH /opt/py2-packages
-WORKDIR /build
 USER cmsbuild
+ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
