@@ -1,0 +1,37 @@
+FROM centos/aarch64
+ADD cernca.repo /etc/yum.repos.d/cernca.repo
+ADD  GPG-KEY-EUGridPMA-RPM-3 /etc/pki/rpm-gpg/GPG-KEY-EUGridPMA-RPM-3
+RUN rpm -iUv http://dl.fedoraproject.org/pub/epel/7/aarch64/e/epel-release-7-9.noarch.rpm
+RUN rpm -iUv http://linuxsoft.cern.ch/cern/centos/7.3/cern/x86_64/Packages/CERN-CA-certs-20160421-2.el7.cern.noarch.rpm
+RUN yum update -y && yum clean all
+RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
+                   openssl ncurses e2fsprogs krb5-libs freetype \
+                   fontconfig libstdc++ libidn libX11 libXmu libSM \
+                   libICE libXcursor libXext libXrandr libXft mesa-libGLU \
+                   mesa-libGL e2fsprogs-libs libXi libXinerama libXrender \
+                   libXpm gcc-c++ libcom_err libXpm-devel libXft-devel \
+                   libX11-devel libXext-devel mesa-libGLU mesa-libGLU-devel \
+                   libGLEW glew perl-Digest-MD5 perl-ExtUtils-MakeMaker \
+                   patch perl-libwww-perl krb5-libs krb5-devel \
+                   perl-Data-Dumper perl-WWW-Curl texinfo hostname time \
+                   perl-Carp perl-Text-ParseWords perl-PathTools \
+                   perl-ExtUtils-MakeMaker perl-Exporter perl-File-Path \
+                   perl-Getopt-Long perl-constant perl-File-Temp perl-Socket \
+                   perl-Time-Local perl-Storable glibc-headers perl-threads \
+                   perl-Thread-Queue perl-Module-ScanDeps perl-Test-Harness \
+                   perl-Env perl-Switch perl-ExtUtils-Embed ncurses-libs \
+                   perl-libs nspr nss nss-util file file-libs readline \
+                   zlib popt bzip2 bzip2-libs python-devel java-1.8.0-openjdk \
+                   readline-devel perl-Switch perl-Storable perl-Env packages \
+                   perl-Thread-Queue  tk-devel tcl-devel which python2-pip \
+                   file git subversion bc finger zip unzip nano hostname \
+                   vim wget screen time voms-clients-cpp && yum clean all
+ADD krb5.conf /etc/krb5.conf
+RUN pip install --upgrade pip
+RUN mkdir -p /opt/py2-packages
+RUN pip install -t /opt/py2-packages pyyaml
+RUN pip install -t /opt/py2-packages PyGithub requests
+ADD dumb-init /usr/local/bin/dumb-init
+RUN chmod +x /usr/local/bin/dumb-init
+env PYTHONPATH /opt/py2-packages
+ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
