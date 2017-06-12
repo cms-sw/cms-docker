@@ -42,9 +42,9 @@ cp /lxr/custom.d/apache-lxrserver.conf  /etc/apache2/conf-available
 a2enconf apache-lxrserver.conf
 
 echo Creating glimpse index version directories
-sudo -u lxr mkdir -p /lxr/glimpse_index/lxr
+su lxr -c "mkdir -p /lxr/glimpse_index/lxr"
 for ver in $(cat /lxr/host_config/versions) ; do
-  sudo -u lxr mkdir -p /lxr/glimpse_index/lxr/$ver
+  su lxr -c "mkdir -p /lxr/glimpse_index/lxr/$ver"
 done
 
 service mysql start
