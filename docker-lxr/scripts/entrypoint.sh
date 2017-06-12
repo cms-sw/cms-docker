@@ -34,8 +34,6 @@ done
 
 echo $@
 public_ip=$1
-#replace the public ip address public_ip_address
-sed -i.bak s/public_ip_address/$1/g /lxr/lxr.conf
 sed -i.bak s/public_ip_address/$1/g /lxr/custom.d/apache-lxrserver.conf
 
 cp /lxr/custom.d/apache-lxrserver.conf  /etc/apache2/conf-available
