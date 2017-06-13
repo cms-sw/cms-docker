@@ -39,14 +39,9 @@ sed -i.bak s/public_ip_address/$1/g /lxr/custom.d/apache-lxrserver.conf
 cp /lxr/custom.d/apache-lxrserver.conf  /etc/apache2/conf-available
 a2enconf apache-lxrserver.conf
 
-echo Creating glimpse index version directories
-su lxr -c "mkdir -p /lxr/glimpse_index/lxr"
-for ver in $(cat /lxr/host_config/versions) ; do
-  su lxr -c "mkdir -p /lxr/glimpse_index/lxr/$ver"
-done
-
 service mysql start
 service apache2 start
 
+su lxr
 cd /lxr
 exec "/bin/bash"
