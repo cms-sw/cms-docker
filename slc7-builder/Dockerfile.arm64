@@ -26,6 +26,8 @@ RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
                    perl-Thread-Queue  tk-devel tcl-devel which python2-pip \
                    file git subversion bc finger zip unzip nano hostname \
                    vim wget screen time voms-clients-cpp && yum clean all
+RUN yum -y install java-1.8.0-openjdk java-1.8.0-openjdk-devel
+ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-3.b12.el7_3.aarch64
 ADD krb5.conf /etc/krb5.conf
 RUN pip install --upgrade pip
 RUN mkdir -p /opt/py2-packages
