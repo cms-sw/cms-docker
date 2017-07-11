@@ -1,0 +1,7 @@
+[slc6-cern]
+name=CERN SLC6
+baseurl=http://linuxsoft.cern.ch/cern/slc6X/x86_64/
+enabled=1
+gpgcheck=1
+gpgkey=http://linuxsoft.cern.ch/cern/slc6X/x86_64/RPM-GPG-KEY-cern
+

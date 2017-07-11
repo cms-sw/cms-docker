@@ -1,0 +1,9 @@
+[elrepo]
+enabled=0
+baseurl=http://linuxsoft.cern.ch/elrepo/elrepo/el6/x86_64
+includepkgs=
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org
+name=El Repo, the Community Enterprise Linux Repository
+priority=30
+

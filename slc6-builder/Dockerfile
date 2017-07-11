@@ -1,27 +1,36 @@
 FROM centos:centos6
 
-ADD RPM-GPG-KEY-cern /etc/pki/rpm-gpg/RPM-GPG-KEY-cern
-ADD HEP_OSlibs.repo /etc/yum.repos.d/HEP_OSlibs.repo
+ADD slc6.repo /etc/yum.repos.d/slc6.repo 
+ADD ca.repo /etc/yum.repos.d/ca.repo 
+ADD elrepo.repo /etc/yum.repos.d/elrepo.repo 
 
-RUN yum update -y && yum install -y HEP_OSlibs_SL6 wget rpm-build which git screen e2fsprogs
+RUN chmod 755 /etc/yum.repos.d/slc6.repo
+ADD RPM-GPG-KEY-cern /etc/pki/rpm-gpg/RPM-GPG-KEY-cern
+ADD GPG-KEY-EUGridPMA-RPM-3 /etc/pki/rpm-gpg/GPG-KEY-EUGridPMA-RPM-3
+ADD RPM-GPG-KEY-elrepo.org /etc/pki/rpm-gpg/RPM-GPG-KEY-elrepo.org
+
+ADD krb5.conf /etc/krb5.conf
 RUN groupadd -g 1399 zh
 RUN adduser -u 22527 -g 1399 cmsbuild && install -d /opt && install -d -o cmsbuild /opt/cms /build
+RUN install -d -o cmsbuild /build
+RUN yum update -y && yum -y install http://linuxsoft.cern.ch/epel/epel-release-latest-6.noarch.rpm && yum clean all
 
-RUN yum install -y tcsh \
-                   zsh \
-                   tcl \
-                   tk \
-                   e2fsprogs \
-                   perl-ExtUtils-Embed \
-                   compat-libstdc++-33 \
-                   libXmu \
-                   e2fsprogs-libs \
-                   libXpm \
-                   java-1.7.0-openjdk \
-                   bc
+RUN yum update -y && yum install -y git-core openssl glibc-devel.x86_64 mesa-libGL-devel.x86_64 mesa-libGLU-devel.x86_64 \
+                             libXext-devel tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs \
+                             libXpm bc libaio tar patch krb5-devel gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn \
+                             cvs gcc-c++ strace cern-wrappers krb5-workstation wget readline-devel nano bzip2 \
+                             CERN-CA-certs tk-devel tcl-devel which python-pip HEP_OSlibs_SL6 file voms-clients-cpp \
+                             java-1.8.0-openjdk java-1.8.0-openjdk-devel && yum clean all
+     
+RUN pip install --upgrade pip
+RUN mkdir -p /opt/py2-packages
+RUN pip install -t /opt/py2-packages pyyaml
+RUN pip install -t /opt/py2-packages PyGithub requests
+RUN chown -R cmsbuild /opt/py2-packages/*
+env PYTHONPATH /opt/py2-packages
 
-RUN yum install -y zip perl-libwww-perl svn cvs
-RUN yum install -y readline-devel
-RUN yum install -y tk-devel tcl-devel
+RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64
+RUN chmod +x /usr/local/bin/dumb-init
+ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
 WORKDIR /build
 USER cmsbuild
