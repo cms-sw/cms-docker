@@ -11,7 +11,7 @@ RUN adduser -u 22527 -g 1399 cmsbuild && install -d /opt && install -d -o cmsbui
 RUN install -d -o cmsbuild /build
 RUN /usr/bin/rpm --import /tmp/RPM-GPG-KEY-cern && /bin/rm /tmp/RPM-GPG-KEY-cern
 
-RUN yum update -y && yum install -y HEP_OSlibs_CC7 git-core openssl glibc-devel.x86_64 \
+RUN yum update -y && yum install -y yum-plugin-ovl HEP_OSlibs_CC7 git-core openssl glibc-devel.x86_64 \
                                     mesa-libGL-devel.x86_64 mesa-libGLU-devel.x86_64 libXext-devel \
                                     tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs libXpm bc libaio \
                                     tar patch krb5-devel perl-Data-Dumper gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn cvs \
