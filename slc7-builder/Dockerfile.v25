@@ -1,4 +1,0 @@
-FROM cmssw/slc7-builder:v24
-USER root
-RUN yum install -y voms-clients-cpp
-USER cmsbuild
