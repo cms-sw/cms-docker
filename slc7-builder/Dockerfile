@@ -10,7 +10,6 @@ RUN groupadd -g 1399 zh
 RUN adduser -u 22527 -g 1399 cmsbuild && install -d /opt && install -d -o cmsbuild /opt/cms /build
 RUN install -d -o cmsbuild /build
 RUN /usr/bin/rpm --import /tmp/RPM-GPG-KEY-cern && /bin/rm /tmp/RPM-GPG-KEY-cern
-RUN yum update -y && yum clean all
 
 RUN yum update -y && yum install -y HEP_OSlibs_CC7 git-core openssl glibc-devel.x86_64 \
                                     mesa-libGL-devel.x86_64 mesa-libGLU-devel.x86_64 libXext-devel \
