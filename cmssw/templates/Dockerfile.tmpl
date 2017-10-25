@@ -1,8 +1,8 @@
 FROM cmssw/slc6-base
+RUN     yum -y install libXft-devel libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel && yum clean all
 
 USER    cmsinst
 WORKDIR /opt/cms
-RUN     yum -y install libXft-devel libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel && yum clean all
 RUN     wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/repos/bootstrap.sh
 RUN     sh /opt/cms/bootstrap.sh setup -r cms -architecture @ARCH@ -server cmsrep.cern.ch 
 RUN     /opt/cms/common/cmspkg -a @ARCH@ install -y cms+local-cern-siteconf+sm111124
