@@ -17,7 +17,8 @@ RUN yum update -y && yum install -y yum-plugin-ovl HEP_OSlibs_CC7 git-core opens
                                     tar patch krb5-devel perl-Data-Dumper gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn cvs \
                                     gcc-c++ strace cern-wrappers krb5-workstation wget hostname readline-devel nano bzip2 perl-Switch perl-Storable \
                                     perl-Env packages perl-Thread-Queue CERN-CA-certs tk-devel tcl-devel which python-pip file voms-clients-cpp \
-                                    java-1.8.0-openjdk java-1.8.0-openjdk-devel popt libXcursor libXrandr libXinerama nspr && yum clean all
+                                    java-1.8.0-openjdk java-1.8.0-openjdk-devel popt libXcursor libXrandr libXinerama nspr nss nss-util file file-libs \
+                                    readline popt bzip2 bzip2-libs && yum clean all
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-2.b11.el7_3.x86_64 
 RUN pip install --upgrade pip
