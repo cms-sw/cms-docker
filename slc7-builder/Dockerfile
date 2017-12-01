@@ -20,7 +20,6 @@ RUN yum update -y && yum install -y yum-plugin-ovl HEP_OSlibs_CC7 git-core opens
                                     java-1.8.0-openjdk java-1.8.0-openjdk-devel popt libXcursor libXrandr libXinerama nspr nss nss-util file file-libs \
                                     readline popt bzip2 bzip2-libs && yum clean all
 
-ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-2.b11.el7_3.x86_64 
 RUN pip install --upgrade pip
 RUN mkdir -p /opt/py2-packages
 RUN pip install -t /opt/py2-packages pyyaml
