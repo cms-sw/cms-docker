@@ -34,4 +34,5 @@ RUN chmod +x /usr/local/bin/dumb-init
 ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
 WORKDIR /build
 RUN yum update -y && yum install -y xz && yum clean all
+RUN yum update -y && yum install -y  libxslt && yum clean all
 USER cmsbuild
