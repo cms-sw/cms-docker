@@ -35,6 +35,6 @@ ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
 WORKDIR /build
 RUN yum update -y && yum install -y xz && yum clean all
 RUN yum update -y && yum install -y  libxslt && yum clean all
-RUN yum remove java-1.8.0-openjdk-headless-1.8.0.161 java-1.8.0-openjdk-devel-1.8.0.161 java-1.8.0-openjdk-1.8.0.161 && yum clean all
+RUN yum remove -y java-1.8.0-openjdk-headless-1.8.0.161 java-1.8.0-openjdk-devel-1.8.0.161 java-1.8.0-openjdk-1.8.0.161 && yum clean all
 RUN yum update -y && yum install -y  java-1.8.0-openjdk-headless-1.8.0.151 java-1.8.0-openjdk-devel-1.8.0.151 java-1.8.0-openjdk-1.8.0.151 && yum clean all
 USER cmsbuild
