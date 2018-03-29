@@ -30,4 +30,5 @@ WORKDIR /build
 RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.1.3/dumb-init_1.1.3_amd64
 RUN chmod +x /usr/local/bin/dumb-init
 ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
+RUN yum update -y && yum install -y python-requests-kerberos && yum clean all
 USER cmsbuild
