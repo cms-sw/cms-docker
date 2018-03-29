@@ -1,7 +1,7 @@
 FROM centos/aarch64
 ADD cernca.repo /etc/yum.repos.d/cernca.repo
 ADD  GPG-KEY-EUGridPMA-RPM-3 /etc/pki/rpm-gpg/GPG-KEY-EUGridPMA-RPM-3
-RUN rpm -iUv http://dl.fedoraproject.org/pub/epel/7/aarch64/e/epel-release-7-9.noarch.rpm
+RUN rpm -iUv http://dl.fedoraproject.org/pub/epel/7/aarch64/Packages/e/epel-release-7-11.noarch.rpm
 RUN rpm -iUv http://linuxsoft.cern.ch/cern/centos/7.3/cern/x86_64/Packages/CERN-CA-certs-20160421-2.el7.cern.noarch.rpm
 RUN yum update -y && yum clean all
 RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
@@ -37,3 +37,4 @@ ADD dumb-init /usr/local/bin/dumb-init
 RUN chmod +x /usr/local/bin/dumb-init
 env PYTHONPATH /opt/py2-packages
 ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
+RUN yum update -y && yum install -y python-requests-kerberos && yum clean all
