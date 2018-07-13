@@ -1,0 +1,1 @@
+A stump file to auto-build this docker image.
