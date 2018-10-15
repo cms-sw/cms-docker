@@ -7,7 +7,7 @@ RUN     wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/repos/bootstra
 RUN     sh /opt/cms/bootstrap.sh setup -r cms -architecture $SCRAM_ARCH -server cmsrep.cern.ch 
 RUN     /opt/cms/common/cmspkg -a $SCRAM_ARCH install -y cms+local-cern-siteconf+sm111124
 ARG     CMSSW_VERSION=CMSSW_5_3_38
-RUN     /opt/cms/common/cmspkg -a $SCRAM_ARCH install -y cms+cmssw+CMSSW_VERSION
+RUN     /opt/cms/common/cmspkg -a $SCRAM_ARCH install -y cms+cmssw+$CMSSW_VERSION
 RUN     /opt/cms/common/cmspkg -a $SCRAM_ARCH clean
 
 USER    root
