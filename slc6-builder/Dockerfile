@@ -20,7 +20,8 @@ RUN yum update -y && yum install -y git-core openssl glibc-devel.x86_64 mesa-lib
                              libXpm bc libaio tar patch krb5-devel gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn \
                              cvs gcc-c++ strace cern-wrappers krb5-workstation wget readline-devel nano bzip2 \
                              CERN-CA-certs tk-devel tcl-devel which python-pip HEP_OSlibs_SL6 file voms-clients-cpp \
-                             java-1.8.0-openjdk java-1.8.0-openjdk-devel compat-readline5 libXcursor libXrandr libXinerama PyYAML && yum clean all
+                             java-1.8.0-openjdk java-1.8.0-openjdk-devel compat-readline5 libXcursor libXrandr libXinerama \
+                             PyYAML python-requests-kerberos xz libxslt && yum clean all
      
 RUN mkdir -p /opt/py2-packages
 RUN pip install -t /opt/py2-packages PyGithub requests
@@ -31,10 +32,7 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 RUN chmod +x /usr/local/bin/dumb-init
 ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
 WORKDIR /build
-RUN yum update -y && yum install -y xz && yum clean all
-RUN yum update -y && yum install -y  libxslt && yum clean all
-RUN yum remove -y java-1.8.0-openjdk-headless-1.8.0.161 java-1.8.0-openjdk-devel-1.8.0.161 java-1.8.0-openjdk-1.8.0.161 && yum clean all
-RUN yum update -y && yum install -y  java-1.8.0-openjdk-headless-1.8.0.151 java-1.8.0-openjdk-devel-1.8.0.151 java-1.8.0-openjdk-1.8.0.151 && yum clean all
-RUN yum update -y && yum install -y python-requests-kerberos && yum clean all
+#RUN yum remove -y java-1.8.0-openjdk-headless-1.8.0.161 java-1.8.0-openjdk-devel-1.8.0.161 java-1.8.0-openjdk-1.8.0.161 && yum clean all
+#RUN yum update -y && yum install -y  java-1.8.0-openjdk-headless-1.8.0.151 java-1.8.0-openjdk-devel-1.8.0.151 java-1.8.0-openjdk-1.8.0.151 && yum clean all
 RUN mkdir /cvmfs /afs /eos
 USER cmsbuild
