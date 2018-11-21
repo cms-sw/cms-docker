@@ -20,11 +20,9 @@ RUN yum update -y && yum install -y git-core openssl glibc-devel.x86_64 mesa-lib
                              libXpm bc libaio tar patch krb5-devel gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn \
                              cvs gcc-c++ strace cern-wrappers krb5-workstation wget readline-devel nano bzip2 \
                              CERN-CA-certs tk-devel tcl-devel which python-pip HEP_OSlibs_SL6 file voms-clients-cpp \
-                             java-1.8.0-openjdk java-1.8.0-openjdk-devel compat-readline5 libXcursor libXrandr libXinerama && yum clean all
+                             java-1.8.0-openjdk java-1.8.0-openjdk-devel compat-readline5 libXcursor libXrandr libXinerama PyYAML && yum clean all
      
-RUN pip install --upgrade pip
 RUN mkdir -p /opt/py2-packages
-RUN pip install -t /opt/py2-packages pyyaml
 RUN pip install -t /opt/py2-packages PyGithub requests
 RUN chown -R cmsbuild /opt/py2-packages/*
 env PYTHONPATH /opt/py2-packages
