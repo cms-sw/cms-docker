@@ -4,6 +4,6 @@
 # EXTRA_BUILD_ARGS=
 PUSH_CONTAINER=true
 DOCKER_FILE=Dockerfile.arm64  
-# CONTAINER_NAME="Get from commit dir" 
+CONTAINER_NAME=aarch64-slc7-builder
 # GITHUT_REPO="Use job default"
 # DOCKER_DIR="Get from commit dir"
