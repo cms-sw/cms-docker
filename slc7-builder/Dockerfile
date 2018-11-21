@@ -31,5 +31,5 @@ RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/
 RUN chmod +x /usr/local/bin/dumb-init
 ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
 RUN yum update -y && yum install -y python-requests-kerberos && yum clean all
-RUN mkdir /cvmfs /afs /eos /build
+RUN mkdir /cvmfs /afs /eos
 USER cmsbuild
