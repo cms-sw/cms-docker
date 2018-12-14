@@ -4,6 +4,6 @@
 # EXTRA_BUILD_ARGS=
 PUSH_CONTAINER=true
 # DOCKER_FILE=Dockerfile
-CONTAINER_NAME=slc6
+#CONTAINER_NAME=slc6
 # GITHUT_REPO="Use job default"
 # DOCKER_DIR="Get from commit dir"
