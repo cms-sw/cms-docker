@@ -1,10 +1,10 @@
 #Imported from https://hub.docker.com/r/bbockelm/cms/dockerfile
 
 ARG OSG_WN_TAG=3.4-el7
-ARG BUILD_DATE=20181214-0000
-ARG EXTRA_PACKAGES=
-
 FROM opensciencegrid/osg-wn:${OSG_WN_TAG}
+
+ARG EXTRA_PACKAGES
+ARG BUILD_DATE=20181214-0000
 
 LABEL name="CMS Worker Node on EL"
 LABEL build-date="${BUILD_DATE}"
