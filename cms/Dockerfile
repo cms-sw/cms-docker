@@ -7,7 +7,7 @@ FROM opensciencegrid/osg-wn:${OSG_WN_TAG}
 
 LABEL name="CMS Worker Node on EL"
 LABEL build-date="${BUILD_DATE}"
-LABEL maintainer="CMs Build"
+LABEL maintainer="CMS Build"
 
 # Required
 # --------
