@@ -19,7 +19,7 @@ RUN groupadd -g 350 cvcmsib
 RUN adduser -u 350 -g 350 cvcmsib
 RUN groupadd -g 101 shared
 RUN adduser -u 101 -g 101 shared
-RUN yum update -y && yum install -y which file && yum clean all
+RUN yum update -y && yum install -y which file libaio && yum clean all
 
 USER shared
 
