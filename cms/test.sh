@@ -1,4 +1,4 @@
-#!/bin/bash -e
+#!/bin/bash -ex
 if [ "$WORKSPACE" = "" ] ; then WORKSPACE=$(/bin/pwd) ; fi
 cd $WORKSPACE
 GET_CMD="wget -q -O"
