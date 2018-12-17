@@ -31,6 +31,7 @@ done
 
 #Test gfal-ls
 rm -f `pwd`/gfal-test
+gfal-ls -l srm://dpmhead-rc.cern.ch:8446/srm/managerv2?SFN=/dpm/cern.ch/home/dteam/
 gfal-copy  srm://dpmhead-rc.cern.ch:8446/srm/managerv2?SFN=/dpm/cern.ch/home/dteam/test1 `pwd`/gfal-test && rm -rf `pwd`/gfal-test
 GFAL_ERR=$(gfal-copy  srm://dpmhead-rc.cern.ch:8446/srm/managerv2?SFN=/dpm/cern.ch/home/dteam/testsdfdsfdfs1 `pwd`/gfal-test  2>&1 ||true)
 echo $GFAL_ERR
