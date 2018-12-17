@@ -7,7 +7,6 @@ ARG EXTRA_PACKAGES
 ARG BUILD_DATE=20181214-0000
 
 LABEL name="CMS Worker Node on EL"
-LABEL build-date="${BUILD_DATE}"
 LABEL maintainer="CMS Build"
 
 # Required
@@ -56,4 +55,6 @@ RUN mkdir -p /hdfs \
              /lfs_roots \
              /storage \
              /build
+
+LABEL build-date="${BUILD_DATE}"
 
