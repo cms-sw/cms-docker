@@ -9,6 +9,7 @@ else
   $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cmsdist/master/cmsos.file
 fi
 chmod +x cmsos
+sh -ex ./cmsos
 HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
 $GET_CMD bootstrap.sh http://cmsrep.cern.ch/cmssw/bootstrap.sh
 
