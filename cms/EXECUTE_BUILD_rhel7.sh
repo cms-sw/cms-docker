@@ -8,3 +8,4 @@ EXTRA_BUILD_ARGS="--build-arg OSG_WN_TAG=3.4-el7 --build-arg BUILD_DATE=$(date +
 #CONTAINER_NAME=cms
 #GITHUT_REPO="Use job default"
 #DOCKER_DIR="Get from commit dir"
+DOCKER_TEST_SLAVE=singularity

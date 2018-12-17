@@ -29,6 +29,7 @@ LABEL maintainer="CMS Build"
 #
 # - 7 Feb 2018: libaio was added to enable the Oracle client, needed for T0 jobs.
 # - 14 Dec 2018: Rsync added, needed by cms bootstrap.sh
+# - 17 Dec 2018: Create /build for testings cms-bot jobs
 
 RUN yum -y install cvmfs \
                    gcc \
@@ -53,5 +54,6 @@ RUN mkdir -p /hdfs \
              /cms \
              /etc/cvmfs/SITECONF \
              /lfs_roots \
-             /storage
+             /storage \
+             /build
 
