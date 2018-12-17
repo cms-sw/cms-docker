@@ -3,7 +3,7 @@
 CONTAINER_TAG=rhel6
 # DOCKERHUB_USER="Use job default"
 EXTRA_BUILD_ARGS="--build-arg OSG_WN_TAG=3.4-el6 --build-arg BUILD_DATE=$(date +%Y%m%d-%H%m) --build-arg EXTRA_PACKAGES=compat-readline5"
-#PUSH_CONTAINER=true
+PUSH_CONTAINER=true
 #DOCKER_FILE=Dockerfile
 #CONTAINER_NAME=cms
 #GITHUT_REPO="Use job default"
