@@ -30,7 +30,7 @@ for repo in cms ; do
 done
 
 #Test gfal-ls
-gfal-copy -fpK /home/doe/file1 srm://dpmhead-rc.cern.ch:8446/srm/managerv2?SFN=/dpm/cern.ch/home/dteam/dir/nested/file1
+rm -f `pwd`/gfal-test
 gfal-copy  srm://dpmhead-rc.cern.ch:8446/srm/managerv2?SFN=/dpm/cern.ch/home/dteam/test1 `pwd`/gfal-test && rm -rf `pwd`/gfal-test
 GFAL_ERR=$(gfal-copy  srm://dpmhead-rc.cern.ch:8446/srm/managerv2?SFN=/dpm/cern.ch/home/dteam/testsdfdsfdfs1 `pwd`/gfal-test  2>&1 ||true)
 echo $GFAL_ERR
