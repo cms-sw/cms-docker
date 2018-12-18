@@ -41,3 +41,4 @@ RUN yum update -y && yum install -y python-requests-kerberos && yum clean all
 RUN mkdir -p /cvmfs /afs /eos
 RUN mkdir -p /etc/vomses /etc/grid-security
 RUN touch /etc/tnsnames.ora
+RUN mkdir /data
