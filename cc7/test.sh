@@ -3,10 +3,10 @@ if [ "$WORKSPACE" = "" ] ; then WORKSPACE=$(/bin/pwd) ; fi
 cd $WORKSPACE
 GET_CMD="wget -q -O"
 if wget --help >/dev/null 2>&1 ; then
-  $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cmsdist/master/cmsos.file
+  $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cms-common/master/common/cmsos
 else
   GET_CMD="curl -s -k -L -o"
-  $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cmsdist/master/cmsos.file
+  $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cms-common/master/common/cmsos
 fi
 chmod +x cmsos
 HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
