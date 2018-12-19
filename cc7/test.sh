@@ -12,7 +12,7 @@ chmod +x cmsos
 HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
 $GET_CMD bootstrap.sh http://cmsrep.cern.ch/cmssw/bootstrap.sh
 
-INVALID_ARCHS='cms/slc6_amd64_gcc461 cms/slc6_amd64_gcc810'
+INVALID_ARCHS='cms/slc6_amd64_gcc461 cms/slc6_amd64_gcc810 cms/slc7_aarch64_gcc493 cms/slc7_aarch64_gcc530'
 for repo in cms ; do
   echo "############# REPO $repo ##################"
   mkdir -p $repo
