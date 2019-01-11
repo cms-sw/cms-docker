@@ -35,5 +35,5 @@ RUN yum update -y && yum install -y libgfortran && yum clean all
 RUN mkdir /cvmfs /afs /eos
 RUN mkdir -p /etc/vomses /etc/grid-security
 RUN touch /etc/tnsnames.ora
-RUN mkdir /data
+RUN mkdir /data /pool
 USER cmsbuild
