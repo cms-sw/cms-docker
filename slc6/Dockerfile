@@ -35,4 +35,7 @@ WORKDIR /build
 #RUN yum remove -y java-1.8.0-openjdk-headless-1.8.0.161 java-1.8.0-openjdk-devel-1.8.0.161 java-1.8.0-openjdk-1.8.0.161 && yum clean all
 #RUN yum update -y && yum install -y  java-1.8.0-openjdk-headless-1.8.0.151 java-1.8.0-openjdk-devel-1.8.0.151 java-1.8.0-openjdk-1.8.0.151 && yum clean all
 RUN mkdir /cvmfs /afs /eos
+RUN mkdir -p /etc/vomses /etc/grid-security
+RUN touch /etc/tnsnames.ora
+RUN mkdir -p /data /pool
 USER cmsbuild
