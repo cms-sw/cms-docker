@@ -1,0 +1,20 @@
+--- lib/LXR/Lang.pm
++++ lib/LXR/Lang.pm
+@@ -448,7 +448,7 @@ sub _linkincludedirs {
+ 		$sp = rindex ($file, $sep);
+ 		$tail = substr($file, $sp) . $tail;
+ 		$file = substr($file, 0, $sp);
+-		$path =~ s!/[^/]+$!!;
++		$path =~ s!/+[^/]+$!!;
+ 		$link = incdirref($file, 'include', $path, $dir);
+ 	}
+ 	# A known directory (at least) has been found.
+@@ -464,7 +464,7 @@ sub _linkincludedirs {
+ 			$tail = $sep . $link . $tail;
+ 			$sp = rindex ($file, $sep);
+ 			$file = substr($file, 0, $sp);
+-			$path =~ s!/[^/]+$!!;
++			$path =~ s!/+[^/]+$!!;
+ 			$link = incdirref($file, 'include', $path, $dir);
+ 		}
+ 	}

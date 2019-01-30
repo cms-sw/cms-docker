@@ -39,6 +39,7 @@ cd lxr
 cp /lxr/custom.d/apache-lxrserver.conf  /etc/apache2/conf-available
 cat /lxr/custom.d/htaccess-index.conf >> /lxr/.htaccess
 patch -p0 < /lxr/custom.d/lxr-2.2.1-baseurl.patch
+patch -p0 < /lxr/custom.d/lxr-2.2.1-incpath-fix.patch
 a2enconf apache-lxrserver.conf
 service mysql start
 service apache2 start

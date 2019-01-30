@@ -8,6 +8,7 @@ COPY cmsbanner.gif /lxr/cmsbanner.gif
 COPY custom.d/lxr.conf /lxr/lxr.conf
 COPY custom.d/htaccess-index.conf /lxr/custom.d/htaccess-index.conf
 COPY custom.d/lxr-2.2.1-baseurl.patch /lxr/custom.d/lxr-2.2.1-baseurl.patch
+COPY custom.d/lxr-2.2.1-incpath-fix.patch /lxr/custom.d/lxr-2.2.1-incpath-fix.patch
 COPY scripts/entrypoint.sh /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
