@@ -1,3 +1,4 @@
+# trigered on 2019-01-31 
 # Do not foget to change tag on each update or prevous version will be overwriten
 CONTAINER_TAG=dev
 #DOCKERHUB_USER="Use job default"
