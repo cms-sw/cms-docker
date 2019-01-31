@@ -1,15 +1,8 @@
 #!/bin/sh
 if [ ! -d /var/lib/mysql/lxr ] ; then
-  if [ ! -d /host/mysql ] ; then
-    echo "ERROR: MySQL database is not initialize yet."
-    echo "       Please start docker with '-v <host_mysql_dir>:/host/mysql:z'"
-    exit 1
-  fi
   service mysql start
   expect /lxr/expect_initdb
   service mysql stop
-  rsync -a /var/lib/mysql/ /host/mysql/
-  exit 0
 fi
 
 if [ $# -lt 1 ] ; then
