@@ -1,4 +1,4 @@
-FROM cmssw/docker-lxr:v0
+FROM gudrutis/docker-lxr:2.3.4
 
 CMD /bin/rm -rf /lxr/glimpse_db
 RUN addgroup --gid 500 lxr
