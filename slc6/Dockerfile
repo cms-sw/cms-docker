@@ -31,4 +31,5 @@ ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
 WORKDIR /build
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool
 RUN touch /etc/tnsnames.ora
+RUN yum update -y && yum install -y time && yum clean all
 USER cmsbuild
