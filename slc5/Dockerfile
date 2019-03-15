@@ -1,6 +1,6 @@
 FROM cern/slc5-base
 
-RUN     yum install -y libXft-devel libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel \
+RUN     yum update -y && yum install -y libXft-devel libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel \
         libXmu libXpm libSM libXft libXext \
         wget git \
         glibc-devel \
@@ -23,7 +23,7 @@ RUN     wget http://repository.egi.eu/sw/production/cas/1/current/repo-files/EGI
         mv RPM-GPG-KEY-wlcg /etc/pki/rpm-gpg/ && \
         wget http://grid-deployment.web.cern.ch/grid-deployment/download/HEP/repo/HEP_OSlibs.repo && \
         mv HEP_OSlibs.repo /etc/yum.repos.d/ && \
-        yum install -y HEP_OSlibs_SL5 ca-policy-lcg ca-policy-egi-core wlcg-repo.noarch wlcg-voms-cms && \
+        yum update -y && yum install -y HEP_OSlibs_SL5 ca-policy-lcg ca-policy-egi-core wlcg-repo.noarch wlcg-voms-cms && \
         yum clean -y all
 
 
