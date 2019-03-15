@@ -36,6 +36,6 @@ RUN wget -O /usr/local/bin/dumb-init http://cmsrep.cern.ch/cmssw/download/dumb-i
 RUN chmod +x /usr/local/bin/dumb-init
 ENTRYPOINT ["/usr/local/bin/dumb-init", "-c", "--" ]
 WORKDIR /build
-RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool
 RUN touch /etc/tnsnames.ora
+RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool
 USER cmsbuild
