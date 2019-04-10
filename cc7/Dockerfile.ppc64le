@@ -1,0 +1,38 @@
+FROM ppc64le/centos:7
+
+RUN yum -y install java-1.8.0-openjdk python-pip python-devel
+RUN yum -y install java-1.8.0-openjdk-devel
+RUN yum -y install ntp
+RUN yum -y install git subversion bc finger
+RUN yum -y install zip unzip
+RUN yum -y install which
+RUN yum -y install bzip2
+RUN yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl ncurses e2fsprogs krb5-libs freetype fontconfig libstdc++ libidn libX11 libXmu libSM libICE libXcursor libXext libXrandr libXft mesa-libGLU mesa-libGL e2fsprogs-libs libXi libXinerama libXrender libXpm gcc-c++ libcom_err libXpm-devel libXft-devel libX11-devel libXext-devel mesa-libGLU mesa-libGLU-devel libGLEW glew perl-Digest-MD5 perl-ExtUtils-MakeMaker patch perl-libwww-perl krb5-libs krb5-devel perl-Data-Dumper perl-WWW-Curl texinfo hostname time perl-Carp perl-Text-ParseWords perl-PathTools perl-ExtUtils-MakeMaker perl-Exporter perl-File-Path perl-Getopt-Long perl-constant perl-File-Temp perl-Socket perl-Time-Local perl-Storable glibc-headers perl-threads perl-Thread-Queue perl-Module-ScanDeps perl-Test-Harness perl-Env perl-Switch perl-ExtUtils-Embed ncurses-libs perl-libs
+RUN yum -y install file
+RUN yum -y install wget
+RUN yum -y install lcg-CA perl-LWP-Protocol-https fetch-crl
+RUN yum -y install python-setuptools
+RUN yum -y install setroubleshoot-server autofs gdb attr
+
+RUN rpm -iUv https://www.rpmfind.net/linux/epel/7/ppc64le/Packages/k/kstart-4.2-7.el7.ppc64le.rpm
+RUN rpm -iUv https://rpmfind.net/linux/epel/7/ppc64le/Packages/p/python2-pip-8.1.2-8.el7.noarch.rpm
+
+RUN mkdir -p /opt/py2-packages
+RUN pip install -t /opt/py2-packages PyGithub requests
+RUN groupadd -g 1399 zh
+RUN adduser -u 22527 -g 1399 cmsbuild && install -d /opt && install -d -o cmsbuild /opt/cms /build
+RUN install -d -o cmsbuild /build
+RUN chown -R cmsbuild /opt/py2-packages/*
+env PYTHONPATH /opt/py2-packages
+WORKDIR /build
+RUN wget -O /usr/local/bin/dumb-init https://github.com/Yelp/dumb-init/releases/download/v1.2.2/dumb-init_1.2.2_ppc64el
+RUN chmod +x /usr/local/bin/dumb-init
+RUN mkdir /cvmfs /afs /eos
+RUN mkdir -p /etc/vomses /etc/grid-security
+RUN touch /etc/tnsnames.ora
+RUN mkdir /data /pool
+RUN yum install -y time python-requests-kerberos libgfortran && yum update -y && yum clean all
+ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
+CMD ["bash"]
+USER cmsbuild
+
