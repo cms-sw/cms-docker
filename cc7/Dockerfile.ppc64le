@@ -31,7 +31,11 @@ RUN mkdir /cvmfs /afs /eos
 RUN mkdir -p /etc/vomses /etc/grid-security
 RUN touch /etc/tnsnames.ora
 RUN mkdir /data /pool
-RUN yum install -y time python-requests-kerberos libgfortran && yum update -y && yum clean all
+RUN yum -y install time 
+RUN yum -y install python-requests-kerberos 
+RUN yum -y install libgfortran 
+RUN yum update -y 
+#RUN yum clean all
 ENTRYPOINT ["/usr/local/bin/dumb-init", "--"]
 CMD ["bash"]
 USER cmsbuild
