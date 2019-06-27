@@ -10,6 +10,7 @@ COPY custom.d/htaccess-index.conf /lxr/custom.d/htaccess-index.conf
 COPY custom.d/lxr-2.2.1-baseurl.patch /lxr/custom.d/lxr-2.2.1-baseurl.patch
 COPY custom.d/Lang.pm /lxr/lib/LXR/
 COPY scripts/entrypoint.sh /entrypoint.sh
+copy custom.d/filetype.conf /lxr/templates/filetype.conf
 RUN chmod +x /entrypoint.sh
 ENTRYPOINT ["/entrypoint.sh"]
 
