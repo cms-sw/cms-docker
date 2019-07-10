@@ -5,6 +5,8 @@ RUN chmod 755 /etc/yum.repos.d/CentOS-CERN.repo
 ADD http://linuxsoft.cern.ch/cern/centos/7.1/os/x86_64/RPM-GPG-KEY-cern /tmp/RPM-GPG-KEY-cern
 ADD RPM-GPG-KEY-cern /etc/pki/rpm-gpg/RPM-GPG-KEY-cern
 ADD HEP_OSlibs.repo /etc/yum.repos.d/HEP_OSlibs.repo
+RUN groupadd -g 314 cvcms
+RUN adduser -u 314 -g 314 cvcms
 
 RUN /usr/bin/rpm --import /tmp/RPM-GPG-KEY-cern && /bin/rm /tmp/RPM-GPG-KEY-cern
 
