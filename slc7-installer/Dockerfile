@@ -21,4 +21,4 @@ RUN groupadd -g 350 cvcmsib
 RUN adduser -u 350 -g 350 cvcmsib
 RUN groupadd -g 101 shared
 RUN adduser -u 101 -g 101 shared
-USER shared
+USER cvcms
