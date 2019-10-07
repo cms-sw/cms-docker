@@ -1,7 +1,7 @@
 #Imported from https://hub.docker.com/r/bbockelm/cms/dockerfile
 
-ARG OSG_WN_TAG=3.4-el7
-FROM opensciencegrid/osg-wn:${OSG_WN_TAG}
+ARG OSG_WN_TAG=@TAG@
+FROM @FROM@
 
 ARG EXTRA_PACKAGES
 ARG BUILD_DATE=20181214-0000

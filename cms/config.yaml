@@ -1,0 +1,15 @@
+docker: Dockerfile
+push:   false
+args:   --build-arg OSG_WN_TAG=${base}:${from} --build-arg BUILD_DATE=$(date +%Y%m%d-%H%m) --build-arg EXTRA_PACKAGES=${packages}
+base:   opensciencegrid/osg-wn
+test:
+  node:   singularity
+  script: test.sh
+tags:
+  - rhel7:
+      from: 3.4-el7
+      packages: bzip2
+  - rhel6:
+      from: 3.4-el6
+      packages: compat-readline5
+
