@@ -2,7 +2,7 @@
 from __future__ import print_function
 import yaml
 import sys, re
-from os.path import exists, join
+from os.path import exists, join, dirname, abspath
 
 regex_var = re.compile('^(.*)\$\{([^}]+)\}(.*)$')
 
@@ -39,7 +39,7 @@ def expand(data):
 
 def get_docker_images(name, repository='cmssw'):
   images = []
-  setup_file = join(name, "config.yaml")
+  setup_file = join(dirname(dirname(abspath(__file__))), name, "config.yaml")
   if not exists(setup_file):
     print("Warnings: No such file %s" % setup_file)
     return images
@@ -69,8 +69,3 @@ def get_docker_images(name, repository='cmssw'):
 
   for img in images: print (img)
   return images
-
-  
- 
-    
-
