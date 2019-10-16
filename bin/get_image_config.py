@@ -63,9 +63,6 @@ def get_docker_images(name, repository='cmssw'):
     images[-1]['DOCKER_FILE']=get_key('docker', img_data)
     images[-1]['FROM']=get_key('base', img_data)+":"+get_key('from', img_data)
     images[-1]['CONTAINER']=get_key('repository', img_data)+"/"+get_key('name', img_data)+":"+get_key('tag', img_data)
-    images[-1]['TEST_NODE']=get_key('test_node', img_data)
     images[-1]['TEST_SCRIPT']=get_key('script', img_data)
     images[-1]['TEST_NODE']=get_key('node', img_data)
-
-  for img in images: print (img)
   return images

@@ -1,0 +1,7 @@
+docker: Dockerfile
+push:   true
+base:   centos/8
+tags:
+  - latest:
+      from: latest
+
