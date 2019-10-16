@@ -20,6 +20,8 @@ def get_docker_token(repo):
 
 def get_manifest(image):
   repo = image.split(":",1)[0]
+  if '/' not in repo:
+    repo = 'library/'+repo
   tag = image.split(":",1)[-1]
   if repo==tag: tag="latest"
   token = get_docker_token(repo)
