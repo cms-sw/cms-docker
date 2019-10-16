@@ -1,6 +1,6 @@
 #Imported from https://hub.docker.com/r/bbockelm/cms/dockerfile
 
-ARG OSG_WN_TAG=@TAG@
+ARG OSG_WN_TAG=@BASE_TAG@
 FROM @FROM@
 
 ARG EXTRA_PACKAGES
