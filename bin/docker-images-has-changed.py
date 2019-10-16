@@ -19,14 +19,17 @@ def create_file(img):
 parser = ArgumentParser(description='Check if docker image based on the same layers as the parent image')
 parser.add_argument('-r', dest='repo', type=str, help="Provide specific repository for docker images.")
 args = parser.parse_args()
+repos = []
 if args.repo:
-  images_to_compare(args.repo)
+  repos.append(args.repo)
 else:
   dir = os.path.dirname(dirname(os.path.abspath(__file__)))
   for file in glob.glob(dir + '/**/*.yaml*'):
-    reponame = os.path.basename(dirname(file)) # gets name of folder where .yaml file founded
-    for img in get_docker_images(reponame):
-      inher= img.get('CONTAINER')
-      parent = img.get('FROM')
-      if has_parent_changed(parent, inher, reponame):
-         create_file(img)
+    repos.append(os.path.basename(dirname(file)))
+
+for reponame in repos:
+  for img in get_docker_images(reponame):
+    inher= img.get('CONTAINER')
+    parent = img.get('FROM')
+    if has_parent_changed(parent, inher, reponame):
+      create_file(img)

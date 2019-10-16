@@ -1,7 +1,6 @@
 docker: Dockerfile
 push:   true
-base:   centos/8
+base:   centos
 tags:
   - latest:
-      from: latest
-
+      from: 8

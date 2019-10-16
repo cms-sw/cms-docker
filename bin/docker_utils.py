@@ -23,7 +23,7 @@ def get_manifest(image):
   tag = image.split(":",1)[-1]
   if repo==tag: tag="latest"
   token = get_docker_token(repo)
-  print('Getting image_manifest for %s/%s' % (repo, tag))
+  print('Getting image_manifest for %s:%s' % (repo, tag))
   e, o = run_cmd('curl --silent --request "GET" --header "Authorization: Bearer %s" "https://registry-1.docker.io/v2/%s/manifests/%s"' % (token, repo, tag))
   return loads(o)
 
