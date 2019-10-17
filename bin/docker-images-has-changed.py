@@ -8,7 +8,7 @@ import json
 
 def create_file(img):
   print('Writing to file ....')
-  file_name = (img.get('CONTAINER').replace('/', '_').replace(':', '_') + '.txt')
+  file_name = (img.get('IMAGE_NAME').replace('/', '_').replace(':', '_') + '.txt')
   with open(file_name,'w+') as file:
     for key, value in img.items():
       line = str(key) + '=' + str(value) + '\n'
