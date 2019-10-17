@@ -1,4 +1,4 @@
-FROM @FROM@
+FROM @BASE_IMAGE_NAME@
 RUN yum update -y && \
     yum install -y \
     automake bash bzip2 bzip2-libs bzip2-devel coreutils-single e2fsprogs e2fsprogs-libs \

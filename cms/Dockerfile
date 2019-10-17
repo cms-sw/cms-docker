@@ -1,10 +1,6 @@
 #Imported from https://hub.docker.com/r/bbockelm/cms/dockerfile
 
-ARG OSG_WN_TAG=@BASE_TAG@
-FROM @FROM@
-
-ARG EXTRA_PACKAGES
-ARG BUILD_DATE=20181214-0000
+FROM @BASE_IMAGE_NAME@
 
 LABEL name="CMS Worker Node on EL"
 LABEL maintainer="CMS Build"
@@ -43,7 +39,7 @@ RUN yum -y install cvmfs \
                    perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path perl-File-Temp perl-Getopt-Long \
                    perl-Socket perl-Text-ParseWords perl-Time-Local libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel \
                    perl-Switch perl-Storable perl-Env perl-Thread-Queue perl-Encode nspr nss nss-util file file-libs readline \
-                   zlib popt bzip2 bzip2-libs libaio rsync ${EXTRA_PACKAGES} && \
+                   zlib popt bzip2 bzip2-libs libaio rsync @EXTRA_PACKAGES@ && \
     yum clean all
 
 # Various directories needed for bind mounts (as overlayfs is not available on RHEL6)
@@ -57,5 +53,5 @@ RUN mkdir -p /hdfs \
              /storage \
              /build
 
-LABEL build-date="${BUILD_DATE}"
+LABEL build-date="@BUILD_DATE@"
 

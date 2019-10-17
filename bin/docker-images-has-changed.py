@@ -29,7 +29,7 @@ else:
 
 for reponame in repos:
   for img in get_docker_images(reponame):
-    inher= img.get('CONTAINER')
-    parent = img.get('FROM')
+    inher= img.get('IMAGE_NAME')
+    parent = img.get('BASE_IMAGE_NAME')
     if has_parent_changed(parent, inher, reponame):
       create_file(img)
