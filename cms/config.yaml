@@ -2,7 +2,7 @@ docker: Dockerfile
 push:   false
 base:   opensciencegrid/osg-wn
 variables:
-  BUILD_BASE: 20191017-0810
+  BUILD_DATE: 20191017-0810
 test:
   node:   singularity
   script: test.sh
