@@ -1,4 +1,6 @@
 push:   false
+test:
+  script: test.sh
 tags:
   amd64:
     docker: Dockerfile.${tag}
