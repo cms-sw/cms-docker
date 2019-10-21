@@ -1,4 +1,4 @@
-FROM cern/cc7-base
+FROM @BASE_IMAGE_NAME@
 
 ADD http://linux.web.cern.ch/linux/centos7/CentOS-CERN.repo /etc/yum.repos.d/CentOS-CERN.repo
 RUN chmod 755 /etc/yum.repos.d/CentOS-CERN.repo

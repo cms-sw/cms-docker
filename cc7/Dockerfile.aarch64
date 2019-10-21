@@ -1,4 +1,4 @@
-FROM centos/aarch64
+FROM @BASE_IMAGE_NAME@
 ADD cernca.repo /etc/yum.repos.d/cernca.repo
 ADD  GPG-KEY-EUGridPMA-RPM-3 /etc/pki/rpm-gpg/GPG-KEY-EUGridPMA-RPM-3
 RUN rpm -iUv http://dl.fedoraproject.org/pub/epel/7/aarch64/Packages/e/epel-release-7-11.noarch.rpm

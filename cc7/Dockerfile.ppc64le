@@ -1,4 +1,4 @@
-FROM ppc64le/centos:7
+FROM @BASE_IMAGE_NAME@
 
 RUN yum -y install java-1.8.0-openjdk python-pip python-devel
 RUN yum -y install java-1.8.0-openjdk-devel
