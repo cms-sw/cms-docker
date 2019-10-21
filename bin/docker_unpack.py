@@ -61,7 +61,7 @@ def process(image, outdir):
 
   print ("Starting Container %s with %s hash" % (image, image_hash))
   tmpdir = join(outdir, ".images", "tmp")
-  e, o = run_cmd('docker run --name %s %s echo OK' % (image_hash,image))
+  e, o = run_cmd('docker run -u $(id -u):$(id -g) --name %s %s echo OK' % (image_hash,image))
   if e: cleanup_exit(o, [tmpdir], image_hash)
 
   print("Getting Container Id")
