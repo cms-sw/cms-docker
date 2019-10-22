@@ -31,6 +31,9 @@ def get_manifest(image):
 
 def has_parent_changed(parent, image, repository):
   parent_layers = get_manifest(parent)['fsLayers']
+  try: image_layers = get_manifest(image)['fsLayers']
+  except KeyError:
+    return True
   image_layers = get_manifest(image)['fsLayers']
   while parent_layers and image_layers:
     if parent_layers.pop()!=image_layers.pop():
