@@ -36,11 +36,10 @@ def has_parent_changed(parent, image, repository):
     if image_manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN':
       return True
     else:
-      print('Failed to get image manifest\nErrorCode: ' + image_manifest[u'errors'][0][u'code'])
-      return
+      raise Exception(image_manifest)
   parent_layers = get_manifest(parent)['fsLayers']
-  while parent_layers and image_manifest['fsLayers']:
-    if parent_layers.pop()!=image_manifest['fsLayers'].pop():
+  image_layers = image_manifest['fsLayers']
+  while parent_layers and image_layers:
+    if parent_layers.pop()!=image_layers.pop():
       return True
   return len(parent_layers)>0
-
