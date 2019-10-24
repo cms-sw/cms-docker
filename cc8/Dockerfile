@@ -24,8 +24,8 @@ RUN yum update -y && \
     alternatives --set python `which python2` && \
     yum clean all
 ADD krb5.conf /etc/krb5.conf
-RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms
-RUN touch /etc/tnsnames.ora
-RUN groupadd -g 1399 zh && adduser -u 22527 -g 1399 cmsbuild
-RUN groupadd -g 350 cvcmsib && adduser -u 350 -g 350 cvcmsib
-RUN groupadd -g 101 shared && adduser -u 101 -g 101 shared
+RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
+    touch /etc/tnsnames.ora &&\
+    groupadd -g 1399 zh && adduser -u 22527 -g 1399 cmsbuild &&\
+    groupadd -g 350 cvcmsib && adduser -u 350 -g 350 cvcmsib &&\
+    groupadd -g 101 shared && adduser -u 101 -g 101 shared
