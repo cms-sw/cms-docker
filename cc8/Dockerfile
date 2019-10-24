@@ -19,16 +19,13 @@ RUN yum update -y && \
     perl-Term-ANSIColor perl-Test-Harness perl-Text-ParseWords perl-Thread-Queue \
     perl-Time-HiRes perl-Time-Local perl-YAML \
     patch popt popt-devel python2 readline readline-devel rpm-build \
-    rsync tcl tcsh time tk wget which zlib zsh && \
+    rsync tcl tcsh time tk wget which zlib zsh \
+    bc strace tar zip unzip hostname nano && \
     alternatives --set python `which python2` && \
     yum clean all
 ADD krb5.conf /etc/krb5.conf
-WORKDIR /build
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms
-RUN chmod 0777 /build
 RUN touch /etc/tnsnames.ora
 RUN groupadd -g 1399 zh && adduser -u 22527 -g 1399 cmsbuild
 RUN groupadd -g 350 cvcmsib && adduser -u 350 -g 350 cvcmsib
 RUN groupadd -g 101 shared && adduser -u 101 -g 101 shared
-WORKDIR /build
-RUN yum update -y && yum install -y bc strace tar zip unzip hostname nano && yum clean all
