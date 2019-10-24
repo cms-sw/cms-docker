@@ -32,4 +32,3 @@ RUN groupadd -g 350 cvcmsib && adduser -u 350 -g 350 cvcmsib
 RUN groupadd -g 101 shared && adduser -u 101 -g 101 shared
 WORKDIR /build
 RUN yum update -y && yum install -y bc strace tar zip unzip hostname nano && yum clean all
-USER cvcms
