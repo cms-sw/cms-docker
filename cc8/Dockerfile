@@ -29,3 +29,9 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool 
     groupadd -g 1399 zh && adduser -u 22527 -g 1399 cmsbuild &&\
     groupadd -g 350 cvcmsib && adduser -u 350 -g 350 cvcmsib &&\
     groupadd -g 101 shared && adduser -u 101 -g 101 shared
+RUN if [ -d /etc/ssh/ssh_config.d ] ; then \
+      touch /etc/ssh/ssh_config.d/delme.conf && \
+      touch /etc/ssh/ssh_config && \
+      cat /etc/ssh/ssh_config.d/*.conf >> /etc/ssh/ssh_config && \
+      rm -rf /etc/ssh/ssh_config.d ;\
+    fi
