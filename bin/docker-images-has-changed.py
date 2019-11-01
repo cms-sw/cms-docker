@@ -18,7 +18,7 @@ def create_file(img):
 
 parser = ArgumentParser(description='Check if docker image based on the same layers as the parent image')
 parser.add_argument('-r', dest='repo', type=str, help="Provide specific repository for docker images.")
-parser.add_option("-f", "--force",    dest="force",     action="store_true", help="Force re-build", default=False)
+parser.add_argument("-f", "--force",    dest="force",     action="store_true", help="Force re-build", default=False)
 args = parser.parse_args()
 repos = []
 if args.repo:
