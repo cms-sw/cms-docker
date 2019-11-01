@@ -20,7 +20,7 @@ RUN yum update -y && \
     perl-Time-HiRes perl-Time-Local perl-YAML \
     patch popt popt-devel python2 readline readline-devel rpm-build \
     rsync tcl tcsh time tk wget which zlib zsh \
-    bc strace tar zip unzip hostname nano && \
+    bc strace tar zip unzip hostname nano libnsl && \
     alternatives --set python `which python2` && \
     yum clean all
 ADD krb5.conf /etc/krb5.conf
