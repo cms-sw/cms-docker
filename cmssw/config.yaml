@@ -3,3 +3,5 @@ tags:
   CMSSW_10_2_18:
     docker: Dockerfile
     from: cms:3.4-el6
+    variables:
+      SCRAM_ARCH: slc6_amd64_gcc700
