@@ -3,6 +3,7 @@ from __future__ import print_function
 import yaml
 import sys, re
 from os.path import exists, join, dirname, abspath
+from docker_utils import get_manifest
 
 regex_var = re.compile('^(.*)\$\{([^}]+)\}(.*)$')
 
@@ -61,12 +62,19 @@ def get_docker_images(name, repository='cmssw'):
     data[-1]['tag']=tag
     img_data = expand(data)
     pop_info(data, cnt)
+    image_name = get_key('contianer', img_data) + ":"+get_key('tag', img_data)
+    override = get_key('override', img_data)
+    if override in ["", "False"]:
+      manifest = get_manifest(image_name)
+      if 'fsLayers' in manifest: continue
+      if not 'errors' in manifest: continue
+      if manifest['errors'][0]['code'] != 'MANIFEST_UNKNOWN': continue
 
     images.append({})
     images[-1]['DOCKER_REPOSITORY']=get_key('repository', img_data)
     images[-1]['DOCKER_NAME']=get_key('name', img_data)
     images[-1]['DOCKER_CONTAINER']=get_key('contianer', img_data)
-    images[-1]['IMAGE_NAME']=get_key('contianer', img_data) + ":"+get_key('tag', img_data)
+    images[-1]['IMAGE_NAME']=image_name
     images[-1]['IMAGE_TAG']=get_key('tag', img_data)
 
     base_image = get_key('from', img_data)

@@ -5,7 +5,6 @@ from json import loads
 import sys
 import os, glob
 from os.path import dirname, abspath
-from get_image_config import get_docker_images
 import json
 
 if sys.version_info[0] == 2:
