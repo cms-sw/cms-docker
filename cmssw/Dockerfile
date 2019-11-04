@@ -2,8 +2,6 @@ FROM @BASE_IMAGE_NAME@
 
 RUN     groupadd -g 500 cmsinst && \
         adduser -u 500 -g 500 cmsinst && \
-        groupadd -g 501 cmsbld && \
-        adduser -u 501 -g 501 cmsbld && \
         /bin/mkdir -p /opt/cms && \
         chown cmsinst:cmsinst -R /opt/cms
 
