@@ -1,8 +1,10 @@
 push:   true
+override: False
+docker: Dockerfile
+slc6: cmssw/cms:rhel6
+slc7: cmssw/cms:rhel7
 tags:
   CMSSW_10_2_18:
-    override: False
-    docker: Dockerfile
-    from: cmssw/cms:rhel6
+    from: ${slc6}
     variables:
       SCRAM_ARCH: slc6_amd64_gcc700
