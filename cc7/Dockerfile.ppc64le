@@ -16,7 +16,6 @@ RUN yum update -y && \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time &&\
     yum clean all
 
-RUN rpm -iUv https://www.rpmfind.net/linux/epel/7/ppc64le/Packages/k/kstart-4.2-7.el7.ppc64le.rpm
 ADD krb5.conf /etc/krb5.conf
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build
 RUN touch /etc/tnsnames.ora
