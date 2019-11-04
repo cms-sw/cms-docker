@@ -1,4 +1,4 @@
-push:   false
+push:   true
 tags:
   CMSSW_10_2_18:
     docker: Dockerfile
