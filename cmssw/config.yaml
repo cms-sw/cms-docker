@@ -2,6 +2,6 @@ push:   false
 tags:
   CMSSW_10_2_18:
     docker: Dockerfile
-    from: opensciencegrid/osg-wn:rhel6
+    from: cmssw/cms:rhel6
     variables:
       SCRAM_ARCH: slc6_amd64_gcc700
