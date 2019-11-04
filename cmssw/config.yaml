@@ -1,0 +1,5 @@
+push:   false
+tags:
+  CMSSW_10_2_18:
+    docker: Dockerfile
+    from: cms:3.4-el6
