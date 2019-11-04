@@ -8,6 +8,7 @@ RUN     groupadd -g 500 cmsinst && \
         chown cmsinst:cmsinst -R /opt/cms
 
 RUN     su cmsinst &&\
+        cd /opt/cms &&\
         wget -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/repos/bootstrap.sh &&\
         sh /opt/cms/bootstrap.sh setup -r cms -architecture @SCRAM_ARCH@ -server cmsrep.cern.ch &&\
         /opt/cms/common/cmspkg -a @SCRAM_ARCH@ install -y cms+local-cern-siteconf+sm111124 &&\
