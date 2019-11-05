@@ -6,11 +6,13 @@ RUN     groupadd -g 500 cmsinst && \
         chown cmsinst:cmsinst -R /opt/cms
 
 RUN     su - cmsinst sh -c "cd /opt/cms &&\
-        wget -q -O /opt/cms/bootstrap.sh http://cmsrep.cern.ch/cmssw/repos/bootstrap.sh &&\
-        sh /opt/cms/bootstrap.sh setup -r cms -architecture @SCRAM_ARCH@ -server cmsrep.cern.ch &&\
-        /opt/cms/common/cmspkg -a @SCRAM_ARCH@ install -y cms+local-cern-siteconf+sm111124 &&\
-        /opt/cms/common/cmspkg -a @SCRAM_ARCH@ install -y cms+cmssw+@IMAGE_TAG@ &&\
-        /opt/cms/common/cmspkg -a @SCRAM_ARCH@ clean"
+        wget -q https://github.com/cms-sw/cms-bot/archive/master.tar.gz &&\
+        tar -xzf master.tar.gz &&\
+        mv cms-bot-master SITECONF &&\
+        wget -q -O bootstrap.sh http://cmsrep.cern.ch/cmssw/repos/bootstrap.sh &&\
+        sh ./bootstrap.sh setup -r cms -architecture @SCRAM_ARCH@ -server cmsrep.cern.ch &&\
+        ./common/cmspkg -a @SCRAM_ARCH@ install -y cms+cmssw+@IMAGE_TAG@ &&\
+        ./common/cmspkg -a @SCRAM_ARCH@ clean"
 
 RUN     /bin/cp -f /opt/cms/cmsset_default.sh  /etc/profile.d/ && \
         /bin/cp -f /opt/cms/cmsset_default.csh /etc/profile.d/
