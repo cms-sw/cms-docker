@@ -6,9 +6,9 @@ RUN     groupadd -g 500 cmsinst && \
         chown cmsinst:cmsinst -R /opt/cms
 
 RUN     su - cmsinst sh -c "cd /opt/cms &&\
-        wget -q https://github.com/cms-sw/cms-bot/archive/master.tar.gz &&\
+        wget -q https://github.com/cms-sw/siteconf/archive/master.tar.gz &&\
         tar -xzf master.tar.gz &&\
-        mv cms-bot-master SITECONF &&\
+        mv siteconf-master SITECONF &&\
         wget -q -O bootstrap.sh http://cmsrep.cern.ch/cmssw/repos/bootstrap.sh &&\
         sh ./bootstrap.sh setup -r cms -architecture @SCRAM_ARCH@ -server cmsrep.cern.ch &&\
         ./common/cmspkg -a @SCRAM_ARCH@ install -y cms+cmssw+@IMAGE_TAG@ &&\
