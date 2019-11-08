@@ -5,12 +5,11 @@ unpacked: false
 base:     opensciencegrid/osg-wn
 nightly: d$${now.strftime("%Y%m%d")}
 monthly: m$${now.strftime("%Y%m")}
-variables:
-  BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
 test:
   node:   singularity
   script: test.sh
 variables:
+  BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
   EXTRA_PACKAGES: ${packages}
   CVMFS_UNPACKED: ${unpacked}
 groups:

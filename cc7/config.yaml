@@ -1,14 +1,13 @@
-push:   false
+override: true
+push:     false
 test:
   script: test.sh
+docker: Dockerfile.${tag}
 tags:
   amd64:
-    docker: Dockerfile.${tag}
     from: cern/cc7-base:latest
   aarch64:
-    docker: Dockerfile.${tag}
     from: centos/aarch64:latest
   ppc64le:
-    docker: Dockerfile.${tag}
     from: ppc64le/centos:7
 
