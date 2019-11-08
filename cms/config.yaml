@@ -1,18 +1,31 @@
+override: False
 docker: Dockerfile
 push:   false
-base:   opensciencegrid/osg-wn
+rhel6_pkg:  compat-readline5
+rhel6_base: opensciencegrid/osg-wn:3.4-el6
+rhel7_pkg:  bzip2
+rhel7_base: opensciencegrid/osg-wn:3.4-el7
 variables:
   BUILD_DATE: 20191017-0810
 test:
   node:   singularity
   script: test.sh
 tags:
+  rhel7-20191108:
+    push: true
+    from: ${rhel7_base}
+    variables:
+      EXTRA_PACKAGES: ${rhel7_pkg}
+  rhel6-20191108:
+    push: true
+    from: ${rhel6_base}
+    variables:
+      EXTRA_PACKAGES: ${rhel6_pkg}
   rhel7:
-    from: ${base}:3.4-el7
+    from: ${rhel7_base}
     variables:
-      EXTRA_PACKAGES: bzip2
+      EXTRA_PACKAGES: ${rhel7_pkg}
   rhel6:
-    from: ${base}:3.4-el6
+    from: ${rhel6_base}
     variables:
-      EXTRA_PACKAGES: compat-readline5
-
+      EXTRA_PACKAGES: ${rhel6_pkg}
