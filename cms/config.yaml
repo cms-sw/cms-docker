@@ -1,31 +1,26 @@
-override: False
+override: false
 docker: Dockerfile
 push:   false
-rhel6_pkg:  compat-readline5
-rhel6_base: opensciencegrid/osg-wn:3.4-el6
-rhel7_pkg:  bzip2
-rhel7_base: opensciencegrid/osg-wn:3.4-el7
+nightly: $${now.strftime("%Y%m%d")}
+monthly: $${now.strftime("%Y%m")}
 variables:
-  BUILD_DATE: 20191017-0810
+  BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
 test:
   node:   singularity
   script: test.sh
-tags:
-  rhel7-20191108:
-    push: true
-    from: ${rhel7_base}
-    variables:
-      EXTRA_PACKAGES: ${rhel7_pkg}
-  rhel6-20191108:
-    push: true
-    from: ${rhel6_base}
-    variables:
-      EXTRA_PACKAGES: ${rhel6_pkg}
-  rhel7:
-    from: ${rhel7_base}
-    variables:
-      EXTRA_PACKAGES: ${rhel7_pkg}
-  rhel6:
-    from: ${rhel6_base}
-    variables:
-      EXTRA_PACKAGES: ${rhel6_pkg}
+variables:
+  EXTRA_PACKAGES: ${packages}
+groups:
+  rhle7:
+    from: opensciencegrid/osg-wn:3.4-el7
+    packages: bzip2
+    tags:
+      rhel7-${monthly}:
+      rhel7:
+  rhle6:
+    from: opensciencegrid/osg-wn:3.4-el6
+    packages: compat-readline5
+    tags:
+      rhel6-${monthly}:
+      rhel6:
+
