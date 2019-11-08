@@ -1,6 +1,7 @@
 override: false
-docker: Dockerfile
-push:   false
+docker:   Dockerfile
+push:     false
+base:     opensciencegrid/osg-wn
 nightly: $${now.strftime("%Y%m%d")}
 monthly: $${now.strftime("%Y%m")}
 variables:
@@ -12,14 +13,14 @@ variables:
   EXTRA_PACKAGES: ${packages}
 groups:
   rhle7:
-    from: opensciencegrid/osg-wn:3.4-el7
+    from: ${base}:3.4-el7
     packages: bzip2
     tags:
       rhel7-${monthly}:
         push: true
       rhel7:
   rhle6:
-    from: opensciencegrid/osg-wn:3.4-el6
+    from: ${base}:3.4-el6
     packages: compat-readline5
     tags:
       rhel6-${monthly}:
