@@ -1,6 +1,7 @@
 override: false
 docker:   Dockerfile
 push:     false
+unpacked: false
 base:     opensciencegrid/osg-wn
 nightly: d$${now.strftime("%Y%m%d")}
 monthly: m$${now.strftime("%Y%m")}
@@ -11,6 +12,7 @@ test:
   script: test.sh
 variables:
   EXTRA_PACKAGES: ${packages}
+  CVMFS_UNPACKED: ${unpacked}
 groups:
   rhle7:
     from: ${base}:3.4-el7
@@ -19,6 +21,7 @@ groups:
       rhel7-${monthly}:
         push: true
       rhel7:
+        unpacked: true
   rhle6:
     from: ${base}:3.4-el6
     packages: compat-readline5
@@ -26,4 +29,5 @@ groups:
       rhel6-${monthly}:
         push: true
       rhel6:
+        unpacked: true
 
