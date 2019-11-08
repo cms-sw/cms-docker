@@ -2,8 +2,8 @@ override: false
 docker:   Dockerfile
 push:     false
 base:     opensciencegrid/osg-wn
-nightly: $${now.strftime("%Y%m%d")}
-monthly: $${now.strftime("%Y%m")}
+nightly: d$${now.strftime("%Y%m%d")}
+monthly: m$${now.strftime("%Y%m")}
 variables:
   BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
 test:
