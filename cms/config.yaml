@@ -16,11 +16,13 @@ groups:
     packages: bzip2
     tags:
       rhel7-${monthly}:
+        push: true
       rhel7:
   rhle6:
     from: opensciencegrid/osg-wn:3.4-el6
     packages: compat-readline5
     tags:
       rhel6-${monthly}:
+        push: true
       rhel6:
 
