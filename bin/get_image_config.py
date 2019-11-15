@@ -100,6 +100,11 @@ def process_tags(setup, data, images):
     images[-1]['DOCKER_FILE']=get_key('docker', img_data)
     images[-1]['TEST_SCRIPT']=get_key('script', img_data)
     images[-1]['TEST_NODE']=get_key('node', img_data)
+    for xkey in ['delete_pattern', 'expires_days']:
+      val = get_key(xkey, img_data)
+      if val:
+        images[-1][xkey.upper()]=val
+
     if ".variables" in data[0]:
       for v in data[0][".variables"]:
         images[-1][v] = get_key(v, img_data)
@@ -121,7 +126,8 @@ def get_docker_images(name, repository='cmssw'):
   if not exists(setup_file):
     print("Warnings: No such file %s" % setup_file)
     return images
-  setup = yaml.load(open(setup_file))
+  with open(setup_file) as file:
+    setup = yaml.load(file, Loader=yaml.FullLoader)
   data = [{}]
   data[-1]['repository'] = repository
   data[-1]['name'] = name
