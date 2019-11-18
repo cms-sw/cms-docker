@@ -1,5 +1,6 @@
 docker: Dockerfile
 push:   true
+override: true
 tags:
   latest:
     from: library/centos:8
