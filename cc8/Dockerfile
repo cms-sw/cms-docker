@@ -33,3 +33,4 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool 
     groupadd -g 101 shared && adduser -u 101 -g 101 shared
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
 RUN /tmp/fix_ssh_config.sh /etc/ssh/ssh_config ; rm -f /tmp/fix_ssh_config.sh
+ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
