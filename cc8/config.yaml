@@ -1,6 +1,8 @@
 docker: Dockerfile
 push:   true
 override: true
+variables:
+  CVMFS_UNPACKED: true
 tags:
   latest:
     from: library/centos:8
