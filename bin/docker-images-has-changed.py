@@ -34,6 +34,6 @@ for reponame in repos:
     if not buildimg:
       inher= img.get('IMAGE_NAME')
       parent = img.get('BASE_IMAGE_NAME')
-      buildimg = has_parent_changed(parent, inher, reponame)
+      buildimg = has_parent_changed(parent, inher)
     if buildimg:
       create_file(img)
