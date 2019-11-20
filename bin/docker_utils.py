@@ -36,8 +36,9 @@ def get_dockerHubToken():
   response = http_request(url, data, None, method='POST')
   return response['token']
 
-def deleteTag(token, repo, tag):
-  print('Deleting tag: %s from %s repository....'% (tag, repo))
+def deleteTag(token, repo, tag, dryRun):
+  print('** Deleting tag: %s from %s repository....'% (tag, repo))
+  if dryRun: return {}
   url = '%srepositories/%s/tags/%s/' % (DOCKER_HUB_API, repo, tag)
   headers = {}
   headers['Accept'] = 'application/json'
@@ -63,7 +64,6 @@ def get_manifest(image):
   token = get_docker_token(repo)
   headers = {}
   headers['Authorization'] = 'Bearer %s' % token
-  print('Getting image_manifest for %s:%s' % (repo, tag))
   response = http_request(url, None, headers)
   return response
 
