@@ -38,13 +38,13 @@ def get_dockerHubToken():
 
 def deleteTag(token, repo, tag, dryRun):
   print('** Deleting tag: %s from %s repository....'% (tag, repo))
-  if not dryRun:
-    url = '%srepositories/%s/tags/%s/' % (DOCKER_HUB_API, repo, tag)
-    headers = {}
-    headers['Accept'] = 'application/json'
-    headers['Authorization'] = 'JWT %s' % token
-    response = http_request(url, None, headers, method = 'DELETE')
-    return response
+  if dryRun: return {}
+  url = '%srepositories/%s/tags/%s/' % (DOCKER_HUB_API, repo, tag)
+  headers = {}
+  headers['Accept'] = 'application/json'
+  headers['Authorization'] = 'JWT %s' % token
+  response = http_request(url, None, headers, method = 'DELETE')
+  return response
 
 def logout(token):
   url = '%slogout/' % DOCKER_HUB_API
