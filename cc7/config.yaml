@@ -3,6 +3,8 @@ push:     false
 test:
   script: test.sh
 docker: Dockerfile.${tag}
+delete_pattern: ${tag}-2[0-9]{8,}
+expires_days: 7
 tags:
   amd64:
     from: cern/cc7-base:latest

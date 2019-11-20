@@ -16,7 +16,7 @@ def find_repos():
   return(repos)
 
 def date_diff(regex_pattern, tag):
-  timeTag = re.match(regex_pattern, tag)
+  timeTag = re.match('^'+regex_pattern+'$', tag)
   if timeTag:
     timeTag = timeTag.group(1)[:8]
     today_date = datetime.now()
