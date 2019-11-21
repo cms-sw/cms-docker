@@ -1,5 +1,5 @@
 override: true
-push:     false
+push:     true
 test:
   script: test.sh
 docker: Dockerfile.${tag}
