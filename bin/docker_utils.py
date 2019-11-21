@@ -3,9 +3,9 @@
 from __future__ import print_function
 from json import loads
 from os.path import dirname, abspath
-from urllib import request, parse
+from requests import request
 from os.path import expanduser
-from urllib.error import URLError, HTTPError
+from urllib3.exceptions import HTTPError
 import os, glob, sys
 
 DOCKER_REGISTRY_API='https://registry-1.docker.io/v2/'
@@ -14,10 +14,9 @@ DOCKER_HUB_API='https://hub.docker.com/v2/'
 def http_request(url, data=None, headers=None, method = 'GET', json=True):
   if data is None: data = {}
   if headers is None: headers = {}
-  req = request.Request(url, data=data, headers=headers, method=method)
-  try: 
-    response = request.urlopen(req).read().decode()
-    return loads(response) if json else response
+  try:
+    response = request(method=method, url=url, data=data, headers=headers)
+    return loads(response.content) if json else response
   except HTTPError as error:
     if error.code == 401:
       return {} if json else '{}'
@@ -32,7 +31,7 @@ def get_docker_token(repo):
 def get_dockerHubToken():
   url = '%susers/login/' % DOCKER_HUB_API
   docker_token = open(expanduser("~/.docker-token")).read().strip()
-  data = parse.urlencode(loads(docker_token)).encode()
+  data = loads(docker_token)
   response = http_request(url, data, None, method='POST')
   return response['token']
 
@@ -68,7 +67,6 @@ def get_manifest(image):
   return response
 
 def get_tags(image):
-  print('\n========= Tags of %s image: ========='%image)
   token = get_docker_token(image)
   headers = {}
   headers['Authorization'] = 'Bearer %s' % token
