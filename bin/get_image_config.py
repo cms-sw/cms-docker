@@ -127,9 +127,11 @@ def get_docker_images(name, repository='cmssw'):
     print("Warnings: No such file %s" % setup_file)
     return images
   with open(setup_file) as file:
-    if sys.version_info[0] > 2:
-      setup = yaml.load(file, Loader=yaml.FullLoader)
-    else:
+    try:
+      from yaml import FullLoader
+      setup = yaml.load(file, Loader=FullLoader)
+    except ImportError as e:
+      print('%s. Update yaml module' % e)
       setup = yaml.load(file)
   data = [{}]
   data[-1]['repository'] = repository
