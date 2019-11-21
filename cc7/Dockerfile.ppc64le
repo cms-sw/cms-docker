@@ -15,7 +15,7 @@ RUN yum update -y && \
         ncurses-libs perl-libs file wget lcg-CA perl-LWP-Protocol-https fetch-crl python-setuptools \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time &&\
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y voms-clients-cpp &&\
+    yum install -y voms-clients-cpp krb5-workstation &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
