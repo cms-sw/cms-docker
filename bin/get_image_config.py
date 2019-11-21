@@ -71,7 +71,7 @@ def process_tags(setup, data, images):
     data[-1]['tag']=tag
     img_data = expand(data)
     pop_info(data, cnt)
-    image_name = get_key('contianer', img_data) + ":"+get_key('tag', img_data)
+    image_name = get_key('container', img_data) + ":"+get_key('tag', img_data)
     override = get_key('override', img_data).upper()
     if override in ["", "FALSE"]:
       manifest = get_manifest(image_name)
@@ -134,7 +134,7 @@ def get_docker_images(name, repository='cmssw'):
   data = [{}]
   data[-1]['repository'] = repository
   data[-1]['name'] = name
-  data[-1]['contianer'] = join(repository, name)
+  data[-1]['container'] = join(repository, name)
   push_info(setup, data)
   if not 'groups' in setup:
     setup['groups'] = {'default' : {'tags': dict(setup['tags'])}}
