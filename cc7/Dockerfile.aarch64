@@ -22,8 +22,10 @@ RUN yum update -y && \
         readline-devel perl-Switch perl-Storable perl-Env packages \
         perl-Thread-Queue  tk-devel tcl-devel which python2-pip \
         file git subversion bc finger zip unzip nano hostname \
-        perl-LWP-Protocol-https vim wget screen time voms-clients-cpp \
+        perl-LWP-Protocol-https vim wget screen time \
         java-1.8.0-openjdk java-1.8.0-openjdk-devel python-requests-kerberos && \
+    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
+    yum install -y voms-clients-cpp &&\
     yum clean all
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-3.b12.el7_3.aarch64
