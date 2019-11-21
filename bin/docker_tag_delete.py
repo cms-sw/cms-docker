@@ -31,28 +31,30 @@ args = parser.parse_args()
 
 dockerHubToken = get_dockerHubToken()
 for repo in find_repos():
-  try:
-    tags = get_tags(args.dockerUser + '/' + repo)
-  except KeyError:
-    print('Docker Hub user "%s" does not contain image "%s"'%(args.dockerUser, repo))
-    continue
-  tagCounter = 0
-  for tag in tags:
-    tagCounter += 1
-    print("{}. {}".format(tagCounter, tag))
-    for image in get_docker_images(repo):
-      if not image['IMAGE_TAG'] in tag:
-        continue
-      if ('DELETE_PATTERN' in image) and ('EXPIRES_DAYS' in image):
-        delete_pattern = image['DELETE_PATTERN']
-        expires_days = int(image['EXPIRES_DAYS'])
-        days = date_diff(delete_pattern, tag)
-        if not days: continue
-        if days > expires_days:
-          deleteTag(dockerHubToken,(args.dockerUser + '/' + repo), tag, args.dryRun)
-          break
-      else:
-        print('Required keys are not provided in config.yaml for "%s" repo.\n\
-Nothing to delete.\n'%repo)
+  got_tags = False
+  tags = []
+  for image in get_docker_images(repo):
+    if (not 'DELETE_PATTERN' in image) or (not 'EXPIRES_DAYS' in image):
+      continue
+    if not got_tags:
+      got_tags = True
+      try:
+        tags = [str(t) for t in get_tags(args.dockerUser + '/' + repo)]
+      except KeyError:
+        print('Docker Hub user "%s" does not contain image "%s"'%(args.dockerUser, repo))
+        break
+    print("Checking  %s/%s" % (repo, image['IMAGE_TAG']))
+    ntags = []
+    for tag in tags:
+      ntags.append(tag)
+      if not tag.startswith(image['IMAGE_TAG']): continue
+      delete_pattern = image['DELETE_PATTERN']
+      expires_days = int(image['EXPIRES_DAYS'])
+      days = date_diff(delete_pattern, tag)
+      if not days: continue
+      if days > expires_days:
+        deleteTag(dockerHubToken,(args.dockerUser + '/' + repo), tag, args.dryRun)
+        ntags.remove(tag)
+    tags = ntags[:]
 
 logout(dockerHubToken)
