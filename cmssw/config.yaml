@@ -1,5 +1,5 @@
 push:   true
-override: False
+override: false
 docker: Dockerfile
 slc6: cmssw/cms:rhel6
 slc7: cmssw/cms:rhel7
