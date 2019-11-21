@@ -16,6 +16,8 @@ def http_request(url, data=None, headers=None, method = 'GET', json=True):
   if headers is None: headers = {}
   try:
     response = request(method=method, url=url, data=data, headers=headers)
+    if response.status_code == 204:
+      return {} if json else '{}'
     return loads(response.content) if json else response
   except HTTPError as error:
     if error.code == 401:
