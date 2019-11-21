@@ -23,7 +23,7 @@ RUN yum update -y && \
     bc strace tar zip unzip hostname nano libnsl && \
     alternatives --set python `which python2` && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
-    yum install -y voms-clients-cpp &&\
+    yum install -y voms-clients-cpp krb5-workstation &&\
     yum clean all
 ADD krb5.conf /etc/krb5.conf
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
