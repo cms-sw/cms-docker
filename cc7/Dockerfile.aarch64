@@ -24,7 +24,7 @@ RUN yum update -y && \
         file git subversion bc finger zip unzip nano hostname \
         perl-LWP-Protocol-https vim wget screen time \
         java-1.8.0-openjdk java-1.8.0-openjdk-devel python-requests-kerberos && \
-    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
+    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum install -y voms-clients-cpp &&\
     yum clean all
 
