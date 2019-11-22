@@ -3,9 +3,9 @@ push:   true
 override: true
 delete_pattern: ${tag}-(2[0-9]{7,})
 expires_days: 7
-alias: latest
 variables:
   CVMFS_UNPACKED: true
 tags:
   amd64:
     from: library/centos:8
+    alias: latest

@@ -7,11 +7,11 @@ delete_pattern: ${tag}-(2[0-9]{7,})
 expires_days: 7
 variables:
   CVMFS_UNPACKED: true
-alias: latest
 multi_arch: true
 tags:
   amd64:
     from: cern/cc7-base:latest
+    alias: latest
   aarch64:
     from: centos/aarch64:latest
   ppc64le:
