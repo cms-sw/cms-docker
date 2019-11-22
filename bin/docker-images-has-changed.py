@@ -18,7 +18,8 @@ def create_file(img):
 
 parser = ArgumentParser(description='Check if docker image based on the same layers as the parent image')
 parser.add_argument('-r', dest='repo', type=str, help="Provide specific repository for docker images.")
-parser.add_argument("-f", "--force",    dest="force",     action="store_true", help="Force re-build", default=False)
+parser.add_argument("-f", "--force",    dest="force",   action="store_true", help="Force re-build", default=False)
+parser.add_argument('-t', '--tags',     dest='tags', help="Comma separated list of tags to process", type=str, default = '')
 args = parser.parse_args()
 repos = []
 if args.repo:
@@ -28,12 +29,14 @@ else:
   for file in glob.glob(dir + '/**/*.yaml*'):
     repos.append(os.path.basename(dirname(file)))
 
+tags = [ t for t in  args.tags.replace(' ','').split(",") if t]
 for reponame in repos:
   for img in get_docker_images(reponame):
+    if tags and (not img['IMAGE_TAG'] in tags): continue
     buildimg = args.force
     if not buildimg:
-      inher= img.get('IMAGE_NAME')
-      parent = img.get('BASE_IMAGE_NAME')
+      inher= img['IMAGE_NAME']
+      parent = img['BASE_IMAGE_NAME']
       buildimg = has_parent_changed(parent, inher)
     if buildimg:
       create_file(img)

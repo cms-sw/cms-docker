@@ -85,6 +85,7 @@ def process_tags(setup, data, images):
     images[-1]['DOCKER_CONTAINER']=get_key('container', img_data)
     images[-1]['IMAGE_NAME']=image_name
     images[-1]['IMAGE_TAG']=get_key('tag', img_data)
+    images[-1]['IMAGE_TAG_ALIAS']=get_key('alias', img_data)
 
     base_image = get_key('from', img_data)
     if not '/' in base_image: base_image="library/"+base_image
@@ -131,7 +132,6 @@ def get_docker_images(name, repository='cmssw'):
       from yaml import FullLoader
       setup = yaml.load(file, Loader=FullLoader)
     except ImportError as e:
-      print('%s. Update yaml module' % e)
       setup = yaml.load(file)
   data = [{}]
   data[-1]['repository'] = repository

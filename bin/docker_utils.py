@@ -5,7 +5,7 @@ from json import loads
 from os.path import dirname, abspath
 from requests import request
 from os.path import expanduser
-from urllib3.exceptions import HTTPError
+from requests.exceptions import HTTPError
 import os, glob, sys
 
 DOCKER_REGISTRY_API='https://registry-1.docker.io/v2/'
