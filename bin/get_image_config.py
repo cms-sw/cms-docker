@@ -86,6 +86,7 @@ def process_tags(setup, data, images):
     images[-1]['IMAGE_NAME']=image_name
     images[-1]['IMAGE_TAG']=get_key('tag', img_data)
     images[-1]['IMAGE_TAG_ALIAS']=get_key('alias', img_data)
+    images[-1]['MULTI_ARCH']=get_key('multi_arch', img_data)
 
     base_image = get_key('from', img_data)
     if not '/' in base_image: base_image="library/"+base_image
