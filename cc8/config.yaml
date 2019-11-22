@@ -8,4 +8,3 @@ variables:
 tags:
   amd64:
     from: library/centos:8
-    alias: latest
