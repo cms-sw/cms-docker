@@ -55,6 +55,10 @@ def logout(token):
   response = http_request(url, None, headers, method='POST')
   print(response)
 
+def get_digest_of_image(repo, tag):
+  url = '%s/repositories/%s/tags/%s' % (DOCKER_HUB_API, repo, tag)
+  return http_request(url, json=True)['images'][0]['digest'].split(":")[-1]
+
 def get_manifest(image):
   repo = image.split(":",1)[0]
   if '/' not in repo:
