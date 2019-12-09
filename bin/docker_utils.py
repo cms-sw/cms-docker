@@ -43,7 +43,10 @@ def get_token():
 
 def get_repos(user):
   uri = '/repositories/%s/' % user
-  response = hub_request(uri, json=True)
+  payload = {
+    "page_size" : 500,
+  }
+  response = hub_request(uri, params=payload, json=True)
   repos = []
   try: response['results']
   except TypeError:
@@ -158,8 +161,7 @@ def get_manifest(image):
 def tags(image):
   uri = '/repositories/%s/tags' % image
   payload = {
-    "page_size" : 250,
-    "page" : 1
+    "page_size" : 500,
   }
   response = hub_request(uri, params=payload, json=True)
   tags = []
