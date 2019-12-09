@@ -41,18 +41,14 @@ def get_token():
   secret = open(expanduser("~/.docker-token")).read().strip()
   return http_request(uri, loads(secret), method = 'POST', json=True)['token']
 
-def get_repos(user):
+def get_repos(user, page_size=500):
   uri = '/repositories/%s/' % user
-  payload = {
-    "page_size" : 500,
-  }
+  payload = {"page_size" : page_size}
   response = hub_request(uri, params=payload, json=True)
   repos = []
-  try: response['results']
-  except TypeError:
-    return response, response.reason
   for repo in response['results']:
     repos.append(str(repo['name']))
+  if repos == []: return 'No repositories found.\nCheck docker hub username'
   return repos
 
 def create_repo(user, repo, private=False):
@@ -71,7 +67,7 @@ def delete_repo(user, repo):
 def get_members(orgname, teamname):
   uri = '/orgs/%s/groups/%s/members/' % (orgname, teamname)
   response = hub_request(uri, json=True)
-  members = []  
+  members = []
   for member in response:
     try: members.append(str(member['username']))
     except TypeError:
@@ -89,14 +85,15 @@ def delete_member(orgname, teamname, member):
   response = hub_request(uri, method = 'DELETE')
   return response, response.reason
 
-def get_teams(orgname):
+def get_teams(orgname, page_size=500):
   uri = '/orgs/%s/groups/' % orgname
-  response = hub_request(uri)
+  payload = {"page_size" : page_size}
+  response = hub_request(uri, params=payload, json=True)
   teams = {}
-  try: response.json()['results']
-  except KeyError:
+  try: response['results']
+  except TypeError:
     return response, response.content
-  for team in response.json()['results']:
+  for team in response['results']:
     key = str(team['name'])
     value = str(team['id'])
     teams[key] = value
@@ -158,11 +155,9 @@ def get_manifest(image):
   headers['Authorization'] = 'Bearer %s' % token
   return http_request(url, None, None, headers, json=True)
 
-def tags(image):
+def get_tags(image, page_size=500):
   uri = '/repositories/%s/tags' % image
-  payload = {
-    "page_size" : 500,
-  }
+  payload = {"page_size" : page_size}
   response = hub_request(uri, params=payload, json=True)
   tags = []
   for tag in response['results']:
