@@ -36,9 +36,9 @@ def get_registry_token(repo):
   return http_request(uri, params = payload, json = True)['token']
 
 # get token for Docker HUB API:
-def get_token():
+def get_token(filepath=expanduser("~/.docker-token")):
   uri = '%s/users/login/' % DOCKER_HUB_API
-  secret = open(expanduser("~/.docker-token")).read().strip()
+  secret = open(filepath).read().strip()
   return http_request(uri, loads(secret), method = 'POST', json=True)['token']
 
 def get_repos(user, page_size=500):
@@ -125,7 +125,7 @@ def delete_permissions(orgname, repo, group_id):
   response = hub_request(uri, method = 'DELETE')
   return response, response.reason
 
-def deleteTag(repo, tag, dryRun):
+def delete_tag(repo, tag, dryRun):
   print('** Deleting tag: %s from %s repository....'% (tag, repo))
   if dryRun: return 'Dry Run mode is ON, no tags deleted'
   uri = '/repositories/%s/tags/%s/' % (repo, tag)
@@ -134,7 +134,7 @@ def deleteTag(repo, tag, dryRun):
 
 def logout():
   uri = '/logout/'
-  return hub_request(uri, method='POST').content
+  return hub_request(uri, method='POST', json=True)['detail']
 
 def get_digest_of_image(repo, tag):
   uri = '/repositories/%s/tags/%s' % (repo, tag)
