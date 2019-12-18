@@ -152,7 +152,7 @@ def delete_tag(repo, tag, dryrun=True):
 
 def logout():
   uri = '/logout/'
-  return print(hub_request(uri, method='POST', json=True)['detail'])
+  return hub_request(uri, method='POST', json=True)['detail']
 
 def get_digest_of_image(repo, tag):
   uri = '/repositories/%s/tags/%s' % (repo, tag)
