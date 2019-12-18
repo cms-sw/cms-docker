@@ -15,7 +15,7 @@ RUN yum update -y && \
         gcc-c++ strace cern-wrappers krb5-workstation wget hostname readline-devel nano bzip2 perl-Switch perl-Storable \
         perl-Env packages perl-Thread-Queue CERN-CA-certs tk-devel tcl-devel which python-pip file voms-clients-cpp \
         java-1.8.0-openjdk java-1.8.0-openjdk-devel popt libXcursor libXrandr libXinerama nspr nss nss-util file file-libs \
-        readline popt bzip2 bzip2-libs python-requests-kerberos libgfortran time && \
+        readline popt bzip2 bzip2-libs python-requests-kerberos libgfortran time python2-psutil && \
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
