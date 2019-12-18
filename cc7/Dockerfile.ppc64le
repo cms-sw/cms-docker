@@ -13,7 +13,7 @@ RUN yum update -y && \
         perl-constant perl-File-Temp perl-Socket perl-Time-Local perl-Storable glibc-headers perl-threads \
         perl-Thread-Queue perl-Module-ScanDeps perl-Test-Harness perl-Env perl-Switch perl-ExtUtils-Embed \
         ncurses-libs perl-libs file wget lcg-CA perl-LWP-Protocol-https fetch-crl python-setuptools \
-        setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time &&\
+        setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python2-psutil &&\
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum install -y voms-clients-cpp krb5-workstation &&\
     yum clean all
