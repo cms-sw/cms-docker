@@ -25,12 +25,11 @@ RUN yum update -y && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
     yum install -y voms-clients-cpp krb5-workstation &&\
     yum clean all
+
 ADD krb5.conf /etc/krb5.conf
+ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
+ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
     touch /etc/tnsnames.ora &&\
-    groupadd -g 1399 zh && adduser -u 22527 -g 1399 cmsbuild &&\
-    groupadd -g 350 cvcmsib && adduser -u 350 -g 350 cvcmsib &&\
-    groupadd -g 101 shared && adduser -u 101 -g 101 shared
-ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
-RUN /tmp/fix_ssh_config.sh /etc/ssh/ssh_config ; rm -f /tmp/fix_ssh_config.sh
-ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
+    /tmp/fix_ssh_config.sh /etc/ssh/ssh_config ; rm -f /tmp/fix_ssh_config.sh
+WORKDIR /build
