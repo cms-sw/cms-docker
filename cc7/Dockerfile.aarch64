@@ -23,7 +23,7 @@ RUN yum update -y && \
         perl-Thread-Queue  tk-devel tcl-devel which python2-pip \
         file git subversion bc finger zip unzip nano hostname \
         perl-LWP-Protocol-https vim wget screen time \
-        java-1.8.0-openjdk java-1.8.0-openjdk-devel python-requests-kerberos && \
+        java-1.8.0-openjdk java-1.8.0-openjdk-devel python-requests-kerberos python2-psutil && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum install -y voms-clients-cpp krb5-workstation &&\
     yum clean all
