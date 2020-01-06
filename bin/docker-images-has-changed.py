@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from __future__ import print_function
 from argparse import ArgumentParser
 from get_image_config import get_docker_images
 from docker_utils import has_parent_changed, get_tags
@@ -14,7 +15,7 @@ def create_file(img):
       line = str(key) + '=' + str(value) + '\n'
       file.write(line)
   file.close()
-  print('{} file created'.format(file_name))
+  print(file_name,' file created')
 
 parser = ArgumentParser(description='Check if docker image based on the same layers as the parent image')
 parser.add_argument('-r', dest='repo', type=str, help="Provide specific repository for docker images.")
