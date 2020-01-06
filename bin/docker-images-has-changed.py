@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from argparse import ArgumentParser
 from get_image_config import get_docker_images
-from docker_utils import has_parent_changed
-import glob, os
+from docker_utils import has_parent_changed, get_tags
+import glob, os, re
 from os.path import dirname
 import json
 
@@ -30,13 +30,20 @@ else:
     repos.append(os.path.basename(dirname(file)))
 
 tags = [ t for t in  args.tags.replace(' ','').split(",") if t]
+reMonthly = re.compile(".*-m2\d{5}$")
 for reponame in repos:
+  oldtags = get_tags("cmssw/"+reponame)
   for img in get_docker_images(reponame):
     if tags and (not img['IMAGE_TAG'] in tags): continue
     buildimg = args.force
     if not buildimg:
       inher= img['IMAGE_NAME']
       parent = img['BASE_IMAGE_NAME']
+      if reMonthly.match(inher):
+        for tag in oldtags:
+          if reMonthly.match(tag):
+            inher = "cmssw/"+reponame+":"+tag
+            break
       buildimg = has_parent_changed(parent, inher)
       print(inher, parent, buildimg)
     if buildimg:
