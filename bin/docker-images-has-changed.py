@@ -30,18 +30,23 @@ else:
     repos.append(os.path.basename(dirname(file)))
 
 tags = [ t for t in  args.tags.replace(' ','').split(",") if t]
-reMonthly = re.compile(".*-m2\d{5}$")
+autoTag = re.compile("^[^:]+:(.*-[dm]2)\d{5}$")
 for reponame in repos:
   oldtags = get_tags("cmssw/"+reponame)
+  oldtags.sort(reverse=True)
+  print(oldtags)
   for img in get_docker_images(reponame):
     if tags and (not img['IMAGE_TAG'] in tags): continue
     buildimg = args.force
     if not buildimg:
       inher= img['IMAGE_NAME']
       parent = img['BASE_IMAGE_NAME']
-      if reMonthly.match(inher):
+      m = autoTag.match(inher)
+      if m:
+        tag_base = m.group(1)
+        print(tag_base)
         for tag in oldtags:
-          if reMonthly.match(tag):
+          if tag.startswith(m.group(1)):
             inher = "cmssw/"+reponame+":"+tag
             break
       buildimg = has_parent_changed(parent, inher)
