@@ -12,13 +12,16 @@ DOCKER_REGISTRY_API='https://registry-1.docker.io/v2'
 DOCKER_HUB_API='https://hub.docker.com/v2'
 DOCKER_HUB_TOKEN = None
 
-def hub_request(uri, data=None, params=None, headers=None, method = 'GET', json=False):
+def hub_request(uri, data=None, params=None, headers=None, method='GET', dryrun=False, json=False):
   global DOCKER_HUB_TOKEN
   if not DOCKER_HUB_TOKEN:
     DOCKER_HUB_TOKEN = get_token()
   if not headers: headers = {}
   headers['Authorization'] = 'JWT %s' % DOCKER_HUB_TOKEN
-  return http_request('%s%s' %(DOCKER_HUB_API, uri), data, params, headers, method, json)
+  if dryrun: 
+    return('Dry run mode enabled, no changes to Docker Hub applied')
+  else:
+    return http_request('%s%s' %(DOCKER_HUB_API, uri), data, params, headers, method, json)
 
 def http_request(url, data=None, params=None, headers=None, method = 'GET', json=False):
   response = request(method=method, url=url, data=data,  params=params, headers=headers)
@@ -41,8 +44,8 @@ def get_token(filepath=expanduser("~/.docker-token")):
   secret = open(filepath).read().strip()
   return http_request(uri, loads(secret), method = 'POST', json=True)['token']
 
-def get_repos(user, page_size=500):
-  uri = '/repositories/%s/' % user
+def get_repos(username, page_size=500):
+  uri = '/repositories/%s/' % username
   payload = {"page_size" : page_size}
   response = hub_request(uri, params=payload, json=True)
   repos = []
@@ -51,21 +54,22 @@ def get_repos(user, page_size=500):
   if repos == []: return 'No repositories found.\nCheck docker hub username'
   return repos
 
-def create_repo(user, repo, private=False):
+def create_repo(username, repo, dryrun=True, private=False):
   payload = {
-    "namespace":"%s" % user,
+    "namespace":"%s" % username,
     "name":"%s" % repo,
     "is_private":"%s" % private
   }
-  return hub_request("/repositories/", payload, method = 'POST').content
+  response = hub_request("/repositories/", payload, method = 'POST', dryrun=dryrun)
+  return response if dryrun else response.content
 
-def delete_repo(user, repo):
-  uri = '/repositories/%s/%s' % (user, repo)
-  response = hub_request(uri, method = 'DELETE')
-  return response, response.reason
+def delete_repo(username, repo, dryrun=True):
+  uri = '/repositories/%s/%s' % (username, repo)
+  response = hub_request(uri, method = 'DELETE', dryrun=dryrun)
+  return response if dryrun else (response, response.reason)
 
-def get_members(orgname, teamname):
-  uri = '/orgs/%s/groups/%s/members/' % (orgname, teamname)
+def get_members(username, teamname):
+  uri = '/orgs/%s/groups/%s/members/' % (username, teamname)
   response = hub_request(uri, json=True)
   members = []
   for member in response:
@@ -74,19 +78,19 @@ def get_members(orgname, teamname):
       return response, response.reason
   return members
 
-def add_member(orgname, teamname, member):
-  uri = '/orgs/%s/groups/%s/members/' % (orgname, teamname)
+def add_member(username, teamname, member, dryrun=True):
+  uri = '/orgs/%s/groups/%s/members/' % (username, teamname)
   data = {"member":"%s" % member}
-  response = hub_request(uri, data=data, method = 'POST')
-  return response, response.reason, response.content
+  response = hub_request(uri, data=data, method = 'POST', dryrun=dryrun)
+  return response if dryrun else (response.ok, response, response.reason, response.content)
 
-def delete_member(orgname, teamname, member):
-  uri = '/orgs/%s/groups/%s/members/%s/' % (orgname, teamname, member)
-  response = hub_request(uri, method = 'DELETE')
-  return response, response.reason
+def delete_member(username, teamname, member, dryrun=True):
+  uri = '/orgs/%s/groups/%s/members/%s/' % (username, teamname, member)
+  response = hub_request(uri, method = 'DELETE', dryrun=dryrun)
+  return response if dryrun else (response, response.reason)
 
-def get_teams(orgname, page_size=500):
-  uri = '/orgs/%s/groups/' % orgname
+def get_teams(username, page_size=500):
+  uri = '/orgs/%s/groups/' % username
   payload = {"page_size" : page_size}
   response = hub_request(uri, params=payload, json=True)
   teams = {}
@@ -99,38 +103,52 @@ def get_teams(orgname, page_size=500):
     teams[key] = value
   return teams
 
-def create_team(orgname, teamname):
-  uri = '/orgs/%s/groups/' % orgname
+def create_team(username, teamname, dryrun=True):
+  uri = '/orgs/%s/groups/' % username
   data = {"name":"%s" % teamname}
-  response = hub_request(uri, data=data, method = 'POST')
-  return response, response.content
+  response = hub_request(uri, data=data, method = 'POST', dryrun=dryrun)
+  return response if dryrun else (response, response.content)
 
-def delete_team(orgname, teamname):
-  uri = '/orgs/%s/groups/%s' % (orgname, teamname)
-  response = hub_request(uri, method = 'DELETE')
-  return response, response.reason
+def delete_team(username, teamname, dryrun=True):
+  uri = '/orgs/%s/groups/%s' % (username, teamname)
+  response = hub_request(uri, method = 'DELETE', dryrun=dryrun)
+  return response if dryrun else (response, response.reason)
+
+def get_permissions(username, teamname):
+  uri = '/orgs/%s/groups/%s/repositories/' % (username, teamname)
+  headers = {}
+  response = hub_request(uri, headers, json=True)
+  return response
 
 # permissions must be: 'read' / 'write' / 'admin'
-def add_permissions(orgname, repo, group_id, permission):
-  uri = '/repositories/%s/%s/groups/' % (orgname, repo)
+def add_permissions(username, repo, group_id, permission, dryrun=True):
+  uri = '/repositories/%s/%s/groups/' % (username, repo)
   payload = {
     "group_id" : "%s" % group_id,
     "permission" : "%s" % permission
   }
-  response = hub_request(uri, data=payload, method = 'POST')
-  return response, response.content
+  response = hub_request(uri, data=payload, method = 'POST', dryrun=dryrun)
+  return response if dryrun else (response, response.content)
 
-def delete_permissions(orgname, repo, group_id):
-  uri = '/repositories/%s/%s/groups/%s' % (orgname, repo, group_id)
-  response = hub_request(uri, method = 'DELETE')
-  return response, response.reason
+def delete_permissions(username, repo, group_id, dryrun=True):
+  uri = '/repositories/%s/%s/groups/%s' % (username, repo, group_id)
+  response = hub_request(uri, method = 'DELETE', dryrun=dryrun)
+  return response if dryrun else (response, response.reason)
 
-def delete_tag(repo, tag, dryRun):
+def get_tags(image, page_size=500):
+  uri = '/repositories/%s/tags' % image
+  payload = {"page_size" : page_size}
+  response = hub_request(uri, params=payload, json=True)
+  tags = []
+  for tag in response['results']:
+    tags.append(str(tag['name']))
+  return tags
+
+def delete_tag(repo, tag, dryrun=True):
   print('** Deleting tag: %s from %s repository....'% (tag, repo))
-  if dryRun: return 'Dry Run mode is ON, no tags deleted'
   uri = '/repositories/%s/tags/%s/' % (repo, tag)
-  response = hub_request(uri, method = 'DELETE')
-  return response, response.reason
+  response = hub_request(uri, method = 'DELETE', dryrun=dryrun)
+  return response if dryrun else (response, response.reason)
 
 def logout():
   uri = '/logout/'
@@ -154,15 +172,6 @@ def get_manifest(image):
   headers = {}
   headers['Authorization'] = 'Bearer %s' % token
   return http_request(url, None, None, headers, json=True)
-
-def get_tags(image, page_size=500):
-  uri = '/repositories/%s/tags' % image
-  payload = {"page_size" : page_size}
-  response = hub_request(uri, params=payload, json=True)
-  tags = []
-  for tag in response['results']:
-    tags.append(str(tag['name']))
-  return tags
 
 def has_parent_changed(parent, image):
   image_manifest = get_manifest(image)
