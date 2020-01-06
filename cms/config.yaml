@@ -19,7 +19,6 @@ groups:
     tags:
       rhel7-${monthly}:
         push: true
-        override: true
       rhel7:
         unpacked: true
   rhle6:
@@ -28,7 +27,6 @@ groups:
     tags:
       rhel6-${monthly}:
         push: true
-        override: true
       rhel6:
         unpacked: true
 
