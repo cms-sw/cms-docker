@@ -5,12 +5,14 @@ from docker_utils import (get_repos, get_teams, get_permissions, get_members, lo
                           add_permissions, add_member, delete_repo, delete_team, delete_permissions, delete_member)
 from argparse import ArgumentParser
 import yaml
+import sys
 
 parser = ArgumentParser(description='Synchronize Docker HUB with yaml configuration file')
 parser.add_argument('-u', '--username', dest='username', help="Provide Docker Hub username for synchronization", type=str, default='cmssw')
 parser.add_argument('-n', '--disable', dest='dryrun', help="Dry Run mode enabled by default. Disable it to make changes to docker hub", action="store_false", default=True)
 args = parser.parse_args()
-print('==============',args.dryrun)
+if not args.dryrun:
+  print('==== DRY RUN MODE DISABLED ====')
 with open('docker_config.yaml') as file:
   data = yaml.load(file, Loader=yaml.FullLoader)
 
@@ -47,7 +49,7 @@ def update_dockerhub(config_file, docker_hub, username = args.username, team_nam
         print('Deleting member "%s" from "%s" team:' % (list_item, team_name))
         print(delete_member(username, team_name, list_item, dryrun))
 
-#UPDATE REPOSITORIES:
+# UPDATE REPOSITORIES:
 print('\n----- Synchronizing repositories for "%s":' % args.username)
 update_dockerhub(data['repositories'], get_repos(args.username), what_to_sync='repos')
 # UPDATE TEAMS:
@@ -64,10 +66,18 @@ for team_name in get_teams(args.username):
       yaml_repo_access = []
     else:
       yaml_repo_access = yaml_permissions.keys()
-    hub_repo_access = []
+    docker_permissions = {}
     for item in get_permissions(args.username, team_name):
-      hub_repo_access.append(item['repository'])
-    update_dockerhub(yaml_repo_access, hub_repo_access, team_name=team_name, 
+      repository, permission = item['repository'], item['permission']
+      try:
+        if yaml_permissions and yaml_permissions[repository] != permission:
+          continue
+      except KeyError:
+        print(' Check names of repositories for "%s" team in yaml config file' % team_name)
+      docker_permissions[repository] = permission
+    docker_repo_access = []
+    docker_repo_access = docker_permissions.keys()
+    update_dockerhub(yaml_repo_access, docker_repo_access, team_name=team_name, 
     team_id=team_id, yaml_permissions=yaml_permissions, what_to_sync = 'permissions')
     # UPDATE MEMBERS:
     print('\n----- Synchronizing members for "%s":' % team_name)

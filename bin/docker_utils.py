@@ -26,7 +26,8 @@ def hub_request(uri, data=None, params=None, headers=None, method='GET', dryrun=
 def http_request(url, data=None, params=None, headers=None, method = 'GET', json=False):
   response = request(method=method, url=url, data=data,  params=params, headers=headers)
   if not response.ok:
-    return response
+    print(response, response.reason, response.text)
+    sys.exit(1)
   return response.json() if json else response
 
 # get token for docker Registry API
@@ -51,7 +52,9 @@ def get_repos(username, page_size=500):
   repos = []
   for repo in response['results']:
     repos.append(str(repo['name']))
-  if repos == []: return 'No repositories found.\nCheck docker hub username'
+  if repos == []:
+    print('No repositories found. Check Docker Hub username')
+    sys.exit(1)
   return repos
 
 def create_repo(username, repo, dryrun=True, private=False):
@@ -61,7 +64,7 @@ def create_repo(username, repo, dryrun=True, private=False):
     "is_private":"%s" % private
   }
   response = hub_request("/repositories/", payload, method = 'POST', dryrun=dryrun)
-  return response if dryrun else response.content
+  return response if dryrun else response, response.reason, response.text
 
 def delete_repo(username, repo, dryrun=True):
   uri = '/repositories/%s/%s' % (username, repo)
@@ -82,7 +85,7 @@ def add_member(username, teamname, member, dryrun=True):
   uri = '/orgs/%s/groups/%s/members/' % (username, teamname)
   data = {"member":"%s" % member}
   response = hub_request(uri, data=data, method = 'POST', dryrun=dryrun)
-  return response if dryrun else (response.ok, response, response.reason, response.content)
+  return response if dryrun else (response, response.text)
 
 def delete_member(username, teamname, member, dryrun=True):
   uri = '/orgs/%s/groups/%s/members/%s/' % (username, teamname, member)
@@ -96,7 +99,7 @@ def get_teams(username, page_size=500):
   teams = {}
   try: response['results']
   except TypeError:
-    return response, response.content
+    return response, response.text
   for team in response['results']:
     key = str(team['name'])
     value = str(team['id'])
@@ -107,7 +110,7 @@ def create_team(username, teamname, dryrun=True):
   uri = '/orgs/%s/groups/' % username
   data = {"name":"%s" % teamname}
   response = hub_request(uri, data=data, method = 'POST', dryrun=dryrun)
-  return response if dryrun else (response, response.content)
+  return response if dryrun else (response, response.reason, response.text)
 
 def delete_team(username, teamname, dryrun=True):
   uri = '/orgs/%s/groups/%s' % (username, teamname)
@@ -128,7 +131,7 @@ def add_permissions(username, repo, group_id, permission, dryrun=True):
     "permission" : "%s" % permission
   }
   response = hub_request(uri, data=payload, method = 'POST', dryrun=dryrun)
-  return response if dryrun else (response, response.content)
+  return response if dryrun else (response, response.text)
 
 def delete_permissions(username, repo, group_id, dryrun=True):
   uri = '/repositories/%s/%s/groups/%s' % (username, repo, group_id)
