@@ -6,15 +6,19 @@ from docker_utils import (get_repos, get_teams, get_permissions, get_members, lo
 from argparse import ArgumentParser
 import yaml
 import sys
+from os.path import join, dirname, abspath
 
 parser = ArgumentParser(description='Synchronize Docker HUB with yaml configuration file')
-parser.add_argument('-u', '--username', dest='username', help="Provide Docker Hub username for synchronization", type=str, default='cmssw')
+parser.add_argument('-u', '--username', dest='username', help="Provide Docker Hub username for synchronization", type=str, default='org0namespace')
 parser.add_argument('-n', '--disable', dest='dryrun', help="Dry Run mode enabled by default. Disable it to make changes to docker hub", action="store_false", default=True)
 args = parser.parse_args()
 if not args.dryrun:
   print('==== DRY RUN MODE DISABLED ====')
-with open('docker_config.yaml') as file:
-  data = yaml.load(file, Loader=yaml.FullLoader)
+yaml_location = join(dirname(dirname(abspath(__file__))), "docker_config.yaml")
+with open(yaml_location) as file:
+  yaml_file = yaml.load(file, Loader=yaml.FullLoader)
+
+dryrun_message = 'Dry run mode enabled, no changes to Docker Hub applied'
 
 def update_dockerhub(config_file, docker_hub, username = args.username, team_name = None, repo = None, 
                      team_id = None, yaml_permissions = None, what_to_sync = None, dryrun=args.dryrun):
@@ -23,44 +27,51 @@ def update_dockerhub(config_file, docker_hub, username = args.username, team_nam
     if list_item in config_file and list_item not in docker_hub:
       if what_to_sync == 'repos':
         print('Adding repository: "%s"' % list_item)
-        print(create_repo(username, list_item, dryrun))
+        print(dryrun_message) if dryrun else print(create_repo(username, list_item)[0])
       elif what_to_sync == 'teams':
         print('Creating team: "%s"' % list_item)
-        print(create_team(username, list_item, dryrun))
+        print(create_team(username, list_item))
       elif what_to_sync == 'permissions':
         print('Adding "%s" permission to "%s" repository for "%s" team:' % (yaml_permissions[list_item], list_item, team_name))
-        print(add_permissions(username, list_item, team_id, yaml_permissions[list_item], dryrun))
+        print(add_permissions(username, list_item, team_id, yaml_permissions[list_item]))
       elif what_to_sync == 'members':
         print('Adding member "%s" to "%s" team:' % (list_item, team_name))
-        member_is_added =  add_member(username, team_name, list_item, dryrun)
+        member_is_added =  add_member(username, team_name, list_item)
         print(member_is_added[3]) if not member_is_added[0] else print(member_is_added)
 
     if list_item in docker_hub and list_item not in config_file:
       if what_to_sync == 'repos':
         print('Deleting repository: "%s"' % list_item)
-        print(delete_repo(username, list_item, dryrun))
+        print(delete_repo(username, list_item))
       elif what_to_sync == 'teams':
         print('Deleting team: "%s"' % list_item)
-        print(delete_team(username, list_item, dryrun))
+        print(delete_team(username, list_item))
       elif what_to_sync == 'permissions':
         print('Deleting permission for "%s" repository from "%s" team:' % (list_item, team_name))
-        print(delete_permissions(username, list_item, team_id, dryrun))
+        print(delete_permissions(username, list_item, team_id))
       elif what_to_sync == 'members':
         print('Deleting member "%s" from "%s" team:' % (list_item, team_name))
-        print(delete_member(username, team_name, list_item, dryrun))
+        print(delete_member(username, team_name, list_item))
 
 # UPDATE REPOSITORIES:
 print('\n----- Synchronizing repositories for "%s":' % args.username)
-update_dockerhub(data['repositories'], get_repos(args.username), what_to_sync='repos')
+hub_repos = get_repos(args.username)
+if hub_repos[1] == []:
+  print('No repositories found. Check Docker Hub username')
+  sys.exit(1)
+if hub_repos[0]:
+  print(hub_repos)
+  print(yaml_file['repositories'])
+  update_dockerhub(yaml_file['repositories'], hub_repos[1], what_to_sync='repos')
 # UPDATE TEAMS:
 print('\n----- Synchronizing teams for "%s":' % args.username)
-update_dockerhub(list(data['teams'].keys()), list(get_teams(args.username).keys()), what_to_sync='teams')
+update_dockerhub(list(yaml_file['teams'].keys()), list(get_teams(args.username).keys()), what_to_sync='teams')
 for team_name in get_teams(args.username):
   team_id = get_teams(args.username)[team_name]
   if team_name != 'owners':
   # UPDATE PERMISSIONS:
     print('\n----- Synchronizing permissions for "%s" team:' % team_name)
-    yaml_permissions = data['teams'][team_name]['permissions']
+    yaml_permissions = yaml_file['teams'][team_name]['permissions']
     if yaml_permissions is None:
       print('No repository permissions found in yaml config file for "%s"' % team_name)
       yaml_repo_access = []
@@ -81,7 +92,7 @@ for team_name in get_teams(args.username):
     team_id=team_id, yaml_permissions=yaml_permissions, what_to_sync = 'permissions')
     # UPDATE MEMBERS:
     print('\n----- Synchronizing members for "%s":' % team_name)
-    members_in_yaml = data['teams'][team_name]['members']
+    members_in_yaml = yaml_file['teams'][team_name]['members']
     if members_in_yaml is None: members_in_yaml = []
     update_dockerhub(members_in_yaml, get_members(args.username, team_name), team_name=team_name, what_to_sync='members')
 logout()

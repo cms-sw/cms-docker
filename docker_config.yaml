@@ -1,0 +1,26 @@
+repositories:
+  - fridayrepo
+  - tuesdayrepo
+  - org0repo
+  - testrepo
+  - cc7
+
+teams:
+  owners:
+    members:
+      - cmsuser
+
+  users:
+    permissions:
+      fridayrepo: admin
+      org0repo: write
+      tuesdayrepo: write
+    members:
+      - cmsuser
+  
+  testteam:
+    permissions:
+      cc7: admin
+    members:
+      - smuzaffar
+      - tulamor 
