@@ -1,38 +1,25 @@
 repositories:
-  - tuesdayrepo
-  - org0repo
-  - testrepo
-  - cc7
-  - thursdayrepo
-  - fridayrepo
+  - tuesdayrepo:
+      users: write
+      addteam: write
+  - org0repo:
+      users: write
+      addteam: write
+  - testrepo:
+  - cc7:
+      testteam: admin
+      users: read
+  - thursdayrepo:
+  - fridayrepo:
+      users: admin
 teams:
   owners:
-    members:
-      - cmsuser
-
+    - cmsuser
   users:
-    permissions:
-      fridayrepo: admin
-      org0repo: write
-      tuesdayrepo: write
-      cc7: read
-    members:
-      - cmsuser
-  
+    - cmsuser
   testteam:
-    permissions:
-      cc7: admin
-    members:
-      - smuzaffar
-      - tulamor
-
+    - smuzaffar
+    - tulamor
   addteam:
-    permissions:
-      tuesdayrepo: write
-      org0repo: write
-    members:
-
   deleteteam:
-    permissions:
-    members:
-      - tulamor
+    - tulamor
