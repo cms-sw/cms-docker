@@ -1,10 +1,10 @@
 repositories:
-  - fridayrepo
   - tuesdayrepo
   - org0repo
   - testrepo
   - cc7
-
+  - thursdayrepo
+  - fridayrepo
 teams:
   owners:
     members:
@@ -15,6 +15,7 @@ teams:
       fridayrepo: admin
       org0repo: write
       tuesdayrepo: write
+      cc7: read
     members:
       - cmsuser
   
@@ -26,9 +27,12 @@ teams:
       - tulamor
 
   addteam:
+    permissions:
+      tuesdayrepo: write
+      org0repo: write
     members:
-      tulamor
 
   deleteteam:
     permissions:
     members:
+      - tulamor
