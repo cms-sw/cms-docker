@@ -23,4 +23,12 @@ teams:
       cc7: admin
     members:
       - smuzaffar
-      - tulamor 
+      - tulamor
+
+  addteam:
+    members:
+      tulamor
+
+  deleteteam:
+    permissions:
+    members:
