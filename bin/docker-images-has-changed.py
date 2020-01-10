@@ -33,7 +33,8 @@ else:
 tags = [ t for t in  args.tags.replace(' ','').split(",") if t]
 autoTag = re.compile("^[^:]+:(.*-[dm]2)\d{5}$")
 for reponame in repos:
-  oldtags = get_tags("cmssw/"+reponame)
+  ok, oldtags = get_tags("cmssw/"+reponame)
+  if not ok: continue
   oldtags.sort(reverse=True)
   for img in get_docker_images(reponame):
     if tags and (not img['IMAGE_TAG'] in tags): continue
