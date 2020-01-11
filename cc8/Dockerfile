@@ -20,10 +20,10 @@ RUN yum update -y && \
     perl-Time-HiRes perl-Time-Local perl-YAML \
     patch popt popt-devel python2 readline readline-devel rpm-build \
     rsync tcl tcsh time tk wget which zlib zsh \
-    bc strace tar zip unzip hostname nano libnsl myproxy && \
+    bc strace tar zip unzip hostname nano libnsl && \
     alternatives --set python `which python2` && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation python2-psutil &&\
+    yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
