@@ -37,13 +37,11 @@ for repo in find_repos():
       continue
     if not got_tags:
       got_tags = True
-      try:
-        ok, tags = get_tags(args.dockerUser + '/' + repo)
-        if not ok:
-          tags = []
-          print('Docker Hub user "%s" does not contain image "%s"'%(args.dockerUser, repo))
-          break
-
+      ok, tags = get_tags(args.dockerUser + '/' + repo)
+      if not ok:
+        tags = []
+        print('Docker Hub user "%s" does not contain image "%s"'%(args.dockerUser, repo))
+        break
     print("Checking  %s/%s" % (repo, image['IMAGE_TAG']))
     ntags = []
     for tag in tags:
