@@ -1,0 +1,128 @@
+repositories:
+  aarch64-slc7-builder:
+    cmssw: write
+  acdcserver:
+    dmwm: write
+  alertscollector:
+    dmwm: write
+  cc7:
+    cmssw: admin
+  cc7-aarch64:
+    cmssw: write
+  cc7-ppc64le:
+    cmssw: write
+  cc8:
+    cmssw: write
+  cms:
+    cmssw: write
+  cmsenv-slc6:
+    cmssw: write
+  cmsmon:
+    dmwm: write
+  cmssw:
+    cmssw: write
+  cmsweb:
+    dmwm: write
+  confdb:
+    dmwm: write
+  couchdb:
+    dmwm: write
+  crabcache:
+    dmwm: write
+  crabserver:
+    dmwm: write
+  das:
+    dmwm: write
+  das2go:
+    dmwm: write
+  dbs:
+    dmwm: write
+  dbs2go:
+    dmwm: write
+  dbsmigration:
+    dmwm: write
+  dmwmmon:
+    dmwm: write
+  docker-lxr:
+    cmssw: write
+  dqmgui:
+    dmwm: write
+  exitcodes:
+    dmwm: write
+  exporters:
+    dmwm: write
+  frontend:
+    dmwm: write
+  httpgo:
+    dmwm: write
+  httpsgo:
+    dmwm: write
+  jenkins:
+    cmssw: write
+  monitor:
+    dmwm: write
+  nats-sub:
+    dmwm: write
+  phedex:
+    dmwm: write
+  proxy:
+    dmwm: write
+  reqmgr:
+    dmwm: write
+  reqmgr2:
+    dmwm: write
+  reqmgr2ms:
+    dmwm: write
+  reqmon:
+    dmwm: write
+  rucio-daemons:
+    dmwm: write
+  rucio-probes:
+    dmwm: write
+  rucio-server:
+    dmwm: write
+  rucio-sync:
+    dmwm: write
+  rucio_client:
+    dmwm: write
+  rucio_dev_env:
+    dmwm: write
+  sitedb:
+    dmwm: write
+  slc5:
+    cmssw: write
+  slc6:
+    cmssw: write
+  slc6-base:
+    cmssw: write
+  slc6-builder:
+    cmssw: write
+  slc7-builder:
+    cmssw: write
+  slc7-installer:
+    cmssw: write
+  t0_reqmon:
+    dmwm: write
+  t0wmadatasvc:
+    dmwm: write
+  tfaas:
+    dmwm: write
+  workqueue:
+    dmwm: write
+teams:
+  cmssw:
+  - cmsuser
+  - smuzaffar
+  - cmsblddoc
+  dmwm:
+  - muhammadimranfarooqi
+  - cmsblddoc
+  - yuyiguo
+  - ericvaandering
+  - bbockelm
+  - veknet
+  owners:
+  - cmsblddoc
+  - tulamor
+  - smuzaffar
+  - bbockelm
