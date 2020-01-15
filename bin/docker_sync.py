@@ -63,7 +63,7 @@ def update_dockerhub(config_file, docker_hub, username = args.username, team_nam
         print('###### Deleting member "%s" from "%s" team:' % (list_item, team_name))
         print(dryrun_message) if dryrun else print(delete_member(username, team_name, list_item)[0])
 
-yaml_location = join(dirname(dirname(abspath(__file__))), "org0namespace-docker-config.yaml")
+yaml_location = join(dirname(dirname(abspath(__file__))), "docker-config.yaml")
 with open(yaml_location) as file:
   try:
     from yaml import FullLoader
