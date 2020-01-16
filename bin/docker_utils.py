@@ -226,4 +226,3 @@ def generate_yaml(username):
   with open(yaml_location, 'w') as file:
     yaml.safe_dump(docker_config, file, encoding='utf-8', allow_unicode=True)
   return True
-  

@@ -44,7 +44,10 @@ def update_dockerhub(config_file, docker_hub, username = args.username, team_nam
         else:
           delete_status = delete_repo(username, list_item)
           if not delete_status:
-            print('%s repository is not empty. Could not be removed' % list_item)
+            print('Error: %s repository is not empty. Could not be removed' % list_item)
+            sys.exit(1)
+          elif not delete_status[0]:
+            print(delete_status)
             sys.exit(1)
           else: print(delete_status[0])
       elif what_to_sync == 'teams':
@@ -54,6 +57,9 @@ def update_dockerhub(config_file, docker_hub, username = args.username, team_nam
           delete_status = delete_team(username, list_item)
           if not delete_status:
             print('Error: %s team is not empty. Could not be removed' % list_item)
+            sys.exit(1)
+          elif not delete_status[0]:
+            print(delete_status)
             sys.exit(1)
           else: print(delete_status[0])
       elif what_to_sync == 'permissions':
