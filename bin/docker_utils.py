@@ -64,7 +64,7 @@ def create_repo(username, repo, private=False):
 
 def delete_repo(username, repo, force=False):
   uri = '/repositories/%s/%s' % (username, repo)
-  if get_tags('%s/%s'%(username,repo))[1] == [] or force:
+  if force or not get_tags('%s/%s'%(username,repo))[1]:
     response = hub_request(uri, method = 'DELETE')
     return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
   else: return False
@@ -111,7 +111,7 @@ def create_team(username, teamname):
 
 def delete_team(username, teamname, force=False):
   uri = '/orgs/%s/groups/%s' % (username, teamname)
-  if get_members(username, teamname)[1] == [] or force:
+  if force or not get_members(username, teamname)[1]:
     response = hub_request(uri, method = 'DELETE')
     return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
   else: return False
