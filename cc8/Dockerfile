@@ -24,6 +24,7 @@ RUN yum update -y && \
     alternatives --set python `which python2` && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
     yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy &&\
+    python2-requests python3-requests &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
