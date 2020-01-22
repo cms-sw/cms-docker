@@ -23,7 +23,7 @@ RUN yum update -y && \
     bc strace tar zip unzip hostname nano libnsl && \
     alternatives --set python `which python2` && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy &&\
+    yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy \
     python2-requests python3-requests &&\
     yum clean all
 
