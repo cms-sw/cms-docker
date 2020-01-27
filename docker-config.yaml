@@ -85,8 +85,6 @@ repositories:
     cmssw: write
   slc6:
     cmssw: write
-  slc6-builder:
-    cmssw: write
   slc6-installer:
     cmssw: write
   slc7-installer:
