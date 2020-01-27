@@ -55,6 +55,8 @@ repositories:
     dmwm: admin
   nats-sub:
     dmwm: admin
+  parfullcms:
+    cmssw: write
   phedex:
     dmwm: admin
   proxy:
@@ -88,6 +90,8 @@ repositories:
   slc6-base:
     cmssw: write
   slc6-builder:
+    cmssw: write
+  slc6-installer:
     cmssw: write
   slc7-installer:
     cmssw: write
