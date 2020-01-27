@@ -1,4 +1,4 @@
-from cmssw/slc6-vanilla
+from cmssw/slc6
 MAINTAINER Marco Rovere marco.rovere@cern.ch
 
 ENV INSTALL_DIR=/data/srv
