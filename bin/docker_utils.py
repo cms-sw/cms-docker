@@ -62,10 +62,12 @@ def create_repo(username, repo, private=False):
   response = hub_request("/repositories/", payload, method = 'POST')
   return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
 
-def delete_repo(username, repo):
+def delete_repo(username, repo, force=False):
   uri = '/repositories/%s/%s' % (username, repo)
-  response = hub_request(uri, method = 'DELETE')
-  return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
+  if force or not get_tags('%s/%s'%(username,repo))[1]:
+    response = hub_request(uri, method = 'DELETE')
+    return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
+  else: return False
 
 def get_members(username, teamname):
   uri = '/orgs/%s/groups/%s/members/' % (username, teamname)
@@ -107,10 +109,12 @@ def create_team(username, teamname):
   response = hub_request(uri, data=data, method = 'POST')
   return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
 
-def delete_team(username, teamname):
+def delete_team(username, teamname, force=False):
   uri = '/orgs/%s/groups/%s' % (username, teamname)
-  response = hub_request(uri, method = 'DELETE')
-  return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
+  if force or not get_members(username, teamname)[1]:
+    response = hub_request(uri, method = 'DELETE')
+    return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
+  else: return False
 
 def get_permissions(username, teamname):
   uri = '/orgs/%s/groups/%s/repositories/' % (username, teamname)
@@ -222,4 +226,3 @@ def generate_yaml(username):
   with open(yaml_location, 'w') as file:
     yaml.safe_dump(docker_config, file, encoding='utf-8', allow_unicode=True)
   return True
-  
