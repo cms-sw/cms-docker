@@ -101,16 +101,14 @@ teams:
   cmssw:
   - cmsuser
   - smuzaffar
-  - cmsblddoc
+  - tulamor
   dmwm:
   - muhammadimranfarooqi
-  - cmsblddoc
   - yuyiguo
   - ericvaandering
   - bbockelm
   - veknet
   owners:
   - cmsblddoc
-  - tulamor
   - smuzaffar
   - bbockelm
