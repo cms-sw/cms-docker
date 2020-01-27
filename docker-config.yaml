@@ -57,8 +57,6 @@ repositories:
     dmwm: write
   httpsgo:
     dmwm: write
-  jenkins:
-    cmssw: write
   monitor:
     dmwm: write
   nats-sub:
