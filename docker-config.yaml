@@ -9,8 +9,6 @@ repositories:
     cmssw: write
   cms:
     cmssw: write
-  cmsenv-slc6:
-    cmssw: write
   cmsmon:
     dmwm: admin
   cmssw:
@@ -86,8 +84,6 @@ repositories:
   slc5:
     cmssw: write
   slc6:
-    cmssw: write
-  slc6-base:
     cmssw: write
   slc6-builder:
     cmssw: write
