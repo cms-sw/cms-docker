@@ -1,6 +1,0 @@
-[HEP_OSlibs]                                                                                                                                                                                                                                                  
-name=Repo need for HEP_OSlibs
-baseurl=http://grid-deployment.web.cern.ch/grid-deployment/download/HEP/repo/sl5/x86_64
-enabled=1
-gpgcheck=0
-priority=99
