@@ -224,5 +224,5 @@ def generate_yaml(username):
   logout()
   yaml_location = join(dirname(dirname(abspath(__file__))), 'generated-docker-config.yaml')
   with open(yaml_location, 'w') as file:
-    yaml.safe_dump(docker_config, file, encoding='utf-8', allow_unicode=True)
+    yaml.safe_dump(docker_config, file, encoding='utf-8', allow_unicode=True, default_flow_style=False)
   return True

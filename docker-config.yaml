@@ -1,55 +1,118 @@
 repositories:
-  acdcserver: {dmwm: admin}
-  alertscollector: {dmwm: admin}
-  cc7: {cmssw: admin}
-  cc8: {cmssw: write}
-  cms: {cmssw: write}
-  cmsenv-slc6: {cmssw: write}
-  cmsmon: {dmwm: admin}
-  cmssw: {cmssw: write}
-  cmsweb: {dmwm: admin}
-  confdb: {dmwm: admin}
-  couchdb: {dmwm: admin}
-  crabcache: {dmwm: admin}
-  crabserver: {dmwm: admin}
-  das: {dmwm: admin}
-  das2go: {dmwm: admin}
-  dbs: {dmwm: admin}
-  dbs2go: {dmwm: admin}
-  dbsmigration: {dmwm: admin}
-  dmwmmon: {dmwm: admin}
-  docker-lxr: {cmssw: write}
-  dqmgui: {dmwm: admin}
-  exitcodes: {dmwm: admin}
-  exporters: {dmwm: admin}
-  frontend: {dmwm: admin}
-  httpgo: {dmwm: admin}
-  httpsgo: {dmwm: admin}
-  monitor: {dmwm: admin}
-  nats-sub: {dmwm: admin}
-  phedex: {dmwm: admin}
-  proxy: {dmwm: admin}
-  reqmgr: {dmwm: admin}
-  reqmgr2: {dmwm: admin}
-  reqmgr2ms: {dmwm: admin}
-  reqmon: {dmwm: admin}
-  rucio-daemons: {dmwm: admin}
-  rucio-probes: {dmwm: admin}
-  rucio-server: {dmwm: admin}
-  rucio-sync: {dmwm: admin}
-  rucio_client: {dmwm: admin}
-  rucio_dev_env: {dmwm: admin}
-  sitedb: {dmwm: admin}
-  slc5: {cmssw: write}
-  slc6: {cmssw: write}
-  slc6-base: {cmssw: write}
-  slc6-builder: {cmssw: write}
-  slc7-installer: {cmssw: write}
-  t0_reqmon: {dmwm: admin}
-  t0wmadatasvc: {dmwm: admin}
-  tfaas: {dmwm: admin}
-  workqueue: {dmwm: admin}
+  acdcserver:
+    dmwm: admin
+  alertscollector:
+    dmwm: admin
+  cc7:
+    cmssw: admin
+  cc8:
+    cmssw: write
+  cms:
+    cmssw: write
+  cmsenv-slc6:
+    cmssw: write
+  cmsmon:
+    dmwm: admin
+  cmssw:
+    cmssw: write
+  cmsweb:
+    dmwm: admin
+  confdb:
+    dmwm: admin
+  couchdb:
+    dmwm: admin
+  crabcache:
+    dmwm: admin
+  crabserver:
+    dmwm: admin
+  das:
+    dmwm: admin
+  das2go:
+    dmwm: admin
+  dbs:
+    dmwm: admin
+  dbs2go:
+    dmwm: admin
+  dbsmigration:
+    dmwm: admin
+  dmwmmon:
+    dmwm: admin
+  docker-lxr:
+    cmssw: write
+  dqmgui:
+    dmwm: admin
+  exitcodes:
+    dmwm: admin
+  exporters:
+    dmwm: admin
+  frontend:
+    dmwm: admin
+  httpgo:
+    dmwm: admin
+  httpsgo:
+    dmwm: admin
+  monitor:
+    dmwm: admin
+  nats-sub:
+    dmwm: admin
+  phedex:
+    dmwm: admin
+  proxy:
+    dmwm: admin
+  reqmgr:
+    dmwm: admin
+  reqmgr2:
+    dmwm: admin
+  reqmgr2ms:
+    dmwm: admin
+  reqmon:
+    dmwm: admin
+  rucio-daemons:
+    dmwm: admin
+  rucio-probes:
+    dmwm: admin
+  rucio-server:
+    dmwm: admin
+  rucio-sync:
+    dmwm: admin
+  rucio_client:
+    dmwm: admin
+  rucio_dev_env:
+    dmwm: admin
+  sitedb:
+    dmwm: admin
+  slc5:
+    cmssw: write
+  slc6:
+    cmssw: write
+  slc6-base:
+    cmssw: write
+  slc6-builder:
+    cmssw: write
+  slc7-installer:
+    cmssw: write
+  t0_reqmon:
+    dmwm: admin
+  t0wmadatasvc:
+    dmwm: admin
+  tfaas:
+    dmwm: admin
+  workqueue:
+    dmwm: admin
 teams:
-  cmssw: [cmsuser, smuzaffar, cmsblddoc]
-  dmwm: [muhammadimranfarooqi, cmsblddoc, yuyiguo, ericvaandering, bbockelm, veknet]
-  owners: [cmsblddoc, tulamor, smuzaffar, bbockelm]
+  cmssw:
+  - cmsuser
+  - smuzaffar
+  - cmsblddoc
+  dmwm:
+  - muhammadimranfarooqi
+  - cmsblddoc
+  - yuyiguo
+  - ericvaandering
+  - bbockelm
+  - veknet
+  owners:
+  - cmsblddoc
+  - tulamor
+  - smuzaffar
+  - bbockelm
