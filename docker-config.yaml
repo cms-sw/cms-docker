@@ -2,9 +2,9 @@ repositories:
   aarch64-slc7-builder:
     cmssw: write
   acdcserver:
-    dmwm: write
+    dmwm: admin
   alertscollector:
-    dmwm: write
+    dmwm: admin
   cc7:
     cmssw: admin
   cc7-aarch64:
@@ -18,75 +18,75 @@ repositories:
   cmsenv-slc6:
     cmssw: write
   cmsmon:
-    dmwm: write
+    dmwm: admin
   cmssw:
     cmssw: write
   cmsweb:
-    dmwm: write
+    dmwm: admin
   confdb:
-    dmwm: write
+    dmwm: admin
   couchdb:
-    dmwm: write
+    dmwm: admin
   crabcache:
-    dmwm: write
+    dmwm: admin
   crabserver:
-    dmwm: write
+    dmwm: admin
   das:
-    dmwm: write
+    dmwm: admin
   das2go:
-    dmwm: write
+    dmwm: admin
   dbs:
-    dmwm: write
+    dmwm: admin
   dbs2go:
-    dmwm: write
+    dmwm: admin
   dbsmigration:
-    dmwm: write
+    dmwm: admin
   dmwmmon:
-    dmwm: write
+    dmwm: admin
   docker-lxr:
     cmssw: write
   dqmgui:
-    dmwm: write
+    dmwm: admin
   exitcodes:
-    dmwm: write
+    dmwm: admin
   exporters:
-    dmwm: write
+    dmwm: admin
   frontend:
-    dmwm: write
+    dmwm: admin
   httpgo:
-    dmwm: write
+    dmwm: admin
   httpsgo:
-    dmwm: write
+    dmwm: admin
   monitor:
-    dmwm: write
+    dmwm: admin
   nats-sub:
-    dmwm: write
+    dmwm: admin
   phedex:
-    dmwm: write
+    dmwm: admin
   proxy:
-    dmwm: write
+    dmwm: admin
   reqmgr:
-    dmwm: write
+    dmwm: admin
   reqmgr2:
-    dmwm: write
+    dmwm: admin
   reqmgr2ms:
-    dmwm: write
+    dmwm: admin
   reqmon:
-    dmwm: write
+    dmwm: admin
   rucio-daemons:
-    dmwm: write
+    dmwm: admin
   rucio-probes:
-    dmwm: write
+    dmwm: admin
   rucio-server:
-    dmwm: write
+    dmwm: admin
   rucio-sync:
-    dmwm: write
+    dmwm: admin
   rucio_client:
-    dmwm: write
+    dmwm: admin
   rucio_dev_env:
-    dmwm: write
+    dmwm: admin
   sitedb:
-    dmwm: write
+    dmwm: admin
   slc5:
     cmssw: write
   slc6:
@@ -100,13 +100,13 @@ repositories:
   slc7-installer:
     cmssw: write
   t0_reqmon:
-    dmwm: write
+    dmwm: admin
   t0wmadatasvc:
-    dmwm: write
+    dmwm: admin
   tfaas:
-    dmwm: write
+    dmwm: admin
   workqueue:
-    dmwm: write
+    dmwm: admin
 teams:
   cmssw:
   - cmsuser
