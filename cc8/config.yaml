@@ -1,12 +1,15 @@
 docker: Dockerfile
 push:   true
 override: true
-delete_pattern: ${tag}-(2[0-9]{7,})
+delete_pattern: tmp-${tag}-(2[0-9]{7,})
 expires_days: 7
 variables:
   CVMFS_UNPACKED: true
 test:
   script: test.sh
+from: library/centos:centos8
 tags:
   amd64:
-    from: library/centos:8
+  aarch64:
+  ppc64le:
+

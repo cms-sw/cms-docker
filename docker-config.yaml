@@ -99,9 +99,9 @@ repositories:
     dmwm: admin
 teams:
   cmssw:
+  - tulamor
   - cmsuser
   - smuzaffar
-  - tulamor
   dmwm:
   - muhammadimranfarooqi
   - yuyiguo
