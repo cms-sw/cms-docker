@@ -10,7 +10,7 @@ from os.path import join, dirname, abspath
 
 parser = ArgumentParser(description='Synchronize Docker HUB with yaml configuration file')
 parser.add_argument('-u', '--username', dest='username', help="Provide Docker Hub username for synchronization", type=str, default='cmssw')
-parser.add_argument('-n', '--dry-run', dest='dryrun', help="Dry Run mode enabled by default. Disable it to make changes to docker hub", action="store_True", default=False)
+parser.add_argument('-n', '--dry-run', dest='dryrun', help="Dry Run mode enabled by default. Disable it to make changes to docker hub", action="store_true", default=False)
 args = parser.parse_args()
 changes_applied = False
 if not args.dryrun:
