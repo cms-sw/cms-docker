@@ -98,21 +98,21 @@ repositories:
   workqueue:
     dmwm: admin
   runregistry-frontend:
-    cmssw: write
+    dmwm: write
   runregistry-backend:
-    cmssw: write
+    dmwm: write
 teams:
   cmssw:
   - tulamor
   - cmsuser
   - smuzaffar
-  - fabioespinosa
   dmwm:
   - muhammadimranfarooqi
   - yuyiguo
   - ericvaandering
   - bbockelm
   - veknet
+  - fabioespinosa
   owners:
   - cmsblddoc
   - smuzaffar
