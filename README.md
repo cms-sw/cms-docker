@@ -3,7 +3,7 @@
 Notice that since these are in a public repository you should not expose any
 details of the CMS infrastructure and have everything configurable via an
 environment variable. Actual values of the environment variables are maintained
-somewhere else.
+somewhere else. 
 
 ### Automatic docker image build
 
