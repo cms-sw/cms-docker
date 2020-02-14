@@ -97,6 +97,10 @@ repositories:
     dmwm: admin
   workqueue:
     dmwm: admin
+  runregistry-frontend:
+    dmwm: write
+  runregistry-backend:
+    dmwm: write
 teams:
   cmssw:
   - tulamor
@@ -108,6 +112,7 @@ teams:
   - ericvaandering
   - bbockelm
   - veknet
+  - fabioespinosa
   owners:
   - cmsblddoc
   - smuzaffar
