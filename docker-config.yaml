@@ -3,6 +3,8 @@ repositories:
     dmwm: admin
   alertscollector:
     dmwm: admin
+  auth-proxy-server:
+    dmwm: admin
   cc7:
     cmssw: admin
   cc8:
