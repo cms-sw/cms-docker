@@ -103,6 +103,8 @@ repositories:
     dmwm: write
   runregistry-backend:
     dmwm: write
+  udp-server:
+    dmwm: admin
 teams:
   cmssw:
   - tulamor
