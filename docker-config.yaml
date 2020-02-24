@@ -47,6 +47,8 @@ repositories:
     dmwm: admin
   frontend:
     dmwm: admin
+  htdocs:
+    dmwm: admin
   httpgo:
     dmwm: admin
   httpsgo:
