@@ -93,6 +93,8 @@ repositories:
     cmssw: write
   slc7-installer:
     cmssw: write
+  sqoop:
+    dmwm: admin
   t0_reqmon:
     dmwm: admin
   t0wmadatasvc:
