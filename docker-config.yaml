@@ -53,6 +53,8 @@ repositories:
     dmwm: admin
   httpsgo:
     dmwm: admin
+  http-exporter:
+    dmwm: admin
   monitor:
     dmwm: admin
   nats-sub:
