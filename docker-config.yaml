@@ -85,6 +85,8 @@ repositories:
     dmwm: admin
   rucio_dev_env:
     dmwm: admin
+  rucio-ui:
+    dmwm: admin
   sitedb:
     dmwm: admin
   slc5:
