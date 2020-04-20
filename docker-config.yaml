@@ -111,6 +111,8 @@ repositories:
     dmwm: write
   runregistry-backend:
     dmwm: write
+  dqmgui-frontend:
+    dmwm: write
   udp-server:
     dmwm: admin
 teams:
