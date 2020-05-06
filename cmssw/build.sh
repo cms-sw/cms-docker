@@ -20,8 +20,8 @@ eval "$RELDATA"
 
 BASE_IMG="cmssw/cms:rhel6"
 case $architecture in
-  slc6_* ) BASE_IMG="cmssw/cms:rhel6" ;;
-  slc7_* ) BASE_IMG="cmssw/cms:rhel7" ;;
+  slc6_* ) BASE_IMG="cmssw/cms:rhel6-m202002" ;;
+  slc7_* ) BASE_IMG="cmssw/cms:rhel7-m202002" ;;
 esac
 
 cp $THISDIR/Dockerfile $THISDIR/Dockerfile.$CMSSW_VERSION
