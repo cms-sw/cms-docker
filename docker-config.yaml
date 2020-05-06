@@ -55,6 +55,8 @@ repositories:
     dmwm: admin
   http-exporter:
     dmwm: admin
+  log-clustering:
+    dmwm: admin
   monitor:
     dmwm: admin
   nats-sub:
