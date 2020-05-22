@@ -53,6 +53,8 @@ repositories:
     dmwm: admin
   httpsgo:
     dmwm: admin
+  ggus-alerts:
+    dmwm: admin
   http-exporter:
     dmwm: admin
   log-clustering:
@@ -99,6 +101,8 @@ repositories:
     cmssw: write
   slc7-installer:
     cmssw: write
+  ssb-alerts:
+    dmwm: admin
   sqoop:
     dmwm: admin
   t0_reqmon:
