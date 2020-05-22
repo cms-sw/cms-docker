@@ -13,6 +13,8 @@ repositories:
     cmssw: write
   cmsmon:
     dmwm: admin
+  cmsmon-alerts:
+    dmwm: admin
   cmssw:
     cmssw: write
   cmsweb:
