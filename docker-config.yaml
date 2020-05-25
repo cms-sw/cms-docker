@@ -13,6 +13,8 @@ repositories:
     cmssw: write
   cmsmon:
     dmwm: admin
+  cmsmon-alerts:
+    dmwm: admin
   cmssw:
     cmssw: write
   cmsweb:
@@ -52,6 +54,8 @@ repositories:
   httpgo:
     dmwm: admin
   httpsgo:
+    dmwm: admin
+  ggus-alerts:
     dmwm: admin
   http-exporter:
     dmwm: admin
@@ -99,6 +103,8 @@ repositories:
     cmssw: write
   slc7-installer:
     cmssw: write
+  ssb-alerts:
+    dmwm: admin
   sqoop:
     dmwm: admin
   t0_reqmon:
