@@ -59,6 +59,8 @@ repositories:
     dmwm: admin
   http-exporter:
     dmwm: admin
+  karma:
+    dmwm: admin
   log-clustering:
     dmwm: admin
   monitor:
