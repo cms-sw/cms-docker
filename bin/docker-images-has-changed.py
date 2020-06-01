@@ -2,8 +2,8 @@
 from __future__ import print_function
 from argparse import ArgumentParser
 from get_image_config import get_docker_images
-from docker_utils import has_parent_changed, get_tags
-import glob, os, re
+from docker_utils import has_parent_changed
+import glob, os
 from os.path import dirname
 import json
 
@@ -31,24 +31,13 @@ else:
     repos.append(os.path.basename(dirname(file)))
 
 tags = [ t for t in  args.tags.replace(' ','').split(",") if t]
-autoTag = re.compile("^[^:]+:(.*-[dm]2)\d{5}$")
 for reponame in repos:
-  ok, oldtags = get_tags("cmssw/"+reponame)
-  if not ok: continue
-  oldtags.sort(reverse=True)
   for img in get_docker_images(reponame):
     if tags and (not img['IMAGE_TAG'] in tags): continue
     buildimg = args.force
     if not buildimg:
       inher= img['IMAGE_NAME']
       parent = img['BASE_IMAGE_NAME']
-      m = autoTag.match(inher)
-      if m:
-        tag_base = m.group(1)
-        for tag in oldtags:
-          if tag.startswith(m.group(1)):
-            inher = "cmssw/"+reponame+":"+tag
-            break
       buildimg = has_parent_changed(parent, inher)
       print(inher, parent, buildimg)
     if buildimg:

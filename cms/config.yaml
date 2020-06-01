@@ -17,16 +17,20 @@ groups:
     from: ${base}:3.4-el7
     packages: bzip2
     tags:
-      rhel7-${monthly}:
+      rhel7-latest:
         push: true
+        override: true
+        alias: rhel7-${monthly}
       rhel7:
         unpacked: true
   rhle6:
     from: ${base}:3.4-el6
     packages: compat-readline5
     tags:
-      rhel6-${monthly}:
+      rhel6-latest:
         push: true
+        override: true
+        alias: rhel6-${monthly}
       rhel6:
         unpacked: true
 
