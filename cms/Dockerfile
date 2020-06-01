@@ -25,9 +25,9 @@ LABEL maintainer="CMS Build"
 # - 7 Feb 2018: libaio was added to enable the Oracle client, needed for T0 jobs.
 # - 14 Dec 2018: Rsync added, needed by cms bootstrap.sh
 # - 17 Dec 2018: Create /build for testings cms-bot jobs
-# - 01 Jun 2020: Run yum update get the updates packages. including osg-ca-certs
+# - 01 Jun 2020: Force update osg-ca-certs
 
-RUN yum update -y &&\
+RUN yum update -y osg-ca-certs &&\
     yum -y install cvmfs \
                    gcc \
                    glibc-headers \
