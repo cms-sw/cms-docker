@@ -27,8 +27,7 @@ LABEL maintainer="CMS Build"
 # - 17 Dec 2018: Create /build for testings cms-bot jobs
 # - 01 Jun 2020: Force update osg-ca-certs
 
-RUN yum update -y osg-ca-certs &&\
-    yum -y install cvmfs \
+RUN yum -y install cvmfs \
                    gcc \
                    glibc-headers \
                    openssh-clients \
@@ -43,6 +42,8 @@ RUN yum update -y osg-ca-certs &&\
                    perl-Switch perl-Storable perl-Env perl-Thread-Queue perl-Encode nspr nss nss-util file file-libs readline \
                    zlib popt bzip2 bzip2-libs libaio rsync @EXTRA_PACKAGES@ && \
     yum clean all
+    
+RUN yum update -y osg-ca-certs && yum clean all
 
 # Various directories needed for bind mounts (as overlayfs is not available on RHEL6)
 
