@@ -3,8 +3,7 @@ docker:   Dockerfile
 push:     false
 unpacked: false
 base:     opensciencegrid/osg-wn
-nightly: d$${now.strftime("%Y%m%d")}
-monthly: m$${now.strftime("%Y%m")}
+daily: m$${now.strftime("%Y%m%d")}
 test:
   node:   singularity
   script: test.sh
@@ -20,7 +19,7 @@ groups:
       rhel7-latest:
         push: true
         override: true
-        alias: rhel7-${monthly}
+        alias: rhel7-${daily}
       rhel7:
         unpacked: true
   rhle6:
@@ -30,7 +29,7 @@ groups:
       rhel6-latest:
         push: true
         override: true
-        alias: rhel6-${monthly}
+        alias: rhel6-${daily}
       rhel6:
         unpacked: true
 
