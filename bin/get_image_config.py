@@ -72,14 +72,16 @@ def process_tags(setup, data, images):
     img_data = expand(data)
     pop_info(data, cnt)
     image_name = get_key('container', img_data) + ":"+get_key('tag', img_data)
-    override = get_key('override', img_data).upper()
-    if override in ["", "FALSE"]:
+    override = get_key('override', img_data).lower()
+    if override != 'true':
       manifest = get_manifest(image_name)
       if 'fsLayers' in manifest: continue
       if not 'errors' in manifest: continue
       if manifest['errors'][0]['code'] != 'MANIFEST_UNKNOWN': continue
+      override = "false"
 
     images.append({})
+    images[-1]['OVERRIDE_TAG']=override
     images[-1]['DOCKER_REPOSITORY']=get_key('repository', img_data)
     images[-1]['DOCKER_NAME']=get_key('name', img_data)
     images[-1]['DOCKER_CONTAINER']=get_key('container', img_data)
