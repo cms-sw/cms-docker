@@ -1,3 +1,6 @@
+#CMS tags mapping. Format
+#Destination tag: source tag
+
 rhel6-itb: rhel6-m20200605
 rhel7-itb: rhel7-m20200605
 rhel6: rhel6-m202006
