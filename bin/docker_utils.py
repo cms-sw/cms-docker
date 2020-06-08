@@ -185,11 +185,14 @@ def has_parent_changed(parent, image):
   try: image_manifest['fsLayers']
   except KeyError:
     if image_manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN':
+      print("Image %s not found")
       return True
     else:
       raise Exception(image_manifest)
   parent_layers = get_manifest(parent)['fsLayers']
   image_layers = image_manifest['fsLayers']
+  print("Layers: %s%s" % (parent,"\n  ".join(parent_layers)))
+  print("Layers: %s%s" % (imag,"\n  ".join(image_layers)))
   while parent_layers and image_layers:
     if parent_layers.pop()!=image_layers.pop():
       return True
