@@ -191,8 +191,8 @@ def has_parent_changed(parent, image):
       raise Exception(image_manifest)
   parent_layers = get_manifest(parent)['fsLayers']
   image_layers = image_manifest['fsLayers']
-  print("Layers: %s%s" % (parent,"\n  ".join(parent_layers)))
-  print("Layers: %s%s" % (imag,"\n  ".join(image_layers)))
+  print("Layers: %s%s" % (parent,"\n  ".join([i['blobSum'] for i in parent_layers])))
+  print("Layers: %s%s" % (imag,"\n  ".join([i['blobSum'] for i in image_layers])))
   while parent_layers and image_layers:
     if parent_layers.pop()!=image_layers.pop():
       return True
