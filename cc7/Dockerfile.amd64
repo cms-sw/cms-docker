@@ -7,10 +7,13 @@ RUN yum install -y yum-plugin-ovl HEP_OSlibs_CC7 git-core openssl glibc-devel \
         mesa-libGL-devel mesa-libGLU-devel libXext-devel \
         tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs libXpm bc libaio \
         tar patch krb5-devel perl-Data-Dumper gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn cvs \
-        gcc-c++ strace cern-wrappers krb5-workstation wget hostname readline-devel nano bzip2 perl-Switch perl-Storable \
-        perl-Env packages perl-Thread-Queue CERN-CA-certs tk-devel tcl-devel which python-pip file voms-clients-cpp myproxy \
+        gcc-c++ strace cern-wrappers  wget hostname readline-devel nano bzip2 perl-Switch perl-Storable \
+        perl-Env packages perl-Thread-Queue CERN-CA-certs tk-devel tcl-devel which python-pip file \
         java-1.8.0-openjdk java-1.8.0-openjdk-devel popt libXcursor libXrandr libXinerama nspr nss nss-util file file-libs \
         readline popt bzip2 bzip2-libs python-requests-kerberos libgfortran time python2-psutil && \
+    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+    yum install -y voms-clients-cpp krb5-workstation myproxy &&\
+    yum clean all
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
