@@ -2,7 +2,6 @@ override: true
 push:     true
 test:
   script: test.sh
-docker: Dockerfile.${tag}
 delete_pattern: tmp-${tag}-(2[0-9]{7,})
 expires_days: 7
 daily: d$${now.strftime("%Y%m%d")}
@@ -11,8 +10,11 @@ variables:
 from: library/centos:7
 tags:
   amd64-latest:
+    docker: Dockerfile.amd64
     alias: amd64-${daily}
   aarch64-latest:
+    docker: Dockerfile.aarch64
     alias: aarch64-${daily}
   ppc64le-latest:
+    docker: Dockerfile.ppc64le
     alias: ppc64le-${daily}
