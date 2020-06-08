@@ -3,13 +3,16 @@ push:   true
 override: true
 delete_pattern: tmp-${tag}-(2[0-9]{7,})
 expires_days: 7
+daily: d$${now.strftime("%Y%m%d")}
 variables:
   CVMFS_UNPACKED: true
 test:
   script: test.sh
-from: library/centos:centos8
+from: library/centos:8
 tags:
-  amd64:
-  aarch64:
-  ppc64le:
-
+  amd64-latest:
+    alias: amd64-${daily}
+  aarch64-latest:
+    alias: aarch64-${daily}
+  ppc64le-latest:
+    alias: ppc64le-${daily}
