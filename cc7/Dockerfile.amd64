@@ -2,7 +2,7 @@ FROM @BASE_IMAGE_NAME@
 
 ADD http://linux.web.cern.ch/linux/centos7/CentOS-CERN.repo           /etc/yum.repos.d/CentOS-CERN.repo
 ADD http://linuxsoft.cern.ch/cern/centos/7/os/x86_64/RPM-GPG-KEY-cern /etc/pki/rpm-gpg/RPM-GPG-KEY-cern
-RUN yum yum install -y yum-plugin-ovl HEP_OSlibs_CC7 git-core openssl glibc-devel \
+RUN yum install -y yum-plugin-ovl HEP_OSlibs_CC7 git-core openssl glibc-devel \
         pciutils glx-utils mesa-dri-drivers libX11 libXi libXrender \
         mesa-libGL-devel mesa-libGLU-devel libXext-devel \
         tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs libXpm bc libaio \
