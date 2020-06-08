@@ -14,7 +14,6 @@ RUN yum install -y yum-plugin-ovl HEP_OSlibs_CC7 git-core openssl glibc-devel \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum install -y voms-clients-cpp krb5-workstation myproxy &&\
     yum clean all
-    yum clean all
 
 ADD krb5.conf /etc/krb5.conf
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build &&\
