@@ -8,6 +8,7 @@ variables:
   CVMFS_UNPACKED: true
 test:
   script: test.sh
+  node:   singularity
 from: library/centos:8
 tags:
   amd64-latest:
