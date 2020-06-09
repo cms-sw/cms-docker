@@ -177,11 +177,31 @@ def get_manifest(image):
   url = '%s/%s/manifests/%s' % (DOCKER_REGISTRY_API, repo, tag)
   token = get_registry_token(repo)
   headers = {}
+  headers['Accept'] = 'application/vnd.docker.distribution.manifest.list.v2+json'
   headers['Authorization'] = 'Bearer %s' % token
   return http_request(url, None, None, headers, json=True)
 
+def get_layers(image, arch=""):
+  manifest = get_manifest(image)
+  try:
+    return {'architecture': manifest['architecture'],
+            'fsLayers': [layer['blobSum'] for layer in manifest['fsLayers']]}
+  except:
+    try:
+      digest = ""
+      for m in manifest['manifests']:
+        if m['platform']['architecture'] == arch:
+          digest = m['digest']
+          break
+      if not digest: return manifest
+      repo = image.split(":",1)[0]
+      manifest = get_manifest("%s:%s" % (repo,digest))
+      return {'architecture': arch,'fsLayers' : [layer['digest'] for layer in manifest['layers']]}
+    except:
+      return manifest
+
 def has_parent_changed(parent, image):
-  image_manifest = get_manifest(image)
+  image_manifest = get_layers(image)
   try: image_manifest['fsLayers']
   except KeyError:
     if image_manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN':
@@ -189,10 +209,10 @@ def has_parent_changed(parent, image):
       return True
     else:
       raise Exception(image_manifest)
-  parent_layers = get_manifest(parent)['fsLayers']
+  parent_layers = get_layers(parent, image_manifest['architecture'])['fsLayers']
   image_layers = image_manifest['fsLayers']
-  print("Layers: %s%s" % (parent,"\n  ".join([i['blobSum'] for i in parent_layers])))
-  print("Layers: %s%s" % (image ,"\n  ".join([i['blobSum'] for i in image_layers])))
+  print("Layers: %s\n  %s" % (parent,"\n  ".join(parent_layers)))
+  print("Layers: %s\n  %s" % (image ,"\n  ".join(image_layers)))
   while parent_layers and image_layers:
     if parent_layers.pop()!=image_layers.pop():
       return True

@@ -3,7 +3,7 @@ from __future__ import print_function
 import yaml
 import sys, re
 from os.path import exists, join, dirname, abspath
-from docker_utils import get_manifest
+from docker_utils import get_layers
 from datetime import datetime
 now = datetime.now()
 
@@ -74,7 +74,7 @@ def process_tags(setup, data, images):
     image_name = get_key('container', img_data) + ":"+get_key('tag', img_data)
     override = get_key('override', img_data).lower()
     if override != 'true':
-      manifest = get_manifest(image_name)
+      manifest = get_layers(image_name)
       if 'fsLayers' in manifest: continue
       if not 'errors' in manifest: continue
       if manifest['errors'][0]['code'] != 'MANIFEST_UNKNOWN': continue
