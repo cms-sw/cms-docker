@@ -26,14 +26,12 @@ LABEL maintainer="CMS Build"
 # - 14 Dec 2018: Rsync added, needed by cms bootstrap.sh
 # - 17 Dec 2018: Create /build for testings cms-bot jobs
 # - 01 Jun 2020: Force update osg-ca-certs
+# - 15 Jun 2020: Remove osg-ca-certs, base-image shoudl provide the updated certs
+#                Reduce image layers by running only single command.
 
-RUN yum -y install cvmfs \
-                   gcc \
-                   glibc-headers \
-                   openssh-clients \
-                   redhat-lsb-core \
-                   sssd-client && \
-    yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl ncurses e2fsprogs krb5-libs freetype ncurses-libs perl-libs perl-ExtUtils-Embed \
+RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-client && \
+    yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl ncurses e2fsprogs \
+                   krb5-libs freetype ncurses-libs perl-libs perl-ExtUtils-Embed \
                    fontconfig compat-libstdc++-33 libidn libX11 libXmu libSM libICE libXcursor \
                    libXext libXrandr libXft mesa-libGLU mesa-libGL e2fsprogs-libs libXi libXinerama libXft-devel \
                    libXrender libXpm libcom_err perl-Test-Harness perl-Carp perl-constant perl-PathTools \
@@ -41,20 +39,17 @@ RUN yum -y install cvmfs \
                    perl-Socket perl-Text-ParseWords perl-Time-Local libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel \
                    perl-Switch perl-Storable perl-Env perl-Thread-Queue perl-Encode nspr nss nss-util file file-libs readline \
                    zlib popt bzip2 bzip2-libs libaio rsync @EXTRA_PACKAGES@ && \
-    yum clean all
-    
-RUN yum update -y osg-ca-certs && yum clean all
-
-# Various directories needed for bind mounts (as overlayfs is not available on RHEL6)
-
-RUN mkdir -p /hdfs \
+    yum clean all &&\
+    mkdir -p /hdfs \
              /mnt/hadoop \
              /hadoop \
              /cms \
              /etc/cvmfs/SITECONF \
              /lfs_roots \
              /storage \
-             /build
+             /build &&\
+    echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
+    echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
 
 LABEL build-date="@BUILD_DATE@"
 
