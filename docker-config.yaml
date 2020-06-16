@@ -27,6 +27,8 @@ repositories:
     dmwm: admin
   crabserver:
     dmwm: admin
+  crabtw:
+    dmwm: admin
   das:
     dmwm: admin
   das2go:
@@ -137,6 +139,8 @@ teams:
   - bbockelm
   - veknet
   - fabioespinosa
+  - sbelforte
+  - ddaina
   owners:
   - cmsblddoc
   - smuzaffar
