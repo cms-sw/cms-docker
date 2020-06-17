@@ -123,6 +123,12 @@ repositories:
     dmwm: write
   runregistry-backend:
     dmwm: write
+  runregistry-workers-dqm-gui-pinging:
+    dmwm: write
+  runregistry-workers-json-processing:
+    dmwm: write
+  runregistry-workers-oms-fetching:
+    dmwm: write
   dqmgui-frontend:
     dmwm: write
   udp-server:
