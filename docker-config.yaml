@@ -27,7 +27,7 @@ repositories:
     dmwm: admin
   crabserver:
     dmwm: admin
-  crabtw:
+  crabtaskworker:
     dmwm: admin
   das:
     dmwm: admin
