@@ -33,6 +33,10 @@ repositories:
     dmwm: admin
   das2go:
     dmwm: admin
+  das-mongo:
+    dmwm: admin
+  das-server:
+    dmwm: admin
   dbs:
     dmwm: admin
   dbs2go:
