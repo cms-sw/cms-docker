@@ -19,6 +19,8 @@ repositories:
     cmssw: write
   cmsweb:
     dmwm: admin
+  cmsweb-base:
+    dmwm: admin
   confdb:
     dmwm: admin
   couchdb:
