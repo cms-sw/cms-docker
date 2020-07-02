@@ -16,7 +16,7 @@ chmod +x cmsos
 HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
 $GET_CMD bootstrap.sh http://cmsrep.cern.ch/cmssw/bootstrap.sh
 
-#INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
+INVALID_ARCHS='slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
 week=week$(ls -d ${RELEASE_INST_DIR}/nweek-* | head -1 | sed 's|.*\(.\)$|\1%2|' | bc)
 rpm_repo="cms.$week"
