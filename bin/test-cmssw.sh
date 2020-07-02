@@ -27,6 +27,7 @@ touch $WORKSPACE/res.txt
 for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${HOST_CMS_ARCH}_|;s|<.*||") ; do
   export SCRAM_ARCH=$arch
   cd $WORKSPACE/inst
+  echo ${SCRAM_ARCH} >> $WORKSPACE/res.txt
   if [ $(echo ${INVALID_ARCHS} | tr ' ' '\n' | grep "^${arch}$" | wc -l) -gt 0 ] ; then
     echo ${SCRAM_ARCH}.SKIP >> $WORKSPACE/res.txt
     continue
@@ -49,13 +50,12 @@ for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${H
     boot_repo="cms"
   fi
   if ! sh -ex $WORKSPACE/bootstrap.sh -r ${boot_repo} -a $SCRAM_ARCH setup ; then
-    echo ${SCRAM_ARCH}.ERR >> $WORKSPACE/res.txt
+    echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
     continue
   fi
-  echo "======================================================="
+  echo ${SCRAM_ARCH}.BOOT.OK >> $WORKSPACE/res.txt
   if [ "${cmssw_ver}" = "" ] ; then
     echo "Warnings: No CMSSW version available for $SCRAM_ARCH"
-    echo ${SCRAM_ARCH}.OK >> $WORKSPACE/res.txt
     continue
   fi
   echo "Found release: ${cmssw_ver}"
@@ -82,9 +82,9 @@ for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${H
       fi
     done
     if scram build -j $(nproc) ; then
-      echo ${SCRAM_ARCH}.OK >> $WORKSPACE/res.txt
+      echo ${SCRAM_ARCH}.${cmssw_ver}.OK >> $WORKSPACE/res.txt
     else
-      echo ${SCRAM_ARCH}.ERR >> $WORKSPACE/res.txt
+      echo ${SCRAM_ARCH}.${cmssw_ver}.ERR >> $WORKSPACE/res.txt
     fi
   )
   rm -rf $SCRAM_ARCH
