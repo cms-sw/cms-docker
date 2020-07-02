@@ -62,7 +62,11 @@ for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${H
     continue
   fi
   echo "Found release: ${cmssw_ver}"
+  INSTALL_PACKAGES="$($WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH search gcc-fixincludes | sed 's| .*||' | grep 'gcc-fixincludes' | sort | tail -1)"
   $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH install -y cms+cmssw+${cmssw_ver}
+  if [ "${INSTALL_PACKAGES}" != "" ] ; then
+    $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH install -y ${INSTALL_PACKAGES}
+  fi
   export cmssw_ver
   (
     source $WORKSPACE/inst/$SCRAM_ARCH/cmsset_default.sh >/dev/null 2>&1
