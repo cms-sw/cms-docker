@@ -7,7 +7,7 @@ daily: d$${now.strftime("%Y%m%d")}
 variables:
   CVMFS_UNPACKED: true
 test:
-  script: test.sh
+  script: test-cmssw.sh
   node:   singularity
 from: library/centos:8
 tags:

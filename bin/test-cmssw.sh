@@ -2,6 +2,7 @@
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
+ARCHS="$1"
 
 if [ "$WORKSPACE" = "" ] ; then export WORKSPACE=$(/bin/pwd) ; fi
 cd $WORKSPACE
@@ -12,15 +13,17 @@ ls /cvmfs/cms.cern.ch >/dev/null 2>&1
 
 GET_CMD="curl -s -k -L -o"
 if wget --help >/dev/null 2>&1 ; then GET_CMD="wget -q -O" ; fi
-
-$GET_CMD archs http://cmsrep.cern.ch/cgi-bin/repos/cms
-$GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cms-common/master/common/cmsos
-chmod +x cmsos
-HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
-ARCHS=$(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${HOST_CMS_ARCH}_|;s|<.*||")
-rm -f cmsos archs
-
 $GET_CMD bootstrap.sh http://cmsrep.cern.ch/cmssw/bootstrap.sh
+
+if [ "${ARCHS}" = "" ] ; then
+  $GET_CMD archs http://cmsrep.cern.ch/cgi-bin/repos/cms
+  $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cms-common/master/common/cmsos
+  chmod +x cmsos
+  HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
+  ARCHS=$(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${HOST_CMS_ARCH}_|;s|<.*||")
+  rm -f cmsos archs
+fi
+
 parch=""
 touch $WORKSPACE/res.txt
 for arch in ${ARCHS} ; do
