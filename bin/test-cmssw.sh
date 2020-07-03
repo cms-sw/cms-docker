@@ -44,7 +44,7 @@ for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${H
   for v in $(grep ${RELEASE_INST_DIR}/ cmssw.rel | grep '_[0-9][0-9]*_X_' | awk '{print $3}') ; do
     if [ -e $v/build-errors ] ; then continue ; fi
     cmssw_ver=$(basename $v)
-    boot_repo=cms.$(echo $v | cut -d/ -f3)
+    boot_repo=cms.$(echo $v | cut -d/ -f4)
   done
   if [ "${cmssw_ver}" = "" ] ; then
     cmssw_ver=$(grep /cvmfs/cms.cern.ch/ cmssw.rel | tail -1 | awk '{print $2}' || true)
