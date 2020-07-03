@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
-INVALID_ARCHS='slc7_aarch64_gcc493 slc7_aarch64_gcc530'
+INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
 ARCHS="$1"
 
