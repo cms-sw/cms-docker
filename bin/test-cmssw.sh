@@ -63,9 +63,9 @@ for arch in ${ARCHS} ; do
   fi
   echo "Found release: ${cmssw_ver}"
   INSTALL_PACKAGES="$($WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH search gcc-fixincludes | sed 's| .*||' | grep 'gcc-fixincludes' | sort | tail -1)"
-  $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH install -y cms+cmssw+${cmssw_ver}
+  $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH --debug install -y cms+cmssw+${cmssw_ver}
   if [ "${INSTALL_PACKAGES}" != "" ] ; then
-    $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH install -y ${INSTALL_PACKAGES}
+    $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH --debug install -y ${INSTALL_PACKAGES}
   fi
   export cmssw_ver
   (
