@@ -9,23 +9,21 @@ rm -rf inst; mkdir inst; cd inst
 
 ls /cvmfs/cms-ib.cern.ch >/dev/null 2>&1
 ls /cvmfs/cms.cern.ch >/dev/null 2>&1
-GET_CMD="wget -q -O"
-if wget --help >/dev/null 2>&1 ; then
-  $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cms-common/master/common/cmsos
-else
-  GET_CMD="curl -s -k -L -o"
-  $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cms-common/master/common/cmsos
-fi
+
+GET_CMD="curl -s -k -L -o"
+if wget --help >/dev/null 2>&1 ; then GET_CMD="wget -q -O" ; fi
+
+$GET_CMD archs http://cmsrep.cern.ch/cgi-bin/repos/cms
+$GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cms-common/master/common/cmsos
 chmod +x cmsos
 HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
-rm -f cmsos
+ARCHS=$(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${HOST_CMS_ARCH}_|;s|<.*||")
+rm -f cmsos archs
 
 $GET_CMD bootstrap.sh http://cmsrep.cern.ch/cmssw/bootstrap.sh
-$GET_CMD archs http://cmsrep.cern.ch/cgi-bin/repos/cms
-
 parch=""
 touch $WORKSPACE/res.txt
-for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${HOST_CMS_ARCH}_|;s|<.*||") ; do
+for arch in ${ARCHS} ; do
   export SCRAM_ARCH=$arch
   cd $WORKSPACE/inst
   echo ${SCRAM_ARCH} >> $WORKSPACE/res.txt
