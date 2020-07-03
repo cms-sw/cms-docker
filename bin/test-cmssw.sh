@@ -39,14 +39,15 @@ for arch in ${ARCHS} ; do
   $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ' CMSSW_' >cmssw.rel) || true
   cat cmssw.rel
   cmssw_ver=""
-  for v in $(grep ${RELEASE_INST_DIR}/ cmssw.rel | grep '_[0-9][0-9]*_X_' | awk '{print $3}') ; do
+  boot_repo="cms"
+  for v in $(grep ${RELEASE_INST_DIR}/ cmssw.rel | grep '_[0-9][0-9]*_X_' | awk '{print $3}' | tac) ; do
     if [ -e $v/build-errors ] ; then continue ; fi
     cmssw_ver=$(basename $v)
     boot_repo=cms.$(echo $v | cut -d/ -f4)
+    break
   done
   if [ "${cmssw_ver}" = "" ] ; then
     cmssw_ver=$(grep /cvmfs/cms.cern.ch/ cmssw.rel | tail -1 | awk '{print $2}' || true)
-    boot_repo="cms"
   fi
   if ! sh -ex $WORKSPACE/inst/bootstrap.sh -r ${boot_repo} -a $SCRAM_ARCH setup ; then
     echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
