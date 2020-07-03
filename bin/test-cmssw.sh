@@ -1,7 +1,11 @@
 #!/bin/bash -ex
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
+INVALID_ARCHS='slc7_aarch64_gcc493 slc7_aarch64_gcc530'
+export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
+
 if [ "$WORKSPACE" = "" ] ; then export WORKSPACE=$(/bin/pwd) ; fi
 cd $WORKSPACE
+rm -rf inst; mkdir inst; cd inst
 
 ls /cvmfs/cms-ib.cern.ch >/dev/null 2>&1
 ls /cvmfs/cms.cern.ch >/dev/null 2>&1
@@ -14,14 +18,11 @@ else
 fi
 chmod +x cmsos
 HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
-$GET_CMD bootstrap.sh http://cmsrep.cern.ch/cmssw/bootstrap.sh
+rm -f cmsos
 
-INVALID_ARCHS='slc7_aarch64_gcc493 slc7_aarch64_gcc530'
-export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
-week=week$(ls -d ${RELEASE_INST_DIR}/nweek-* | head -1 | sed 's|.*\(.\)$|\1%2|' | bc)
-rpm_repo="cms.$week"
-rm -rf inst; mkdir inst; cd inst
-$GET_CMD archs http://cmsrep.cern.ch/cgi-bin/repos/${rpm_repo}
+$GET_CMD bootstrap.sh http://cmsrep.cern.ch/cmssw/bootstrap.sh
+$GET_CMD archs http://cmsrep.cern.ch/cgi-bin/repos/cms
+
 parch=""
 touch $WORKSPACE/res.txt
 for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${HOST_CMS_ARCH}_|;s|<.*||") ; do
@@ -39,17 +40,17 @@ for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${H
   touch cmssw.rel
   $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ' CMSSW_' >cmssw.rel) || true
   cat cmssw.rel
-  boot_repo=${rpm_repo}
   cmssw_ver=""
-  for v in $(grep ${RELEASE_INST_DIR}/${week}/ cmssw.rel | grep '_[0-9][0-9]*_X_' | awk '{print $3}') ; do
+  for v in $(grep ${RELEASE_INST_DIR}/ cmssw.rel | grep '_[0-9][0-9]*_X_' | awk '{print $3}') ; do
     if [ -e $v/build-errors ] ; then continue ; fi
     cmssw_ver=$(basename $v)
+    boot_repo=cms.$(echo $v | cut -d/ -f3)
   done
   if [ "${cmssw_ver}" = "" ] ; then
     cmssw_ver=$(grep /cvmfs/cms.cern.ch/ cmssw.rel | tail -1 | awk '{print $2}' || true)
     boot_repo="cms"
   fi
-  if ! sh -ex $WORKSPACE/bootstrap.sh -r ${boot_repo} -a $SCRAM_ARCH setup ; then
+  if ! sh -ex $WORKSPACE/inst/bootstrap.sh -r ${boot_repo} -a $SCRAM_ARCH setup ; then
     echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
     continue
   fi
@@ -90,6 +91,8 @@ for arch in $(grep ">${HOST_CMS_ARCH}_" archs |  sed "s|.*>${HOST_CMS_ARCH}_|${H
   rm -rf $SCRAM_ARCH
 done
 [ "${parch}" != "" ] && rm -rf ${parch}
+cd $WORKSPACE
+rm -rf inst
 cat $WORKSPACE/res.txt
 if [ $(grep '\.ERR$' $WORKSPACE/res.txt | wc -l) -gt 0 ] ; then exit 1 ; fi
 echo "ALL_OK"
