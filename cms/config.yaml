@@ -6,7 +6,7 @@ base:     opensciencegrid/osg-wn
 daily: m$${now.strftime("%Y%m%d")}
 test:
   node:   singularity
-  script: test.sh
+  script: test-cmssw.sh
 variables:
   BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
   EXTRA_PACKAGES: ${packages}
