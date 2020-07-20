@@ -15,6 +15,8 @@ repositories:
     dmwm: admin
   cmsmon-alerts:
     dmwm: admin
+  cmsmon-intelligence:
+    dmwm: admin
   cmssw:
     cmssw: write
   cmsweb:
