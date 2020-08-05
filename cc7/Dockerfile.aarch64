@@ -17,7 +17,7 @@ RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
         perl-Thread-Queue perl-Module-ScanDeps perl-Test-Harness \
         perl-Env perl-Switch perl-ExtUtils-Embed ncurses-libs \
         perl-libs nspr nss nss-util file file-libs readline \
-        zlib popt bzip2 bzip2-libs python-devel java-1.8.0-openjdk \
+        zlib popt bzip2 bzip2-libs python-devel python3-devel java-1.8.0-openjdk \
         readline-devel perl-Switch perl-Storable perl-Env \
         perl-Thread-Queue  tk-devel tcl-devel which \
         file git subversion bc finger zip unzip nano hostname \
