@@ -2,5 +2,5 @@
 #Destination tag: source tag
 
 amd64: amd64-d20200805
-aarch64: aarch64-d20200608
+aarch64: aarch64-d20200805
 ppc64le: ppc64le-d20200805
