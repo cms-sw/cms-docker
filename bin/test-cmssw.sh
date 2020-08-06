@@ -75,8 +75,8 @@ for arch in ${ARCHS} ; do
     cd ${cmssw_ver}
     eval `scram run -sh` >/dev/null 2>&1
     USE_GIT=false
-    if git cms-addpkg FWCore/Version >/dev/null 2>&1 ; then USE_GIT=true ; fi
-    for p in FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ; do
+    #if git cms-addpkg FWCore/Version >/dev/null 2>&1 ; then USE_GIT=true ; fi
+    for p in FWCore/Version FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ; do
       [ -e $CMSSW_RELEASE_BASE/src/$p ] || continue
       if $USE_GIT  ; then
         git cms-addpkg $p
