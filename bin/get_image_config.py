@@ -5,6 +5,7 @@ import sys, re
 from os.path import exists, join, dirname, abspath
 from docker_utils import get_layers
 from datetime import datetime
+import hashlib
 now = datetime.now()
 
 regex_var = re.compile('^(.*?)([$]{1,2})\{([^}]+)\}(.*)$')
@@ -108,10 +109,25 @@ def process_tags(setup, data, images):
       val = get_key(xkey, img_data)
       if val:
         images[-1][xkey.upper()]=val
-
     if ".variables" in data[0]:
       for v in data[0][".variables"]:
         images[-1][v] = get_key(v, img_data)
+    config_dir = get_key('config_dir', img_data)
+    docFile = join(config_dir, images[-1]['DOCKER_FILE'])
+    chkdata = []
+    with open(docFile) as ref:
+        chkdata.append(hashlib.md5(ref.read()).hexdigest())
+    with open(docFile) as ref:
+      for line in ref.readlines():
+          items = [i for i in line.split(" ") if i]
+          if items[0] != "ADD":
+            continue
+          xfile = join(config_dir, items[1])
+          if not exists(xfile):
+            continue
+          with open(xfile) as xref:
+            chkdata.append(hashlib.md5(xref.read()).hexdigest())
+    images[-1]['BUILD_CHECKSUM'] = hashlib.md5("\n".join(chkdata)).hexdigest()
   return
   
 
@@ -137,6 +153,7 @@ def get_docker_images(name, repository='cmssw'):
     except ImportError as e:
       setup = yaml.load(file)
   data = [{}]
+  data[-1]['config_dir'] = dirname(setup_file)
   data[-1]['repository'] = repository
   data[-1]['name'] = name
   data[-1]['container'] = join(repository, name)

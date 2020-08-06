@@ -2,7 +2,7 @@
 from __future__ import print_function
 from argparse import ArgumentParser
 from get_image_config import get_docker_images
-from docker_utils import has_parent_changed
+from docker_utils import has_parent_changed, get_labels
 import glob, os
 from os.path import dirname
 import json
@@ -36,9 +36,13 @@ for reponame in repos:
     if tags and (not img['IMAGE_TAG'] in tags): continue
     buildimg = args.force
     if not buildimg:
-      inher= img['IMAGE_NAME']
+      inher = img['IMAGE_NAME']
       parent = img['BASE_IMAGE_NAME']
       buildimg = has_parent_changed(parent, inher)
+      if not buildimg:
+        labels = get_labels(inher)
+        print (labels)
+        buildimg = ('build-checksum' in labels) and (labels['build-checksum'] != img['BUILD_CHECKSUM'])
       print(inher, parent, buildimg)
     if buildimg:
       create_file(img)

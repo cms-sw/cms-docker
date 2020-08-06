@@ -12,6 +12,7 @@ import yaml
 DOCKER_REGISTRY_API='https://registry-1.docker.io/v2'
 DOCKER_HUB_API='https://hub.docker.com/v2'
 DOCKER_HUB_TOKEN = None
+DOCKER_IMAGE_CACHE = {}
 
 def hub_request(uri, data=None, params=None, headers=None, method='GET', json=False):
   global DOCKER_HUB_TOKEN
@@ -169,6 +170,9 @@ def get_digest_of_image(repo, tag):
   except: return (False, hub_request(uri).text)
 
 def get_manifest(image):
+  global DOCKER_IMAGE_CACHE
+  if image in DOCKER_IMAGE_CACHE:
+    return DOCKER_IMAGE_CACHE[image]
   repo = image.split(":",1)[0]
   if '/' not in repo:
     repo = 'library/'+repo
@@ -179,7 +183,8 @@ def get_manifest(image):
   headers = {}
   headers['Accept'] = 'application/vnd.docker.distribution.manifest.list.v2+json'
   headers['Authorization'] = 'Bearer %s' % token
-  return http_request(url, None, None, headers, json=True)
+  DOCKER_IMAGE_CACHE[image] = http_request(url, None, None, headers, json=True)
+  return DOCKER_IMAGE_CACHE[image]
 
 def get_layers(image, arch=""):
   manifest = get_manifest(image)
@@ -199,6 +204,12 @@ def get_layers(image, arch=""):
       return {'architecture': arch,'fsLayers' : [layer['digest'] for layer in manifest['layers']]}
     except:
       return manifest
+
+def get_labels(image):
+  manifest = get_manifest(image)
+  if ('errors' in manifest) and (manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN'):
+    return {}
+  return loads(manifest['history'][0]['v1Compatibility'])['container_config']['Labels']
 
 def has_parent_changed(parent, image):
   image_manifest = get_layers(image)
