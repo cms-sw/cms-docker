@@ -82,7 +82,7 @@ for arch in ${ARCHS} ; do
         git cms-addpkg $p
       else
         mkdir -p $CMSSW_BASE/src/$p
-        cp -r $CMSSW_RELEASE_BASE/src/$p/* $CMSSW_BASE/src/$p/
+        rsync -a $CMSSW_RELEASE_BASE/src/$p/ $CMSSW_BASE/src/$p/
       fi
     done
     if scram build -j $(nproc) ; then
