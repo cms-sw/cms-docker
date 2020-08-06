@@ -43,6 +43,6 @@ for reponame in repos:
         labels = get_labels(inher)
         print (labels)
         buildimg = ('build-checksum' in labels) and (labels['build-checksum'] != img['BUILD_CHECKSUM'])
-      print(inher, parent, buildimg)
+      print(inher, parent, buildimg, img['BUILD_CHECKSUM'])
     if buildimg:
       create_file(img)
