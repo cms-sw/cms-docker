@@ -2,6 +2,7 @@
 from __future__ import print_function
 from argparse import ArgumentParser
 from docker_utils import get_digest_of_image
+import sys
 
 parser = ArgumentParser(description='')
 parser.add_argument('-r', dest='repository',  type=str, help="Docker container repository e.g. cmssw/cms")
