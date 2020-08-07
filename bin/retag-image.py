@@ -17,6 +17,7 @@ if not src[0]:
   sys.exit(1)
 
 des = get_digest_of_image(args.repository, args.destination)
+print("%s vs %s" % (src[1], des[1]), file=sys.stder)
 if src[1] != des[1]:
   print("SOURCE_IMAGE=%s:%s" % (args.repository, args.source))
   print("DESTINATION_IMAGE=%s:%s" % (args.repository, args.destination)) 
