@@ -93,6 +93,8 @@ repositories:
     dmwm: admin
   reqmon:
     dmwm: admin
+  rucio-consistency:
+    dmwm: admin
   rucio-daemons:
     dmwm: admin
   rucio-probes:
