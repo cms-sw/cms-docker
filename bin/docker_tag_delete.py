@@ -45,12 +45,12 @@ for repo in find_repos():
     print("Wroking on %s/%s" % (repo, image['IMAGE_TAG']))
     ntags = []
     for tag in tags:
-      print ("  Checking %s" % tag)
       ntags.append(tag)
       if tag not in image['IMAGE_TAG']: continue
       delete_pattern = image['DELETE_PATTERN']
       expires_days = int(image['EXPIRES_DAYS'])
       days = date_diff(delete_pattern, tag)
+      print ("  Checking %s (%s)" % (tag, days))
       if not days: continue
       if days > expires_days:
         delete_tag((args.dockerUser + '/' + repo), tag, args.dryRun)
