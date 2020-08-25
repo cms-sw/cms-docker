@@ -120,7 +120,7 @@ def process_tags(setup, data, images):
     with open(docFile) as ref:
       for line in ref.readlines():
           items = [i for i in line.split(" ") if i]
-          if items[0] not in ["ADD", "COPY"]:
+          if (items[0] not in ["ADD", "COPY"]) or (":" in items[1]):
             continue
           xfile = join(config_dir, items[1])
           with open(xfile) as xref:
