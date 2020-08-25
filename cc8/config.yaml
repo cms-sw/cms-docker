@@ -10,10 +10,14 @@ test:
   script: test-cmssw.sh
   node:   singularity
 from: library/centos:8
-tags:
-  amd64-latest:
-    alias: amd64-${daily}
-  aarch64-latest:
-    alias: aarch64-${daily}
-  ppc64le-latest:
-    alias: ppc64le-${daily}
+alias: ${group}-${daily}
+groups:
+  amd64:
+    tags:
+      ${group}-latest:
+  aarch64:
+    tags:
+      ${group}-latest:
+  ppc64le:
+    tags:
+      ${group}-latest:

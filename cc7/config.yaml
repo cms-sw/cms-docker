@@ -9,13 +9,15 @@ daily: d$${now.strftime("%Y%m%d")}
 variables:
   CVMFS_UNPACKED: true
 from: library/centos:7
-tags:
-  amd64-latest:
-    docker: Dockerfile.amd64
-    alias: amd64-${daily}
-  aarch64-latest:
-    docker: Dockerfile.aarch64
-    alias: aarch64-${daily}
-  ppc64le-latest:
-    docker: Dockerfile.ppc64le
-    alias: ppc64le-${daily}
+docker: Dockerfile.${group}
+alias:  ${group}-${daily}
+groups:
+  amd64:
+    tags:
+      ${group}-latest:
+  aarch64:
+    tags:
+      ${group}-latest:
+  ppc64le:
+    tags:
+      ${group}-latest:
