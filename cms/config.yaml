@@ -4,6 +4,8 @@ push:     false
 unpacked: false
 base:     opensciencegrid/osg-wn
 daily: m$${now.strftime("%Y%m%d")}
+delete_pattern: tmp-${tag}-(2[0-9]{7,})
+expires_days: 7
 test:
   node:   singularity
   script: test-cmssw.sh
