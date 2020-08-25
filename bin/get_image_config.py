@@ -115,8 +115,10 @@ def process_tags(setup, data, images):
     config_dir = get_key('config_dir', img_data)
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
     chkdata = []
+    print("tag:",image_name)
     with open(docFile) as ref:
         chkdata.append(hashlib.md5(ref.read()).hexdigest())
+    print("chksum:", docFile, chkdata[-1])
     with open(docFile) as ref:
       for line in ref.readlines():
           items = [i for i in line.split(" ") if i]
@@ -125,6 +127,7 @@ def process_tags(setup, data, images):
           xfile = join(config_dir, items[1])
           with open(xfile) as xref:
             chkdata.append(hashlib.md5(xref.read()).hexdigest())
+          print("chksum:", xfile, chkdata[-1])
     images[-1]['BUILD_CHECKSUM'] = hashlib.md5("\n".join(chkdata)).hexdigest()
   return
   
