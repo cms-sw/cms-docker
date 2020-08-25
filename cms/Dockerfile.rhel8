@@ -25,7 +25,7 @@ LABEL maintainer="CMS Build"
 
 RUN yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client &&\
     yum -y install \
-        mesa-libGL automake bash bzip2 bzip2-libs bzip2-devel coreutils e2fsprogs e2fsprogs-libs \
+        mesa-libGL automake bash bzip2 bzip2-libs bzip2-devel coreutils-single e2fsprogs e2fsprogs-libs \
         file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs libaio \
         libcom_err libgomp libICE libidn \
         libSM libX11 libX11-devel libxcrypt libXcursor libXext \
