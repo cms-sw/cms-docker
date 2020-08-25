@@ -53,6 +53,7 @@ for repo in find_repos():
       print ("  Checking %s (%s)" % (tag, days))
       if not days: continue
       if days > expires_days:
+        print ("  Deleting %s" % tag)
         if not args.dryRun:
             delete_tag((args.dockerUser + '/' + repo), tag)
         ntags.remove(tag)
