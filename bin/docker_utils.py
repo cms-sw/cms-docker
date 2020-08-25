@@ -155,7 +155,6 @@ def get_tags(image, page_size=500):
   return (True, tags)
 
 def delete_tag(repo, tag):
-  print('** Deleting tag: %s from %s repository....'% (tag, repo))
   uri = '/repositories/%s/tags/%s/' % (repo, tag)
   response = hub_request(uri, method = 'DELETE')
   return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
