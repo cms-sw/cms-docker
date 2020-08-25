@@ -26,7 +26,6 @@ RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum install -y voms-clients-cpp krb5-workstation myproxy python2-psutil &&\
     yum clean all
-    
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-3.b12.el7_3.aarch64
 ADD krb5.conf /etc/krb5.conf
