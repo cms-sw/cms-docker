@@ -120,11 +120,9 @@ def process_tags(setup, data, images):
     with open(docFile) as ref:
       for line in ref.readlines():
           items = [i for i in line.split(" ") if i]
-          if items[0] != "ADD":
+          if items[0] not in ["ADD", "COPY"]:
             continue
           xfile = join(config_dir, items[1])
-          if not exists(xfile):
-            continue
           with open(xfile) as xref:
             chkdata.append(hashlib.md5(xref.read()).hexdigest())
     images[-1]['BUILD_CHECKSUM'] = hashlib.md5("\n".join(chkdata)).hexdigest()
