@@ -15,16 +15,17 @@ push: true
 override: true
 alias: ${group}-${daily}
 groups:
-  rhle8:
+  rhel8:
+    docker: Dockerfile.${group}
     tags:
       ${group}-latest:
         from: ${base}:3.5-el8
-  rhle7:
+  rhel7:
     tags:
       ${group}-latest:
         packages: bzip2
         from: ${base}:3.5-el7
-  rhle6:
+  rhel6:
     tags:
       ${group}-latest:
         packages: compat-readline5

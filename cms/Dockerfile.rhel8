@@ -1,0 +1,64 @@
+#Imported from https://hub.docker.com/r/bbockelm/cms/dockerfile
+
+FROM @BASE_IMAGE_NAME@
+
+LABEL name="CMS Worker Node on EL"
+LABEL maintainer="CMS Build"
+
+# Required
+# --------
+# - cmsRun fails without stdint.h (from glibc-headers)
+#   Tested CMSSW_7_4_5_patch1
+#
+# Other
+# -----
+# - ETF calls /usr/bin/lsb_release (from redhat-lsb-core)
+# - sssd-client for LDAP lookups through the host
+# - SAM tests expect cvmfs utilities
+# - gcc is required by GLOW jobs (builds matplotlib)
+#
+# CMSSW dependencies
+# ------------------
+# Required software is listed under cc8_amd64_platformSeeds at
+# http://cmsrep.cern.ch/cgi-bin/cmspkg/driver/cms/cc8_amd64_gcc8
+#
+
+RUN yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client &&\
+    yum -y install \
+        mesa-libGL automake bash bzip2 bzip2-libs bzip2-devel coreutils e2fsprogs e2fsprogs-libs \
+        file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs libaio \
+        libcom_err libgomp libICE libidn \
+        libSM libX11 libX11-devel libxcrypt libXcursor libXext \
+        libXext-devel libXft libXft-devel libXi libXinerama \
+        libXmu libXpm libXpm-devel libXrandr libXrender \
+        libglvnd-opengl mesa-libGL mesa-libGLU mesa-libGLU-devel \
+        java-1.8.0-openjdk-devel libtool m4 make \
+        ncurses ncurses-libs ncurses-devel nspr nss nss-devel nss-util \
+        openssl openssl-devel openssl-libs \
+        perl perl-interpreter perl-libs \
+        perl-Carp perl-CGI perl-constant perl-Data-Dumper perl-DBI \
+        perl-Digest-MD5 perl-Encode perl-Env perl-Exporter perl-ExtUtils-Embed \
+        perl-File-Path perl-File-Temp perl-Getopt-Long perl-IO perl-libnet \
+        perl-Memoize perl-PathTools perl-Scalar-List-Utils perl-Socket perl-Storable \
+        perl-Term-ANSIColor perl-Test-Harness perl-Text-ParseWords perl-Thread-Queue \
+        perl-Time-HiRes perl-Time-Local perl-YAML \
+        patch popt popt-devel python2 readline readline-devel rpm-build \
+        rsync tcl tcsh tk wget which zlib zsh &&\
+    alternatives --set python `which python2` &&\
+    wget -O /etc/yum.repos.d/cernvm.repo http://cvmrepo.web.cern.ch/cvmrepo/yum/cernvm.repo &&\
+    wget -O /etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM http://cvmrepo.web.cern.ch/cvmrepo/yum/RPM-GPG-KEY-CernVM &&\
+    yum -y install cvmfs &&\
+    yum clean all &&\
+    mkdir -p /hdfs \
+             /mnt/hadoop \
+             /hadoop \
+             /cms \
+             /etc/cvmfs/SITECONF \
+             /lfs_roots \
+             /storage \
+             /build &&\
+    echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
+    echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
+
+LABEL build-date="@BUILD_DATE@"
+
