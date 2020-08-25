@@ -42,9 +42,10 @@ for repo in find_repos():
         tags = []
         print('Docker Hub user "%s" does not contain image "%s"'%(args.dockerUser, repo))
         break
-    print("Checking  %s/%s" % (repo, image['IMAGE_TAG']))
+    print("Wroking on %s/%s" % (repo, image['IMAGE_TAG']))
     ntags = []
     for tag in tags:
+      print ("  Checking %s" % tag)
       ntags.append(tag)
       if tag not in image['IMAGE_TAG']: continue
       delete_pattern = image['DELETE_PATTERN']
