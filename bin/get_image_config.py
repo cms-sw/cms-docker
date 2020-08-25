@@ -30,7 +30,7 @@ def pop_info(data, cnt):
 
 def get_key(key, data):
   for item in data[::-1]:
-    if key in item: return item[key]
+    if key in item: return str(item[key])
   return ""
 
 def expand_var(var, data):
@@ -60,7 +60,7 @@ def expand(data):
       if k=='.variables': continue
       v = item[k]
       k = expand_var(k, data)
-      nbuilds[-1][k] = expand_var(v, data)
+      nbuilds[-1][k] = expand_var(str(v), data)
   return nbuilds
 
 def process_tags(setup, data, images):
@@ -133,8 +133,14 @@ def process_tags(setup, data, images):
 
 def process_groups(setup, data, images):
   if 'groups' not in setup: return
+  prev_group = get_key("group", data)
+  gcount = int(get_key("group_count", data)) + 1
   for group in setup['groups']:
     cnt = len(data)
+    data.append({})
+    data[-1]['group'] = "%s%s" % (prev_group, group)
+    data[-1]['group_count'] = gcount
+    data[-1]['group%s' % gcount] = group
     push_info(setup['groups'][group], data)
     process_tags(setup['groups'][group], data, images)
     process_groups(setup['groups'][group], data, images)
@@ -157,6 +163,8 @@ def get_docker_images(name, repository='cmssw'):
   data[-1]['repository'] = repository
   data[-1]['name'] = name
   data[-1]['container'] = join(repository, name)
+  data[-1]['group'] = ""
+  data[-1]['group_count'] = -1
   push_info(setup, data)
   if not 'groups' in setup:
     setup['groups'] = {'default' : {'tags': dict(setup['tags'])}}
