@@ -46,7 +46,7 @@ for repo in find_repos():
     ntags = []
     for tag in tags:
       ntags.append(tag)
-      if tag not in image['IMAGE_TAG']: continue
+      if image['IMAGE_TAG'] not in tag: continue
       delete_pattern = image['DELETE_PATTERN']
       expires_days = int(image['EXPIRES_DAYS'])
       days = date_diff(delete_pattern, tag)
