@@ -18,10 +18,12 @@ if [ ! -f ${DockerFile} ] ; then
     exit 1
   fi
   eval "$RELDATA"
-  BASE_IMG="cmssw/cms:rhel6"
+  BASE_IMG=""
   case $architecture in
     slc6_* ) BASE_IMG="cmssw/cms:rhel6" ;;
     slc7_* ) BASE_IMG="cmssw/cms:rhel7" ;;
+    cc8_* ) BASE_IMG="cmssw/cms:rhel8" ;;
+    * ) echo "Unknown architecture $architecture"; exit 1 ;;
   esac
   cp Dockerfile.tmpl ${DockerFile}
   sed -i -e "s|@BASE_IMAGE_NAME@|${BASE_IMG}|;s|@SCRAM_ARCH@|${architecture}|g;s|@IMAGE_TAG@|$1|g" ${DockerFile}
