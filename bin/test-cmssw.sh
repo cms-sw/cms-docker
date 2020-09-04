@@ -1,6 +1,6 @@
 #!/bin/bash -ex
 CMSREP="cmsrep.cern.ch"
-if [ "$2" != "" ] ; then CMSREP="cmsrep03.cern.ch" ; fi
+if [ "$2" != "" ] ; then CMSREP="$2" ; fi
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
