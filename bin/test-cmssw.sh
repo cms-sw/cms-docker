@@ -1,4 +1,5 @@
 #!/bin/bash -ex
+CMSREP="cmsrep03.cern.ch"
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
@@ -13,10 +14,10 @@ ls /cvmfs/cms.cern.ch >/dev/null 2>&1
 
 GET_CMD="curl -s -k -L -o"
 if wget --help >/dev/null 2>&1 ; then GET_CMD="wget -q -O" ; fi
-$GET_CMD bootstrap.sh http://cmsrep.cern.ch/cmssw/bootstrap.sh
+$GET_CMD bootstrap.sh http://${CMSREP}/cmssw/bootstrap.sh
 
 if [ "${ARCHS}" = "" ] ; then
-  $GET_CMD archs http://cmsrep.cern.ch/cgi-bin/repos/cms
+  $GET_CMD archs http://${CMSREP}/cgi-bin/repos/cms
   $GET_CMD cmsos https://raw.githubusercontent.com/cms-sw/cms-common/master/common/cmsos
   chmod +x cmsos
   HOST_CMS_ARCH=$(./cmsos 2>/dev/null)
@@ -52,7 +53,7 @@ for arch in ${ARCHS} ; do
   if [ "${cmssw_ver}" = "" ] ; then
     cmssw_ver=$(grep /cvmfs/cms.cern.ch/ cmssw.rel | tail -1 | awk '{print $2}' || true)
   fi
-  if ! sh -ex $WORKSPACE/inst/bootstrap.sh -r ${boot_repo} -a $SCRAM_ARCH setup ; then
+  if ! sh -ex $WORKSPACE/inst/bootstrap.sh -server ${CMSREP} -r ${boot_repo} -a $SCRAM_ARCH setup ; then
     echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
     continue
   fi
