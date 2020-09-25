@@ -1,6 +1,6 @@
 #CMS tags mapping. Format
 #Destination tag: source tag
 
-amd64: amd64-d20200811
-aarch64: aarch64-d20200811
-ppc64le: ppc64le-d20200811
+amd64: amd64-latest
+aarch64: aarch64-latest
+ppc64le: ppc64le-latest
