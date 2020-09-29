@@ -149,7 +149,6 @@ repositories:
     dmwm: admin
 teams:
   cmssw:
-  - tulamor
   - cmsuser
   - smuzaffar
   dmwm:
