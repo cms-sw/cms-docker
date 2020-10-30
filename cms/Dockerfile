@@ -28,7 +28,7 @@ LABEL maintainer="CMS Build"
 # - 01 Jun 2020: Force update osg-ca-certs
 # - 15 Jun 2020: Remove osg-ca-certs, base-image shoudl provide the updated certs
 #                Reduce image layers by running only single command.
-# - 30 Oct 2020: Added python3 needed by new SCRAM V3
+# - 30 Oct 2020: Added python3 (via config.yaml) needed by new SCRAM V3
 
 RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-client && \
     yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl ncurses e2fsprogs \
@@ -39,7 +39,7 @@ RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-
                    perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path perl-File-Temp perl-Getopt-Long \
                    perl-Socket perl-Text-ParseWords perl-Time-Local libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel \
                    perl-Switch perl-Storable perl-Env perl-Thread-Queue perl-Encode nspr nss nss-util file file-libs readline \
-                   zlib popt bzip2 bzip2-libs libaio rsync python3 @EXTRA_PACKAGES@ && \
+                   zlib popt bzip2 bzip2-libs libaio rsync @EXTRA_PACKAGES@ && \
     yum clean all &&\
     mkdir -p /hdfs \
              /mnt/hadoop \
