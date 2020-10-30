@@ -23,11 +23,11 @@ groups:
   rhel7:
     tags:
       ${group}-latest:
-        packages: bzip2
+        packages: python3
         from: ${base}:3.5-el7
   rhel6:
     tags:
       ${group}-latest:
-        packages: compat-readline5
+        packages: compat-readline5 python34
         from: ${base}:3.4-el6
 
