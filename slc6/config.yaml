@@ -6,7 +6,7 @@ test:
 delete_pattern: tmp-${tag}-(2[0-9]{7,})
 expires_days: 7
 daily: d$${now.strftime("%Y%m%d")}
-from: centos:centos6
+from: library/centos:centos6
 docker: Dockerfile
 alias:  ${group}-${daily}
 groups:
