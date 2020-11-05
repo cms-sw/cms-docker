@@ -1,0 +1,5 @@
+#CMS tags mapping. Format
+#Destination tag: source tag
+
+amd64: amd64-latest
+latest: amd64-latest
