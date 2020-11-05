@@ -1,0 +1,15 @@
+override: true
+push:     true
+test:
+  script: test-cmssw.sh
+  node:   singularity
+delete_pattern: tmp-${tag}-(2[0-9]{7,})
+expires_days: 7
+daily: d$${now.strftime("%Y%m%d")}
+from: centos:centos6
+docker: Dockerfile
+alias:  ${group}-${daily}
+groups:
+  amd64:
+    tags:
+      ${group}-latest:
