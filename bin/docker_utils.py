@@ -221,8 +221,9 @@ def has_parent_changed(parent, image):
       raise Exception(image_manifest)
   parent_layers = get_layers(parent, image_manifest['architecture'])['fsLayers']
   image_layers = image_manifest['fsLayers']
-  while image_layers[-1]==image_layers[0]:
-    image_layers.pop()
+  lab_layer = image_layers[0]
+  image_layers = [l for l in image_layers if l!=lab_layer]
+  parent_layers = [l for l in parent_layers if l!=lab_layer]
   print("Layers: %s\n  %s" % (parent,"\n  ".join(parent_layers)))
   print("Layers: %s\n  %s" % (image ,"\n  ".join(image_layers)))
   while parent_layers and image_layers:
