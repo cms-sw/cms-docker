@@ -1,4 +1,4 @@
-FROM @BASE_IMAGE_NAME@
+FROM library/centos:7
 
 ADD http://linux.web.cern.ch/linux/centos7/CentOS-CERN.repo           /etc/yum.repos.d/CentOS-CERN.repo
 ADD http://linuxsoft.cern.ch/cern/centos/7/os/x86_64/RPM-GPG-KEY-cern /etc/pki/rpm-gpg/RPM-GPG-KEY-cern
@@ -18,5 +18,7 @@ RUN yum install -y yum-plugin-ovl git-core openssl glibc-devel \
 ADD krb5.conf /etc/krb5.conf
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build &&\
     touch /etc/tnsnames.ora
+ADD psutil.patch /tmp/psutil.patch
+RUN patch -p0 < /tmp/psutil.patch
 WORKDIR /build
 

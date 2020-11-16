@@ -1,0 +1,18 @@
+--- /usr/lib64/python2.7/site-packages/psutil/__init__.py	2019-11-26 07:25:07.000000000 +0000
++++ /usr/lib64/python2.7/site-packages/psutil/__init__.py	2020-11-16 12:45:47.145679790 +0000
+@@ -992,15 +992,6 @@
+         If *recursive* is True return all the parent descendants.
+ 
+         Example (A == this process):
+-
+-         A ─┐
+-            │
+-            ├─ B (child) ─┐
+-            │             └─ X (grandchild) ─┐
+-            │                                └─ Y (great grandchild)
+-            ├─ C (child)
+-            └─ D (child)
+-
+         >>> import psutil
+         >>> p = psutil.Process()
+         >>> p.children()
