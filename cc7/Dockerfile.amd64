@@ -1,4 +1,4 @@
-FROM library/centos:7
+FROM @BASE_IMAGE_NAME@
 
 ADD http://linux.web.cern.ch/linux/centos7/CentOS-CERN.repo           /etc/yum.repos.d/CentOS-CERN.repo
 ADD http://linuxsoft.cern.ch/cern/centos/7/os/x86_64/RPM-GPG-KEY-cern /etc/pki/rpm-gpg/RPM-GPG-KEY-cern
