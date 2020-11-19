@@ -22,7 +22,7 @@ RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
         perl-Thread-Queue  tk-devel tcl-devel which \
         file git subversion bc finger zip unzip nano hostname \
         perl-LWP-Protocol-https vim wget screen time \
-        popt-devel bzip2-devel nspr-devel nss-devel file-devel \
+        popt-devel bzip2-devel nspr-devel nss-devel file-devel rpm-build \
         java-1.8.0-openjdk java-1.8.0-openjdk-devel python-requests-kerberos && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum install -y voms-clients-cpp krb5-workstation myproxy python2-psutil &&\
