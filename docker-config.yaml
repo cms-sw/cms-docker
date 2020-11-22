@@ -83,6 +83,8 @@ repositories:
     cmssw: write
   phedex:
     dmwm: admin
+  promxy:
+    dmwm: admin
   proxy:
     dmwm: admin
   reqmgr:
