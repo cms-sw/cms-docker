@@ -111,6 +111,8 @@ repositories:
     dmwm: admin
   rucio-ui:
     dmwm: admin
+  rumble:
+    dmwm: admin
   sitedb:
     dmwm: admin
   slc5:
