@@ -73,6 +73,8 @@ repositories:
     dmwm: admin
   karma:
     dmwm: admin
+  imagebot:
+    dmwm: admin
   log-clustering:
     dmwm: admin
   monitor:
