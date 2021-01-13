@@ -79,6 +79,8 @@ repositories:
     dmwm: admin
   monitor:
     dmwm: admin
+  ms-output-mongo:
+    dmwm: admin
   nats-sub:
     dmwm: admin
   parfullcms:
@@ -167,6 +169,7 @@ teams:
   - sbelforte
   - ddaina
   - panos512
+  - goughes
   owners:
   - cmsblddoc
   - smuzaffar
