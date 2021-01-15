@@ -87,7 +87,7 @@ for arch in ${ARCHS} ; do
         rsync -a $CMSSW_RELEASE_BASE/src/$p/ $CMSSW_BASE/src/$p/
       fi
     done
-    if scram build -v -j $(nproc) ; then
+    if scram build -j $(nproc) ; then
       echo ${SCRAM_ARCH}.${cmssw_ver}.OK >> $WORKSPACE/res.txt
     else
       echo ${SCRAM_ARCH}.${cmssw_ver}.ERR >> $WORKSPACE/res.txt
