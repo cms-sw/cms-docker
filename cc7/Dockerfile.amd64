@@ -12,7 +12,7 @@ RUN yum install -y yum-plugin-ovl git-core openssl glibc-devel \
         java-1.8.0-openjdk java-1.8.0-openjdk-devel popt libXcursor libXrandr libXinerama nspr nss nss-util file file-libs \
         readline popt bzip2 bzip2-libs python-requests-kerberos libgfortran time python3 && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation myproxy python2-psutil python2-pip python3-pip &&\
+    yum install -y voms-clients-cpp krb5-workstation myproxy python2-psutil python2-pip python3-pip singularity &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
