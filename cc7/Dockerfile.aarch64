@@ -24,7 +24,7 @@ RUN yum install -y glibc coreutils bash tcsh zsh perl tcl tk readline \
         perl-LWP-Protocol-https vim wget screen time \
         java-1.8.0-openjdk java-1.8.0-openjdk-devel python-requests-kerberos && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation myproxy python2-psutil &&\
+    yum install -y voms-clients-cpp krb5-workstation myproxy python2-psutil singularity &&\
     yum clean all
 
 ENV JAVA_HOME /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.131-3.b12.el7_3.aarch64
@@ -33,6 +33,6 @@ ADD cern-ca-bundle.crt /tmp/cern-ca-bundle.crt
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build &&\
     touch /etc/tnsnames.ora &&\
     cat /tmp/cern-ca-bundle.crt >> /etc/pki/tls/certs/ca-bundle.crt &&\
-    rm -f /tmp/cern-ca-bundle.crt
+    rm -f /tmp/cern-ca-bundle.crt &&\
+    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
 WORKDIR /build
-

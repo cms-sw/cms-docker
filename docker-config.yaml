@@ -73,9 +73,13 @@ repositories:
     dmwm: admin
   karma:
     dmwm: admin
+  imagebot:
+    dmwm: admin
   log-clustering:
     dmwm: admin
   monitor:
+    dmwm: admin
+  ms-output-mongo:
     dmwm: admin
   nats-sub:
     dmwm: admin
@@ -166,6 +170,8 @@ teams:
   - ddaina
   - panos512
   - dmwmbot
+  - goughes
+  - amaltaro
   owners:
   - cmsblddoc
   - smuzaffar

@@ -14,7 +14,7 @@ RUN yum install -y \
         ncurses-libs perl-libs file wget perl-LWP-Protocol-https python-setuptools \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python3 &&\
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil &&\
+    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil singularity &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
@@ -22,5 +22,6 @@ ADD cern-ca-bundle.crt /tmp/cern-ca-bundle.crt
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build &&\
     touch /etc/tnsnames.ora &&\
     cat /tmp/cern-ca-bundle.crt >> /etc/pki/tls/certs/ca-bundle.crt &&\
-    rm -f /tmp/cern-ca-bundle.crt
+    rm -f /tmp/cern-ca-bundle.crt &&\
+    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
 WORKDIR /build
