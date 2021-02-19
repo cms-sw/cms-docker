@@ -27,6 +27,8 @@ repositories:
     dmwm: admin
   cmsweb-base-db:
     dmwm: admin
+  cmsweb-monit:
+    dmwm: admin
   confdb:
     dmwm: admin
   couchdb:
