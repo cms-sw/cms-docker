@@ -117,6 +117,8 @@ repositories:
     dmwm: admin
   rucio_client:
     dmwm: admin
+  rucio-tracer:
+    dmwm: admin
   rucio_dev_env:
     dmwm: admin
   rucio-ui:
