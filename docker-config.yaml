@@ -83,6 +83,8 @@ repositories:
     dmwm: admin
   log-clustering:
     dmwm: admin
+  loki:
+    dmwm: admin
   monitor:
     dmwm: admin
   ms-output-mongo:
@@ -92,6 +94,8 @@ repositories:
   parfullcms:
     cmssw: write
   phedex:
+    dmwm: admin
+  promtail:
     dmwm: admin
   promxy:
     dmwm: admin
