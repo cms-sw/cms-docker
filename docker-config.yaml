@@ -115,6 +115,8 @@ repositories:
     dmwm: admin
   rucio-sync:
     dmwm: admin
+  rucio-tracers:
+    dmwm: admin
   rucio_client:
     dmwm: admin
   rucio-tracer:
