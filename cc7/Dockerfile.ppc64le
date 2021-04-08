@@ -3,7 +3,8 @@ FROM @BASE_IMAGE_NAME@
 RUN yum install -y \
         java-1.8.0-openjdk python-devel java-1.8.0-openjdk-devel ntp \
         git subversion bc finger zip unzip which bzip2 \
-        glibc coreutils bash tcsh zsh perl tcl tk readline readline-devel openssl ncurses e2fsprogs krb5-libs freetype fontconfig \
+        openssl openssl-devel openssl-libs \
+        glibc coreutils bash tcsh zsh perl tcl tk readline readline-devel ncurses e2fsprogs krb5-libs freetype fontconfig \
         libstdc++ libidn libX11 libXmu libSM libICE libXcursor libXext libXrandr libXft mesa-libGLU mesa-libGL \
         e2fsprogs-libs libXi libXinerama libXrender libXpm gcc-c++ libcom_err libXpm-devel libXft-devel libX11-devel \
         libXext-devel mesa-libGLU mesa-libGLU-devel libGLEW glew perl-Digest-MD5 perl-ExtUtils-MakeMaker patch \
