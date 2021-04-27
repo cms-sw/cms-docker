@@ -29,9 +29,10 @@ LABEL maintainer="CMS Build"
 # - 15 Jun 2020: Remove osg-ca-certs, base-image shoudl provide the updated certs
 #                Reduce image layers by running only single command.
 # - 30 Oct 2020: Added python3 (via config.yaml) needed by new SCRAM V3
+# - 27 Apr 2021: Added openssl-devel openssl-libs as cmssw is dropping it for CMSSW 12.0.X
 
 RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-client && \
-    yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl ncurses e2fsprogs \
+    yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl openssl-devel openssl-libs ncurses e2fsprogs \
                    krb5-libs freetype ncurses-libs perl-libs perl-ExtUtils-Embed \
                    fontconfig compat-libstdc++-33 libidn libX11 libXmu libSM libICE libXcursor \
                    libXext libXrandr libXft mesa-libGLU mesa-libGL e2fsprogs-libs libXi libXinerama libXft-devel \
