@@ -30,6 +30,7 @@ LABEL maintainer="CMS Build"
 #                Reduce image layers by running only single command.
 # - 30 Oct 2020: Added python3 (via config.yaml) needed by new SCRAM V3
 # - 27 Apr 2021: Added openssl-devel openssl-libs as cmssw is dropping it for CMSSW 12.0.X
+# - 28 Apr 2021: Cleanup config.yaml, use separate DockerFile for each rhelX
 
 RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-client && \
     yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl openssl-devel openssl-libs ncurses e2fsprogs \
@@ -40,7 +41,7 @@ RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-
                    perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path perl-File-Temp perl-Getopt-Long \
                    perl-Socket perl-Text-ParseWords perl-Time-Local libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel \
                    perl-Switch perl-Storable perl-Env perl-Thread-Queue perl-Encode nspr nss nss-util file file-libs readline \
-                   zlib popt bzip2 bzip2-libs libaio rsync @EXTRA_PACKAGES@ && \
+                   zlib popt bzip2 bzip2-libs libaio rsync python3 && \
     yum clean all &&\
     mkdir -p /hdfs \
              /mnt/hadoop \

@@ -1,0 +1,60 @@
+#Imported from https://hub.docker.com/r/bbockelm/cms/dockerfile
+
+FROM @BASE_IMAGE_NAME@
+
+LABEL name="CMS Worker Node on EL"
+LABEL maintainer="CMS Build"
+
+# Required
+# --------
+# - cmsRun fails without stdint.h (from glibc-headers)
+#   Tested CMSSW_7_4_5_patch1
+#
+# Other
+# -----
+# - ETF calls /usr/bin/lsb_release (from redhat-lsb-core)
+# - sssd-client for LDAP lookups through the host
+# - SAM tests expect cvmfs utilities
+# - gcc is required by GLOW jobs (builds matplotlib)
+#
+# CMSSW dependencies
+# ------------------
+# Required software is listed under slc7_amd64_platformSeeds at
+# http://cmsrep.cern.ch/cgi-bin/cmspkg/driver/cms/slc7_amd64_gcc820
+#
+# - 7 Feb 2018: libaio was added to enable the Oracle client, needed for T0 jobs.
+# - 14 Dec 2018: Rsync added, needed by cms bootstrap.sh
+# - 17 Dec 2018: Create /build for testings cms-bot jobs
+# - 01 Jun 2020: Force update osg-ca-certs
+# - 15 Jun 2020: Remove osg-ca-certs, base-image shoudl provide the updated certs
+#                Reduce image layers by running only single command.
+# - 30 Oct 2020: Added python3 (via config.yaml) needed by new SCRAM V3
+# - 28 Apr 2021: Cleanup config.yaml, use separate DockerFile for each rhelX
+#                Use vault.centos.org repo instead of mirror.centos.org
+#                Cleanup packages perl-* which are not available in centos6 repo
+
+RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|^#baseurl=|baseurl=|' /etc/yum.repos.d/CentOS-Base.repo && \
+    sed -i -e 's|/mirror.centos.org/|/vault.centos.org/|' /etc/yum.repos.d/CentOS-Base.repo && \
+    yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-client && \
+    yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl ncurses e2fsprogs \
+                   krb5-libs freetype ncurses-libs perl-libs perl-ExtUtils-Embed \
+                   fontconfig compat-libstdc++-33 libidn libX11 libXmu libSM libICE libXcursor \
+                   libXext libXrandr libXft mesa-libGLU mesa-libGL e2fsprogs-libs libXi libXinerama libXft-devel \
+                   libXrender libXpm libcom_err perl-Test-Harness perl-File-Temp \
+                   libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel \
+                   nspr nss nss-util file file-libs readline \
+                   zlib popt bzip2 bzip2-libs libaio rsync compat-readline5 python34 && \
+    yum clean all &&\
+    mkdir -p /hdfs \
+             /mnt/hadoop \
+             /hadoop \
+             /cms \
+             /etc/cvmfs/SITECONF \
+             /lfs_roots \
+             /storage \
+             /build &&\
+    echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
+    echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
+
+LABEL build-date="@BUILD_DATE@"
+
