@@ -21,6 +21,8 @@ repositories:
     cmssw: write
   check-metric:
     dmwm: admin
+  cmskv:
+    dmwm: admin
   cmsweb:
     dmwm: admin
   cmsweb-base:
