@@ -21,6 +21,8 @@ repositories:
     cmssw: write
   check-metric:
     dmwm: admin
+  cms-htcondor-es:
+    dmwm: admin
   cmskv:
     dmwm: admin
   cmsweb:
