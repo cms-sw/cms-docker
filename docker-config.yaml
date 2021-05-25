@@ -173,6 +173,8 @@ repositories:
     dmwm: write
   udp-server:
     dmwm: admin
+  vmbackup-utility:
+    dmwm: admin
   wmarchive:
     dmwm: admin
 teams:
