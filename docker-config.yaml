@@ -79,6 +79,8 @@ repositories:
     dmwm: admin
   http-exporter:
     dmwm: admin
+  k8snodemon:
+    dmwm: admin
   karma:
     dmwm: admin
   kerberos:
