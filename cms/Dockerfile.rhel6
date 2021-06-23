@@ -32,6 +32,7 @@ LABEL maintainer="CMS Build"
 # - 28 Apr 2021: Cleanup config.yaml, use separate DockerFile for each rhelX
 #                Use vault.centos.org repo instead of mirror.centos.org
 #                Cleanup packages perl-* which are not available in centos6 repo
+# - 23 Jun 2021: Added  osg-wn-client-setup.sh script
 
 RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|^#baseurl=|baseurl=|' /etc/yum.repos.d/CentOS-Base.repo && \
     sed -i -e 's|/mirror.centos.org/|/vault.centos.org/|' /etc/yum.repos.d/CentOS-Base.repo && \
@@ -52,9 +53,10 @@ RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|^#baseurl=|baseurl=|' /etc/yum.rep
              /etc/cvmfs/SITECONF \
              /lfs_roots \
              /storage \
-             /build &&\
+             /build \
+             /.singularity.d/env &&\
     echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
-
+ADD osg-wn-client-setup.sh /.singularity.d/env/99-osg-wn-client-setup.sh
 LABEL build-date="@BUILD_DATE@"
 
