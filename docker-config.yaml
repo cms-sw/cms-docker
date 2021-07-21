@@ -113,6 +113,8 @@ repositories:
     dmwm: admin
   reqmgr2ms:
     dmwm: admin
+  reqmgr2ms-unmerged:
+    dmwm: admin
   reqmon:
     dmwm: admin
   rucio-consistency:
