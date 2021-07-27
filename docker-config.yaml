@@ -107,6 +107,8 @@ repositories:
     dmwm: admin
   proxy:
     dmwm: admin
+  proxy-ms-unmerged:
+    dmwm: admin
   reqmgr:
     dmwm: admin
   reqmgr2:
