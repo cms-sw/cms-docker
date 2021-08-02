@@ -55,6 +55,8 @@ repositories:
     dmwm: admin
   dbs2go:
     dmwm: admin
+  dbsproxy:
+    dmwm: admin
   dbsmigration:
     dmwm: admin
   dmwmmon:
