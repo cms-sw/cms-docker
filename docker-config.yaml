@@ -71,6 +71,8 @@ repositories:
     dmwm: admin
   frontend:
     dmwm: admin
+  filebeat:
+    dmwm: admin
   htdocs:
     dmwm: admin
   httpgo:
