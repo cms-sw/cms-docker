@@ -99,6 +99,8 @@ repositories:
     dmwm: admin
   nats-sub:
     dmwm: admin
+  oracle:
+    dmwm: admin
   parfullcms:
     cmssw: write
   phedex:
