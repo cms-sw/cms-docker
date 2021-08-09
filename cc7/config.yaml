@@ -16,7 +16,7 @@ groups:
     tags:
       ${group}-latest:
       ${group}-bootstrap:
-        docker: Dockerfile.bootstrap.${group}
+        docker: Dockerfile.bootstrap
         from: cmssw/cc7:${group}
   aarch64:
     tags:
