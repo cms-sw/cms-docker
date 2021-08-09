@@ -8,31 +8,34 @@ expires_days: 7
 daily: d$${now.strftime("%Y%m%d")}
 variables:
   CVMFS_UNPACKED: true
-from: library/centos:7
-docker: Dockerfile.${group}
-alias:  ${group}-${daily}
 groups:
-  amd64:
-    tags:
-      ${group}-latest:
-      ${group}-bootstrap:
-        docker: Dockerfile.bootstrap
-        from: cmssw/cc7:${group}
-        variables:
-          SKIP_TESTS: true
-  aarch64:
-    tags:
-      ${group}-latest:
-      ${group}-bootstrap:
-        docker: Dockerfile.bootstrap
-        from: cmssw/cc7:${group}
-        variables:
-          SKIP_TESTS: true
-  ppc64le:
-    tags:
-      ${group}-latest:
-      ${group}-bootstrap:
-        docker: Dockerfile.bootstrap
-        from: cmssw/cc7:${group}
-        variables:
-          SKIP_TESTS: true
+  bootstrap:
+    alias: ${group}-${daily}
+    docker: Dockerfile.${group0}
+    from: cmssw/cc7:${group1}
+    variables:
+      SKIP_TESTS: true
+    groups:
+      amd64:
+        tags:
+          ${group1}-${group0}:
+      aarch64:
+        tags:
+          ${group1}-${group0}:
+      ppc64le:
+        tags:
+          ${group1}-${group0}:
+  latest:
+    alias: ${group1}-${daily}
+    docker: Dockerfile.${group1}
+    from: library/centos:7
+    groups:
+      amd64:
+        tags:
+          ${group1}-${group0}:
+      aarch64:
+        tags:
+          ${group1}-${group0}:
+      ppc64le:
+        tags:
+          ${group1}-${group0}:

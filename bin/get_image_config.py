@@ -139,7 +139,10 @@ def process_groups(setup, data, images):
   for group in setup['groups']:
     cnt = len(data)
     data.append({})
-    data[-1]['group'] = "%s%s" % (prev_group, group)
+    if prev_group == "":
+      data[-1]['group'] = group
+    else:
+      data[-1]['group'] = "%s-%s" % (prev_group, group)
     data[-1]['group_count'] = gcount
     data[-1]['group%s' % gcount] = group
     push_info(setup['groups'][group], data)
