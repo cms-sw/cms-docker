@@ -1,4 +1,4 @@
 FROM @BASE_IMAGE_NAME@
 RUN yum install -y bzip2-devel file popt-devel nspr-devel nss-devel \
-        rpm-build autoconf automake libtool gettext-devel && \
+        rpm-build autoconf automake libtool gettext-devel elfutils-devel && \
     yum clean all
