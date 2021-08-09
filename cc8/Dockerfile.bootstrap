@@ -1,0 +1,7 @@
+FROM @BASE_IMAGE_NAME@
+RUN yum install -y bzip2-devel file-devel popt-devel nspr-devel nss-devel \
+        rpm-build autoconf automake libtool gettext-devel \
+        centos-release-scl &&\
+    yum install -y devtoolset-8-gcc devtoolset-8-gcc-c++ &&\
+    yum clean all &&\
+    scl enable devtoolset-8 -- bash

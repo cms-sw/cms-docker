@@ -3,16 +3,16 @@ push:     true
 test:
   script: test-cmssw.sh
   node:   singularity
-delete_pattern: tmp-${tag}-(2[0-9]{7,})
+delete_pattern: tmp-${group1}.*-(2[0-9]{7,})
 expires_days: 7
 daily: d$${now.strftime("%Y%m%d")}
 variables:
   CVMFS_UNPACKED: true
 groups:
   bootstrap:
-    alias: ${group}-${daily}
+    alias: ${tag}-${daily}
     docker: Dockerfile.${group0}
-    from: cmssw/cc7:${group1}
+    from: ${container}:${group1}
     variables:
       SKIP_TESTS: true
     groups:

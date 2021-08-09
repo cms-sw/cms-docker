@@ -1,7 +1,6 @@
-docker: Dockerfile
 push:   true
 override: true
-delete_pattern: tmp-${tag}-(2[0-9]{7,})
+delete_pattern: tmp-${group1}.*-(2[0-9]{7,})
 expires_days: 7
 daily: d$${now.strftime("%Y%m%d")}
 variables:
@@ -9,15 +8,34 @@ variables:
 test:
   script: test-cmssw.sh
   node:   singularity
-from: library/centos:8
-alias: ${group}-${daily}
 groups:
-  amd64:
-    tags:
-      ${group}-latest:
-  aarch64:
-    tags:
-      ${group}-latest:
-  ppc64le:
-    tags:
-      ${group}-latest:
+  bootstrap:
+    alias: ${tag}-${daily}
+    docker: Dockerfile.${group0}
+    from: ${container}:${group1}
+    variables:
+      SKIP_TESTS: true
+    groups:
+      amd64:
+        tags:
+          ${group1}-${group0}:
+      aarch64:
+        tags:
+          ${group1}-${group0}:
+      ppc64le:
+        tags:
+          ${group1}-${group0}:
+  latest:
+    alias: ${group1}-${daily}
+    docker: Dockerfile
+    from: library/centos:8
+    groups:
+      amd64:
+        tags:
+          ${group1}-${group0}:
+      aarch64:
+        tags:
+          ${group1}-${group0}:
+      ppc64le:
+        tags:
+          ${group1}-${group0}:
