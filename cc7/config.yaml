@@ -18,15 +18,21 @@ groups:
       ${group}-bootstrap:
         docker: Dockerfile.bootstrap
         from: cmssw/cc7:${group}
+        variables:
+          SKIP_TESTS: true
   aarch64:
     tags:
       ${group}-latest:
       ${group}-bootstrap:
         docker: Dockerfile.bootstrap
         from: cmssw/cc7:${group}
+        variables:
+          SKIP_TESTS: true
   ppc64le:
     tags:
       ${group}-latest:
       ${group}-bootstrap:
         docker: Dockerfile.bootstrap
         from: cmssw/cc7:${group}
+        variables:
+          SKIP_TESTS: true
