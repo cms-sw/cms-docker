@@ -15,9 +15,18 @@ groups:
   amd64:
     tags:
       ${group}-latest:
+      ${group}-bootstrap:
+        docker: Dockerfile.bootstrap.${group}
+        from: cmssw/cc7:${group}
   aarch64:
     tags:
       ${group}-latest:
+      ${group}-bootstrap:
+        docker: Dockerfile.bootstrap
+        from: cmssw/cc7:${group}
   ppc64le:
     tags:
       ${group}-latest:
+      ${group}-bootstrap:
+        docker: Dockerfile.bootstrap
+        from: cmssw/cc7:${group}
