@@ -33,9 +33,11 @@ LABEL maintainer="CMS Build"
 #                Use vault.centos.org repo instead of mirror.centos.org
 #                Cleanup packages perl-* which are not available in centos6 repo
 # - 23 Jun 2021: Added  osg-wn-client-setup.sh script
+# - 20 Aug 2021: disable osg-* repos, see https://github.com/opensciencegrid/docker-osg-wn/issues/5
 
 RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|^#baseurl=|baseurl=|' /etc/yum.repos.d/CentOS-Base.repo && \
     sed -i -e 's|/mirror.centos.org/|/vault.centos.org/|' /etc/yum.repos.d/CentOS-Base.repo && \
+    for r in /etc/yum.repos.d/osg-*.repo ; do mv $r $r.old ; done &&\
     yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-client && \
     yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl ncurses e2fsprogs \
                    krb5-libs freetype ncurses-libs perl-libs perl-ExtUtils-Embed \
