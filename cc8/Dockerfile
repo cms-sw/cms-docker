@@ -34,3 +34,7 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool 
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
 WORKDIR /build
+RUN yum install -y dnf-plugins-core && \
+    yum config-manager --set-enabled powertools && \
+    dnf -y install doxygen &&\
+    yum clean all
