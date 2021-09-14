@@ -22,6 +22,8 @@ LABEL maintainer="CMS Build"
 # Required software is listed under cc8_amd64_platformSeeds at
 # http://cmsrep.cern.ch/cgi-bin/cmspkg/driver/cms/cc8_amd64_gcc8
 #
+# - 09 Jun 2021: Added  osg-wn-client-setup.sh script
+# - 14 Sep 2021: Force update igtf-ca-certs
 
 RUN yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client &&\
     yum -y install \
@@ -60,5 +62,6 @@ RUN yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client
     echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
 
+ADD osg-wn-client-setup.sh /.singularity.d/env/99-osg-wn-client-setup.sh
+RUN yum update -y igtf-ca-certs && yum clean all
 LABEL build-date="@BUILD_DATE@"
-
