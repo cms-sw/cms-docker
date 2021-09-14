@@ -32,6 +32,7 @@ LABEL maintainer="CMS Build"
 # - 27 Apr 2021: Added openssl-devel openssl-libs as cmssw is dropping it for CMSSW 12.0.X
 # - 28 Apr 2021: Cleanup config.yaml, use separate DockerFile for each rhelX
 # - 09 Jun 2021: Added  osg-wn-client-setup.sh script
+# - 14 Sep 2021: Force update osg-ca-certs
 
 RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-client && \
     yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl openssl-devel openssl-libs ncurses e2fsprogs \
@@ -58,5 +59,6 @@ RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
 
 ADD osg-wn-client-setup.sh /.singularity.d/env/99-osg-wn-client-setup.sh
+RUN yum update -y osg-ca-certs && yum clean all
 LABEL build-date="@BUILD_DATE@"
 
