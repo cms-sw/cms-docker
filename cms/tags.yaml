@@ -5,5 +5,5 @@ rhel6-itb: rhel6-m20210820
 rhel7-itb: rhel7-m20210914
 rhel8-itb: rhel8-m20210227
 rhel6: rhel6-m20210820
-rhel7: rhel7-m20210818
+rhel7: rhel7-m20210914
 rhel8: rhel8-m20210227
