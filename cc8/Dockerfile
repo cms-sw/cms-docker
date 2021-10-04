@@ -21,9 +21,13 @@ RUN yum install -y \
     rsync tcl tcsh time tk wget which zlib zsh \
     bc strace tar zip unzip hostname nano libnsl && \
     alternatives --set python `which python2` && \
-    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm && \
+    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm &&\
     yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy singularity \
-    python2-requests python3-requests &&\
+        python2-requests python3-requests &&\
+    yum update -y ca-certificates &&\
+    yum install -y dnf-plugins-core &&\
+    yum config-manager --set-enabled powertools &&\
+    dnf -y install doxygen &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
@@ -34,7 +38,3 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool 
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
 WORKDIR /build
-RUN yum install -y dnf-plugins-core && \
-    yum config-manager --set-enabled powertools && \
-    dnf -y install doxygen &&\
-    yum clean all
