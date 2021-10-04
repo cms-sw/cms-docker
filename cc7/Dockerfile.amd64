@@ -23,4 +23,4 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build 
     patch -p0 < /tmp/psutil.patch &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
 WORKDIR /build
-RUN yum install -y doxygen && yum clean all
+RUN yum install -y doxygen && yum update -y ca-certificates && yum clean all
