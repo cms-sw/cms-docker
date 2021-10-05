@@ -34,6 +34,8 @@ LABEL maintainer="CMS Build"
 #                Cleanup packages perl-* which are not available in centos6 repo
 # - 23 Jun 2021: Added  osg-wn-client-setup.sh script
 # - 20 Aug 2021: disable osg-* repos, see https://github.com/opensciencegrid/docker-osg-wn/issues/5
+# - 02 Oct 2021: Copied expired ANSPGrid.pem from /cvmfs/grid.cern.ch/etc/grid-security/certificates
+#                Removed expired /etc/grid-security/certificates/QuoVadis-Root-CA1.pem
 
 RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|^#baseurl=|baseurl=|' /etc/yum.repos.d/CentOS-Base.repo && \
     sed -i -e 's|/mirror.centos.org/|/vault.centos.org/|' /etc/yum.repos.d/CentOS-Base.repo && \
@@ -57,8 +59,11 @@ RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|^#baseurl=|baseurl=|' /etc/yum.rep
              /storage \
              /build \
              /.singularity.d/env &&\
+    rm -f /etc/grid-security/certificates/QuoVadis-Root-CA1.pem &&\
     echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
 ADD osg-wn-client-setup.sh /.singularity.d/env/99-osg-wn-client-setup.sh
+ADD certificates/ANSPGrid.pem /etc/grid-security/certificates/ANSPGrid.pem
+
 LABEL build-date="@BUILD_DATE@"
 
