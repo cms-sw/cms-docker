@@ -1,6 +1,6 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 import json, sys
-from commands import getstatusoutput as run_cmd
+from subprocess import getstatusoutput as run_cmd
 
 e, o = run_cmd('curl --silent -f -lSL https://index.docker.io/v1/repositories/%s/tags' % sys.argv[1])
 if e:
