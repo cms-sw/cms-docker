@@ -4,7 +4,7 @@ from subprocess import getstatusoutput as run_cmd
 
 e, o = run_cmd('curl --silent -f -lSL https://index.docker.io/v1/repositories/%s/tags' % sys.argv[1])
 if e:
-  print o
+  print(o)
   sys.exit(1)
 
 data=json.loads(o)
