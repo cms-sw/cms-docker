@@ -18,7 +18,7 @@ RUN yum install -y \
     perl-Term-ANSIColor perl-Test-Harness perl-Text-ParseWords perl-Thread-Queue \
     perl-Time-HiRes perl-Time-Local perl-YAML \
     patch popt popt-devel python2 python3 readline readline-devel rpm-build \
-    rsync tcl tcsh time tk wget which zlib zsh \
+    rsync tcl tcsh time tk wget which zlib zsh tcl-devel tk-devel \
     bc strace tar zip unzip hostname nano libnsl && \
     alternatives --set python `which python2` && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm &&\
