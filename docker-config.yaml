@@ -9,6 +9,8 @@ repositories:
     cmssw: admin
   cc8:
     cmssw: write
+  cs8:
+    cmssw: write
   cms:
     cmssw: write
   cmsmon:
