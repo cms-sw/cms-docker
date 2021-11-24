@@ -33,9 +33,9 @@ else:
 tags = [ t for t in  args.tags.replace(' ','').split(",") if t]
 for reponame in repos:
   for img in get_docker_images(reponame):
+    print("Working on ",img)
     if tags and (not img['IMAGE_TAG'] in tags): continue
     buildimg = args.force
-    print("Working on ",img)
     if not buildimg:
       inher = img['IMAGE_NAME']
       parent = img['BASE_IMAGE_NAME']
