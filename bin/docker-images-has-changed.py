@@ -35,9 +35,11 @@ for reponame in repos:
   for img in get_docker_images(reponame):
     if tags and (not img['IMAGE_TAG'] in tags): continue
     buildimg = args.force
+    print("Working on ",img)
     if not buildimg:
       inher = img['IMAGE_NAME']
       parent = img['BASE_IMAGE_NAME']
+      print("Checking ",parent, inher)
       buildimg = has_parent_changed(parent, inher)
       if not buildimg:
         labels = get_labels(inher)
