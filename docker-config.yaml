@@ -6,7 +6,7 @@ repositories:
   auth-proxy-server:
     dmwm: admin
   cc7:
-    cmssw: admin
+    cmssw: write
   cc8:
     cmssw: write
   cs8:
