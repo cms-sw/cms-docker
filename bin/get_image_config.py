@@ -81,6 +81,7 @@ def process_tags(setup, data, images):
     override = get_key('override', img_data).lower()
     if override != 'true':
       res , manifest = get_digest(image_name, arch)
+      print("Existign image",res , manifest)
       if manifest: continue
       override = "false"
 
