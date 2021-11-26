@@ -17,7 +17,7 @@ groups:
     variables:
       SKIP_TESTS: true
     groups:
-      amd64:
+      x86_64:
         tags:
           ${group1}-${group0}:
       aarch64:
@@ -31,7 +31,7 @@ groups:
     docker: Dockerfile.${group1}
     from: library/centos:7
     groups:
-      amd64:
+      x86_64:
         tags:
           ${group1}-${group0}:
       aarch64:

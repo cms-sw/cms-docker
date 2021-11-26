@@ -11,6 +11,6 @@ docker: Dockerfile
 alias:  ${group}-${daily}
 architecture: ${group0}
 groups:
-  amd64:
+  x86_64:
     tags:
       ${group}-latest:

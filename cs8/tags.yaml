@@ -2,6 +2,5 @@
 #Destination tag: source tag
 
 x86_64: x86_64-latest
-amd64: x86_64-latest
 aarch64: aarch64-latest
 ppc64le: ppc64le-latest
