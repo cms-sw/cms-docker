@@ -1,7 +1,7 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import print_function
 from argparse import ArgumentParser
-from docker_utils import get_digest_of_image
+from docker_utils import get_digest
 import sys
 
 parser = ArgumentParser(description='')
@@ -12,12 +12,12 @@ args = parser.parse_args()
 if not (args.repository and args.source and args.destination):
   parser.error("Missing arguments.")
 
-src = get_digest_of_image(args.repository, args.source)
+src = get_digest("%s:%s" % (args.repository, args.source), "")
 if not src[0]:
   print("ERROR: Unable to find source image %s:%s" % (args.repository, args.source))
   sys.exit(1)
 
-des = get_digest_of_image(args.repository, args.destination)
+des = get_digest("%s:%s" % (args.repository, args.destination), "")
 print("%s vs %s" % (src[1], des[1]), file=sys.stderr)
 if src[1] != des[1]:
   print("SOURCE_IMAGE=%s:%s" % (args.repository, args.source))

@@ -163,9 +163,33 @@ def logout():
   uri = '/logout/'
   return hub_request(uri, method='POST', json=True)['detail']
 
-def get_digest_of_image(repo, tag):
+def get_digest(image, arch):
+  tag = image.split(":")[-1]
+  repo = image.split(":")[0]
+  image_data = repo.split("/")
+  registory = ""
+  if len(image_data)>2:
+    registory = image_data[0]
+    repo = "/".join(image_data[1:])
+  archs = [arch]
+  if arch in ['x86_64', 'amd64']: archs = ['x86_64', 'amd64']
+  elif arch in ['arm64', 'aarch64']: archs = ['arm64', 'aarch64']
+  if 'quay.io' in registory:
+    data = http_request('https://quay.io/api/v1/repository/%s/tag/' % repo, None, {'specificTag': tag}, {}, json=True)
+    if data:
+      data = http_request('https://quay.io/api/v1/repository/%s/manifest/%s' % (repo, data['tags'][0]['manifest_digest']), None, None, {}, json=True)
+      for x in loads(data['manifest_data'])['manifests']:
+        if x['platform']['architecture'] in archs:
+          return (True, x['digest'])
+    return (False, "")
   uri = '/repositories/%s/tags/%s' % (repo, tag)
-  try: return (True, hub_request(uri, json=True)['images'][0]['digest'].split(":")[-1])
+  try:
+    images = hub_request(uri, json=True)['images']
+    if len(images)==1: return (True, images[0]['digest'])
+    for img in images:
+      if img['architecture'] in archs:
+        return (True, img['digest'])
+    return (False, "")
   except: return (False, hub_request(uri).text)
 
 def get_manifest(image):
@@ -185,51 +209,11 @@ def get_manifest(image):
   DOCKER_IMAGE_CACHE[image] = http_request(url, None, None, headers, json=True)
   return DOCKER_IMAGE_CACHE[image]
 
-def get_layers(image, arch=""):
-  manifest = get_manifest(image)
-  try:
-    return {'architecture': manifest['architecture'],
-            'fsLayers': [layer['blobSum'] for layer in manifest['fsLayers']]}
-  except:
-    try:
-      digest = ""
-      for m in manifest['manifests']:
-        if m['platform']['architecture'] == arch:
-          digest = m['digest']
-          break
-      if not digest: return manifest
-      repo = image.split(":",1)[0]
-      manifest = get_manifest("%s:%s" % (repo,digest))
-      return {'architecture': arch,'fsLayers' : [layer['digest'] for layer in manifest['layers']]}
-    except:
-      return manifest
-
 def get_labels(image):
   manifest = get_manifest(image)
   if ('errors' in manifest) and (manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN'):
     return {}
   return loads(manifest['history'][0]['v1Compatibility'])['container_config']['Labels']
-
-def has_parent_changed(parent, image):
-  image_manifest = get_layers(image)
-  try: image_manifest['fsLayers']
-  except KeyError:
-    if image_manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN':
-      print("Image %s not found" % image)
-      return True
-    else:
-      raise Exception(image_manifest)
-  parent_layers = get_layers(parent, image_manifest['architecture'])['fsLayers']
-  image_layers = image_manifest['fsLayers']
-  lab_layer = image_layers[0]
-  image_layers = [l for l in image_layers if l!=lab_layer]
-  parent_layers = [l for l in parent_layers if l!=lab_layer]
-  print("Layers: %s\n  %s" % (parent,"\n  ".join(parent_layers)))
-  print("Layers: %s\n  %s" % (image ,"\n  ".join(image_layers)))
-  while parent_layers and image_layers:
-    if parent_layers.pop()!=image_layers.pop():
-      return True
-  return len(parent_layers)>0
 
 def generate_yaml(username):
   teams_dict = {}

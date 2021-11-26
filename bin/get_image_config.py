@@ -1,9 +1,9 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import print_function
 import yaml
 import sys, re
 from os.path import exists, join, dirname, abspath
-from docker_utils import get_layers
+from docker_utils import get_digest
 from datetime import datetime
 import hashlib
 now = datetime.now()
@@ -72,13 +72,16 @@ def process_tags(setup, data, images):
     data[-1]['tag']=tag
     img_data = expand(data)
     pop_info(data, cnt)
+    arch = get_key('architecture', img_data)
+    res, from_manifest = get_digest(get_key('from', img_data), arch)
+    if not res:
+      print("Base image ",get_key('from', img_data),arch,"not avauilable yet.")
+      continue
     image_name = get_key('container', img_data) + ":"+get_key('tag', img_data)
     override = get_key('override', img_data).lower()
     if override != 'true':
-      manifest = get_layers(image_name)
-      if 'fsLayers' in manifest: continue
-      if not 'errors' in manifest: continue
-      if manifest['errors'][0]['code'] != 'MANIFEST_UNKNOWN': continue
+      res , manifest = get_digest(image_name, arch)
+      if manifest: continue
       override = "false"
 
     images.append({})
@@ -105,6 +108,7 @@ def process_tags(setup, data, images):
     images[-1]['DOCKER_FILE']=get_key('docker', img_data)
     images[-1]['TEST_SCRIPT']=get_key('script', img_data)
     images[-1]['TEST_NODE']=get_key('node', img_data)
+    images[-1]['ARCHITECTURE']=arch
     for xkey in ['delete_pattern', 'expires_days']:
       val = get_key(xkey, img_data)
       if val:
@@ -114,10 +118,11 @@ def process_tags(setup, data, images):
         images[-1][v] = get_key(v, img_data)
     config_dir = get_key('config_dir', img_data)
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
-    chkdata = []
+    print("base man:",from_manifest)
+    chkdata = [from_manifest]
     print("tag:",image_name)
     with open(docFile) as ref:
-        chkdata.append(hashlib.md5(ref.read()).hexdigest())
+        chkdata.append(hashlib.md5(ref.read().encode()).hexdigest())
     print("chksum:", docFile, chkdata[-1])
     with open(docFile) as ref:
       for line in ref.readlines():
@@ -126,11 +131,10 @@ def process_tags(setup, data, images):
             continue
           xfile = join(config_dir, items[1])
           with open(xfile) as xref:
-            chkdata.append(hashlib.md5(xref.read()).hexdigest())
+            chkdata.append(hashlib.md5(xref.read().encode()).hexdigest())
           print("chksum:", xfile, chkdata[-1])
-    images[-1]['BUILD_CHECKSUM'] = hashlib.md5("\n".join(chkdata)).hexdigest()
+    images[-1]['BUILD_CHECKSUM'] = hashlib.md5(("\n".join(chkdata)).encode()).hexdigest()
   return
-  
 
 def process_groups(setup, data, images):
   if 'groups' not in setup: return

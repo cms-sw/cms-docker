@@ -13,6 +13,7 @@ variables:
 push: true
 override: true
 alias: ${group}-${daily}
+architecture: amd64
 groups:
   rhel8:
     tags:

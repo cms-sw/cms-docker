@@ -9,6 +9,7 @@ daily: d$${now.strftime("%Y%m%d")}
 from: library/centos:centos6
 docker: Dockerfile
 alias:  ${group}-${daily}
+architecture: ${group0}
 groups:
   amd64:
     tags:

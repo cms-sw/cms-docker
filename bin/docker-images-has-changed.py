@@ -1,8 +1,8 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 from __future__ import print_function
 from argparse import ArgumentParser
 from get_image_config import get_docker_images
-from docker_utils import has_parent_changed, get_labels
+from docker_utils import get_labels
 import glob, os
 from os.path import dirname
 import json
@@ -37,14 +37,10 @@ for reponame in repos:
     if tags and (not img['IMAGE_TAG'] in tags): continue
     buildimg = args.force
     if not buildimg:
-      inher = img['IMAGE_NAME']
-      parent = img['BASE_IMAGE_NAME']
-      print("Checking ",parent, inher)
-      buildimg = has_parent_changed(parent, inher)
-      if not buildimg:
-        labels = get_labels(inher)
-        print (labels)
-        buildimg = ('build-checksum' in labels) and (labels['build-checksum'] != img['BUILD_CHECKSUM'])
-      print(inher, parent, buildimg, img['BUILD_CHECKSUM'])
+      base = img['BASE_IMAGE_NAME']
+      image = img['IMAGE_NAME']
+      labels = get_labels(image)
+      buildimg = ('build-checksum' not in labels) or (labels['build-checksum'] != img['BUILD_CHECKSUM'])
+      print(image, base, buildimg, img['BUILD_CHECKSUM'])
     if buildimg:
       create_file(img)
