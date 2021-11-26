@@ -41,6 +41,6 @@ for reponame in repos:
       image = img['IMAGE_NAME']
       labels = get_labels(image)
       buildimg = ('build-checksum' not in labels) or (labels['build-checksum'] != img['BUILD_CHECKSUM'])
-      print(image, base, buildimg, img['BUILD_CHECKSUM'])
+      print("===>",image, base, buildimg, img['BUILD_CHECKSUM'])
     if buildimg:
       create_file(img)
