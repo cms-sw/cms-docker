@@ -1,4 +1,4 @@
-override: true
+override: false
 push:     true
 test:
   script: test-cmssw.sh
@@ -11,6 +11,6 @@ docker: Dockerfile
 alias:  ${group}-${daily}
 architecture: ${group0}
 groups:
-  x86_64:
+  amd64:
     tags:
       ${group}-latest:
