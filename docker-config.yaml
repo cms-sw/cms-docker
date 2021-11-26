@@ -105,8 +105,6 @@ repositories:
     dmwm: admin
   oracle:
     dmwm: admin
-  parfullcms:
-    cmssw: write
   phedex:
     dmwm: admin
   promtail:
@@ -154,10 +152,6 @@ repositories:
   slc5:
     cmssw: write
   slc6:
-    cmssw: write
-  slc6-installer:
-    cmssw: write
-  slc7-installer:
     cmssw: write
   ssb-alerts:
     dmwm: admin
