@@ -1,7 +1,7 @@
 FROM @BASE_IMAGE_NAME@
 RUN yum install -y \
     automake bash bzip2 bzip2-libs bzip2-devel coreutils-single e2fsprogs e2fsprogs-libs \
-    file file-libs fontconfig freetype libstdc++-static gcc-c++ git glibc krb5-libs libaio \
+    file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs libaio \
     libcom_err libgomp libICE libidn \
     libSM libX11 libX11-devel libxcrypt libXcursor libXext \
     libXext-devel libXft libXft-devel libXi libXinerama \
@@ -23,7 +23,7 @@ RUN yum install -y \
     alternatives --set python `which python2` && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm &&\
     yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy singularity \
-        python2-requests python3-requests &&\
+        python2-requests python3-requests libstdc++-static &&\
     yum update -y ca-certificates &&\
     yum install -y dnf-plugins-core &&\
     yum config-manager --set-enabled powertools &&\
