@@ -23,10 +23,11 @@ RUN yum install -y \
     alternatives --set python `which python2` && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm &&\
     yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy singularity \
-        python2-requests python3-requests libstdc++-static &&\
+        python2-requests python3-requests &&\
     yum update -y ca-certificates &&\
     yum install -y dnf-plugins-core &&\
     yum config-manager --set-enabled powertools &&\
+    yum install -y libstdc++-static &&\
     dnf -y install doxygen &&\
     yum clean all
 
