@@ -115,13 +115,15 @@ def process_tags(setup, data, images):
       val = get_key(xkey, img_data)
       if val:
         images[-1][xkey.upper()]=val
+    chkdata = [from_manifest]
     if ".variables" in data[0]:
       for v in data[0][".variables"]:
         images[-1][v] = get_key(v, img_data)
+        if not v in ['SKIP_TESTS', 'CVMFS_UNPACKED', 'BUILD_DATE']:
+          chkdata.append("%s=%s" % (v, images[-1][v])) 
     config_dir = get_key('config_dir', img_data)
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
     print("base man:",from_manifest)
-    chkdata = [from_manifest]
     print("tag:",image_name)
     with open(docFile) as ref:
         chkdata.append(hashlib.md5(ref.read().encode()).hexdigest())
@@ -135,6 +137,7 @@ def process_tags(setup, data, images):
           with open(xfile) as xref:
             chkdata.append(hashlib.md5(xref.read().encode()).hexdigest())
           print("chksum:", xfile, chkdata[-1])
+    print("Full checksum",chkdata)
     images[-1]['BUILD_CHECKSUM'] = hashlib.md5(("\n".join(chkdata)).encode()).hexdigest()
   return
 

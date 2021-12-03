@@ -9,7 +9,6 @@ test:
   script: test-cmssw.sh
 variables:
   BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
-  CVMFS_UNPACKED: ${unpacked}
 push: true
 override: true
 alias: ${group}-${daily}
