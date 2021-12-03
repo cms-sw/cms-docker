@@ -7,8 +7,6 @@ delete_pattern: tmp-${group1}.*-(2[0-9]{7,})
 expires_days: 7
 daily: d$${now.strftime("%Y%m%d")}
 architecture: ${group1}
-variables:
-  CVMFS_UNPACKED: true
 groups:
   bootstrap:
     alias: ${tag}-${daily}
@@ -33,6 +31,8 @@ groups:
     groups:
       x86_64:
         docker: Dockerfile
+        variables:
+          EXTRA_PACKAGES: doxygen
         tags:
           ${group1}-${group0}:
       aarch64:
