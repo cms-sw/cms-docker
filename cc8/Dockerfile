@@ -26,8 +26,8 @@ RUN yum install -y \
         python2-requests python3-requests &&\
     yum update -y ca-certificates &&\
     yum install -y dnf-plugins-core &&\
-    yum config-manager --set-enabled powertools ;\
-    [ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ ;\
+    yum config-manager --set-enabled powertools &&\
+    ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
