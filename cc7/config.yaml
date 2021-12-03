@@ -30,7 +30,7 @@ groups:
     groups:
       x86_64:
         variables:
-          EXTRA_PACKAGES: doxygen
+          EXTRA_PACKAGES: doxygen compat-libstdc++-33
         tags:
           ${group1}-${group0}:
       aarch64:
