@@ -11,7 +11,7 @@ import sys, re, yaml, os, glob
 def find_repos():
   repos = []
   dir = os.path.dirname(dirname(os.path.abspath(__file__)))
-  for file in glob.glob(dir + '/**/*.yaml*'):
+  for file in glob.glob(dir + '/**/config.yaml'):
     repos.append(os.path.basename(dirname(file)))
   return(repos)
 
