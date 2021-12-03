@@ -172,6 +172,7 @@ def get_docker_images(name, repository='cmssw'):
     except ImportError as e:
       setup = yaml.load(file)
   data = [{}]
+  data[-1]['docker'] = "Dockerfile"
   data[-1]['config_dir'] = dirname(setup_file)
   data[-1]['repository'] = repository
   data[-1]['name'] = name
