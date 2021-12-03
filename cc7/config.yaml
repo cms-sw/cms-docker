@@ -34,7 +34,6 @@ groups:
         tags:
           ${group1}-${group0}:
       aarch64:
-        docker: Dockerfile.${group1}
         tags:
           ${group1}-${group0}:
       ppc64le:
