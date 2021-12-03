@@ -26,10 +26,11 @@ groups:
           ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
-    docker: Dockerfile
     from: library/centos:8
     groups:
       x86_64:
+        variables:
+          EXTRA_PACKAGES: doxygen
         tags:
           ${group1}-${group0}:
       aarch64:
