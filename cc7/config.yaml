@@ -32,6 +32,7 @@ groups:
     from: library/centos:7
     groups:
       x86_64:
+        docker: Dockerfile
         tags:
           ${group1}-${group0}:
       aarch64:
