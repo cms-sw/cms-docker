@@ -29,6 +29,8 @@ groups:
     from: quay.io/centos/centos:stream8
     groups:
       x86_64:
+        variables:
+          EXTRA_PACKAGES: doxygen
         tags:
           ${group1}-${group0}:
       aarch64:

@@ -27,8 +27,8 @@ RUN yum install -y \
     yum update -y ca-certificates &&\
     yum install -y dnf-plugins-core &&\
     yum config-manager --set-enabled powertools &&\
-    yum install -y libstdc++-static &&\
-    dnf -y install doxygen &&\
+    yum install -y libstdc++-static ;\
+    [ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ ;\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
