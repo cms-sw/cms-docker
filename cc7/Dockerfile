@@ -14,10 +14,10 @@ RUN yum install -y \
         perl-constant perl-File-Temp perl-Socket perl-Time-Local perl-Storable glibc-headers perl-threads \
         perl-Thread-Queue perl-Module-ScanDeps perl-Test-Harness perl-Env perl-Switch perl-ExtUtils-Embed \
         ncurses-libs perl-libs file wget perl-LWP-Protocol-https python-setuptools \
-        libaio tcl-devel tk-devel rust \
+        libaio tcl-devel tk-devel \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python3 strace &&\
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil singularity libstdc++-static &&\
+    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil singularity libstdc++-static rust &&\
     yum update -y ca-certificates &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && yum install -y @EXTRA_PACKAGES@ || true) &&\
     yum clean all
