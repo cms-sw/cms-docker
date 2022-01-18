@@ -72,6 +72,9 @@ def process_tags(setup, data, images):
     data[-1]['tag']=tag
     img_data = expand(data)
     pop_info(data, cnt)
+    if get_key('disabled', img_data) == 'true':
+      print("Ignoring ",tag," as it is marked disabled")
+      continue
     arch = get_key('architecture', img_data)
     res, from_manifest = get_digest(get_key('from', img_data), arch)
     print("Base Image: ",get_key('from', img_data),res, from_manifest)
@@ -82,7 +85,7 @@ def process_tags(setup, data, images):
     override = get_key('override', img_data).lower()
     if override != 'true':
       res , manifest = get_digest(image_name, arch)
-      print("Existign image",res , manifest)
+      print("Existing image",res , manifest)
       if manifest: continue
       override = "false"
 
@@ -179,6 +182,7 @@ def get_docker_images(name, repository='cmssw'):
   data[-1]['container'] = join(repository, name)
   data[-1]['group'] = ""
   data[-1]['group_count'] = -1
+  data[-1]['disabled'] = 'false'
   push_info(setup, data)
   if not 'groups' in setup:
     setup['groups'] = {'default' : {'tags': dict(setup['tags'])}}

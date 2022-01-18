@@ -1,0 +1,44 @@
+push:   true
+override: true
+delete_pattern: tmp-${group1}.*-(2[0-9]{7,})
+expires_days: 7
+daily: d$${now.strftime("%Y%m%d")}
+architecture: ${group1}
+test:
+  script: test-cmssw.sh
+  node:   singularity
+disabled: true
+groups:
+  bootstrap:
+    alias: ${tag}-${daily}
+    docker: Dockerfile.${group0}
+    from: ${container}:${group1}
+    variables:
+      SKIP_TESTS: true
+    groups:
+      x86_64:
+        disabled: false
+        tags:
+          ${group1}-${group0}:
+      aarch64:
+        tags:
+          ${group1}-${group0}:
+      ppc64le:
+        tags:
+          ${group1}-${group0}:
+  latest:
+    alias: ${group1}-${daily}
+    from: redhat/ubi8
+    groups:
+      x86_64:
+        disabled: false
+        variables:
+          EXTRA_PACKAGES: doxygen
+        tags:
+          ${group1}-${group0}:
+      aarch64:
+        tags:
+          ${group1}-${group0}:
+      ppc64le:
+        tags:
+          ${group1}-${group0}:
