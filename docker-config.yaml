@@ -11,6 +11,8 @@ repositories:
     cmssw: write
   cs8:
     cmssw: write
+  ubi8:
+    cmssw: write
   cms:
     cmssw: write
   cmsmon:

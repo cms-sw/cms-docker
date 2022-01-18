@@ -79,7 +79,7 @@ def process_tags(setup, data, images):
     res, from_manifest = get_digest(get_key('from', img_data), arch)
     print("Base Image: ",get_key('from', img_data),res, from_manifest)
     if not res:
-      print("Base image ",get_key('from', img_data),arch,"not avauilable yet.")
+      print("Base image ",get_key('from', img_data),arch,"not available yet.")
       continue
     image_name = get_key('container', img_data) + ":"+get_key('tag', img_data)
     override = get_key('override', img_data).lower()
