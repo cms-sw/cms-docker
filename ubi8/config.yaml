@@ -28,7 +28,7 @@ groups:
           ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
-    from: redhat/ubi8
+    from: redhat/ubi8:8.5
     groups:
       x86_64:
         disabled: false
