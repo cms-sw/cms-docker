@@ -28,8 +28,8 @@ RUN sed -i -e 's|enabled=1|enabled=0|' /etc/dnf/plugins/subscription-manager.con
       voms-clients-cpp krb5-workstation python2-psutil myproxy singularity python2-requests &&\
     dnf update -y ca-certificates &&\
     dnf config-manager --set-enabled powertools &&\
-    ([ "doxygen" != "" ] && dnf -y install doxygen || true) &&\
-    echo `cat /etc/redhat-release` `echo UBI` > /etc/redhat-release
+    ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
+    echo `cat /etc/redhat-release` `echo UBI` > /etc/redhat-release &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
