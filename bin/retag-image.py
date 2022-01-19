@@ -15,7 +15,7 @@ if not (args.repository and args.source and args.destination):
 src = get_digest("%s:%s" % (args.repository, args.source), "")
 if not src[0]:
   print("ERROR: Unable to find source image %s:%s" % (args.repository, args.source))
-  sys.exit(1)
+  sys.exit(0)
 
 des = get_digest("%s:%s" % (args.repository, args.destination), "")
 print("%s vs %s" % (src[1], des[1]), file=sys.stderr)
