@@ -29,8 +29,8 @@ RUN sed -i -e 's|enabled=1|enabled=0|' /etc/dnf/plugins/subscription-manager.con
     dnf update -y ca-certificates &&\
     dnf config-manager --set-enabled powertools &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
-    echo `cat /etc/redhat-release` `echo UBI` > /etc/redhat-release &&\
-    alternatives --set python `which python2` && \
+    alternatives --set python `which python2` &&\
+    echo ubi8 > /etc/cmsos &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
