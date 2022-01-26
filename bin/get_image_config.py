@@ -17,7 +17,7 @@ def push_info(setup, data, variables=False):
     if type(setup[k])==dict:
       push_info(setup[k], data, variables or k=="variables")
     else:
-      sval = str(setup[k])
+      sval = "" if setup[k] is None else str(setup[k])
       if variables:
         if not ".variables" in data[0]:
           data[0][".variables"]={}
