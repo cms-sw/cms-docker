@@ -24,6 +24,9 @@ groups:
       aarch64:
         tags:
           ${group1}-${group0}:
+      ppc64le:
+        tags:
+          ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
     from: library/almalinux:8
