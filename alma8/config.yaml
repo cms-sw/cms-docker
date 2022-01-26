@@ -7,6 +7,9 @@ architecture: ${group1}
 test:
   script: test-cmssw.sh
   node:   singularity
+variables:
+  DEFAULT_PACKAGES: coreutils-single
+  EPEL_PACKAGES:
 groups:
   bootstrap:
     alias: ${tag}-${daily}
@@ -31,5 +34,11 @@ groups:
         tags:
           ${group1}-${group0}:
       aarch64:
+        tags:
+          ${group1}-${group0}:
+      ppc64le:
+        from: cmssw/alma8:base-ppc64le
+        variables:
+          DEFAULT_PACKAGES: coreutils
         tags:
           ${group1}-${group0}:

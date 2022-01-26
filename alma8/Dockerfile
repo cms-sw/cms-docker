@@ -1,5 +1,5 @@
 FROM @BASE_IMAGE_NAME@
-RUN dnf install -y automake bash bzip2 bzip2-libs bzip2-devel coreutils-single \
+RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel \
       file file-libs fontconfig freetype gcc-c++  git glibc krb5-libs libaio \
       libcom_err libgomp libICE libidn \
       libSM libX11 libX11-devel libxcrypt libXcursor libXext \
@@ -19,7 +19,7 @@ RUN dnf install -y automake bash bzip2 bzip2-libs bzip2-devel coreutils-single \
       rsync tcl time tk wget which zlib \
       bc tar zip unzip hostname nano procps-ng dnf-plugins-core python3-requests &&\
     dnf install -y epel-release &&\
-    dnf install -y libnsl e2fsprogs e2fsprogs-libs libXext-devel libXft-devel \
+    dnf install -y @EPEL_PACKAGES@ libnsl e2fsprogs e2fsprogs-libs libXext-devel libXft-devel \
       libglvnd-opengl mesa-libGLU mesa-libGLU-devel nss-devel perl-CGI \
       popt-devel readline-devel tcsh zsh tcl-devel tk-devel strace \
       voms-clients-cpp krb5-workstation python2-psutil myproxy singularity python2-requests &&\
