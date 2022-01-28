@@ -1,0 +1,60 @@
+#Imported from https://hub.docker.com/r/bbockelm/cms/dockerfile
+
+FROM @BASE_IMAGE_NAME@
+
+LABEL name="CMS Worker Node on EL"
+LABEL maintainer="CMS Build"
+
+# Required
+# --------
+# - cmsRun fails without stdint.h (from glibc-headers)
+#   Tested CMSSW_7_4_5_patch1
+#
+# Other
+# -----
+# - ETF calls /usr/bin/lsb_release (from redhat-lsb-core)
+# - sssd-client for LDAP lookups through the host
+# - SAM tests expect cvmfs utilities
+# - gcc is required by GLOW jobs (builds matplotlib)
+#
+# CMSSW dependencies
+# ------------------
+# Required software is listed under alma8_amd64_platformSeeds at
+# http://cmsrep.cern.ch/cgi-bin/cmspkg/driver/cms/alma8_amd64_gcc10
+#
+# - 28 Jan 2022: copied from Docker.rhel8 + contents of 
+#     https://github.com/opensciencegrid/docker-osg-wn/blob/9d253e61ce767085cc6df9d421933c5a20c428cb/Dockerfile
+
+RUN dnf -y install \
+        bash tcsh perl bzip2-libs glibc nspr nss nss-util popt zlib glibc-devel \
+        openssl openssl-devel openssl-libs krb5-libs libcom_err \
+        libX11 libXext libXft libXpm libglvnd-glx libglvnd-opengl mesa-libGLU \
+        readline ncurses-libs tcl tk libaio libxcrypt perl-libs perl-IO \
+        git patch make zip unzip bzip2 java-1.8.0-openjdk-devel libcom_err-devel which \
+        libXpm-devel libXft-devel mesa-libGLU-devel rsync \
+        perl-Carp perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
+        perl-File-Temp perl-Getopt-Long perl-PathTools perl-Text-ParseWords \
+        perl-constant readline-devel ncurses-devel tcl-devel tk-devel \
+        python36 perl-interpreter coreutils-single \
+        sssd-client redhat-lsb-core gcc glibc-headers gcc-c++ wget yum-utils epel-release &&\
+    wget -O /etc/yum.repos.d/cernvm.repo http://cvmrepo.web.cern.ch/cvmrepo/yum/cernvm.repo &&\
+    wget -O /etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM http://cvmrepo.web.cern.ch/cvmrepo/yum/RPM-GPG-KEY-CernVM &&\
+    dnf -y install cvmfs &&\
+    dnf -y install https://repo.opensciencegrid.org/osg/@OSG_RELEASE@/osg-@OSG_RELEASE@-el@EL_VER@-release-latest.rpm &&\
+    dnf config-manager --set-enabled powertools &&\
+    dnf -y install osg-wn-client singularity &&\
+    yum clean all &&\
+    mkdir -p /hdfs \
+             /mnt/hadoop \
+             /hadoop \
+             /cms \
+             /etc/cvmfs/SITECONF \
+             /lfs_roots \
+             /storage \
+             /build &&\
+    echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
+    echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
+
+ADD osg-wn-client-setup.sh /.singularity.d/env/99-osg-wn-client-setup.sh
+RUN yum -y update igtf-ca-certs && yum clean all
+LABEL build-date="@BUILD_DATE@"
