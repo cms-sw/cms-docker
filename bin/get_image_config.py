@@ -34,23 +34,14 @@ def get_key(key, data):
   return ""
 
 def expand_var(var, data):
-  stack = []
-  expanded = {}
   while True:
-    stack.append(var)
     m = regex_var.match(var)
-    if not m: return var
-    vx = m.group(3)
-    if vx in expanded:
-      print("Error: variables %s refers to itself" %  vx)
-      print("  ","\n  ".join(stack))
-      sys.exit(1)
-    expanded[vx] = 1
-    if m.group(2)=='$$': vx = eval(m.group(3))
-    else: vx = get_key(m.group(3), data)
-    vx = vx.replace("%s{%s}" % (m.group(2),m.group(3)), '')
-    var = "%s%s%s" % (m.group(1), vx, m.group(4))
-  return v
+    if not m: break
+    val = ""
+    if m.group(2)=='$$': val = eval(m.group(3))
+    else: val = get_key(m.group(3), data)
+    var = "%s%s%s" % (m.group(1), val, m.group(4))
+  return var
 
 def expand(data):
   nbuilds = []
