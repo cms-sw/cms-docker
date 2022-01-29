@@ -12,7 +12,6 @@ variables:
   EPEL_PACKAGES:
 groups:
   bootstrap:
-    alias: ${tag}-${daily}
     docker: Dockerfile.${group0}
     from: ${container}:${group1}
     variables:
@@ -28,7 +27,7 @@ groups:
         tags:
           ${group1}-${group0}:
   latest:
-    alias: ${group1}-${daily}
+    alias: ${group1}-${daily} ${group1}
     from: library/almalinux:8
     groups:
       x86_64:
