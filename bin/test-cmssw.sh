@@ -1,6 +1,8 @@
 #!/bin/bash -ex
 CMSREP="cmsrep.cern.ch"
+ADD_PKGS=""
 if [ "$2" != "" ] ; then CMSREP="$2" ; fi
+if [ "$3" != "" ] ; then ADD_PKGS="$3" ; fi
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
@@ -78,7 +80,7 @@ for arch in ${ARCHS} ; do
     eval `scram run -sh` >/dev/null 2>&1
     USE_GIT=false
     if git cms-addpkg FWCore/Version >/dev/null 2>&1 ; then USE_GIT=true ; fi
-    for p in FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ; do
+    for p in FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ${ADD_PKGS} ; do
       [ -e $CMSSW_RELEASE_BASE/src/$p ] || continue
       if $USE_GIT  ; then
         git cms-addpkg $p
