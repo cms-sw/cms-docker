@@ -17,12 +17,13 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
       perl-Time-HiRes perl-Time-Local perl-YAML \
       patch popt python2 python3 readline rpm-build \
       rsync tcl time tk wget which zlib \
-      bc tar zip unzip hostname nano procps-ng dnf-plugins-core python3-requests &&\
-    dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ libnsl e2fsprogs e2fsprogs-libs libXext-devel libXft-devel \
+      bc tar zip unzip hostname nano procps-ng dnf-plugins-core python3-requests \
+      libnsl e2fsprogs e2fsprogs-libs libXext-devel libXft-devel \
       libglvnd-opengl mesa-libGLU mesa-libGLU-devel nss-devel perl-CGI \
       popt-devel readline-devel tcsh zsh tcl-devel tk-devel strace \
-      voms-clients-cpp krb5-workstation python2-psutil myproxy singularity python2-requests &&\
+      krb5-workstation python2-requests &&\
+    dnf install -y epel-release &&\
+    dnf install -y @EPEL_PACKAGES@ voms-clients-cpp python2-psutil myproxy singularity &&\
     dnf update -y ca-certificates &&\
     dnf config-manager --set-enabled powertools &&\
     dnf install -y libstdc++-static &&\

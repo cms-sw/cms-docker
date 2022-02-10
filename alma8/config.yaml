@@ -39,8 +39,6 @@ groups:
         tags:
           ${group1}-${group0}:
       ppc64le:
-        from: cmssw/alma8:base-ppc64le
-        variables:
-          DEFAULT_PACKAGES: coreutils
+        from: almalinux/8-base:8.5-beta-ppc64le
         tags:
           ${group1}-${group0}:
