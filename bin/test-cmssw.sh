@@ -1,8 +1,10 @@
 #!/bin/bash -ex
 CMSREP="cmsrep.cern.ch"
 ADD_PKGS=""
+RUN_TESTS="false"
 if [ "$2" != "" ] ; then CMSREP="$2" ; fi
 if [ "$3" != "" ] ; then ADD_PKGS="$3" ; fi
+if [ "$4" = "true" ] ; then RUN_TESTS="true" ; fi
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
@@ -72,6 +74,7 @@ for arch in ${ARCHS} ; do
   if [ "${INSTALL_PACKAGES}" != "" ] ; then
     $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg $INST_OPTS ${INSTALL_PACKAGES}
   fi
+  export CMS_PATH=/cvmfs/cms-ib.cern.ch
   export cmssw_ver
   (
     source $WORKSPACE/inst/$SCRAM_ARCH/cmsset_default.sh >/dev/null 2>&1
@@ -93,6 +96,18 @@ for arch in ${ARCHS} ; do
       echo ${SCRAM_ARCH}.${cmssw_ver}.OK >> $WORKSPACE/res.txt
     else
       echo ${SCRAM_ARCH}.${cmssw_ver}.ERR >> $WORKSPACE/res.txt
+    fi
+    if $RUN_TESTS ; then
+      ((timeout 14400 runTheMatrix.py -j $(nproc) -s && echo ALL_OK) 2>&1 | tee -a $WORKSPACE/${SCRAM_ARCH}.${cmssw_ver}.matrix) || true
+      if grep ALL_OK $WORKSPACE/${SCRAM_ARCH}.${cmssw_ver}.matrix ; then
+        if [ $(grep ' tests passed' $WORKSPACE/${SCRAM_ARCH}.${cmssw_ver}.matrix | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' |wc -l) -eq 0 ] ; then
+          echo ${SCRAM_ARCH}.${cmssw_ver}.OK >> $WORKSPACE/res.txt
+        else
+          echo ${SCRAM_ARCH}.${cmssw_ver}.ERR >> $WORKSPACE/res.txt
+        fi
+      else
+        echo ${SCRAM_ARCH}.${cmssw_ver}.ERR >> $WORKSPACE/res.txt
+      fi
     fi
   )
   rm -rf $SCRAM_ARCH
