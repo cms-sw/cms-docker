@@ -93,21 +93,23 @@ for arch in ${ARCHS} ; do
       fi
     done
     if scram build -j $(nproc) ; then
-      echo ${SCRAM_ARCH}.${cmssw_ver}.OK >> $WORKSPACE/res.txt
+      echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.OK >> $WORKSPACE/res.txt
     else
-      echo ${SCRAM_ARCH}.${cmssw_ver}.ERR >> $WORKSPACE/res.txt
+      echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.ERR >> $WORKSPACE/res.txt
     fi
     if $RUN_TESTS ; then
       ((timeout 14400 runTheMatrix.py -j $(nproc) -s && echo ALL_OK) 2>&1 | tee -a $WORKSPACE/${SCRAM_ARCH}.${cmssw_ver}.matrix) || true
       if grep ALL_OK $WORKSPACE/${SCRAM_ARCH}.${cmssw_ver}.matrix ; then
         if [ $(grep ' tests passed' $WORKSPACE/${SCRAM_ARCH}.${cmssw_ver}.matrix | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' |wc -l) -eq 0 ] ; then
-          echo ${SCRAM_ARCH}.${cmssw_ver}.OK >> $WORKSPACE/res.txt
+          echo ${SCRAM_ARCH}.${cmssw_ver}.TEST.OK >> $WORKSPACE/res.txt
         else
-          echo ${SCRAM_ARCH}.${cmssw_ver}.ERR >> $WORKSPACE/res.txt
+          echo ${SCRAM_ARCH}.${cmssw_ver}.TEST.ERR >> $WORKSPACE/res.txt
         fi
       else
-        echo ${SCRAM_ARCH}.${cmssw_ver}.ERR >> $WORKSPACE/res.txt
+        echo ${SCRAM_ARCH}.${cmssw_ver}.TEST.ERR >> $WORKSPACE/res.txt
       fi
+    else
+      echo ${SCRAM_ARCH}.${cmssw_ver}.TEST.SKIP >> $WORKSPACE/res.txt
     fi
   )
   rm -rf $SCRAM_ARCH
