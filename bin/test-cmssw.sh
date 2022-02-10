@@ -80,10 +80,13 @@ for arch in ${ARCHS} ; do
   if [ "${INSTALL_PACKAGES}" != "" ] ; then
     $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg $INST_OPTS ${INSTALL_PACKAGES}
   fi
-  export CMS_PATH=/cvmfs/cms-ib.cern.ch
   export cmssw_ver
   (
+    export CMS_PATH=/cvmfs/cms-ib.cern.ch
+    export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
     source $WORKSPACE/inst/$SCRAM_ARCH/cmsset_default.sh >/dev/null 2>&1
+    which dasgoclient
+    dasgoclient --help
     scram -a $SCRAM_ARCH project ${cmssw_ver}
     cd ${cmssw_ver}
     eval `scram run -sh` >/dev/null 2>&1
