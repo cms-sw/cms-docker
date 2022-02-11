@@ -148,6 +148,7 @@ def process_groups(setup, data, images):
       data[-1]['group'] = "%s-%s" % (prev_group, group)
     data[-1]['group_count'] = gcount
     data[-1]['group%s' % gcount] = group
+    print(group,setup['groups'][group])
     push_info(setup['groups'][group], data)
     process_tags(setup['groups'][group], data, images)
     process_groups(setup['groups'][group], data, images)
