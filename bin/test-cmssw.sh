@@ -85,8 +85,6 @@ for arch in ${ARCHS} ; do
     export CMS_PATH=/cvmfs/cms-ib.cern.ch
     export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
     source $WORKSPACE/inst/$SCRAM_ARCH/cmsset_default.sh >/dev/null 2>&1
-    which dasgoclient
-    dasgoclient --help
     scram -a $SCRAM_ARCH project ${cmssw_ver}
     cd ${cmssw_ver}
     eval `scram run -sh` >/dev/null 2>&1
@@ -107,6 +105,9 @@ for arch in ${ARCHS} ; do
       echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.ERR >> $WORKSPACE/res.txt
     fi
     if $RUN_TESTS ; then
+      [ -d ${WORKSPACE}/cms-bot ] || git clone --depth 1 https://github.com/cms-sw/cms-bot
+      ${WORKSPACE}/cms-bot/das-utils/use-ibeos-sort
+      export PATH=${WORKSPACE}/cms-bot/das-utils:$PATH
       mkdir -p $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
       pushd $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
       ((timeout 14400 runTheMatrix.py -j $(nproc) -s && echo ALL_OK) 2>&1 | tee -a matrix.log) || true
