@@ -28,18 +28,18 @@ groups:
         tags:
           ${group1}-${group0}:
   latest:
-    alias: ${group1}-${daily} ${group1}
+    alias: ${group1}-${daily}
     from: library/almalinux:8
     groups:
       x86_64:
         variables:
           EXTRA_PACKAGES: doxygen
         tags:
-          ${group1}-${group0}:
+          ${group1}:
       aarch64:
         tags:
-          ${group1}-${group0}:
+          ${group1}:
       ppc64le:
         from: almalinux/8-base:8.5-beta-ppc64le
         tags:
-          ${group1}-${group0}:
+          ${group1}:
