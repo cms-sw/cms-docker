@@ -2,9 +2,11 @@
 CMSREP="cmsrep.cern.ch"
 ADD_PKGS=""
 RUN_TESTS="false"
+TEST_OK_MATCH="tests passed, 0 1 2 0 0 0 0 0 0 0 failed"
 if [ "$2" != "" ] ; then CMSREP="$2" ; fi
 if [ "$3" != "" ] ; then ADD_PKGS="$3" ; fi
 if [ "$4" = "true" ] ; then RUN_TESTS="true" ; fi
+if [ "$5" != "" ] ; then TEST_OK_MATCH="$5" ; fi
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
@@ -118,7 +120,7 @@ for arch in ${ARCHS} ; do
           if [ $(grep ' tests passed' matrix.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' |wc -l) -eq 0 ] ; then
             RES="OK"
           elif [ $(echo ${SCRAM_ARCH} | grep '_aarch64_' | wc -l) -eq 1 ] ; then
-            if [ $(grep 'tests passed, 0 1 2 0 0 0 0 0 0 0 failed' matrix.log | wc -l) -eq 1 ] ; then
+            if [ $(grep "${TEST_OK_MATCH}" matrix.log | wc -l) -eq 1 ] ; then
               RES="OK"
             fi
           fi
