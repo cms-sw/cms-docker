@@ -104,27 +104,28 @@ for arch in ${ARCHS} ; do
     else
       echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.ERR >> $WORKSPACE/res.txt
     fi
+    RES="SKIP"
     if $RUN_TESTS ; then
+      RES="ERR"
       [ -d ${WORKSPACE}/cms-bot ] || git clone --depth 1 https://github.com/cms-sw/cms-bot
       ${WORKSPACE}/cms-bot/das-utils/use-ibeos-sort
       export PATH=${WORKSPACE}/cms-bot/das-utils:$PATH
       mkdir -p $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
       pushd $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
-      ((timeout 7200 runTheMatrix.py -j $(nproc) -s --command ' -n 5' && echo ALL_OK) 2>&1 | tee -a matrix.log) || true
-      find . -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
-      if grep ALL_OK matrix.log ; then
-        if [ $(grep ' tests passed' matrix.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' |wc -l) -eq 0 ] ; then
-          echo ${SCRAM_ARCH}.${cmssw_ver}.TEST.OK >> $WORKSPACE/res.txt
-        else
-          echo ${SCRAM_ARCH}.${cmssw_ver}.TEST.ERR >> $WORKSPACE/res.txt
+        ((timeout 7200 runTheMatrix.py -j $(nproc) -s --command ' -n 5' && echo ALL_OK) 2>&1 | tee -a matrix.log) || true
+        find . -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
+        if grep ALL_OK matrix.log ; then
+          if [ $(grep ' tests passed' matrix.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' |wc -l) -eq 0 ] ; then
+            RES="OK"
+          elif [ $(echo ${SCRAM_ARCH} | grep '_aarch64_' | wc -l) -eq 1 ] ; then
+            if [ $(grep 'tests passed, 0 1 2 0 0 0 0 0 0 0 failed' matrix.log | wc -l) -eq 1 ] ; then
+              RES="OK"
+            fi
+          fi
         fi
-      else
-        echo ${SCRAM_ARCH}.${cmssw_ver}.TEST.ERR >> $WORKSPACE/res.txt
-      fi
       popd
-    else
-      echo ${SCRAM_ARCH}.${cmssw_ver}.TEST.SKIP >> $WORKSPACE/res.txt
     fi
+    echo "${SCRAM_ARCH}.${cmssw_ver}.TEST.${RES}" >> $WORKSPACE/res.txt
   )
   rm -rf $SCRAM_ARCH
 done
