@@ -114,9 +114,9 @@ for arch in ${ARCHS} ; do
       export PATH=${WORKSPACE}/cms-bot/das-utils:$PATH
       mkdir -p $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
       pushd $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
-        ((timeout 7200 runTheMatrix.py -j $(nproc) -s --command ' -n 5' && echo ALL_OK) 2>&1 | tee -a matrix.log) || true
+        ((timeout 7200 runTheMatrix.py -j $(nproc) -s --command ' -n 5') 2>&1 | tee -a matrix.log) || true
         find . -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
-        if grep ALL_OK matrix.log ; then
+        if grep ' tests passed' matrix.log ; then
           if [ $(grep ' tests passed' matrix.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' |wc -l) -eq 0 ] ; then
             RES="OK"
           elif [ $(echo ${SCRAM_ARCH} | grep '_aarch64_' | wc -l) -eq 1 ] ; then
