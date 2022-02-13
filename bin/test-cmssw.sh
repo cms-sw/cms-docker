@@ -2,7 +2,7 @@
 CMSREP="cmsrep.cern.ch"
 ADD_PKGS=""
 RUN_TESTS="false"
-TEST_OK_MATCH="tests passed, 0 1 2 0 0 0 0 0 0 0 failed"
+TEST_OK_MATCH="tests passed, 0 1 0 0 0 0 0 0 0 0 failed"
 if [ "$2" != "" ] ; then CMSREP="$2" ; fi
 if [ "$3" != "" ] ; then ADD_PKGS="$3" ; fi
 if [ "$4" = "true" ] ; then RUN_TESTS="true" ; fi
