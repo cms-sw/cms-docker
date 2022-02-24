@@ -211,6 +211,8 @@ def get_manifest(image):
 
 def get_labels(image):
   manifest = get_manifest(image)
+  if ('errors' in manifest):
+    print(manifest)
   if ('errors' in manifest) and (manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN'):
     return {}
   return loads(manifest['history'][0]['v1Compatibility'])['container_config']['Labels']
