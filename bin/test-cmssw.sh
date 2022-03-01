@@ -105,6 +105,7 @@ for arch in ${ARCHS} ; do
       echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.OK >> $WORKSPACE/res.txt
     else
       echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.ERR >> $WORKSPACE/res.txt
+      RUN_TESTS=false
     fi
     RES="SKIP"
     if $RUN_TESTS ; then
