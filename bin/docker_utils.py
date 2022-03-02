@@ -163,7 +163,7 @@ def logout():
   uri = '/logout/'
   return hub_request(uri, method='POST', json=True)['detail']
 
-def get_digest(image, arch):
+def get_digest(image, arch, debug=False):
   tag = image.split(":")[-1]
   repo = image.split(":")[0]
   image_data = repo.split("/")
@@ -178,6 +178,7 @@ def get_digest(image, arch):
     data = http_request('https://quay.io/api/v1/repository/%s/tag/' % repo, None, {'specificTag': tag}, {}, json=True)
     if data:
       data = http_request('https://quay.io/api/v1/repository/%s/manifest/%s' % (repo, data['tags'][0]['manifest_digest']), None, None, {}, json=True)
+      if debug: print(data)
       for x in loads(data['manifest_data'])['manifests']:
         if x['platform']['architecture'] in archs:
           return (True, x['digest'])
@@ -185,6 +186,7 @@ def get_digest(image, arch):
   uri = '/repositories/%s/tags/%s' % (repo, tag)
   try:
     images = hub_request(uri, json=True)['images']
+    if debug: print(images)
     if len(images)==1: return (True, images[0]['digest'])
     for img in images:
       if img['architecture'] in archs:
