@@ -68,8 +68,9 @@ def process_tags(setup, data, images):
       print("Ignoring",image_name,"as it is marked disabled")
       continue
     arch = get_key('architecture', img_data)
+    print("\nWorking on",get_key('from', img_data),"for arch",arch)
     res, from_manifest = get_digest(get_key('from', img_data), arch)
-    print("Base Image: ",get_key('from', img_data),res, from_manifest)
+    print("Base Image: ",get_key('from', img_data),arch,res,from_manifest)
     if not res:
       print("Base image ",get_key('from', img_data),arch,"not available yet.")
       continue
