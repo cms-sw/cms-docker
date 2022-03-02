@@ -69,7 +69,7 @@ def process_tags(setup, data, images):
       continue
     arch = get_key('architecture', img_data)
     print("\nWorking on",get_key('from', img_data),"for arch",arch)
-    res, from_manifest = get_digest(get_key('from', img_data), arch)
+    res, from_manifest = get_digest(get_key('from', img_data), arch, debug=True)
     print("Base Image: ",get_key('from', img_data),arch,res,from_manifest)
     if not res:
       print("Base image ",get_key('from', img_data),arch,"not available yet.")
