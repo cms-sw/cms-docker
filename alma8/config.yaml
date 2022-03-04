@@ -29,7 +29,7 @@ groups:
           ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
-    from: library/almalinux:8
+    from: almalinux/8-base:8
     groups:
       x86_64:
         variables:
@@ -40,6 +40,5 @@ groups:
         tags:
           ${group1}:
       ppc64le:
-        from: almalinux/8-base:8.5-beta-ppc64le
         tags:
           ${group1}:
