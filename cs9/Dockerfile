@@ -13,7 +13,6 @@ RUN dnf install -y \
     patch popt popt-devel python3 readline readline-devel rpm-build \
     rsync tcl tcsh time tk wget which zlib zsh tcl-devel tk-devel \
     bc strace tar zip unzip hostname nano libnsl procps-ng && \
-    alternatives --install /usr/bin/python python /usr/bin/python3 1 &&\
     dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm &&\
     dnf install -y voms-clients-cpp krb5-workstation python3-psutil myproxy singularity \
         python3-requests &&\
