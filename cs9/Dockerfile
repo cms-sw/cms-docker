@@ -2,7 +2,7 @@ FROM @BASE_IMAGE_NAME@
 RUN dnf install -y \
     automake bash bzip2 bzip2-libs bzip2-devel coreutils-single e2fsprogs e2fsprogs-libs \
     perl file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs libaio \
-    libcom_err libgomp libICE \
+    libcom_err libcom_err-devel libgomp libICE \
     libSM libX11 libX11-devel libxcrypt libXcursor libXext \
     libXext-devel libXft libXft-devel libXi libXinerama \
     libXmu libXpm libXpm-devel libXrandr libXrender \
