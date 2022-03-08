@@ -1,0 +1,50 @@
+authentication:
+    # Passphrase authentication
+    # Access to the server is protected with a passphrase. There are no user names involved - if
+    # the passphrase is shared between multiple users then they are treated as the same user.
+    # When the server is started for the first time with passphrase authentication then the URL
+    # displayed in the stdout will include a one time token that would allow the user to set the
+    # passphrase. To reset the passphrase the server needs to be restarted with --reset-passphrase
+    # command line option.
+#    type: passphrase
+    # login session duration (days). Defaults to 365 days
+#    sessionDuration: 60
+
+     # Reverse proxy authentication
+#    type: reverse-proxy
+    # http header containing the authorized user ID. Inserted by the reverse proxy
+#    header: <header name>
+
+    # Anonymous authentication
+    # Access to the server is not protected and the server is publicly available to any user. Not
+    # recommended for use. If you do run the server with anonymous authentication then at least make
+    # sure to run the server without --allow-remote-ui and on a host that other users do not have
+    # access to.
+    type: anonymous
+
+
+    # SAML
+    # Users are authenticated with a SAML Identity Provider. It's also advised to enable network
+    # user group authorization on SAML Identity Provider side to control access to the server.
+#    type: saml
+#    rootUrl: https://vtune01.mycompany.com
+#    saml:
+        # The following fields need to be provided to the SAML Identity Provider administrator.
+#        consumePath: '/consume'
+#        entityID: 'vtune01.mycompany.com'
+
+        # The following fields are provided by SAML Identity Provider administrator after access is
+        # configured.
+#        entryPoint: '<IDp administrator provided URL>'
+#        cert: '<IDp administrator provided public certificate key>'
+
+         # Additional options
+         # SAML auth request binding. Defaults to 'Redirect'
+#        authnRequestBinding: 'HTTP-POST'
+         # Do not deflate SAML request. Defaults to false.
+         # Use this option if the Identity Provider does not support SAML request compression
+#        skipRequestCompression: true
+
+# VTune Profiler Server URL
+# When enabled, this config is used by the VTune Agent to connect to the server
+serverEndpoint: https://public_ip_address:8080
