@@ -18,4 +18,4 @@ public_ip=$1
 sed -i.bak s/public_ip_address/$1/g /home/vtune/config.yml
 
 cp /home/vtune/config.yml /opt/intel/oneapi/vtune/latest/backend/config.yml
-su vtune -c "$(which vtune-backend) --web-port 8080 --data-directory /vtune/profiles --allow-remote-access --log-to-console --log-level debug"
+su vtune -c "$(which vtune-backend) --web-port 8080 --data-directory /vtune/profiles --allow-remote-access"
