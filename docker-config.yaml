@@ -19,6 +19,8 @@ repositories:
     cmssw: write
   cms:
     cmssw: write
+  docker-vtune:
+    cmssw: write
   cmsmon:
     dmwm: admin
   cmsmon-alerts:
