@@ -1,6 +1,6 @@
 FROM @BASE_IMAGE_NAME@
 RUN sed -i -e 's|enabled=1|enabled=0|' /etc/dnf/plugins/subscription-manager.conf &&\
-    dnf install -y automake bash bzip2 bzip2-libs bzip2-devel coreutils-single \
+    for p in automake bash bzip2 bzip2-libs bzip2-devel coreutils-single \
       file file-libs fontconfig freetype gcc-c++ libstdc++-static git glibc krb5-libs libaio \
       libcom_err libgomp libICE libidn \
       libSM libX11 libX11-devel libxcrypt libXcursor libXext \
@@ -18,7 +18,8 @@ RUN sed -i -e 's|enabled=1|enabled=0|' /etc/dnf/plugins/subscription-manager.con
       perl-Time-HiRes perl-Time-Local perl-YAML \
       patch popt python2 python3 readline rpm-build \
       rsync tcl time tk wget which zlib \
-      bc tar zip unzip hostname nano procps-ng dnf-plugins-core python3-requests &&\
+      bc tar zip unzip hostname nano procps-ng dnf-plugins-core python3-requests ; \
+      do dnf install -y $p ; done &&\
     dnf install -y http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-gpg-keys-8-3.el8.noarch.rpm &&\
     dnf install -y http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os/Packages/centos-stream-repos-8-3.el8.noarch.rpm &&\
     dnf install -y epel-release &&\
