@@ -18,14 +18,13 @@ groups:
     tags:
       ${group}-latest:
         from: ${base}:3.5-el8
+      ${group}-m:
+        from: alma8-wn
   alma8:
     tags:
       ${group}-wn:
         from: library/almalinux:8
         docker: Dockerfile-wn.${group}
-      ${group}-latest:
-        from: ${group}-wn
-        docker: Dockerfile.rhel8
   rhel7:
     tags:
       ${group}-latest:
