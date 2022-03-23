@@ -1,0 +1,14 @@
+FROM @BASE_IMAGE_NAME@
+
+LABEL name="CMS Worker Node base on AlmaLinux"
+LABEL maintainer="CMS Build"
+
+RUN yum -y install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el8-release-latest.rpm \
+                   epel-release \
+                   yum-utils && \
+    yum-config-manager --enable powertools osg-upcoming &&\
+    yum -y install   \
+                   osg-wn-client \
+                   redhat-lsb-core \
+                   singularity && \
+    yum clean all
