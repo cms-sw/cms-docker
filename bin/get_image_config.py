@@ -114,7 +114,7 @@ def process_tags(setup, data, images):
     if ".variables" in data[0]:
       for v in data[0][".variables"]:
         images[-1][v] = get_key(v, img_data)
-        if (not v in ['SKIP_TESTS', 'CVMFS_UNPACKED', 'BUILD_DATE']) and images[-1][v]:
+        if (not v in ['SKIP_TESTS', 'CVMFS_UNPACKED', 'BUILD_DATE', 'MAIL_TO']) and images[-1][v]:
           chkdata.append("%s=%s" % (v, images[-1][v]))
     config_dir = get_key('config_dir', img_data)
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
