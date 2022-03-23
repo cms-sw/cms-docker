@@ -23,6 +23,7 @@ groups:
         MAIL_TO: muzaffar
         from: ${repository}/${name}:alma8-wn
   alma8:
+    alias: ${group}-wn-${daily}
     variables:
       SKIP_TESTS: true
       MAIL_TO: muzaffar
