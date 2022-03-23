@@ -21,6 +21,8 @@ groups:
       ${group}-m:
         from: alma8-wn
   alma8:
+    variables:
+      SKIP_TESTS: true
     tags:
       ${group}-wn:
         from: library/almalinux:8
