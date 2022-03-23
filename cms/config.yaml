@@ -19,10 +19,12 @@ groups:
       ${group}-latest:
         from: ${base}:3.5-el8
       ${group}-m:
-        from: alma8-wn
+        MAIL_TO: muzaffar
+        from: ${repository}/${name}:alma8-wn
   alma8:
     variables:
       SKIP_TESTS: true
+      MAIL_TO: muzaffar
     tags:
       ${group}-wn:
         from: library/almalinux:8
