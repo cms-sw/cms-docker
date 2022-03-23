@@ -29,7 +29,7 @@ groups:
           ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
-    from: almalinux/8-base:8
+    from: library/almalinux:8
     groups:
       x86_64:
         variables:
