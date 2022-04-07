@@ -40,9 +40,6 @@ RUN dnf -y install \
     wget -O /etc/yum.repos.d/cernvm.repo http://cvmrepo.web.cern.ch/cvmrepo/yum/cernvm.repo &&\
     wget -O /etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM http://cvmrepo.web.cern.ch/cvmrepo/yum/RPM-GPG-KEY-CernVM &&\
     dnf -y install cvmfs &&\
-    dnf -y install https://repo.opensciencegrid.org/osg/@OSG_RELEASE@/osg-@OSG_RELEASE@-el@EL_VER@-release-latest.rpm &&\
-    dnf config-manager --set-enabled powertools &&\
-    dnf -y install osg-wn-client singularity &&\
     yum clean all &&\
     mkdir -p /hdfs \
              /mnt/hadoop \
