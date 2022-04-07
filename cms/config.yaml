@@ -19,6 +19,8 @@ groups:
       ${group}-latest:
         from: ${base}:3.5-el8
       ${group}-cms:
+        variables:
+          OSG_WN_BASE: opensciencegrid/osg-wn:3.5-el8
         alias: ${group}-m-${daily}
         MAIL_TO: muzaffar
         from: ${repository}/${name}:alma8-wn
