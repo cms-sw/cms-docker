@@ -20,8 +20,10 @@ groups:
         from: ${base}:3.5-el8
       ${group}-cms:
         variables:
-          OSG_WN_BASE: opensciencegrid/osg-wn:3.5-el8
+          OSG_WN_BASE: opensciencegrid/osg-wn:${OSG_RELEASE}-el${EL_VER}
           MAIL_TO: muzaffar
+          OSG_RELEASE: 3.5
+          EL_VER: 8
         alias: ${group}-m-${daily}
         docker: Dockerfile.alma8
         from: ${repository}/${name}:alma8-wn
