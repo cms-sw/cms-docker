@@ -34,7 +34,7 @@ RUN dnf -y install \
         libXpm-devel libXft-devel mesa-libGLU-devel rsync \
         perl-Carp perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
         perl-File-Temp perl-Getopt-Long perl-PathTools perl-Text-ParseWords \
-        perl-constant readline-devel ncurses-devel tcl-devel tk-devel \
+        perl-constant readline-devel ncurses-devel tcl-devel tk-devel krb5-devel \
         python36 perl-interpreter coreutils-single \
         sssd-client redhat-lsb-core gcc glibc-headers gcc-c++ wget yum-utils epel-release &&\
     wget -O /etc/yum.repos.d/cernvm.repo http://cvmrepo.web.cern.ch/cvmrepo/yum/cernvm.repo &&\
