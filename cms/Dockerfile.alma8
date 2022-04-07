@@ -52,7 +52,7 @@ RUN dnf -y install \
              /lfs_roots \
              /storage \
              /build &&\
-    echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
+    echo "Source: @OSG_WN_BASE@" > /image-source-info.txt &&\
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
 
 ADD osg-wn-client-setup.sh /.singularity.d/env/99-osg-wn-client-setup.sh
