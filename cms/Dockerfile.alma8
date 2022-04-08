@@ -34,15 +34,12 @@ RUN dnf -y install \
         libXpm-devel libXft-devel mesa-libGLU-devel rsync \
         perl-Carp perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
         perl-File-Temp perl-Getopt-Long perl-PathTools perl-Text-ParseWords \
-        perl-constant readline-devel ncurses-devel tcl-devel tk-devel \
+        perl-constant readline-devel ncurses-devel tcl-devel tk-devel krb5-devel \
         python36 perl-interpreter coreutils-single \
         sssd-client redhat-lsb-core gcc glibc-headers gcc-c++ wget yum-utils epel-release &&\
     wget -O /etc/yum.repos.d/cernvm.repo http://cvmrepo.web.cern.ch/cvmrepo/yum/cernvm.repo &&\
     wget -O /etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM http://cvmrepo.web.cern.ch/cvmrepo/yum/RPM-GPG-KEY-CernVM &&\
     dnf -y install cvmfs &&\
-    dnf -y install https://repo.opensciencegrid.org/osg/@OSG_RELEASE@/osg-@OSG_RELEASE@-el@EL_VER@-release-latest.rpm &&\
-    dnf config-manager --set-enabled powertools &&\
-    dnf -y install osg-wn-client singularity &&\
     yum clean all &&\
     mkdir -p /hdfs \
              /mnt/hadoop \
@@ -52,7 +49,7 @@ RUN dnf -y install \
              /lfs_roots \
              /storage \
              /build &&\
-    echo "Source: @BASE_IMAGE_NAME@" > /image-source-info.txt &&\
+    echo "Source: @OSG_WN_BASE@" > /image-source-info.txt &&\
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
 
 ADD osg-wn-client-setup.sh /.singularity.d/env/99-osg-wn-client-setup.sh
