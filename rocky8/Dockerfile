@@ -29,7 +29,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     dnf install -y libstdc++-static &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
     alternatives --set python `which python2` &&\
-    echo alma8 > /etc/cmsos &&\
+    echo rocky8 > /etc/cmsos &&\
     dnf clean all
 
 ADD krb5.conf /etc/krb5.conf
