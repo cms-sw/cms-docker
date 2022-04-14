@@ -17,6 +17,8 @@ repositories:
     cmssw: write
   alma8:
     cmssw: write
+  rocky8:
+    cmssw: write
   el8:
     cmssw: write
   cms:
