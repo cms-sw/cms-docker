@@ -8,7 +8,6 @@ test:
   script: test-cmssw.sh
   node:   singularity
 variables:
-  CMS_COMPATIBLE_OS: cs8
   DEFAULT_PACKAGES: coreutils-single
   EPEL_PACKAGES:
 groups:
