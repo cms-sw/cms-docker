@@ -38,6 +38,6 @@ groups:
         tags:
           ${group1}:
       ppc64le:
-        disabled: false
+        disabled: true
         tags:
           ${group1}:
