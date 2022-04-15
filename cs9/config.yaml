@@ -21,5 +21,6 @@ groups:
         tags:
           ${group1}:
       ppc64le:
+        disabled: false
         tags:
           ${group1}:
