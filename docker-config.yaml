@@ -21,6 +21,8 @@ repositories:
     cmssw: write
   el8:
     cmssw: write
+  el9:
+    cmssw: write
   cms:
     cmssw: write
   docker-vtune:

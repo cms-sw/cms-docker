@@ -19,7 +19,7 @@ RUN dnf install -y \
     dnf update -y ca-certificates &&\
     dnf install -y dnf-plugins-core &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
-    yum clean all
+    dnf clean all
 
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\

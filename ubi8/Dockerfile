@@ -31,7 +31,6 @@ RUN sed -i -e 's|enabled=1|enabled=0|' /etc/dnf/plugins/subscription-manager.con
     dnf config-manager --set-enabled powertools &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
     alternatives --set python `which python2` &&\
-    echo ubi8 > /etc/cmsos &&\
     yum clean all
 
 ADD krb5.conf /etc/krb5.conf
@@ -39,5 +38,6 @@ ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
     touch /etc/tnsnames.ora &&\
+    echo el8 > /etc/cmsos &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
