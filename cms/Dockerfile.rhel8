@@ -25,7 +25,8 @@ LABEL maintainer="CMS Build"
 # - 09 Jun 2021: Added  osg-wn-client-setup.sh script
 # - 14 Sep 2021: Force update igtf-ca-certs
 
-RUN yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client &&\
+RUN yum -y install openssl-devel &&
+    yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client &&\
     yum -y install \
         mesa-libGL automake bash bzip2 bzip2-libs bzip2-devel coreutils-single e2fsprogs e2fsprogs-libs \
         file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs libaio \
@@ -36,7 +37,7 @@ RUN yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client
         libglvnd-opengl mesa-libGL mesa-libGLU mesa-libGLU-devel \
         java-1.8.0-openjdk-devel libtool m4 make \
         ncurses ncurses-libs ncurses-devel nspr nss nss-devel nss-util \
-        openssl openssl-devel openssl-libs \
+        openssl openssl-libs \
         perl perl-interpreter perl-libs \
         perl-Carp perl-CGI perl-constant perl-Data-Dumper perl-DBI \
         perl-Digest-MD5 perl-Encode perl-Env perl-Exporter perl-ExtUtils-Embed \
