@@ -25,7 +25,7 @@ LABEL maintainer="CMS Build"
 # - 09 Jun 2021: Added  osg-wn-client-setup.sh script
 # - 14 Sep 2021: Force update igtf-ca-certs
 
-RUN yum -y install openssl-devel &&
+RUN yum -y install openssl-devel &&\
     yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client &&\
     yum -y install \
         mesa-libGL automake bash bzip2 bzip2-libs bzip2-devel coreutils-single e2fsprogs e2fsprogs-libs \
