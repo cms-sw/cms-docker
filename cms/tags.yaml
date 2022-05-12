@@ -2,8 +2,8 @@
 #Destination tag: source tag
 
 rhel6-itb: rhel6-m20211005
-rhel7-itb: rhel7-m20220331
-rhel8-itb: rhel8-m-m20220407
+rhel7-itb: rhel7-m20220512
+rhel8-itb: rhel8-m20220512
 rhel6: rhel6-m20211005
 rhel7: rhel7-m20220331
 rhel8: rhel8-m-m20220407
