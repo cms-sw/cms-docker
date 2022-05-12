@@ -74,6 +74,13 @@ def process_tags(setup, data, images):
     if not res:
       print("Base image ",get_key('from', img_data),arch,"not available yet.")
       continue
+    watch_img = get_key('watch', img_data)
+    watch_manifest = ""
+    if watch_img:
+      res, watch_manifest = get_digest(watch_img, arch, debug=True)
+      if not res:
+        print("Watch image ",watch_img,arch,"not available yet.")
+        continue
     override = get_key('override', img_data).lower()
     if override != 'true':
       res , manifest = get_digest(image_name, arch)
@@ -111,6 +118,8 @@ def process_tags(setup, data, images):
       if val:
         images[-1][xkey.upper()]=val
     chkdata = [from_manifest]
+    if watch_manifest:
+      chkdata.append(watch_manifest)
     if ".variables" in data[0]:
       for v in data[0][".variables"]:
         images[-1][v] = get_key(v, img_data)
@@ -119,17 +128,18 @@ def process_tags(setup, data, images):
     config_dir = get_key('config_dir', img_data)
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
     print("base man:",from_manifest)
+    if watch_manifest: print("watch man:",watch_manifest)
     print("tag:",image_name)
-    with open(docFile) as ref:
+    with open(docFile, encoding="utf-8") as ref:
         chkdata.append(hashlib.md5(ref.read().encode()).hexdigest())
     print("chksum:", docFile, chkdata[-1])
-    with open(docFile) as ref:
+    with open(docFile, encoding="utf-8") as ref:
       for line in ref.readlines():
           items = [i for i in line.split(" ") if i]
           if (items[0] not in ["ADD", "COPY"]) or (":" in items[1]):
             continue
           xfile = join(config_dir, items[1])
-          with open(xfile) as xref:
+          with open(xfile, encoding="utf-8") as xref:
             chkdata.append(hashlib.md5(xref.read().encode()).hexdigest())
           print("chksum:", xfile, chkdata[-1])
     print("Full checksum",chkdata)

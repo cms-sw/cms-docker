@@ -25,6 +25,7 @@ groups:
         alias: ${group}-m-${daily}
         docker: Dockerfile.alma8
         from: ${repository}/${name}:alma8-wn
+        watch: ${base}:3.5-el8
   alma8:
     alias: ${group}-wn-${daily}
     variables:
