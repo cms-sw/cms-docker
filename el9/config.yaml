@@ -21,6 +21,7 @@ groups:
         tags:
           ${group1}-${group0}:
       ppc64le:
+        disabled: true
         tags:
           ${group1}-${group0}:
   latest:
@@ -36,5 +37,6 @@ groups:
         tags:
           ${group1}:
       ppc64le:
+        disabled: true
         tags:
           ${group1}:
