@@ -15,19 +15,17 @@ groups:
       SKIP_TESTS: true
     groups:
       x86_64:
-        disabled: false
         tags:
           ${group1}-${group0}:
       aarch64:
         tags:
           ${group1}-${group0}:
       ppc64le:
-        disabled: false
         tags:
           ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
-    from: quay.io/centos/centos:stream9
+    from: library/almalinux:9
     groups:
       x86_64:
         variables:
@@ -38,6 +36,5 @@ groups:
         tags:
           ${group1}:
       ppc64le:
-        disabled: true
         tags:
           ${group1}:
