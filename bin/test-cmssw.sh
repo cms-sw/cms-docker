@@ -92,7 +92,7 @@ for arch in ${ARCHS} ; do
     eval `scram run -sh` >/dev/null 2>&1
     USE_GIT=false
     if git cms-addpkg FWCore/Version >/dev/null 2>&1 ; then USE_GIT=true ; fi
-    for p in FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ${ADD_PKGS} ; do
+    for p in Calibration/EcalCalibAlgos FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ${ADD_PKGS} ; do
       [ -e $CMSSW_RELEASE_BASE/src/$p ] || continue
       if $USE_GIT  ; then
         git cms-addpkg $p
