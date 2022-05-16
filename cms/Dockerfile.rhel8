@@ -37,7 +37,7 @@ RUN yum -y install openssl-devel &&\
         libglvnd-opengl mesa-libGL mesa-libGLU mesa-libGLU-devel \
         java-1.8.0-openjdk-devel libtool m4 make \
         ncurses ncurses-libs ncurses-devel nspr nss nss-devel nss-util \
-        openssl openssl-libs \
+        openssl openssl-libs libnsl \
         perl perl-interpreter perl-libs \
         perl-Carp perl-CGI perl-constant perl-Data-Dumper perl-DBI \
         perl-Digest-MD5 perl-Encode perl-Env perl-Exporter perl-ExtUtils-Embed \
