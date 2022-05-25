@@ -27,4 +27,5 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool 
     echo el9 > /etc/cmsos &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
+ADD cms_env.sh /.singularity.d/env/99-cms_env.sh
 WORKDIR /build
