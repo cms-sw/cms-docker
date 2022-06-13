@@ -21,7 +21,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
       libnsl e2fsprogs e2fsprogs-libs libXext-devel libXft-devel \
       libglvnd-opengl mesa-libGLU mesa-libGLU-devel nss-devel perl-CGI \
       popt-devel readline-devel tcsh zsh tcl-devel tk-devel strace \
-      krb5-workstation python2-requests &&\
+      krb5-workstation python2-requests perf &&\
     dnf install -y epel-release &&\
     dnf install -y @EPEL_PACKAGES@ voms-clients-cpp python2-psutil myproxy singularity &&\
     dnf update -y ca-certificates &&\
