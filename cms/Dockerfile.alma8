@@ -35,7 +35,7 @@ RUN dnf -y install \
         perl-Carp perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
         perl-File-Temp perl-Getopt-Long perl-PathTools perl-Text-ParseWords \
         perl-constant readline-devel ncurses-devel tcl-devel tk-devel krb5-devel \
-        python36 perl-interpreter coreutils-single libnsl \
+        python36 perl-interpreter coreutils-single libnsl glibc-langpack-en \
         sssd-client redhat-lsb-core gcc glibc-headers gcc-c++ wget yum-utils epel-release &&\
     wget -O /etc/yum.repos.d/cernvm.repo http://cvmrepo.web.cern.ch/cvmrepo/yum/cernvm.repo &&\
     wget -O /etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM http://cvmrepo.web.cern.ch/cvmrepo/yum/RPM-GPG-KEY-CernVM &&\
