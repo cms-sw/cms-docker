@@ -75,7 +75,7 @@ def get_members(username, teamname):
   response = hub_request(uri, json=True)
   members = []
   try:
-    for member in response:
+    for member in response['results']:
       members.append(str(member['username']))
   except: return (False, response)
   return (True, members)
