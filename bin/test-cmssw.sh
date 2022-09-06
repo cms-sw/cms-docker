@@ -85,6 +85,7 @@ for arch in ${ARCHS} ; do
   export cmssw_ver
   (
     export CMS_PATH=/cvmfs/cms-ib.cern.ch
+    export SITECONFIG_PATH=/cvmfs/cms-ib.cern.ch/SITECONF/local
     export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
     source $WORKSPACE/inst/$SCRAM_ARCH/cmsset_default.sh >/dev/null 2>&1
     scram -a $SCRAM_ARCH project ${cmssw_ver}
