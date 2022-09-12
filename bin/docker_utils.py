@@ -7,7 +7,6 @@ from requests import request
 from os.path import expanduser
 from requests.exceptions import HTTPError
 import os, glob
-import yaml
 
 DOCKER_REGISTRY_API='https://registry-1.docker.io/v2'
 DOCKER_HUB_API='https://hub.docker.com/v2'
@@ -220,6 +219,7 @@ def get_labels(image):
   return loads(manifest['history'][0]['v1Compatibility'])['container_config']['Labels']
 
 def generate_yaml(username):
+  import yaml
   teams_dict = {}
   repositories_dict = {}
   hub_teams = get_teams(username)
