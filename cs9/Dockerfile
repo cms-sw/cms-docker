@@ -12,7 +12,7 @@ RUN dnf install -y \
     openssl openssl-devel openssl-libs \
     patch popt popt-devel python3 readline readline-devel rpm-build \
     rsync tcl tcsh time tk wget which zlib zsh tcl-devel tk-devel krb5-devel \
-    bc strace tar zip unzip hostname nano libnsl procps-ng && \
+    bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
     dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm &&\
     dnf install -y voms-clients-cpp krb5-workstation python3-psutil myproxy singularity \
         python3-requests &&\
