@@ -24,6 +24,7 @@ LABEL maintainer="CMS Build"
 #
 # - 09 Jun 2021: Added  osg-wn-client-setup.sh script
 # - 14 Sep 2021: Force update igtf-ca-certs
+# - 18 Oct 2022: Installed openssh-server as requested by  Marco Mascheroni
 
 RUN yum -y install openssl-devel &&\
     yum -y install gcc glibc-headers openssh-clients redhat-lsb-core sssd-client &&\
@@ -46,7 +47,7 @@ RUN yum -y install openssl-devel &&\
         perl-Term-ANSIColor perl-Test-Harness perl-Text-ParseWords perl-Thread-Queue \
         perl-Time-HiRes perl-Time-Local perl-YAML \
         patch popt popt-devel python2 readline readline-devel rpm-build \
-        rsync tcl tcsh tk wget which zlib zsh &&\
+        rsync tcl tcsh tk wget which zlib zsh openssh-server &&\
     alternatives --set python `which python2` &&\
     wget -O /etc/yum.repos.d/cernvm.repo http://cvmrepo.web.cern.ch/cvmrepo/yum/cernvm.repo &&\
     wget -O /etc/pki/rpm-gpg/RPM-GPG-KEY-CernVM http://cvmrepo.web.cern.ch/cvmrepo/yum/RPM-GPG-KEY-CernVM &&\
