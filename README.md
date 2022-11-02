@@ -8,8 +8,6 @@ somewhere else.
 ### Automatic docker image build
 
 In order to automatically build and deploy images to our [Docker Hub](https://hub.docker.com/u/cmssw/), 
-each docker file should have a corresponding `*EXECUTE_BUILD.sh` file(s) ([example files](jenkins/)). 
-This file contains build parameters for the image such as tag or build arguments. 
-
-NOTE: changing `Dockerfile` will not trigger the build. It is intentional, so that you would at least update `CONTAINER_TAG` 
-in `*EXECUTE_BUILD.sh`.
+create a sub-directory which should contain ( e.g. see https://github.com/cms-sw/cms-docker/tree/master/el8 )
+ - config.yaml which defines the images you want to build
+ - Dockerfile which should contains the details of how to build the container
