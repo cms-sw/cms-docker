@@ -25,7 +25,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     dnf install -y epel-release &&\
     dnf install -y @EPEL_PACKAGES@ voms-clients-cpp python2-psutil python3-psutil myproxy singularity &&\
     dnf update -y ca-certificates &&\
-    dnf config-manager --set-enabled powertools &&\
+    dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
     dnf install -y libstdc++-static &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
     alternatives --set python `which python2` &&\
