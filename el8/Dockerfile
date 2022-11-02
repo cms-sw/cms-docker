@@ -1,7 +1,7 @@
 FROM @BASE_IMAGE_NAME@
 RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel \
       file file-libs fontconfig freetype gcc-c++  git glibc krb5-libs libaio \
-      libcom_err libgomp libICE libidn textinfo \
+      libcom_err libgomp libICE libidn \
       libSM libX11 libX11-devel libxcrypt libXcursor libXext \
       libXft libXi libXinerama \
       libXmu libXpm libXpm-devel libXrandr libXrender \
