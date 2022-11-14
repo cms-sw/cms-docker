@@ -55,7 +55,7 @@ for arch in ${ARCHS} ; do
     if [ -e $v/build-errors ] ; then continue ; fi
     cmssw_ver=$(basename $v)
     boot_repo=cms.$(echo $v | cut -d/ -f4)
-    if [ ${boot_repo} = "cmw.sw" ]; then boot_repo = boot_repo=cms.$(echo $v | cut -d/ -f6); fi
+    if [ "${boot_repo}" = "cmw.sw" ]; then boot_repo=cms.$(echo $v | cut -d/ -f6); fi
     break
   done
   if [ "${cmssw_ver}" = "" ] ; then
