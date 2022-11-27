@@ -10,7 +10,7 @@ test:
 groups:
   latest:
     alias: ${group1}-${daily}
-    from: redhat/ubi8:latest
+    from: redhat/ubi8:8.7
     groups:
       x86_64:
         variables:
