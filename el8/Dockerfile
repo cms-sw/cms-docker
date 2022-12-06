@@ -29,7 +29,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     dnf install -y libstdc++-static &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
-    $xcmd &&\
+    eval $xcmd &&\
     alternatives --set python `which python2` &&\
     echo el8 > /etc/cmsos &&\
     dnf clean all
