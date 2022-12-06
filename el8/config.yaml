@@ -32,7 +32,7 @@ groups:
     groups:
       x86_64:
         variables:
-          EXTRA_COMMAND: dnf --enablerepo=powertools install -y doxygen &&
+          EXTRA_COMMAND: dnf --enablerepo=powertools install -y doxygen
         tags:
           ${group1}:
       aarch64:
