@@ -27,7 +27,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     dnf update -y ca-certificates &&\
     dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
     dnf install -y libstdc++-static &&\
-    if [ "@EXTRA_COMMAND@" != "" ] ; then DUMMY_ENV=true @EXTRA_COMMAND@ ; fi &&\
+    @EXTRA_COMMAND@ \
     alternatives --set python `which python2` &&\
     echo el8 > /etc/cmsos &&\
     dnf clean all
