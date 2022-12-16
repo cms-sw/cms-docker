@@ -22,6 +22,7 @@ groups:
         variables:
           OSG_WN_BASE: opensciencegrid/osg-wn:3.5-el8
           MAIL_TO: muzaffar
+          CMS_COMPATIBLE_OS: el8
         alias: ${group}-m-${daily}
         docker: Dockerfile.alma8
         from: ${repository}/${name}:alma8-wn
