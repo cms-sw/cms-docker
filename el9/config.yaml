@@ -34,7 +34,7 @@ groups:
     groups:
       x86_64:
         variables:
-          EXTRA_PACKAGES: doxygen
+          EXTRA_COMMAND: dnf --enablerepo=crb install doxygen
         tags:
           ${group1}:
       aarch64:
