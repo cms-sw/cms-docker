@@ -14,7 +14,7 @@ RUN dnf install -y \
     rsync tcl tcsh time tk wget which zlib zsh tcl-devel tk-devel krb5-devel \
     bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
     dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ xrootd-client gfal2-all \
+    dnf install -y @EPEL_PACKAGES@ xrootd-client gfal2-all gfal2-util-scripts \
       python3-requests python3-psutil dnf-plugins-core \
       voms-clients-cpp krb5-workstation myproxy singularity &&\
     dnf update -y ca-certificates &&\
