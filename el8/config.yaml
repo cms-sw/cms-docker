@@ -36,6 +36,8 @@ groups:
         tags:
           ${group1}:
       aarch64:
+        variables:
+          EPEL_PACKAGES: xrootd-client
         tags:
           ${group1}:
       ppc64le:
