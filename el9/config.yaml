@@ -7,6 +7,10 @@ architecture: ${group1}
 test:
   script: test-cmssw.sh
   node:   singularity
+variables:
+  DEFAULT_PACKAGES:
+  EPEL_PACKAGES:
+  EXTRA_COMMAND:
 groups:
   bootstrap:
     docker: Dockerfile.${group0}

@@ -13,12 +13,16 @@ RUN dnf install -y \
     patch popt popt-devel python3 readline readline-devel rpm-build \
     rsync tcl tcsh time tk wget which zlib zsh tcl-devel tk-devel krb5-devel \
     bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
-    dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm &&\
-    dnf install -y voms-clients-cpp krb5-workstation python3-psutil myproxy singularity \
-        python3-requests &&\
+    dnf install -y epel-release &&\
+    dnf install -y @EPEL_PACKAGES@ xrootd-client gfal2-all \
+      python3-requests python3-psutil dnf-plugins-core \
+      voms-clients-cpp krb5-workstation myproxy singularity &&\
     dnf update -y ca-certificates &&\
-    dnf install -y dnf-plugins-core &&\
-    ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
+    dnf --enablerepo=powertools install -y texinfo &&\
+    xcmd="@EXTRA_COMMAND@" &&\
+    if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
+    eval $xcmd &&\
+    echo el9 > /etc/cmsos &&\
     dnf clean all
 
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
