@@ -18,7 +18,7 @@ RUN dnf install -y \
       python3-requests python3-psutil dnf-plugins-core \
       voms-clients-cpp krb5-workstation myproxy singularity &&\
     dnf update -y ca-certificates &&\
-    dnf --enablerepo=powertools install -y texinfo &&\
+    dnf --enablerepo=crb install -y texinfo &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
