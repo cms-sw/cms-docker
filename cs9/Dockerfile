@@ -14,7 +14,7 @@ RUN dnf install -y \
     rsync tcl tcsh time tk wget which zlib zsh tcl-devel tk-devel krb5-devel \
     bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
     dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm &&\
-    dnf install -y voms-clients-cpp krb5-workstation python3-psutil myproxy singularity \
+    dnf install -y voms-clients-cpp krb5-workstation python3-psutil myproxy apptainer \
         python3-requests &&\
     dnf update -y ca-certificates &&\
     dnf install -y dnf-plugins-core &&\
