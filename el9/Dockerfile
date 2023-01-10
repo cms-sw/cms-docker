@@ -16,7 +16,7 @@ RUN dnf install -y \
     dnf install -y epel-release &&\
     dnf install -y @EPEL_PACKAGES@ xrootd-client \
       python3-requests python3-psutil dnf-plugins-core \
-      voms-clients-cpp krb5-workstation myproxy singularity &&\
+      voms-clients-cpp krb5-workstation myproxy apptainer &&\
     dnf update -y ca-certificates &&\
     dnf install -y gfal2-all gfal2-util-scripts python3-gfal2-util &&\
     dnf --enablerepo=crb install -y texinfo &&\
