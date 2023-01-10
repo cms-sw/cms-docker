@@ -14,10 +14,11 @@ RUN dnf install -y \
     rsync tcl tcsh time tk wget which zlib zsh tcl-devel tk-devel krb5-devel \
     bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
     dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ xrootd-client gfal2-all gfal2-util-scripts \
+    dnf install -y @EPEL_PACKAGES@ xrootd-client \
       python3-requests python3-psutil dnf-plugins-core \
       voms-clients-cpp krb5-workstation myproxy singularity &&\
     dnf update -y ca-certificates &&\
+    dnf install -y gfal2-all gfal2-util-scripts python3-gfal2-util &&\
     dnf --enablerepo=crb install -y texinfo &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
