@@ -23,10 +23,11 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
       popt-devel readline-devel tcsh zsh tcl-devel tk-devel strace \
       krb5-workstation python2-requests perf glibc-langpack-en environment-modules &&\
     dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ xrootd-client gfal2-util-scripts gfal2-all \
+    dnf install -y @EPEL_PACKAGES@ xrootd-client \
       voms-clients-cpp python2-psutil python3-psutil myproxy singularity &&\
     dnf update -y ca-certificates &&\
-    dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
+    dnf --enablerepo=powertools install -y texinfo libstdc++-static boost-python3 &&\
+    dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util &&\
     dnf install -y libstdc++-static &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
