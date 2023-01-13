@@ -26,7 +26,7 @@ RUN sed -i -e 's|enabled=1|enabled=0|' /etc/dnf/plugins/subscription-manager.con
     dnf install -y libnsl e2fsprogs e2fsprogs-libs libXext-devel libXft-devel \
       libglvnd-opengl mesa-libGLU mesa-libGLU-devel nss-devel perl-CGI \
       popt-devel readline-devel tcsh zsh tcl-devel tk-devel strace \
-      voms-clients-cpp krb5-workstation python2-psutil myproxy singularity python2-requests &&\
+      voms-clients-cpp krb5-workstation python2-psutil myproxy apptainer python2-requests &&\
     dnf update -y ca-certificates &&\
     dnf config-manager --set-enabled powertools &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
