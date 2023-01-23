@@ -28,7 +28,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     dnf update -y ca-certificates &&\
     dnf --enablerepo=powertools install -y texinfo libstdc++-static boost-python3 &&\
     dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util &&\
-    dnf install -y libstdc++-static java-11-openjdk-devel &&\
+    dnf install -y libstdc++-static java-11-openjdk-devel xauth xdg-utils &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
