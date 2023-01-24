@@ -19,6 +19,7 @@ RUN dnf install -y \
       voms-clients-cpp krb5-workstation myproxy apptainer &&\
     dnf update -y ca-certificates &&\
     dnf install -y gfal2-all gfal2-util-scripts python3-gfal2-util &&\
+    dnf install -y java-11-openjdk-devel xauth xdg-utils vim &&\
     dnf --enablerepo=crb install -y texinfo &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
