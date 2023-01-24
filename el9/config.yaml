@@ -8,6 +8,7 @@ test:
   script: test-cmssw.sh
   node:   singularity
 variables:
+  CI_TESTS: stageout
   DEFAULT_PACKAGES:
   EPEL_PACKAGES:
   EXTRA_COMMAND:
