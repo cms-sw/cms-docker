@@ -23,7 +23,7 @@ RUN yum -y install openssl-devel &&\
     bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
     alternatives --set python `which python2` && \
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-8.noarch.rpm &&\
-    yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy singularity \
+    yum install -y voms-clients-cpp krb5-workstation python2-psutil myproxy apptainer \
         python2-requests python3-requests &&\
     yum update -y ca-certificates &&\
     yum install -y dnf-plugins-core &&\
@@ -39,5 +39,5 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool 
     touch /etc/tnsnames.ora &&\
     echo el8 > /etc/cmsos &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
-    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
+    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
 WORKDIR /build
