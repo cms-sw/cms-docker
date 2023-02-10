@@ -216,7 +216,10 @@ def get_labels(image):
     print(manifest)
   if ('errors' in manifest) and (manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN'):
     return {}
-  return loads(manifest['history'][0]['v1Compatibility'])['container_config']['Labels']
+  try:
+      return loads(manifest['history'][0]['v1Compatibility'])['container_config']['Labels']
+  except KeyError:
+      return loads(manifest['history'][0]['v1Compatibility'])['config']['Labels']
 
 def generate_yaml(username):
   import yaml
