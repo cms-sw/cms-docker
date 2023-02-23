@@ -53,5 +53,5 @@ RUN dnf -y install \
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt
 
 ADD osg-wn-client-setup.sh /.singularity.d/env/99-osg-wn-client-setup.sh
-RUN yum -y update igtf-ca-certs && yum clean all
+RUN yum -y update igtf-ca-certs && yum  install srm-ifce --enablerepo=epel-testing -y && yum clean all
 LABEL build-date="@BUILD_DATE@"
