@@ -12,5 +12,5 @@ RUN yum -y install https://repo.opensciencegrid.org/osg/3.5/osg-3.5-el8-release-
                    osg-wn-client \
                    redhat-lsb-core \
                    openssh-server \
-                   singularity && \
+                   apptainer && \
     yum clean all
