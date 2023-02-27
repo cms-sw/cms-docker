@@ -23,7 +23,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
       popt-devel readline-devel tcsh zsh tcl-devel tk-devel strace \
       krb5-workstation python2-requests glibc-langpack-en &&\
     dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ voms-clients-cpp python2-psutil myproxy singularity &&\
+    dnf install -y @EPEL_PACKAGES@ voms-clients-cpp python2-psutil myproxy apptainer &&\
     dnf update -y ca-certificates &&\
     dnf config-manager --set-enabled powertools &&\
     dnf install -y libstdc++-static &&\
