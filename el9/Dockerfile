@@ -7,7 +7,7 @@ RUN dnf install -y \
     libXext-devel libXft libXft-devel libXi libXinerama \
     libXmu libXpm libXpm-devel libXrandr libXrender \
     libglvnd-opengl mesa-libGL mesa-libGLU mesa-libGLU-devel \
-    java-1.8.0-openjdk-devel libtool m4 make man-db \
+    java-1.8.0-openjdk-devel libtool m4 make cmake man-db \
     ncurses ncurses-libs ncurses-devel nspr nss nss-devel nss-util \
     openssl openssl-devel openssl-libs \
     patch popt popt-devel python3 readline readline-devel rpm-build \
