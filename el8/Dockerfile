@@ -40,6 +40,7 @@ ADD krb5.conf /etc/krb5.conf
 ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
+    RUN dnf -y update igtf-ca-certs && dnf clean all &&\
     touch /etc/tnsnames.ora &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
