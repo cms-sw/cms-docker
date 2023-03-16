@@ -36,6 +36,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     echo el8 > /etc/cmsos &&\
     dnf clean all
 
+
 ADD krb5.conf /etc/krb5.conf
 ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
