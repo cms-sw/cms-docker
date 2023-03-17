@@ -10,6 +10,7 @@ test:
 variables:
   CI_TESTS: stageout
   DEFAULT_PACKAGES: coreutils-single
+  BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
   EPEL_PACKAGES:
 groups:
   bootstrap:
