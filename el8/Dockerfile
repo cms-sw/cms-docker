@@ -1,4 +1,7 @@
 FROM @BASE_IMAGE_NAME@
+LABEL maintainer="CMS Build"
+LABEL name="CMS Worker Node on EL"
+
 RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel \
       file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs libaio \
       libcom_err libgomp libICE libidn \
@@ -41,6 +44,10 @@ ADD krb5.conf /etc/krb5.conf
 ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
+    mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
     touch /etc/tnsnames.ora &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
+    echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
+
+LABEL build-date="@BUILD_DATE@"
