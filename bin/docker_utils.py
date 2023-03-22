@@ -142,11 +142,14 @@ def delete_permissions(username, repo, group_id):
   response = hub_request(uri, method = 'DELETE')
   return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
 
-def get_tags(image, page_size=500):
+def get_tags(image, page_size=1000, full=False):
   uri = '/repositories/%s/tags' % image
   payload = {"page_size" : page_size}
   response = hub_request(uri, params=payload, json=True)
   tags = []
+  if not 'results' in response:
+    return (False,response)
+  if full: return (True, response['results'])
   try:
     for tag in response['results']:
       tags.append(str(tag['name']))
