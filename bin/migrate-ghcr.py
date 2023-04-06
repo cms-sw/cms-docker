@@ -1,15 +1,14 @@
 #!/usr/bin/env python3
 import sys, yaml
 from subprocess import getstatusoutput as run_cmd
-from os.path import join, dirname, abspath
+from os.path import join, dirname, abspath, expanduser
 from docker_utils import get_tags, get_repos, hub_request
 from time import sleep
-import threading
 topdir = dirname(dirname(abspath(__file__)))
 sys.path.insert(0,join(topdir,'..', "cms-bot"))
 from github_utils import get_org_packages, get_org_package_versions, get_org_package_version
 
-token_file = "/afs/cern.ch/user/m/muzaffar/.gh_container"
+token_file = expanduser("~/.ghcr_token")
 
 def get_manifest(image):
   e , sha = run_cmd("docker manifest inspect %s | grep '\"digest\"' | head -1 | sed 's|.*sha256:||;s|\".*||'" % image)
@@ -57,8 +56,6 @@ def add_tags(name):
       continue
     if not tag_name.startswith("tmp-"):
       hub_sha[tag_name] = sha
-  jobs = []
-  max_jobs = 1
   for tag_name in hub_sha:
     if (tag_name in gh_sha) and (hub_sha[tag_name]==gh_sha[tag_name]):
       print("  Tag exists:",tag_name)
@@ -67,17 +64,8 @@ def add_tags(name):
     if get_manifest(img) == get_manifest("ghcr.io/cms-sw/"+img):
       print("  Tag exists:",tag_name)
     else:
-      while (len(jobs) >= max_jobs):
-        sleep(0.1)
-        ajobs = []
-        for t in jobs:
-          if t.is_alive(): ajobs.append(t)
-        jobs = ajobs[:]
-      t = threading.Thread(target=push_tag, args=(name, tag_name))
-      t.start()
-      jobs.append(t)
-      sleep(0.1)
-  for t in jobs: t.join()
+      if not push_tag(name, tag_name):
+        return False
   return True
 
 name_repo_map = {
@@ -96,7 +84,6 @@ with open(join(dirname(dirname(abspath(__file__))), "docker-config.yaml")) as re
 
 gh_repos = get_org_packages("cms-sw", token_file=token_file)
 for name in repo_conf['repositories']:
-  #if name!="ubi8": continue
   fname = "cmssw/%s" % name
   repo_obj = repo_conf['repositories'][name]
   found=False
