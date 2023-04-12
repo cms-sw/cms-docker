@@ -17,7 +17,7 @@ RUN yum install -y \
         libaio tcl-devel tk-devel \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python3 strace &&\
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil singularity apptainer libstdc++-static &&\
+    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil libstdc++-static &&\
     yum update -y ca-certificates &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && yum install -y @EXTRA_PACKAGES@ || true) &&\
     yum clean all
