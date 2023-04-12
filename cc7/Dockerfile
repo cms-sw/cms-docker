@@ -17,7 +17,7 @@ RUN yum install -y \
         libaio tcl-devel tk-devel \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python3 strace &&\
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil singularity libstdc++-static &&\
+    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil apptainer libstdc++-static &&\
     yum update -y ca-certificates &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && yum install -y @EXTRA_PACKAGES@ || true) &&\
     yum clean all
@@ -28,5 +28,5 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build 
     touch /etc/tnsnames.ora &&\
     cat /tmp/cern-ca-bundle.crt >> /etc/pki/tls/certs/ca-bundle.crt &&\
     rm -f /tmp/cern-ca-bundle.crt &&\
-    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/singularity/singularity.conf
+    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
 WORKDIR /build
