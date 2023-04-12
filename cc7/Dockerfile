@@ -1,7 +1,7 @@
 FROM @BASE_IMAGE_NAME@
 
 RUN yum install -y \
-        java-1.8.0-openjdk python-devel java-1.8.0-openjdk-devel ntp \
+        java-1.8.0-openjdk python-devel java-1.8.0-openjdk-devel java-11-openjdk-devel ntp \
         git subversion bc finger zip unzip which bzip2 \
         zlib nss nspr popt nss-util \
         openssl openssl-devel openssl-libs \
