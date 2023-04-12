@@ -29,12 +29,16 @@ groups:
     groups:
       x86_64:
         variables:
-          EXTRA_PACKAGES: doxygen compat-libstdc++-33 mesa-dri-drivers
+          EXTRA_PACKAGES: doxygen compat-libstdc++-33 mesa-dri-drivers apptainer
         tags:
           ${group1}:
       aarch64:
+        variables:
+          EXTRA_PACKAGES: singularity
         tags:
           ${group1}:
       ppc64le:
+        variables:
+          EXTRA_PACKAGES: apptainer
         tags:
           ${group1}:
