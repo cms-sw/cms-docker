@@ -28,5 +28,7 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build 
     touch /etc/tnsnames.ora &&\
     cat /tmp/cern-ca-bundle.crt >> /etc/pki/tls/certs/ca-bundle.crt &&\
     rm -f /tmp/cern-ca-bundle.crt &&\
-    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
+    conf=/etc/singularity/singularity.conf &&\
+    [ ! -f /etc/apptainer/apptainer.conf ] || conf=/etc/apptainer/apptainer.conf &&\
+    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' $conf
 WORKDIR /build
