@@ -167,6 +167,8 @@ repositories:
     dmwm: admin
   slc5:
     cmssw: write
+  el5:
+    cmssw: write
   slc6:
     cmssw: write
   el6:
