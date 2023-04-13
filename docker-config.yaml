@@ -7,6 +7,8 @@ repositories:
     dmwm: admin
   cc7:
     cmssw: write
+  el7:
+    cmssw: write
   cc8:
     cmssw: write
   cs8:
@@ -166,6 +168,8 @@ repositories:
   slc5:
     cmssw: write
   slc6:
+    cmssw: write
+  el6:
     cmssw: write
   ssb-alerts:
     dmwm: admin

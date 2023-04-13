@@ -1,0 +1,4 @@
+#CMS tags mapping. Format
+#Destination tag: source tag
+
+x86_64: cmssw/el6:x86_64
