@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import datetime, os, sys, yaml
+import sys, yaml
 from argparse import ArgumentParser
 from subprocess import getstatusoutput as run_cmd
 from os.path import join, dirname, abspath, expanduser
