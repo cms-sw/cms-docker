@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import datetime, os, sys, yaml
+from argparse import ArgumentParser
 from subprocess import getstatusoutput as run_cmd
 from os.path import join, dirname, abspath, expanduser
 from docker_utils import get_tags, get_repos, hub_request
@@ -10,11 +11,10 @@ from github_utils import get_org_packages, get_org_package_versions, get_org_pac
 
 token_file = expanduser("~/.ghcr_token")
 
-full_run = os.getenv('FULL_RUN')
-if full_run == False:
-  time_frame = os.getenv('TIME_WINDOW')
-  time_delta = datetime.timedelta(days=int(time_frame)) if time_frame else datetime.timedelta(days=7)
-  print("Checkin for the last %d days" % time_delta.days)
+parser = ArgumentParser()
+parser.add_argument("-r", "--fullrun")
+args = parser.parse_args()
+full_run = args.fullrun
 
 def get_manifest(image):
   """Retrieve SHA256 digest of Docker image manifest."""
@@ -47,10 +47,7 @@ def add_tags(name):
   """
   rname = "cmssw%%2F%s" % name
   res, hub_tags = get_tags(rname, full=True)
-  # Reduce list of hub_tags based on last pushed date
-  if full_run == False:
-    now = datetime.datetime.now().date()
-    hub_tags = [tag for tag in hub_tags if (now - datetime.datetime.strptime(tag['tag_last_pushed'], '%Y-%m-%dT%H:%M:%S.%fZ').date()) <= time_delta]  
+
   if not res: return res
   gh_tags = get_org_package_versions("cms-sw", package=rname, token_file=token_file)
   gh_sha = {}
@@ -76,8 +73,11 @@ def add_tags(name):
     tag_name = tag['name']  # In DockerHub, tag['name'] contains the tag name
     #tag_last_update = datetime.datetime.strptime(tag['tag_last_pushed'], '%Y-%m-%dT%H:%M:%S.%fZ').date()
     if (not tag_name in moving_tags) and (tag_name in gh_sha):
-      print("  Tag exists: ", tag_name)
-      continue
+      if full_run == "true":  ## 
+        print("  Tag exists: ", tag_name)
+        continue
+      else:  ## if full_run is false, we break once the tag exists (they are ordered by date)
+        break
     # Fill hub_sha dict with changing DockerHub tag names as keys and their corresponding sha as values
     if not tag_name.startswith("tmp-"):
       hub_sha[tag_name] = sha
