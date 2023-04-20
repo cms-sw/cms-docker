@@ -111,6 +111,7 @@ with open(join(dirname(dirname(abspath(__file__))), "docker-config.yaml")) as re
     repo_conf = yaml.load(ref)
 
 gh_repos = get_org_packages("cms-sw", token_file=token_file)
+print("%s GH Repos found:\n  %s" % (len(gh_repos), "\n  ".join([r['name'] for r in gh_repos])))
 for name in repo_conf['repositories']:
   fname = "cmssw/%s" % name
   repo_obj = repo_conf['repositories'][name]
