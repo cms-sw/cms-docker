@@ -41,7 +41,6 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
 
 
 ADD krb5.conf /etc/krb5.conf
-ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
     mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
