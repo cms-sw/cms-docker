@@ -2,10 +2,10 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL"
 
-ADD krb5.conf /etc/krb5.conf
-ADD CERN.repo /etc/yum.repos.d/CERN.repo
-ADD RPM-GPG-KEY-kojiv2 /tmp/RPM-GPG-KEY-kojiv2
-ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
+ADD krb5.conf               /etc/krb5.conf
+ADD CERN.repo               /tmp/CERN.repo
+ADD RPM-GPG-KEY-kojiv2      /tmp/RPM-GPG-KEY-kojiv2
+ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
 
 RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel \
       file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs libaio \
@@ -41,6 +41,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     eval $xcmd &&\
     alternatives --set python `which python2` &&\
     echo el8 > /etc/cmsos &&\
+    cp /tmp/CERN.repo /etc/yum.repos.d/CERN.repo &&\
     rpm --import /tmp/RPM-GPG-KEY-kojiv2 &&\
     dnf install -y cern-gpg-keys CERN-CA-certs &&\
     update-ca-trust &&\
@@ -49,7 +50,8 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
     mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
     touch /etc/tnsnames.ora &&\
-    /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
+    /tmp/fix_ssh_config.sh /etc/ssh/ssh_config &&\
+    rm -f /tmp/CERN.repo /tmp/RPM-GPG-KEY-kojiv2 /tmp/fix_ssh_config.sh &&\
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
 
