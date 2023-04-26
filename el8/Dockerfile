@@ -3,7 +3,7 @@ LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL"
 
 ADD krb5.conf /etc/krb5.conf
-ADD CERN.repo /etc/yum-puppet.repos.d/CERN.repo
+ADD CERN.repo /etc/yum.repos.d/CERN.repo
 ADD RPM-GPG-KEY-kojiv2 /tmp/RPM-GPG-KEY-kojiv2
 ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
 
