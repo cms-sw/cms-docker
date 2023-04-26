@@ -1,4 +1,10 @@
 FROM @BASE_IMAGE_NAME@
+LABEL maintainer="CMS Build"
+LABEL name="CMS Worker Node on EL"
+
+ADD krb5.conf               /etc/krb5.conf
+ADD cern.repo               /tmp/cern.repo
+ADD RPM-GPG-KEY-cern        /tmp/RPM-GPG-KEY-cern
 
 RUN yum install -y \
         java-1.8.0-openjdk python-devel java-1.8.0-openjdk-devel java-11-openjdk-devel ntp \
@@ -18,18 +24,21 @@ RUN yum install -y \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python3 strace &&\
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
     yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil libstdc++-static &&\
-    yum update -y ca-certificates &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && yum install -y @EXTRA_PACKAGES@ || true) &&\
-    yum clean all
-RUN yum install -y xrootd-client && yum clean all
-
-ADD krb5.conf /etc/krb5.conf
-ADD cern-ca-bundle.crt /tmp/cern-ca-bundle.crt
-RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build &&\
+    yum install -y xrootd-client &&\
+    cp /tmp/cern.repo /etc/yum.repos.d/cern.repo &&\
+    rpm --import /tmp/RPM-GPG-KEY-cern &&\
+    yum install -y CERN-CA-certs &&\
+    update-ca-trust &&\
+    yum update -y ca-certificates &&\
+    yum clean all &&\
+    mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build &&\
+    mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
     touch /etc/tnsnames.ora &&\
-    cat /tmp/cern-ca-bundle.crt >> /etc/pki/tls/certs/ca-bundle.crt &&\
-    rm -f /tmp/cern-ca-bundle.crt &&\
+    rm -f /tmp/cern.repo /tmp/RPM-GPG-KEY-cern &&\
     conf=/etc/singularity/singularity.conf &&\
     [ ! -f /etc/apptainer/apptainer.conf ] || conf=/etc/apptainer/apptainer.conf &&\
+    echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' $conf
-WORKDIR /build
+
+LABEL build-date="@BUILD_DATE@"
