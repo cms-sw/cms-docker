@@ -1,7 +1,4 @@
 FROM @BASE_IMAGE_NAME@
 RUN yum install -y bzip2-devel file popt-devel nspr-devel nss-devel \
-        rpm-build autoconf automake libtool gettext-devel \
-        centos-release-scl &&\
-    yum-config-manager --save --setopt=centos-sclo-rh.skip_if_unavailable=true &&\
-    yum install -y devtoolset-8-gcc devtoolset-8-gcc-c++ &&\
+        rpm-build autoconf automake libtool gettext-devel &&\
     yum clean all
