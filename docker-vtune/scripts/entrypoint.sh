@@ -5,4 +5,4 @@ if [ ! -d /vtune/profiles ] ; then
   exit 1
 fi
 
-su vtune -c "$(which vtune-backend) --web-port 8080 --data-directory /vtune/profiles --allow-remote-access --tls-certificate /etc/httpd/conf/apache-cert.pem --tls-certificate-key /etc/httpd/conf/apache-key.pem"
+su vtune -c "$(which vtune-backend) --web-port 8080 --data-directory /vtune/profiles --allow-remote-access --no-https --suppress-automatic-help-tours --log-to-console"
