@@ -4,5 +4,5 @@ if [ ! -d /vtune/profiles ] ; then
   echo "       Please start docker with '-v <vtune_config_dir>:/vtune/profiles:z'"
   exit 1
 fi
-
-su vtune -c "$(which vtune-backend) --web-port 8080 --data-directory /vtune/profiles --allow-remote-access --no-https --suppress-automatic-help-tours --log-to-console"
+/etc/init.d/nginx start
+su vtune -c "$(which vtune-server) --web-port 4000 --data-port 4040 --no-https --log-to-console --suppress-automatic-help-tours --log-level info --data-directory /vtune/profiles --base-url https://cmssdt.cern.ch/vtune/"
