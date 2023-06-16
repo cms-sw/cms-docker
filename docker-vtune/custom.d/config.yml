@@ -6,21 +6,21 @@ authentication:
     # displayed in the stdout will include a one time token that would allow the user to set the
     # passphrase. To reset the passphrase the server needs to be restarted with --reset-passphrase
     # command line option.
-    type: passphrase
+#    type: passphrase
     # login session duration (days). Defaults to 365 days
 #    sessionDuration: 60
 
      # Reverse proxy authentication
-#     type: reverse-proxy
+     type: reverse-proxy
     # http header containing the authorized user ID. Inserted by the reverse proxy
-#     header: <header name>
+     header: username
 
     # Anonymous authentication
     # Access to the server is not protected and the server is publicly available to any user. Not
     # recommended for use. If you do run the server with anonymous authentication then at least make
     # sure to run the server without --allow-remote-ui and on a host that other users do not have
     # access to.
-#    type: anonymous
+    # type: anonymous
 
 
     # SAML
