@@ -1,0 +1,8 @@
+[CERN]
+name=AlmaLinux-8 - CERN [HEAD]
+baseurl=http://linuxsoft.cern.ch/cern/alma/8/CERN/x86_64
+enabled=1
+gpgcheck=1
+gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-kojiv2
+exclude=puppet-agent
+priority=4
