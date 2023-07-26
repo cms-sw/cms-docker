@@ -10,7 +10,9 @@ ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
 RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh glibc libxcrypt openssl-libs libcom_err krb5-libs ncurses-libs perl \
           perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm &&\
     dnf install -y python2 python3 apptainer &&\
-    dnf install -y epel-release @EPEL_PACKAGES@ &&\
+    dnf install -y epel-release &&\
+    epel_pkgs="@EPEL_PACKAGES@" &&\
+    if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
