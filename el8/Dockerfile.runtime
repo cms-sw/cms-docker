@@ -9,10 +9,9 @@ ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
 
 RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh glibc libxcrypt openssl-libs libcom_err krb5-libs ncurses-libs perl \
           perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm &&\
-    dnf install -y python2 python3 apptainer &&\
+    dnf install -y python2 python3 which &&\
     dnf install -y epel-release &&\
-    epel_pkgs="@EPEL_PACKAGES@" &&\
-    if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
+    dnf install -y @EPEL_PACKAGES@ apptainer &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
@@ -24,7 +23,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh glibc libxcrypt openssl-libs lib
     update-ca-trust &&\
     dnf update -y ca-certificates &&\
     dnf clean all &&\
-    mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
+    mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms /etc/ssh &&\
     mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
     touch /etc/tnsnames.ora &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config &&\
