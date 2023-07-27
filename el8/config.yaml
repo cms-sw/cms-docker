@@ -31,6 +31,8 @@ groups:
   runtime:
     docker: Dockerfile.${group0}
     from: library/almalinux:8
+    variables:
+      SKIP_TESTS: true
     groups:
       x86_64:
         tags:

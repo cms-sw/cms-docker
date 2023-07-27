@@ -2,7 +2,7 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Buildtime"
 
-RUN dnf install -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter perl-File-Path \
+RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter perl-File-Path \
           perl-File-Temp perl-Getopt-Long perl-IO perl-Text-ParseWords perl-constant perl-Digest-MD5 \
           perl-PathTools perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path perl-File-Temp \
           perl-Getopt-Long libdrm perl-File-Which perl-Scalar-List-Utils perl-Term-ANSIColor perl-CGI \
@@ -11,6 +11,8 @@ RUN dnf install -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exp
     dnf install -y tar rpm-build git nspr nss rsync wget openssl-devel ncurses-devel libX11-devel \
           readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
           libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool gcc-c++ &&\
+    epel_pkgs="@EPEL_PACKAGES@" &&\
+    if [ -n "$epel_pkgs" ] ; then dnf install --enablerepo=epel -y $epel_pkgs; fi &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd
