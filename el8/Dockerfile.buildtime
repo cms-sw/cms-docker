@@ -15,7 +15,7 @@ RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper 
     if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
-    eval $xcmd
+    eval $xcmd &&\
     dnf update -y ca-certificates &&\
     dnf clean all &&\
     echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
