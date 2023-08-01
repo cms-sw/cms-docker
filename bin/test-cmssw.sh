@@ -3,10 +3,12 @@ CMSREP="cmsrep.cern.ch"
 ADD_PKGS=""
 RUN_TESTS="false"
 TEST_OK_MATCH="tests passed, 0 1 0 0 0 0 0 0 0 0 failed"
+BUILDTIME="true"
 if [ "$2" != "" ] ; then CMSREP="$2" ; fi
 if [ "$3" != "" ] ; then ADD_PKGS="$3" ; fi
 if [ "$4" = "true" ] ; then RUN_TESTS="true" ; fi
 if [ "$5" != "" ] ; then TEST_OK_MATCH="$5" ; fi
+if [ "$6" != "" ] ; then BUILDTIME="$6" ; fi
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
@@ -92,22 +94,24 @@ for arch in ${ARCHS} ; do
     scram -a $SCRAM_ARCH project ${cmssw_ver}
     cd ${cmssw_ver}
     eval `scram run -sh` >/dev/null 2>&1
-    USE_GIT=false
-    if git cms-addpkg FWCore/Version >/dev/null 2>&1 ; then USE_GIT=true ; fi
-    for p in Calibration/EcalCalibAlgos FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ${ADD_PKGS} ; do
-      [ -e $CMSSW_RELEASE_BASE/src/$p ] || continue
-      if $USE_GIT  ; then
-        git cms-addpkg $p
+    if $BUILDTIME ; then
+      USE_GIT=false
+      if git cms-addpkg FWCore/Version >/dev/null 2>&1 ; then USE_GIT=true ; fi
+      for p in Calibration/EcalCalibAlgos FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ${ADD_PKGS} ; do
+        [ -e $CMSSW_RELEASE_BASE/src/$p ] || continue
+        if $USE_GIT  ; then
+          git cms-addpkg $p
+        else
+          mkdir -p $CMSSW_BASE/src/$p
+          rsync -a $CMSSW_RELEASE_BASE/src/$p/ $CMSSW_BASE/src/$p/
+        fi
+      done
+      if scram build -j $(nproc) ; then
+        echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.OK >> $WORKSPACE/res.txt
       else
-        mkdir -p $CMSSW_BASE/src/$p
-        rsync -a $CMSSW_RELEASE_BASE/src/$p/ $CMSSW_BASE/src/$p/
+        echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.ERR >> $WORKSPACE/res.txt
+        RUN_TESTS=false
       fi
-    done
-    if scram build -j $(nproc) ; then
-      echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.OK >> $WORKSPACE/res.txt
-    else
-      echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.ERR >> $WORKSPACE/res.txt
-      RUN_TESTS=false
     fi
     RES="SKIP"
     if $RUN_TESTS ; then
