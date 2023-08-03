@@ -34,67 +34,108 @@ if [ "${ARCHS}" = "" ] ; then
   rm -f cmsos archs
 fi
 
+run_the_matrix () {
+  echo "Architecture: $SCRAM_ARCH"
+  echo "CMSSW Version: $cmssw_ver"
+
+  RES="ERR"
+  [ -d ${WORKSPACE}/cms-bot ] || git clone --depth 1 https://github.com/cms-sw/cms-bot
+  ${WORKSPACE}/cms-bot/das-utils/use-ibeos-sort
+  export PATH=${WORKSPACE}/cms-bot/das-utils:$PATH
+  mkdir -p $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
+  pushd $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
+    ((timeout 14400 runTheMatrix.py -j $(nproc) -s --command ' -n 5') 2>&1 | tee -a matrix.log) || true
+    find . -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
+    if grep ' tests passed' matrix.log ; then
+      if [ $(grep ' tests passed' matrix.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' | wc -l) -eq 0 ] ; then
+        RES="OK"
+      elif [ $(echo ${SCRAM_ARCH} | grep '_aarch64_' | wc -l) -eq 1 ] ; then
+        if [ $(grep "${TEST_OK_MATCH}" matrix.log | wc -l) -eq 1 ] ; then
+          RES="OK"
+        fi
+      fi
+    fi
+  popd
+}
+
+run_addons () {
+  echo "Architecture: $SCRAM_ARCH"
+  echo "CMSSW Version: $cmssw_ver"
+
+  RES_ADDONS="ERR"
+  mkdir -p $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
+  pushd $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
+    ((timeout 14400 addOnTests.py -j $(nproc)) 2>&1 | tee -a addons.log) || true
+    if grep ' tests passed' addons.log ; then
+      if [ $(grep ' tests passed' addons.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' | wc -l) -eq 0 ] ; then
+        RES_ADDONS="OK"
+      fi
+    fi
+  popd
+}
+
 parch=""
 touch $WORKSPACE/res.txt
 for arch in ${ARCHS} ; do
   export SCRAM_ARCH=$arch
-  cd $WORKSPACE/inst
-  echo ${SCRAM_ARCH} >> $WORKSPACE/res.txt
-  if [ $(echo ${INVALID_ARCHS} | tr ' ' '\n' | grep "^${arch}$" | wc -l) -gt 0 ] ; then
-    echo ${SCRAM_ARCH}.SKIP >> $WORKSPACE/res.txt
-    continue
-  fi
-  [ "${parch}" != "" ] && rm -rf ${parch}
-  parch="${arch}"
-  rm -rf ./$SCRAM_ARCH ; mkdir -p ./$SCRAM_ARCH
-  cd ./$SCRAM_ARCH
-  touch cmssw.rel
-  $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ' CMSSW_' >cmssw.rel) || true
-  cat cmssw.rel
-  cmssw_ver=""
-  boot_repo="cms"
-  for v in $(grep ${RELEASE_INST_DIR}/ cmssw.rel | grep '_[0-9][0-9]*_X_' | awk '{print $3}' | tac) ; do
-    if [ -e $v/build-errors ] ; then continue ; fi
-    cmssw_ver=$(basename $v)
-    boot_repo=cms.$(echo $v | cut -d/ -f4)
-    if [ "${boot_repo}" = "cms.sw" ]; then boot_repo=cms.$(echo $v | cut -d/ -f6); fi
-    break
-  done
-  if [ "${cmssw_ver}" = "" ] ; then
-    cmssw_ver=$(grep /cvmfs/cms.cern.ch/ cmssw.rel | tail -1 | awk '{print $2}' || true)
-  fi
-  if ! sh -ex $WORKSPACE/inst/bootstrap.sh -server ${CMSREP} -r ${boot_repo} -a $SCRAM_ARCH setup ; then
-    echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
-    continue
-  fi
-  echo ${SCRAM_ARCH}.BOOT.OK >> $WORKSPACE/res.txt
-  if [ "${cmssw_ver}" = "" ] ; then
-    echo "Warnings: No CMSSW version available for $SCRAM_ARCH"
-    continue
-  fi
-  echo "Found release: ${cmssw_ver}"
-  INST_OPTS="-a $SCRAM_ARCH --debug install --ignore-size --jobs 2 -y"
-  $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg $INST_OPTS cms+cmssw+${cmssw_ver}
-  INSTALL_PACKAGES=""
-  for pkg in gcc-fixincludes cms+dasgoclient ; do
-    pkg=$(($WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH search "$pkg" | grep 'CMS Experiment package' | tail -1 | sed 's| .*||') || true)
-    if [ "${pkg}" != "" ] ; then
-      INSTALL_PACKAGES="${INSTALL_PACKAGES} $pkg"
+  if $BUILDTIME ; then
+    cd $WORKSPACE/inst
+    echo ${SCRAM_ARCH} >> $WORKSPACE/res.txt
+    if [ $(echo ${INVALID_ARCHS} | tr ' ' '\n' | grep "^${arch}$" | wc -l) -gt 0 ] ; then
+      echo ${SCRAM_ARCH}.SKIP >> $WORKSPACE/res.txt
+      continue
     fi
-  done
-  if [ "${INSTALL_PACKAGES}" != "" ] ; then
-    $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg $INST_OPTS ${INSTALL_PACKAGES}
-  fi
-  export cmssw_ver
-  (
-    export CMS_PATH=/cvmfs/cms-ib.cern.ch
-    export SITECONFIG_PATH=/cvmfs/cms-ib.cern.ch/SITECONF/local
-    export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
-    source $WORKSPACE/inst/$SCRAM_ARCH/cmsset_default.sh >/dev/null 2>&1
-    scram -a $SCRAM_ARCH project ${cmssw_ver}
-    cd ${cmssw_ver}
-    eval `scram run -sh` >/dev/null 2>&1
-    if $BUILDTIME ; then
+    [ "${parch}" != "" ] && rm -rf ${parch}
+    parch="${arch}"
+    rm -rf ./$SCRAM_ARCH ; mkdir -p ./$SCRAM_ARCH
+    cd ./$SCRAM_ARCH
+    touch cmssw.rel
+    $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ' CMSSW_' >cmssw.rel) || true
+    cat cmssw.rel
+    cmssw_ver=""
+    boot_repo="cms"
+    for v in $(grep ${RELEASE_INST_DIR}/ cmssw.rel | grep '_[0-9][0-9]*_X_' | awk '{print $3}' | tac) ; do
+      if [ -e $v/build-errors ] ; then continue ; fi
+      cmssw_ver=$(basename $v)
+      boot_repo=cms.$(echo $v | cut -d/ -f4)
+      if [ "${boot_repo}" = "cms.sw" ]; then boot_repo=cms.$(echo $v | cut -d/ -f6); fi
+      break
+    done
+    if [ "${cmssw_ver}" = "" ] ; then
+      cmssw_ver=$(grep /cvmfs/cms.cern.ch/ cmssw.rel | tail -1 | awk '{print $2}' || true)
+    fi
+    if ! sh -ex $WORKSPACE/inst/bootstrap.sh -server ${CMSREP} -r ${boot_repo} -a $SCRAM_ARCH setup ; then
+      echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
+      continue
+    fi
+    echo ${SCRAM_ARCH}.BOOT.OK >> $WORKSPACE/res.txt
+    if [ "${cmssw_ver}" = "" ] ; then
+      echo "Warnings: No CMSSW version available for $SCRAM_ARCH"
+      continue
+    fi
+    echo "Found release: ${cmssw_ver}"
+
+    INST_OPTS="-a $SCRAM_ARCH --debug install --ignore-size --jobs 2 -y"
+    $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg $INST_OPTS cms+cmssw+${cmssw_ver}
+    INSTALL_PACKAGES=""
+    for pkg in gcc-fixincludes cms+dasgoclient ; do
+      pkg=$(($WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg -a $SCRAM_ARCH search "$pkg" | grep 'CMS Experiment package' | tail -1 | sed 's| .*||') || true)
+      if [ "${pkg}" != "" ] ; then
+        INSTALL_PACKAGES="${INSTALL_PACKAGES} $pkg"
+      fi
+    done
+    if [ "${INSTALL_PACKAGES}" != "" ] ; then
+      $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg $INST_OPTS ${INSTALL_PACKAGES}
+    fi
+     export cmssw_ver
+    (
+      export CMS_PATH=/cvmfs/cms-ib.cern.ch
+      export SITECONFIG_PATH=/cvmfs/cms-ib.cern.ch/SITECONF/local
+      export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
+      source $WORKSPACE/inst/$SCRAM_ARCH/cmsset_default.sh >/dev/null 2>&1
+      scram -a $SCRAM_ARCH project ${cmssw_ver}
+      cd ${cmssw_ver}
+      eval `scram run -sh` >/dev/null 2>&1
       USE_GIT=false
       if git cms-addpkg FWCore/Version >/dev/null 2>&1 ; then USE_GIT=true ; fi
       for p in Calibration/EcalCalibAlgos FWCore/PrescaleService FWCore/SharedMemory FWCore/Framework DataFormats/Common DataFormats/StdDictionaries CondFormats/HIObjects ${ADD_PKGS} ; do
@@ -112,31 +153,35 @@ for arch in ${ARCHS} ; do
         echo ${SCRAM_ARCH}.${cmssw_ver}.BUILD.ERR >> $WORKSPACE/res.txt
         RUN_TESTS=false
       fi
-    fi
+      RES="SKIP"
+      if $RUN_TESTS ; then
+        run_the_matrix
+        echo "RESULT: $RES"
+      fi
+      echo "${SCRAM_ARCH}.${cmssw_ver}.TEST.${RES}" >> $WORKSPACE/res.txt
+    )
+    rm -rf $SCRAM_ARCH
+  else
+    touch cmssw.rel
+    $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ' CMSSW_' >cmssw.rel) || true
+    cmssw_ver=$(grep /cvmfs/cms.cern.ch/ cmssw.rel | tail -1 | awk '{print $2}' || true)
+    echo "Getting CMSSW area from /cvmfs: $cmssw_ver"
+    export CMS_PATH=/cvmfs/cms-ib.cern.ch
+    export SITECONFIG_PATH=/cvmfs/cms-ib.cern.ch/SITECONF/local
+    export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
+    source /cvmfs/cms.cern.ch/cmsset_default.sh
+    scram -a $SCRAM_ARCH project ${cmssw_ver}
+    cd ${cmssw_ver}
+    eval `scram run -sh` >/dev/null 2>&1
     RES="SKIP"
+    RES_ADDONS="SKIP"
     if $RUN_TESTS ; then
-      RES="ERR"
-      [ -d ${WORKSPACE}/cms-bot ] || git clone --depth 1 https://github.com/cms-sw/cms-bot
-      ${WORKSPACE}/cms-bot/das-utils/use-ibeos-sort
-      export PATH=${WORKSPACE}/cms-bot/das-utils:$PATH
-      mkdir -p $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
-      pushd $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
-        ((timeout 14400 runTheMatrix.py -j $(nproc) -s --command ' -n 5') 2>&1 | tee -a matrix.log) || true
-        find . -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
-        if grep ' tests passed' matrix.log ; then
-          if [ $(grep ' tests passed' matrix.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' |wc -l) -eq 0 ] ; then
-            RES="OK"
-          elif [ $(echo ${SCRAM_ARCH} | grep '_aarch64_' | wc -l) -eq 1 ] ; then
-            if [ $(grep "${TEST_OK_MATCH}" matrix.log | wc -l) -eq 1 ] ; then
-              RES="OK"
-            fi
-          fi
-        fi
-      popd
+      run_the_matrix
+      run_addons
     fi
     echo "${SCRAM_ARCH}.${cmssw_ver}.TEST.${RES}" >> $WORKSPACE/res.txt
-  )
-  rm -rf $SCRAM_ARCH
+    echo "${SCRAM_ARCH}.${cmssw_ver}.TEST_ADDONS.${RES_ADDONS}" >> $WORKSPACE/res.txt
+  fi
 done
 [ "${parch}" != "" ] && rm -rf ${parch}
 cd $WORKSPACE
