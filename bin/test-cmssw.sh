@@ -76,6 +76,8 @@ run_addons () {
 
 parch=""
 touch $WORKSPACE/res.txt
+export CMS_PATH=/cvmfs/cms-ib.cern.ch
+export SITECONFIG_PATH=/cvmfs/cms-ib.cern.ch/SITECONF/local
 for arch in ${ARCHS} ; do
   export SCRAM_ARCH=$arch
   if $BUILDTIME ; then
@@ -129,8 +131,6 @@ for arch in ${ARCHS} ; do
     fi
      export cmssw_ver
     (
-      export CMS_PATH=/cvmfs/cms-ib.cern.ch
-      export SITECONFIG_PATH=/cvmfs/cms-ib.cern.ch/SITECONF/local
       export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
       source $WORKSPACE/inst/$SCRAM_ARCH/cmsset_default.sh >/dev/null 2>&1
       scram -a $SCRAM_ARCH project ${cmssw_ver}
@@ -166,8 +166,6 @@ for arch in ${ARCHS} ; do
     $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ' CMSSW_' >cmssw.rel) || true
     cmssw_ver=$(grep /cvmfs/cms.cern.ch/ cmssw.rel | tail -1 | awk '{print $2}' || true)
     echo "Getting CMSSW area from /cvmfs: $cmssw_ver"
-    export CMS_PATH=/cvmfs/cms-ib.cern.ch
-    export SITECONFIG_PATH=/cvmfs/cms-ib.cern.ch/SITECONF/local
     export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
     source /cvmfs/cms.cern.ch/cmsset_default.sh
     scram -a $SCRAM_ARCH project ${cmssw_ver}
