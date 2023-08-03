@@ -10,7 +10,7 @@ RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper 
           perl-IO-Compress &&\
     dnf install --disablerepo=epel -y tar rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
           libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
-          libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool gcc-c++ libnsl &&\
+          libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool gcc-c++ &&\
     dnf --enablerepo=powertools install -y texinfo &&\
     epel_pkgs="@EPEL_PACKAGES@" &&\
     if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
