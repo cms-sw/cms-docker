@@ -11,7 +11,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh glibc glibc-headers libxcryp
           perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl &&\
     dnf install -y python2 python3 which procps-ng &&\
     dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ apptainer &&\
+    dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
