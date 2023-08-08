@@ -44,6 +44,15 @@ groups:
       x86_64:
         tags:
           ${group1}-${group0}:
+  grid:
+    docker: Dockerfile.${group0}
+    from: ${container}:${group1}-runtime
+    variables:
+      SKIP_TESTS: true
+    groups:
+      x86_64:
+        tags:
+          ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
     from: library/almalinux:8
