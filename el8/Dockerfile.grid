@@ -4,8 +4,7 @@ LABEL name="CMS Worker Node on EL - Grid packages"
 
 RUN dnf --enablerepo=powertools install -y boost-python3
 RUN dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util &&\ 
-    epel_pkgs="@EPEL_PACKAGES@" &&\
-    if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
+    dnf install -y @EPEL_PACKAGES@ myproxy &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
