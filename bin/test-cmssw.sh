@@ -56,7 +56,7 @@ run_the_matrix () {
             echo "Processing $line ..."
             relval=$(echo $line | cut -d_ -f1)
             let step=$(echo $line | grep -o -i "Step[0-9][0-9]*-FAILED"  | sed 's|^Step||i;s|-FAILED$||i')+1
-            ecode=$(echo $line | sed 's|.* exit: ||' | tr ' ' '\n' | grep -v '^[1-9]')
+            ecode=$(echo $line | sed 's|.* exit: ||' | tr ' ' '\n' | grep '^[1-9]')
             echo "Found Relval ${relval}:step${step}:${ecode}"
             if grep -q "^WF:${relval}:step${step}:${ecode}$" $RELVAL_RES ; then
               echo "Known error"
