@@ -3,12 +3,10 @@ CMSREP="cmsrep.cern.ch"
 ADD_PKGS=""
 RUN_TESTS="false"
 BUILDTIME="true"
-RELVAL_RES=""
 if [ "$2" != "" ] ; then CMSREP="$2" ; fi
 if [ "$3" != "" ] ; then ADD_PKGS="$3" ; fi
 if [ "$4" = "true" ] ; then RUN_TESTS="true" ; fi
 if [ "$5" != "" ] ; then BUILDTIME="$5" ; fi
-if [ "$6" != "" ] ; then RELVAL_RES="$6" ; fi
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
@@ -51,10 +49,10 @@ run_the_matrix () {
         RES="OK"
       else
         echo "Checking known errors..."
-        if [ "$RELVAL_RES" != "" -a -f "$RELVAL_RES" ]; then
-          echo "Known failures:
-          cat $RELVAL_RES
-          cat matrix.log | grep "FAILED" | while read line ; do
+        RELVAL_RES=ib-relvals.txt
+        $WORKSPACE/cms-bot/get-relval-failures.py ${cmssw_ver} ${SCRAM_ARCH} > ${RELVAL_RES} || true
+        cat $RELVAL_RES
+        cat matrix.log | grep "FAILED" | while read line ; do
             echo "Processing $line ..."
             relval=$(echo $line | cut -d_ -f1)
             let step=$(echo $line | grep -o -i "Step[0-9][0-9]*-FAILED"  | sed 's|^Step||i;s|-FAILED$||i')+1
@@ -67,9 +65,8 @@ run_the_matrix () {
               echo "Real error"
               echo "${SCRAM_ARCH}.${cmssw_ver}.RELVAL.${relval}.${step}.ERR" >> $WORKSPACE/res.txt
             fi
-          done
-          if [ $(cat $WORKSPACE/res.txt | grep "RELVAL" | grep "ERR" |  wc -l) -eq 0 ] ; then RES="OK" ; fi
-        fi
+        done
+        if [ $(cat $WORKSPACE/res.txt | grep "RELVAL" | grep "ERR" |  wc -l) -eq 0 ] ; then RES="OK" ; fi
       fi
     fi
   popd
