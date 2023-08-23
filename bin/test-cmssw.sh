@@ -3,10 +3,12 @@ CMSREP="cmsrep.cern.ch"
 ADD_PKGS=""
 RUN_TESTS="false"
 BUILDTIME="true"
+RELVAL_RES=""
 if [ "$2" != "" ] ; then CMSREP="$2" ; fi
 if [ "$3" != "" ] ; then ADD_PKGS="$3" ; fi
 if [ "$4" = "true" ] ; then RUN_TESTS="true" ; fi
 if [ "$5" != "" ] ; then BUILDTIME="$5" ; fi
+if [ "$6" != "" ] ; then RELVAL_RES="$6" ; fi
 RELEASE_INST_DIR=/cvmfs/cms-ib.cern.ch
 INVALID_ARCHS='slc6_amd64_gcc461 slc6_amd64_gcc810 slc7_aarch64_gcc493 slc7_aarch64_gcc530'
 export CMSSW_GIT_REFERENCE=/cvmfs/cms.cern.ch/cmssw.git.daily
@@ -49,14 +51,16 @@ run_the_matrix () {
         RES="OK"
       else
         echo "Checking known errors..."
-        if [ -f "$WORKSPACE/relval-$SCRAM_ARCH" ]; then
+        if [ "$RELVAL_RES" != "" -a -f "$RELVAL_RES" ]; then
+          echo "Known failures:
+          cat $RELVAL_RES
           cat matrix.log | grep "FAILED" | while read line ; do
             echo "Processing $line ..."
             relval=$(echo $line | cut -d_ -f1)
-            echo "RelVal es $relval"
-            step=$(echo $line | grep -o -i "Step[0-9]-FAILED" | grep -o -i "Step[0-9]")
-            echo "Step is $step"
-            if [ $(cat $WORKSPACE/relval-$SCRAM_ARCH | grep $relval | grep -i $step | wc -l) -gt 0 ]; then
+            let step=$(echo $line | grep -o -i "Step[0-9][0-9]*-FAILED"  | sed 's|^Step||i;s|-FAILED$||i')+1
+            ecode=$(echo $line | sed 's|.* exit: ||' | tr ' ' '\n' | grep -v '^[1-9]')
+            echo "Found Relval ${relval}:step${step}:${ecode}"
+            if grep -q "^WF:${relval}:step${step}:${ecode}$" $RELVAL_RES ; then
               echo "Known error"
               echo "${SCRAM_ARCH}.${cmssw_ver}.RELVAL.${relval}.${step}.KNOWN" >> $WORKSPACE/res.txt
             else
