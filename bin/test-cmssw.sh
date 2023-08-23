@@ -96,7 +96,7 @@ for arch in ${ARCHS} ; do
   export SCRAM_ARCH=$arch
   touch $WORKSPACE/cmssw.rel
   release_cycle=$(curl https://cmssdt.cern.ch/SDT/BaselineDevRelease)
-  $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ' CMSSW_' | grep $release_cycle >$WORKSPACE/cmssw.rel) || true
+  $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ${release_cycle} >$WORKSPACE/cmssw.rel) || true
   if $BUILDTIME ; then
     cd $WORKSPACE/inst
     echo ${SCRAM_ARCH} >> $WORKSPACE/res.txt
