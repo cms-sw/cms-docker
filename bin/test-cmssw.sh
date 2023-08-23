@@ -96,7 +96,20 @@ for arch in ${ARCHS} ; do
   export SCRAM_ARCH=$arch
   touch $WORKSPACE/cmssw.rel
   release_cycle=$(curl https://cmssdt.cern.ch/SDT/BaselineDevRelease)
-  $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | grep ${release_cycle} >$WORKSPACE/cmssw.rel) || true
+  $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c ${release_cycle} | grep ${RELEASE_INST_DIR}/ | grep -v '/cmssw-patch/' | awk '{print $3}' | tac > $WORKSPACE/cmssw.rel) || true
+  #If tests enabled then find a release for which relvals are fully run
+  if $RUN_TESTS ; then
+    curl -L https://raw.githubusercontent.com/cms-sw/cms-sw.github.io/master/data/${release_cycle}.json > ${release_cycle}.json
+    touch $WORKSPACE/cmssw.rel.filtered
+    for v in $(cat $WORKSPACE/cmssw.rel); do
+      if [ -e $v/build-errors ] ; then continue ; fi
+      ver=$(basename $v)
+      if [ $(grep -B 5 "/${SCRAM_ARCH}/.*/${ver}/pyRelValMatrixLogs/run/" ${release_cycle}.json | grep '"done": *true' |wc -l) -gt 0 ] ; then
+        echo "$v" >> $WORKSPACE/cmssw.rel.filtered
+      fi
+    done
+    mv $WORKSPACE/cmssw.rel.filtered $WORKSPACE/cmssw.rel
+  fi
   if $BUILDTIME ; then
     cd $WORKSPACE/inst
     echo ${SCRAM_ARCH} >> $WORKSPACE/res.txt
@@ -111,7 +124,7 @@ for arch in ${ARCHS} ; do
     cat $WORKSPACE/cmssw.rel
     cmssw_ver=""
     boot_repo="cms"
-    for v in $(grep ${RELEASE_INST_DIR}/ $WORKSPACE/cmssw.rel | grep '_[0-9][0-9]*_X_' | awk '{print $3}' | tac) ; do
+    for v in $(cat $WORKSPACE/cmssw.rel) ; do
       if [ -e $v/build-errors ] ; then continue ; fi
       cmssw_ver=$(basename $v)
       boot_repo=cms.$(echo $v | cut -d/ -f4)
@@ -119,7 +132,7 @@ for arch in ${ARCHS} ; do
       break
     done
     if [ "${cmssw_ver}" = "" ] ; then
-      cmssw_ver=$(grep /cvmfs/cms.cern.ch/ $WORKSPACE/cmssw.rel | tail -1 | awk '{print $2}' || true)
+      cmssw_ver=$(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep -v '/cmssw-patch/' | tail -1 | awk '{print $2}')
     fi
     if ! sh -ex $WORKSPACE/inst/bootstrap.sh -server ${CMSREP} -r ${boot_repo} -a $SCRAM_ARCH setup ; then
       echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
@@ -177,7 +190,7 @@ for arch in ${ARCHS} ; do
     )
     rm -rf $SCRAM_ARCH
   else
-    cmssw_ver=$(grep /cvmfs/cms-ib.cern.ch/ $WORKSPACE/cmssw.rel | tail -1 | awk '{print $2}' || true)
+    cmssw_ver=$(head -1 $WORKSPACE/cmssw.rel | sed 's|.*/||' || true)
     echo "Getting CMSSW area from /cvmfs: $cmssw_ver"
     export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
     source /cvmfs/cms.cern.ch/cmsset_default.sh
