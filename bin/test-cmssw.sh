@@ -34,12 +34,10 @@ fi
 
 run_the_matrix () {
   echo "Architecture: $SCRAM_ARCH"
-  echo "CMSSW Version: $cmssw_ver"
+  echo "CMSSW Version: $cmssw_ver ($CMSSW_BASE)"
 
   RES="ERR"
   [ -d ${WORKSPACE}/cms-bot ] || (pushd $WORKSPACE; git clone --depth 1 https://github.com/cms-sw/cms-bot; popd)
-  ${WORKSPACE}/cms-bot/das-utils/use-ibeos-sort
-  export PATH=${WORKSPACE}/cms-bot/das-utils:$PATH
   mkdir -p $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
   pushd $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
     RELEASE_FORMAT=$cmssw_ver ARCHITECTURE=$SCRAM_ARCH ${WORKSPACE}/cms-bot/run-ib-testbase.sh > run.sh
