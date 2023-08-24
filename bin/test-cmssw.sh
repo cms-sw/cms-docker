@@ -37,22 +37,28 @@ run_the_matrix () {
   echo "CMSSW Version: $cmssw_ver"
 
   RES="ERR"
-  [ -d ${WORKSPACE}/cms-bot ] || git clone --depth 1 https://github.com/cms-sw/cms-bot
+  [ -d ${WORKSPACE}/cms-bot ] || (pushd $WORKSPACE; git clone --depth 1 https://github.com/cms-sw/cms-bot; popd)
   ${WORKSPACE}/cms-bot/das-utils/use-ibeos-sort
   export PATH=${WORKSPACE}/cms-bot/das-utils:$PATH
   mkdir -p $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
   pushd $WORKSPACE/upload/${SCRAM_ARCH}/${cmssw_ver}
-    ((runTheMatrix.py -s --useInput all --job-reports -j $(nproc) --command " -n 5 --customise Validation/Performance/TimeMemorySummary.customiseWithTimeMemorySummary --prefix 'timeout --signal SIGTERM 14400 ' ") 2>&1 | tee -a matrix.log) || true
-    find . -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
-    if grep ' tests passed' matrix.log ; then
-      if [ $(grep ' tests passed' matrix.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' | wc -l) -eq 0 ] ; then
+    RELEASE_FORMAT=$cmssw_ver ARCHITECTURE=$SCRAM_ARCH ${WORKSPACE}/cms-bot/run-ib-testbase.sh > run.sh
+    ALL_WFS=$(runTheMatrix.py -s -n | grep -v ' workflows ' | grep '^[1-9][0-9]*\(.[0-9][0-9]*\|\)\s' | sed 's| .*||' | tr '\n' ',' | sed 's|,$||')
+    echo "${WORKSPACE}/cms-bot/run-ib-relval.py -i 1of1 -f -n -l '${ALL_WFS}'" >> run.sh
+    chmod +x run.sh
+    (./run.sh 2>&1 | tee -a matrix.log) || true
+    mv $CMSSW_BASE/pyRelval .
+    find pyRelval -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
+    cat pyRelval/*/workflow.log > relval-out.log || true
+    if grep ' tests passed' relval-out.log ; then
+      if [ $(grep ' tests passed' relval-out.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' | wc -l) -eq 0 ] ; then
         RES="OK"
       else
         echo "Checking known errors..."
         RELVAL_RES=ib-relvals.txt
         $WORKSPACE/cms-bot/get-relval-failures.py ${cmssw_ver} ${SCRAM_ARCH} > ${RELVAL_RES} || true
         cat $RELVAL_RES
-        cat matrix.log | grep "FAILED" | while read line ; do
+        cat relval-out.log | grep "FAILED" | while read line ; do
             echo "Processing $line ..."
             relval=$(echo $line | cut -d_ -f1)
             let step=$(echo $line | grep -o -i "Step[0-9][0-9]*-FAILED"  | sed 's|^Step||i;s|-FAILED$||i')+1
