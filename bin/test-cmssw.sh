@@ -46,7 +46,7 @@ run_the_matrix () {
     ALL_WFS=$(runTheMatrix.py -s -n | grep -v ' workflows ' | grep '^[1-9][0-9]*\(.[0-9][0-9]*\|\)\s' | sed 's| .*||' | tr '\n' ',' | sed 's|,$||')
     echo "${WORKSPACE}/cms-bot/run-ib-relval.py -i 1of1 -f -n -l '${ALL_WFS}'" >> run.sh
     chmod +x run.sh
-    (./run.sh 2>&1 | tee -a matrix.log) || true
+    (CMS_RELVALS_USER_COMMAND_OPTS='-n 5' ./run.sh 2>&1 | tee -a matrix.log) || true
     mv $CMSSW_BASE/pyRelval .
     find pyRelval -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
     cat pyRelval/*/workflow.log > relval-out.log || true
