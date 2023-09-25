@@ -148,7 +148,6 @@ for arch in ${ARCHS} ; do
       continue
     fi
     echo "Found release: ${cmssw_ver}"
-
     INST_OPTS="-a $SCRAM_ARCH --debug install --ignore-size --jobs 2 -y"
     $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg $INST_OPTS cms+cmssw+${cmssw_ver}
     INSTALL_PACKAGES=""
@@ -194,18 +193,24 @@ for arch in ${ARCHS} ; do
     )
     rm -rf $SCRAM_ARCH
   else
-    cmssw_ver=$(head -1 $WORKSPACE/cmssw.rel | sed 's|.*/||' || true)
-    echo "Getting CMSSW area from /cvmfs: $cmssw_ver"
-    export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
-    source /cvmfs/cms.cern.ch/cmsset_default.sh
-    scram -a $SCRAM_ARCH project ${cmssw_ver}
-    cd ${cmssw_ver}
-    eval `scram run -sh` >/dev/null 2>&1
     RES="SKIP"
     RES_ADDONS="SKIP"
-    if $RUN_TESTS ; then
-      run_the_matrix
-      run_addons
+    cmssw_ver=$(head -1 $WORKSPACE/cmssw.rel | sed 's|.*/||' || true)
+    if [ "${cmssw_ver}" = "" ] ; then
+      echo "Warnings: No CMSSW version available for $SCRAM_ARCH"
+      echo "Skipping tests ..."
+      continue
+    else
+      echo "Getting CMSSW area from /cvmfs: $cmssw_ver"
+      export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
+      source /cvmfs/cms.cern.ch/cmsset_default.sh
+      scram -a $SCRAM_ARCH project ${cmssw_ver}
+      cd ${cmssw_ver}
+      eval `scram run -sh` >/dev/null 2>&1
+      if $RUN_TESTS ; then
+        run_the_matrix
+        run_addons
+      fi
     fi
     echo "${SCRAM_ARCH}.${cmssw_ver}.TEST.${RES}" >> $WORKSPACE/res.txt
     echo "${SCRAM_ARCH}.${cmssw_ver}.TEST_ADDONS.${RES_ADDONS}" >> $WORKSPACE/res.txt
