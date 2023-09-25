@@ -148,7 +148,6 @@ for arch in ${ARCHS} ; do
       continue
     fi
     echo "Found release: ${cmssw_ver}"
-
     INST_OPTS="-a $SCRAM_ARCH --debug install --ignore-size --jobs 2 -y"
     $WORKSPACE/inst/$SCRAM_ARCH/common/cmspkg $INST_OPTS cms+cmssw+${cmssw_ver}
     INSTALL_PACKAGES=""
@@ -200,6 +199,7 @@ for arch in ${ARCHS} ; do
     if [ "${cmssw_ver}" = "" ] ; then
       echo "Warnings: No CMSSW version available for $SCRAM_ARCH"
       echo "Skipping tests ..."
+      continue
     else
       echo "Getting CMSSW area from /cvmfs: $cmssw_ver"
       export BUILD_ARCH=$(echo ${SCRAM_ARCH} | cut -d_ -f1,2)
