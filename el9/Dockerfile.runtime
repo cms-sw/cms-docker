@@ -9,13 +9,12 @@ ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
 
 RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-headers libxcrypt openssl-libs libcom_err krb5-libs ncurses-libs \
           perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl &&\
-    dnf install -y python2 python3 which procps-ng &&\
+    dnf install -y python3 which procps-ng &&\
     dnf install -y epel-release &&\
     dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
-    alternatives --set python `which python2` &&\
     echo el9 > /etc/cmsos &&\
     cp /tmp/CERN.repo /etc/yum.repos.d/CERN.repo &&\
     rpm --import /tmp/RPM-GPG-KEY-kojiv2 &&\
