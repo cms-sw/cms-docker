@@ -29,6 +29,13 @@ groups:
         disabled: true
         tags:
           ${group1}-${group0}:
+  runtime:
+    docker: Dockerfile.${group0}
+    from: library/almalinux:9
+    groups:
+      x86_64:
+        tags:
+          ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
     from: library/almalinux:9
