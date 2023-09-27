@@ -2,7 +2,7 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - User packages"
 
-RUN dnf install -y man-db time bc nano strace perf xauth vim xrootd-client \
+RUN dnf install -y man-db time bc nano strace perf xauth vim \
     krb5-workstation glibc-langpack-en environment-modules xdg-utils &&\
     epel_pkgs="@EPEL_PACKAGES@" &&\
     if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\

@@ -41,9 +41,18 @@ groups:
       ppc64le:
         tags:
           ${group1}-${group0}:
-  buildtime:
+  grid:
     docker: Dockerfile.${group0}
     from: ${container}:${group1}-runtime
+    variables:
+      SKIP_TESTS: true
+    groups:
+      x86_64:
+        tags:
+          ${group1}-${group0}:
+  buildtime:
+    docker: Dockerfile.${group0}
+    from: ${container}:${group1}-grid
     groups:
       x86_64:
         tags:
@@ -52,15 +61,6 @@ groups:
         tags:
           ${group1}-${group0}:
       ppc64le:
-        tags:
-          ${group1}-${group0}:
-  grid:
-    docker: Dockerfile.${group0}
-    from: ${container}:${group1}-runtime
-    variables:
-      SKIP_TESTS: true
-    groups:
-      x86_64:
         tags:
           ${group1}-${group0}:
   user:
