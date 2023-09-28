@@ -8,21 +8,27 @@ ADD RPM-GPG-KEY-kojiv2      /tmp/RPM-GPG-KEY-kojiv2
 ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
 
 RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-headers libxcrypt openssl-libs libcom_err krb5-libs ncurses-libs \
-          perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl &&\
-    dnf install -y python2 python3 which procps-ng &&\
-    dnf install -y epel-release &&\
+	perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl \
+
+RUN dnf install -y python2 python2-psutil python2-requests python3 python3-psutil python3-requests which procps-ng \
+
+RUN dnf install -y epel-release &&\
     dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
-    eval $xcmd &&\
-    alternatives --set python `which python2` &&\
+    eval $xcmd \
+    
+RUN alternatives --set python `which python2` &&\
     echo el8 > /etc/cmsos &&\
     cp /tmp/CERN.repo /etc/yum.repos.d/CERN.repo &&\
-    rpm --import /tmp/RPM-GPG-KEY-kojiv2 &&\
-    dnf install -y cern-gpg-keys CERN-CA-certs &&\
-    update-ca-trust &&\
-    dnf update -y ca-certificates &&\
-    dnf clean all &&\
+    rpm --import /tmp/RPM-GPG-KEY-kojiv2 \
+    
+RUN dnf install -y cern-gpg-keys CERN-CA-certs &&\
+    update-ca-trust \
+    
+RUN dnf update -y ca-certificates \
+
+RUN dnf clean all &&\
     mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms /etc/ssh &&\
     mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
     touch /etc/tnsnames.ora &&\
