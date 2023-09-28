@@ -11,10 +11,10 @@ RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-headers libx
 	perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl &&\
 	dnf clean all
 
-RUN dnf install -y python2 python2-psutil python2-requests python3 python3-psutil python3-requests which procps-ng && dnf clean all
+RUN dnf install -y python2 python3 which procps-ng && dnf clean all
 
 RUN dnf install -y epel-release &&\
-	dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer &&\
+	dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer python2-psutil python2-requests python3-psutil python3-requests &&\
 	xcmd="@EXTRA_COMMAND@" &&\
 	if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
 	eval $xcmd &&\
@@ -24,7 +24,8 @@ RUN dnf install -y epel-release &&\
 	rpm --import /tmp/RPM-GPG-KEY-kojiv2 &&\
 	dnf clean all
     
-RUN dnf install -y cern-gpg-keys CERN-CA-certs update-ca-trust &&\
+RUN dnf install -y cern-gpg-keys CERN-CA-certs &&\
+	update-ca-trust &&\
 	dnf update -y ca-certificates && dnf clean all
 
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms /etc/ssh &&\
