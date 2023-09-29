@@ -12,6 +12,9 @@ RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl-
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake \
 	krb5-workstation environment-modules xdg-utils && dnf clean all
 
+# Extra packages comparing with el8
+RUN dnf install --disablerepo=epel -y krb5-devel coreutils-single libcom_err-devel
+
 RUN dnf --enablerepo=crb install -y texinfo
 	
 RUN dnf epel_pkgs="@EPEL_PACKAGES@" &&\
