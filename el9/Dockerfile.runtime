@@ -2,7 +2,6 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Runtime"
 
-ADD krb5.conf               /etc/krb5.conf
 ADD CERN.repo               /tmp/CERN.repo
 ADD RPM-GPG-KEY-kojiv2      /tmp/RPM-GPG-KEY-kojiv2
 ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
@@ -11,7 +10,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-headers libx
           perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl &&\
     dnf install -y python3 which procps-ng &&\
     dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer &&\
+    dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer python3-requests python3-psutil &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
