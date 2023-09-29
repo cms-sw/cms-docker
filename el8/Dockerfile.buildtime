@@ -9,19 +9,17 @@ RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper 
 	perl-CGI perl-DBI perl-Encode perl-Memoize perl-Storable perl-Time-HiRes perl-Time-Local \
 	perl-YAML perl-IO-Compress && dnf clean all
 
+# Dependencies on libidn libXmu libstdc++-static might be cleaned up in the future
 RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
-	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool libdrm gcc-c++ &&\
+	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool libdrm gcc-c++ libidn libXmu \
 	dnf clean all
-
-# Dependencies that might be cleaned up in the future
-RUN dnf install --disablerepo=epel -y libidn libXmu libstdc++-static && dnf clean all
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace perf xauth vim cmake \
 	krb5-workstation glibc-langpack-en environment-modules xdg-utils && dnf clean all
 
-RUN dnf --enablerepo=powertools install -y texinfo &&\
+RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
 	epel_pkgs="@EPEL_PACKAGES@" &&\
 	if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
 	xcmd="@EXTRA_COMMAND@" &&\
