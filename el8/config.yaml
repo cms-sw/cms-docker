@@ -50,6 +50,12 @@ groups:
       x86_64:
         tags:
           ${group1}-${group0}:
+      aarch64:
+        tags:
+          ${group1}-${group0}:
+      ppc64le:
+        tags:
+          ${group1}-${group0}:
   buildtime:
     docker: Dockerfile.${group0}
     from: ${container}:${group1}-grid
