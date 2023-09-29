@@ -17,7 +17,7 @@ RUN dnf install --disablerepo=epel -y krb5-devel coreutils-single libcom_err-dev
 
 RUN dnf --enablerepo=crb install -y texinfo
 	
-RUN dnf epel_pkgs="@EPEL_PACKAGES@" &&\
+RUN epel_pkgs="@EPEL_PACKAGES@" &&\
 	if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
 	xcmd="@EXTRA_COMMAND@" &&\
 	if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
