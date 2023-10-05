@@ -10,7 +10,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-headers libx
           perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl &&\
     dnf install -y python3 which procps-ng &&\
     dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer python3-requests python3-psutil &&\
+    dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer python3-requests python3-psutil python3-pip  &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
