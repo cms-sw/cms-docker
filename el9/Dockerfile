@@ -22,7 +22,7 @@ RUN dnf install -y \
     bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
     dnf install -y epel-release &&\
     dnf install -y @EPEL_PACKAGES@ xrootd-client \
-      python3-requests python3-psutil dnf-plugins-core \
+      python3-pip python3-requests python3-psutil dnf-plugins-core \
       voms-clients-cpp krb5-workstation myproxy apptainer &&\
     dnf install -y gfal2-all gfal2-util-scripts python3-gfal2-util &&\
     dnf install -y java-11-openjdk-devel xauth xdg-utils vim &&\
