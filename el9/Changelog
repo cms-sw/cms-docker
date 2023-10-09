@@ -19,6 +19,8 @@ https://github.com/cms-sw/cms-docker/commit/afa5d94f461e261b9d2b90cddb00fd75f956
 ## 13-01-2022
 * Add `perf` package (https://github.com/cms-sw/cms-docker/commit/3be4202edd5d1388c5b4482d2a4c567c9b037618).
 
+**Previous changes not tracked. See git history.**
+
 ### From el8 to el9
 A few notes on the change from `el8` images to `el9`:
 * Remove `perl` dependencies. We do not build perl-based SCRAM for `el9`.
