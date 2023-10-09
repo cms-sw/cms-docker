@@ -6,7 +6,7 @@ ADD CERN.repo               /tmp/CERN.repo
 ADD RPM-GPG-KEY-kojiv2      /tmp/RPM-GPG-KEY-kojiv2
 ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
 
-RUN dnf install -y \
+RUN dnf install -y @DEFAULT_PACKAGES@ \
     automake bash bzip2 bzip2-libs bzip2-devel coreutils-single e2fsprogs e2fsprogs-libs \
     perl file file-libs fontconfig freetype gcc-c++ git glibc glibc-headers krb5-libs libaio \
     libcom_err libcom_err-devel libgomp libICE \
