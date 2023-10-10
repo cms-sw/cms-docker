@@ -8,6 +8,7 @@ RUN dnf --enablerepo=powertools install -y boost-python3 &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
+    dnf clean all &&\
     echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 
 LABEL build-date="@BUILD_DATE@"
