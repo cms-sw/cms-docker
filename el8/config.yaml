@@ -15,7 +15,7 @@ variables:
 groups:
   bootstrap:
     docker: Dockerfile.${group0}
-    from: ${container}:${group1}
+    from: ${container}:${group1}-buildtime
     variables:
       SKIP_TESTS: true
     groups:
