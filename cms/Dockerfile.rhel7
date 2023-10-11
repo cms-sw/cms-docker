@@ -34,6 +34,7 @@ LABEL maintainer="CMS Build"
 # - 09 Jun 2021: Added  osg-wn-client-setup.sh script
 # - 14 Sep 2021: Force update osg-ca-certs
 # - 18 Oct 2022: Installed openssh-server as requested by  Marco Mascheroni
+# - 11 Oct 2023: Added gfal2 packages (to align with el8/el9) as requested by Dario Mapelli
 
 RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-client && \
     yum -y install glibc coreutils bash tcsh zsh perl tcl tk readline openssl openssl-devel openssl-libs ncurses e2fsprogs \
@@ -44,7 +45,8 @@ RUN yum -y install cvmfs gcc glibc-headers openssh-clients redhat-lsb-core sssd-
                    perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path perl-File-Temp perl-Getopt-Long \
                    perl-Socket perl-Text-ParseWords perl-Time-Local libX11-devel libXpm-devel libXext-devel mesa-libGLU-devel \
                    perl-Switch perl-Storable perl-Env perl-Thread-Queue perl-Encode nspr nss nss-util file file-libs readline \
-                   zlib popt bzip2 bzip2-libs libaio rsync python3 openssh-server && \
+                   zlib popt bzip2 bzip2-libs libaio rsync python3 openssh-server gfal2-util-scripts gfal2-all \
+                   python3-gfal2-util && \
     yum clean all &&\
     mkdir -p /hdfs \
              /mnt/hadoop \
