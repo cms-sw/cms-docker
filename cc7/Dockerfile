@@ -41,7 +41,8 @@ RUN yum install -y \
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' $conf
 
-# Needed to install rucio client
-RUN yum install -y python3-pip python2-pip && yum clean all
+# Python pip needed to install rucio client
+# Gfal packages needed for CRAB
+RUN yum install -y python3-pip python2-pip gfal2-util-scripts gfal2-all python3-gfal2-util && yum clean all
 
 LABEL build-date="@BUILD_DATE@"
