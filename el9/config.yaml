@@ -59,23 +59,9 @@ groups:
         disabled: true
         tags:
           ${group1}-${group0}:
-  buildtime:
-    docker: Dockerfile.${group0}
-    from: ${container}:${group1}-grid
-    groups:
-      x86_64:
-        tags:
-          ${group1}-${group0}:
-      aarch64:
-        tags:
-          ${group1}-${group0}:
-      ppc64le:
-        disabled: true
-        tags:
-          ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
-    from: library/almalinux:9
+    from: ${container}:${group1}-grid
     groups:
       x86_64:
         variables:
