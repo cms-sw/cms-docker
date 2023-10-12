@@ -15,6 +15,7 @@ function fix_ssh_config()
      fi
   done
 }
-
-fix_ssh_config $1 > $1.tmp
-mv $1.tmp $1
+if [ -e "$1" ] ; then
+  fix_ssh_config $1 > $1.tmp
+  mv $1.tmp $1
+fi
