@@ -21,6 +21,7 @@ RUN dnf --enablerepo=crb install -y texinfo &&\
 	eval $xcmd &&\
 	dnf update -y ca-certificates &&\
 	dnf clean all &&\
+        /root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
 	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 
 LABEL build-date="@BUILD_DATE@"
