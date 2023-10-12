@@ -2,6 +2,10 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL"
 
+# Note: Monolithic CMSSW image (legacy). Currently using a three-stage image:
+# Dockerfile (containing buildtime dependencies and user packages), Dockerfile.runtime
+# (runtime dependencies) and Dockerfile.grid (pkgs needed to run on the GRID).
+
 ADD CERN.repo               /tmp/CERN.repo
 ADD RPM-GPG-KEY-kojiv2      /tmp/RPM-GPG-KEY-kojiv2
 ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
