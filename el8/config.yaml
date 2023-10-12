@@ -15,7 +15,7 @@ variables:
 groups:
   bootstrap:
     docker: Dockerfile.${group0}
-    from: ${container}:${group1}-buildtime
+    from: ${container}:${group1}
     variables:
       SKIP_TESTS: true
     groups:
@@ -56,22 +56,9 @@ groups:
       ppc64le:
         tags:
           ${group1}-${group0}:
-  buildtime:
-    docker: Dockerfile.${group0}
-    from: ${container}:${group1}-grid
-    groups:
-      x86_64:
-        tags:
-          ${group1}-${group0}:
-      aarch64:
-        tags:
-          ${group1}-${group0}:
-      ppc64le:
-        tags:
-          ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
-    from: library/almalinux:8
+    from: ${container}:${group1}-grid
     groups:
       x86_64:
         variables:
