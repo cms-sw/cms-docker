@@ -17,6 +17,10 @@ def create_file(img):
   file.close()
   print(file_name,' file created')
 
+def find_image_deps(image, cache):
+  if image not in cache: return []
+  return [cache[image]] + find_image_deps(cache[image], cache)
+
 parser = ArgumentParser(description='Check if docker image based on the same layers as the parent image')
 parser.add_argument('-r', dest='repo', type=str, help="Provide specific repository for docker images.")
 parser.add_argument("-f", "--force",    dest="force",   action="store_true", help="Force re-build", default=False)
@@ -31,16 +35,39 @@ else:
     repos.append(os.path.basename(dirname(file)))
 
 tags = [ t for t in  args.tags.replace(' ','').split(",") if t]
+imgs = {}
+image_deps = {}
 for reponame in repos:
   for img in get_docker_images(reponame):
     if tags and (not img['IMAGE_TAG'] in tags): continue
     print("Working on ",img)
     buildimg = args.force
+    image = img['IMAGE_NAME']
+    base = img['BASE_IMAGE_NAME']
+    image_deps[image] = base
     if not buildimg:
-      base = img['BASE_IMAGE_NAME']
-      image = img['IMAGE_NAME']
       labels = get_labels(image)
       buildimg = ('build-checksum' not in labels) or (labels['build-checksum'] != img['BUILD_CHECKSUM'])
       print("===>",image, base, buildimg, img['BUILD_CHECKSUM'])
     if buildimg:
-      create_file(img)
+      imgs[image] = img
+
+print("\n")
+build_imgs = []
+for ximg in imgs:
+  img = imgs[ximg]
+  bimgs = find_image_deps(ximg, image_deps)
+  print("FOUND: %s which depends on %s" % (ximg, bimgs))
+  dimgs = [i for i in bimgs if i in imgs]
+  if dimgs:
+    print("SKIPPING: %s requires %s to be build first." % (ximg, dimgs))
+  else:
+    build_imgs.append(img)
+
+all_dependency_imgs = list(image_deps.values())
+for img in build_imgs:
+  img_name = img.get('IMAGE_NAME')
+  if img_name in all_dependency_imgs:
+    img["RECHECK_TAGS_ON_SUCCESS"]=True
+  print("BUILD:", img_name)
+  create_file(img)
