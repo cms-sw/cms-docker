@@ -1,58 +1,31 @@
 FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
-LABEL name="CMS Worker Node on EL"
+LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 
-ADD krb5.conf               /etc/krb5.conf
-ADD CERN.repo               /tmp/CERN.repo
-ADD RPM-GPG-KEY-kojiv2      /tmp/RPM-GPG-KEY-kojiv2
-ADD fix_ssh_config.sh       /tmp/fix_ssh_config.sh
+# Dependencies on libidn libXmu libstdc++-static might be cleaned up in the future
+RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter \
+	perl-File-Path perl-File-Temp perl-Getopt-Long perl-IO perl-Text-ParseWords perl-constant \
+	perl-Digest-MD5 perl-PathTools perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
+	perl-File-Temp perl-Getopt-Long perl-File-Which perl-Scalar-List-Utils perl-Term-ANSIColor \
+	perl-CGI perl-DBI perl-Encode perl-Memoize perl-Storable perl-Time-HiRes perl-Time-Local \
+	perl-YAML perl-IO-Compress rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
+	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
+	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool libdrm gcc-c++ libidn libXmu &&\
+	dnf clean all
 
-RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel \
-      file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs libaio \
-      libcom_err libgomp libICE libidn \
-      libSM libX11 libX11-devel libxcrypt libXcursor libXext \
-      libXft libXi libXinerama \
-      libXmu libXpm libXpm-devel libXrandr libXrender \
-      java-1.8.0-openjdk-devel libtool m4 make cmake man-db \
-      ncurses ncurses-libs ncurses-devel nspr nss nss-util \
-      openssl openssl-devel openssl-libs \
-      perl perl-interpreter perl-libs \
-      perl-Carp perl-constant perl-Data-Dumper perl-DBI \
-      perl-Digest-MD5 perl-Encode perl-Env perl-Exporter perl-ExtUtils-Embed \
-      perl-File-Path perl-File-Temp perl-Getopt-Long perl-IO perl-libnet \
-      perl-Memoize perl-PathTools perl-Scalar-List-Utils perl-Socket perl-Storable \
-      perl-Term-ANSIColor perl-Test-Harness perl-Text-ParseWords perl-Thread-Queue \
-      perl-Time-HiRes perl-Time-Local perl-YAML \
-      patch popt python2 python3 readline rpm-build \
-      rsync tcl time tk wget which zlib \
-      bc tar zip unzip hostname nano procps-ng dnf-plugins-core python3-requests \
-      libnsl e2fsprogs e2fsprogs-libs libXext-devel libXft-devel \
-      libglvnd-opengl mesa-libGLU mesa-libGLU-devel nss-devel perl-CGI \
-      popt-devel readline-devel tcsh zsh tcl-devel tk-devel strace \
-      krb5-workstation python2-requests perf glibc-langpack-en environment-modules &&\
-    dnf install -y epel-release &&\
-    dnf install -y @EPEL_PACKAGES@ xrootd-client \
-      voms-clients-cpp python2-psutil python3-psutil myproxy apptainer &&\
-    dnf --enablerepo=powertools install -y texinfo libstdc++-static boost-python3 &&\
-    dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util &&\
-    dnf install -y libstdc++-static java-11-openjdk-devel xauth xdg-utils vim &&\
-    xcmd="@EXTRA_COMMAND@" &&\
-    if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
-    eval $xcmd &&\
-    alternatives --set python `which python2` &&\
-    echo el8 > /etc/cmsos &&\
-    cp /tmp/CERN.repo /etc/yum.repos.d/CERN.repo &&\
-    rpm --import /tmp/RPM-GPG-KEY-kojiv2 &&\
-    dnf install -y cern-gpg-keys CERN-CA-certs &&\
-    update-ca-trust &&\
-    dnf update -y ca-certificates &&\
-    dnf clean all &&\
-    mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
-    mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
-    touch /etc/tnsnames.ora &&\
-    /tmp/fix_ssh_config.sh /etc/ssh/ssh_config &&\
-    rm -f /tmp/CERN.repo /tmp/RPM-GPG-KEY-kojiv2 /tmp/fix_ssh_config.sh &&\
-    echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt &&\
-    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
+# Please add user packages in the RUN command below
+RUN dnf install --disablerepo=epel -y man-db time bc nano strace perf xauth vim cmake \
+        krb5-workstation glibc-langpack-en environment-modules xdg-utils && dnf clean all
+
+RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
+	epel_pkgs="@EPEL_PACKAGES@" &&\
+	if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
+	xcmd="@EXTRA_COMMAND@" &&\
+	if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
+	eval $xcmd &&\
+	dnf update -y ca-certificates &&\
+	dnf clean all &&\
+	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
+	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 
 LABEL build-date="@BUILD_DATE@"
