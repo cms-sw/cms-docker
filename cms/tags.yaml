@@ -6,5 +6,4 @@ rhel7-itb: rhel7-m20220512
 rhel8-itb: cmssw/el8:x86_64
 rhel6: rhel6-m20211005
 rhel7: rhel7-m20220331
-rhel8: rhel8-m-m20220516
-rhel8-m: rhel8-m-m20221009
+rhel8: mssw/el8:x86_64-d20231016
