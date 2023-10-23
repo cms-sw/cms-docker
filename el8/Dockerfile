@@ -3,7 +3,8 @@ LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 
 # Dependencies on libidn libXmu libstdc++-static might be cleaned up in the future
-RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter \
+RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/versions-grid.tmp &&\
+	dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter \
 	perl-File-Path perl-File-Temp perl-Getopt-Long perl-IO perl-Text-ParseWords perl-constant \
 	perl-Digest-MD5 perl-PathTools perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
 	perl-File-Temp perl-Getopt-Long perl-File-Which perl-Scalar-List-Utils perl-Term-ANSIColor \
@@ -26,6 +27,10 @@ RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
 	dnf update -y ca-certificates &&\
 	dnf clean all &&\
 	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
-	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
+	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
+	rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/versions-grid.tmp &&\
+        grep -vf /tmp/versions-grid.tmp /tmp/versions-buildtime.tmp | sort >> /tmp/pkgs-info &&\
+        rm -f /tmp/versions-grid.tmp /tmp/versions-buildtime.tmp
+
 
 LABEL build-date="@BUILD_DATE@"
