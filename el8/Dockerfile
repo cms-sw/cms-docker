@@ -28,7 +28,7 @@ RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
 	dnf clean all &&\
 	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
 	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
-	rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/versions-grid.tmp &&\
+	rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/versions-buildtime.tmp &&\
         grep -vf /tmp/versions-grid.tmp /tmp/versions-buildtime.tmp | sort >> /tmp/pkgs-info &&\
         rm -f /tmp/versions-grid.tmp /tmp/versions-buildtime.tmp
 
