@@ -2,7 +2,8 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Grid packages"
 
-RUN dnf --enablerepo=powertools install -y boost-python3 &&\
+RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/versions-runtime.tmp &&
+	dnf --enablerepo=powertools install -y boost-python3 &&\
 	dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util xrootd-client &&\
 	dnf install -y @EPEL_PACKAGES@ myproxy &&\
 	xcmd="@EXTRA_COMMAND@" &&\
@@ -10,6 +11,9 @@ RUN dnf --enablerepo=powertools install -y boost-python3 &&\
 	eval $xcmd &&\
 	dnf clean all &&\
 	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
-	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
-
+	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
+	rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/versions-grid.tmp &&\
+        grep -vf /tmp/versions-runtime.tmp /tmp/versions-grid.tmp | sort >> /tmp/pkgs-info &&\
+        rm -f /tmp/versions-runtime.tmp /tmp/versions-grid.tmp
+	
 LABEL build-date="@BUILD_DATE@"
