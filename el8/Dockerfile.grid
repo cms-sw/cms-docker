@@ -2,7 +2,7 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Grid packages"
 
-RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/package-base.tmp &&
+RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/package-base.tmp &&\
 	dnf --enablerepo=powertools install -y boost-python3 &&\
 	dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util xrootd-client &&\
 	dnf install -y @EPEL_PACKAGES@ myproxy &&\
