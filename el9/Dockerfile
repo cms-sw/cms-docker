@@ -4,7 +4,8 @@ LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 
 # Dependency on libXmu might be cleaned up in the future
 # Extra packages comparing with el8: krb5-devel libcom_err-devel (coreutils-single in el8 config file)
-RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
+RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/package-base.tmp &&\
+	dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
 	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool libdrm gcc-c++ libXmu \
  	krb5-devel coreutils-single libcom_err-devel && dnf clean all
@@ -22,6 +23,9 @@ RUN dnf --enablerepo=crb install -y texinfo &&\
 	dnf update -y ca-certificates &&\
 	dnf clean all &&\
         /root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
-	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
+	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
+        rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' | sort >> /tmp/package-image.tmp &&\
+        grep -vf /tmp/package-base.tmp /tmp/package-image.tmp >> /tmp/pkgs-info &&\
+        rm -f /tmp/package-base.tmp /tmp/package-image.tmp
 
 LABEL build-date="@BUILD_DATE@"
