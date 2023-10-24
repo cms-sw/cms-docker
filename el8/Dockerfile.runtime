@@ -7,7 +7,8 @@ ADD CERN.repo               /tmp/CERN.repo
 ADD RPM-GPG-KEY-kojiv2      /tmp/RPM-GPG-KEY-kojiv2
 ADD fix_ssh_config.sh       /root/fix_ssh_config.sh
 
-RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-headers libxcrypt openssl-libs libcom_err krb5-libs ncurses-libs \
+RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' | sort >> /tmp/pkgs-info-base &&\
+	dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-headers libxcrypt openssl-libs libcom_err krb5-libs ncurses-libs \
 	perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl \
 	python2 python3 which procps-ng && dnf install -y epel-release &&\
 	dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer python2-psutil python2-requests python3-psutil python3-requests &&\
@@ -29,6 +30,8 @@ RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-headers libx
 	rm -f /tmp/CERN.repo /tmp/RPM-GPG-KEY-kojiv2 &&\
 	sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf &&\
 	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
-	rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' | sort >> /tmp/pkgs-info
+        rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' | sort >> /tmp/package-image.tmp &&\
+        grep -vf /tmp/pkgs-info-base /tmp/package-image.tmp >> /tmp/pkgs-info &&\
+        rm -f /tmp/package-image.tmp
 
 LABEL build-date="@BUILD_DATE@"
