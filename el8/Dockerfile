@@ -3,7 +3,7 @@ LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 
 # Dependencies on libidn libXmu libstdc++-static might be cleaned up in the future
-RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' | sort >> /tmp/package-base.tmp &&\
+RUN rpm -qa --queryformat '%{NAME} %{VERSION}-%{RELEASE}\n' | sort >> /tmp/package-base.tmp &&\
 	dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter \
 	perl-File-Path perl-File-Temp perl-Getopt-Long perl-IO perl-Text-ParseWords perl-constant \
 	perl-Digest-MD5 perl-PathTools perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
@@ -28,7 +28,7 @@ RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
 	dnf clean all &&\
 	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
 	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
-	rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' | sort >> /tmp/package-image.tmp &&\
+	rpm -qa --queryformat '%{NAME} %{VERSION}-%{RELEASE}\n' | sort >> /tmp/package-image.tmp &&\
         grep -vf /tmp/package-base.tmp /tmp/package-image.tmp >> /tmp/pkgs-info &&\
         rm -f /tmp/package-base.tmp /tmp/package-image.tmp
 
