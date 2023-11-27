@@ -2,7 +2,7 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Grid packages"
 
-RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/package-base.tmp &&\
+RUN rpm -qa --queryformat '%{NAME} %{VERSION}-%{RELEASE}\n' >> /tmp/package-base.tmp &&\
 	dnf --enablerepo=powertools install -y boost-python3 &&\
 	dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util xrootd-client &&\
 	dnf install -y @EPEL_PACKAGES@ myproxy &&\
@@ -12,7 +12,7 @@ RUN rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' >> /tmp/package-base
 	dnf clean all &&\
 	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
 	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
-        rpm -qa --queryformat '%{NAME} %{VERSION} %{RELEASE}\n' | sort >> /tmp/package-image.tmp &&\
+        rpm -qa --queryformat '%{NAME} %{VERSION}-%{RELEASE}\n' | sort >> /tmp/package-image.tmp &&\
         grep -vf /tmp/package-base.tmp /tmp/package-image.tmp >> /tmp/pkgs-info &&\
         rm -f /tmp/package-base.tmp /tmp/package-image.tmp
 	
