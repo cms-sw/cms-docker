@@ -12,7 +12,7 @@ RUN rpm -qa --queryformat '%{NAME} %{VERSION}-%{RELEASE}\n' >> /tmp/package-base
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake \
-	krb5-workstation environment-modules xdg-utils && dnf clean all
+	krb5-workstation environment-modules xdg-utils squid && dnf clean all
 
 RUN dnf --enablerepo=crb install -y texinfo &&\
 	epel_pkgs="@EPEL_PACKAGES@" &&\
