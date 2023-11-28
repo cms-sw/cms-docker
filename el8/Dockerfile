@@ -16,7 +16,7 @@ RUN rpm -qa --queryformat '%{NAME} %{VERSION}-%{RELEASE}\n' | sort >> /tmp/packa
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace perf xauth vim cmake \
-        krb5-workstation glibc-langpack-en environment-modules xdg-utils && dnf clean all
+        krb5-workstation glibc-langpack-en environment-modules xdg-utils squid && dnf clean all
 
 RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
 	epel_pkgs="@EPEL_PACKAGES@" &&\
