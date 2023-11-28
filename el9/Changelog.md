@@ -1,5 +1,8 @@
 # Changelog el9
 
+## 28-11-2023
+* Add `squid` package as requested in https://github.com/cms-sw/cms-docker/issues/235.
+
 ## 05-10-2023
 * Add `python3-pip` package to install comp tools, e.g. Rucio (`Dockerfile` in https://github.com/cms-sw/cms-docker/commit/35ad9f96b2e9ed6403ed1d49b41b0e06cc92c29c
 and `Docker.runtime` in
