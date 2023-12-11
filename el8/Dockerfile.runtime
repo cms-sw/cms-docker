@@ -23,7 +23,7 @@ RUN rpm -qa --queryformat '%{NAME} %{VERSION}-%{RELEASE}\n' | sort >> /tmp/pkgs-
 	update-ca-trust &&\
 	dnf update -y ca-certificates && dnf clean all &&\
 	mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms /etc/ssh &&\
-	mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
+	mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage /scratch &&\
 	touch /etc/tnsnames.ora &&\
 	chmod +x /root/fix_ssh_config.sh &&\
 	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
