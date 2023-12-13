@@ -6,8 +6,8 @@
 ########################
 rhel6-itb: rhel6-m20211005
 rhel7-itb: rhel7-m20220512
-rhel8-itb: cmssw/el8:x86_64-d20231104
-rhel9-itb: cmssw/el9:x86_64-d20231028
+rhel8-itb: cmssw/el8:x86_64-d20231129
+rhel9-itb: cmssw/el9:x86_64-d20231129
 
 #itb x86_64
 rhel6-itb-x86_64: rhel6-itb
@@ -16,11 +16,11 @@ rhel8-itb-x86_64: rhel8-itb
 rhel9-itb-x86_64: rhel9-itb
 
 #itb aarch64
-rhel8-itb-aarch64: cmssw/el8:aarch64-d20231027
-rhel9-itb-aarch64: cmssw/el9:aarch64-d20231104
+rhel8-itb-aarch64: cmssw/el8:aarch64-d20231129
+rhel9-itb-aarch64: cmssw/el9:aarch64-d20231129
 
 #itb ppc64le
-rhel8-itb-ppc64le: cmssw/el8:ppc64le-d20231027
+rhel8-itb-ppc64le: cmssw/el8:ppc64le-d20231129
 
 ########################
 #Production images
