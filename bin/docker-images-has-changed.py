@@ -48,6 +48,7 @@ for reponame in repos:
     if not buildimg:
       labels = get_labels(image)
       buildimg = ('build-checksum' not in labels) or (labels['build-checksum'] != img['BUILD_CHECKSUM'])
+      img['UPSTREAM_BUILD_CHECKSUM'] = labels['build-checksum']
       print("===>",image, base, buildimg, img['BUILD_CHECKSUM'])
     if buildimg:
       imgs[image] = img
