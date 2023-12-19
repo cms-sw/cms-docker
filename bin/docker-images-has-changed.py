@@ -46,7 +46,7 @@ for reponame in repos:
     base = img['BASE_IMAGE_NAME']
     image_deps[image] = base
     labels = get_labels(image)
-    img['UPSTREAM_BUILD_CHECKSUM'] = labels['build-checksum']
+    img['UPSTREAM_CHECKSUM'] = labels['build-checksum']
     if not buildimg:
       buildimg = ('build-checksum' not in labels) or (labels['build-checksum'] != img['BUILD_CHECKSUM'])
       print("===>",image, base, buildimg, img['BUILD_CHECKSUM'])
