@@ -136,7 +136,10 @@ for arch in ${ARCHS} ; do
       break
     done
     if [ "${cmssw_ver}" = "" ] ; then
-      cmssw_ver=$(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep /cvmfs/cms.cern.ch/ | grep -v '/cmssw-patch/' | tail -1 | awk '{print $2}')
+      cmssw_ver=$(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep '_X_' | grep /cvmfs/cms-ib.cern.ch/ | grep -v '/cmssw-patch/' | tail -1 | awk '{print $2}')
+      if [ "${cmssw_ver}" = "" ] ; then
+        cmssw_ver=$(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep /cvmfs/cms.cern.ch/ | grep -v '/cmssw-patch/' | tail -1 | awk '{print $2}')
+      fi
     fi
     if ! sh -ex $WORKSPACE/inst/bootstrap.sh -server ${CMSREP} -r ${boot_repo} -a $SCRAM_ARCH setup ; then
       echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
