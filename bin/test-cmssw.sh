@@ -100,7 +100,7 @@ for arch in ${ARCHS} ; do
   export SCRAM_ARCH=$arch
   touch $WORKSPACE/cmssw.rel
   release_cycle=$(curl https://cmssdt.cern.ch/SDT/BaselineDevRelease)
-  $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW_ ; scram -a $SCRAM_ARCH list -c ${release_cycle}) | grep ${RELEASE_INST_DIR}/ | grep -v '/cmssw-patch/' | awk '{print $3}' | tac > $WORKSPACE/cmssw.rel || true
+  (source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW_ ; scram -a $SCRAM_ARCH list -c ${release_cycle}) | grep ${RELEASE_INST_DIR}/ | grep -v '/cmssw-patch/' | awk '{print $3}' | tac > $WORKSPACE/cmssw.rel || true
   cat $WORKSPACE/cmssw.rel
   #If tests enabled then find a release for which relvals are fully run
   if $RUN_TESTS ; then
