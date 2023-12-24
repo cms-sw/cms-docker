@@ -104,12 +104,15 @@ for arch in ${ARCHS} ; do
   cat $WORKSPACE/cmssw.rel
   #If tests enabled then find a release for which relvals are fully run
   if $RUN_TESTS ; then
-    curl -L https://raw.githubusercontent.com/cms-sw/cms-sw.github.io/master/data/${release_cycle}.json > ${release_cycle}.json
     touch $WORKSPACE/cmssw.rel.filtered
     for v in $(cat $WORKSPACE/cmssw.rel); do
       if [ -e $v/build-errors ] ; then continue ; fi
       ver=$(basename $v)
-      if [ $(grep -B 5 "/${SCRAM_ARCH}/.*/${ver}/pyRelValMatrixLogs/run/" ${release_cycle}.json | grep '"done": *true' |wc -l) -gt 0 ] ; then
+      rel_queue=$(echo $ver | sed 's|_X_.*|_X|')
+      if [ ! -e ${release_cycle}.json ] ; then
+        curl -L https://raw.githubusercontent.com/cms-sw/cms-sw.github.io/master/data/${rel_queue}.json > ${rel_queue}.json
+      fi
+      if [ $(grep -B 5 "/${SCRAM_ARCH}/.*/${ver}/pyRelValMatrixLogs/run/" ${rel_queue}.json | grep '"done": *true' |wc -l) -gt 0 ] ; then
         echo "$v" >> $WORKSPACE/cmssw.rel.filtered
       fi
     done
