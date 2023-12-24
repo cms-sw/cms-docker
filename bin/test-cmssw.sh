@@ -100,7 +100,7 @@ for arch in ${ARCHS} ; do
   export SCRAM_ARCH=$arch
   touch $WORKSPACE/cmssw.rel
   release_cycle=$(curl https://cmssdt.cern.ch/SDT/BaselineDevRelease)
-  $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c ${release_cycle} | grep ${RELEASE_INST_DIR}/ | grep -v '/cmssw-patch/' | awk '{print $3}' | tac > $WORKSPACE/cmssw.rel) || true
+  $(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; (scram -a $SCRAM_ARCH list -c CMSSW_ ; scram -a $SCRAM_ARCH list -c ${release_cycle}) | grep ${RELEASE_INST_DIR}/ | grep -v '/cmssw-patch/' | awk '{print $3}' | tac > $WORKSPACE/cmssw.rel) || true
   #If tests enabled then find a release for which relvals are fully run
   if $RUN_TESTS ; then
     curl -L https://raw.githubusercontent.com/cms-sw/cms-sw.github.io/master/data/${release_cycle}.json > ${release_cycle}.json
@@ -136,10 +136,7 @@ for arch in ${ARCHS} ; do
       break
     done
     if [ "${cmssw_ver}" = "" ] ; then
-      cmssw_ver=$(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep '_X_' | grep /cvmfs/cms-ib.cern.ch/ | grep -v '/cmssw-patch/' | tail -1 | awk '{print $2}')
-      if [ "${cmssw_ver}" = "" ] ; then
-        cmssw_ver=$(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep /cvmfs/cms.cern.ch/ | grep -v '/cmssw-patch/' | tail -1 | awk '{print $2}')
-      fi
+      cmssw_ver=$(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep /cvmfs/cms.cern.ch/ | grep -v '/cmssw-patch/' | tail -1 | awk '{print $2}')
     fi
     if ! sh -ex $WORKSPACE/inst/bootstrap.sh -server ${CMSREP} -r ${boot_repo} -a $SCRAM_ARCH setup ; then
       echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
