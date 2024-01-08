@@ -38,7 +38,17 @@ tags = [ t for t in  args.tags.replace(' ','').split(",") if t]
 imgs = {}
 image_deps = {}
 for reponame in repos:
-  for img in get_docker_images(reponame):
+  images_list = get_docker_images(reponame)
+
+  # Generate a dictionary of base image checksum
+  base_dict = {}
+  for element in images_list:
+    name = element["BASE_DOCKER_REPOSITORY"]
+    arch = element["ARCHITECTURE"]
+    if name != "cmssw":
+        base_dict[arch] = element["BASE_UPSTREAM_CHECKSUM"]
+
+  for img in images_list:
     if tags and (not img['IMAGE_TAG'] in tags): continue
     print("Working on ",img)
     buildimg = args.force
@@ -46,7 +56,7 @@ for reponame in repos:
     base = img['BASE_IMAGE_NAME']
     image_deps[image] = base
     labels = get_labels(image)
-    img['UPSTREAM_CHECKSUM'] = labels['build-checksum']
+    img['BASE_UPSTREAM_CHECKSUM'] = base_dict[img['ARCHITECTURE']]
     if not buildimg:
       buildimg = ('build-checksum' not in labels) or (labels['build-checksum'] != img['BUILD_CHECKSUM'])
       print("===>",image, base, buildimg, img['BUILD_CHECKSUM'])

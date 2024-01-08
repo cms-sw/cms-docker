@@ -68,7 +68,7 @@ def process_tags(setup, data, images):
       print("Ignoring",image_name,"as it is marked disabled")
       continue
     arch = get_key('architecture', img_data)
-    print("\nWorking on",get_key('from', img_data),"for arch",arch)
+    print("\n** Working on",get_key('from', img_data),"for arch",arch)
     res, from_manifest = get_digest(get_key('from', img_data), arch, debug=True)
     print("Base Image: ",get_key('from', img_data),arch,res,from_manifest)
     if not res:
@@ -97,6 +97,7 @@ def process_tags(setup, data, images):
     images[-1]['IMAGE_TAG']=get_key('tag', img_data)
     images[-1]['IMAGE_TAG_ALIAS']=get_key('alias', img_data)
     images[-1]['MULTI_ARCH']=get_key('multi_arch', img_data)
+    images[-1]['BASE_UPSTREAM_CHECKSUM']=from_manifest
 
     base_image = get_key('from', img_data)
     if not '/' in base_image: base_image="library/"+base_image
