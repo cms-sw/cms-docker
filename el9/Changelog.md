@@ -1,5 +1,8 @@
 # Changelog el9
 
+## 01-12-2023
+* Add `tmux` package as requested in https://github.com/cms-sw/cms-docker/issues/237.
+
 ## 28-11-2023
 * Add `squid` package as requested in https://github.com/cms-sw/cms-docker/issues/235.
 
