@@ -78,7 +78,7 @@ run_the_matrix () {
           #For Releases if #Failures as <50 then ignore the errors
           NUM_WFS=$(echo ${ALL_WFS} | tr ',' '\n' | wc -l)
           let PERCENT_FAILURE=${NUM_FAILED_WFS}*100/${NUM_WFS} || true
-          fi [ ${NUM_WFSPERCENT_FAILURE} -lt 50 ] ; then RES="OK" ; fi
+          if [ ${NUM_WFSPERCENT_FAILURE} -lt 50 ] ; then RES="OK" ; fi
         fi
       fi
     fi
