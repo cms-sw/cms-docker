@@ -201,7 +201,8 @@ for arch in ${ARCHS} ; do
       fi
       RES="SKIP"
       if $RUN_TESTS ; then
-        run_the_matrix
+        #Run relvals if cmssw is an IB
+        if $CMSSW_IB ; then run_the_matrix ; fi
         echo "RESULT: $RES"
       fi
       echo "${SCRAM_ARCH}.${cmssw_ver}.TEST.${RES}" >> $WORKSPACE/res.txt
