@@ -16,7 +16,7 @@ rhel8-itb-x86_64: rhel8-itb
 rhel9-itb-x86_64: rhel9-itb
 
 #itb aarch64
-rhel8-itb-aarch64: cmssw/el8:aarch64-d20231129
+rhel8-itb-aarch64: cmssw/el8:aarch64-d20240110
 rhel9-itb-aarch64: cmssw/el9:aarch64-d20231129
 
 #itb ppc64le
@@ -37,7 +37,7 @@ rhel8-x86_64: rhel8
 rhel9-x86_64: rhel9
 
 #aarch64
-rhel8-aarch64: cmssw/el8:aarch64-d20231129
+rhel8-aarch64: cmssw/el8:aarch64-d20240110
 rhel9-aarch64: cmssw/el9:aarch64-d20231129
 
 #ppc64le
