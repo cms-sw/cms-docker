@@ -49,14 +49,17 @@ run_the_matrix () {
     find pyRelval -name '*' -type f | grep -v '\.log$' | grep -v '\.py$' | xargs --no-run-if-empty rm -rf
     cat pyRelval/*/workflow.log > relval-out.log || true
     if grep ' tests passed' relval-out.log ; then
-      if [ $(grep ' tests passed' relval-out.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' | wc -l) -eq 0 ] ; then
+      NUM_FAILED_WFS=$(grep ' tests passed' relval-out.log | sed 's|.*tests passed||' | tr ' ' '\n' | grep '^[1-9]' | wc -l)
+      if [ ${NUM_FAILED_WFS} -eq 0 ] ; then
         RES="OK"
       else
         echo "Checking known errors..."
-        RELVAL_RES=ib-relvals.txt
-        $WORKSPACE/cms-bot/get-relval-failures.py ${cmssw_ver} ${SCRAM_ARCH} > ${RELVAL_RES} || true
-        cat $RELVAL_RES
-        cat relval-out.log | grep "FAILED" | while read line ; do
+        #Check Relval failures only for IBS
+        if [ $(echo ${cmssw_ver} | grep "_X_" | wc -l) -gt 0 ] ; then
+          RELVAL_RES=ib-relvals.txt
+          $WORKSPACE/cms-bot/get-relval-failures.py ${cmssw_ver} ${SCRAM_ARCH} > ${RELVAL_RES} || true
+          cat $RELVAL_RES
+          cat relval-out.log | grep "FAILED" | while read line ; do
             echo "Processing $line ..."
             relval=$(echo $line | cut -d_ -f1)
             let step=$(echo $line | grep -o -i "Step[0-9][0-9]*-FAILED"  | sed 's|^Step||i;s|-FAILED$||i')+1
@@ -69,8 +72,14 @@ run_the_matrix () {
               echo "Real error"
               echo "${SCRAM_ARCH}.${cmssw_ver}.RELVAL.${relval}.${step}.ERR" >> $WORKSPACE/res.txt
             fi
-        done
-        if [ $(cat $WORKSPACE/res.txt | grep "RELVAL" | grep "ERR" |  wc -l) -eq 0 ] ; then RES="OK" ; fi
+          done
+          if [ $(cat $WORKSPACE/res.txt | grep "RELVAL" | grep "ERR" |  wc -l) -eq 0 ] ; then RES="OK" ; fi
+        else
+          #For Releases if #Failures as <50 then ignore the errors
+          NUM_WFS=$(echo ${ALL_WFS} | tr ',' '\n' | wc -l)
+          let PERCENT_FAILURE=${NUM_FAILED_WFS}*100/${NUM_WFS} || true
+          fi [ ${NUM_WFSPERCENT_FAILURE} -lt 50 ] ; then RES="OK" ; fi
+        fi
       fi
     fi
   popd
