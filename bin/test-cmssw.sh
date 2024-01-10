@@ -200,12 +200,15 @@ for arch in ${ARCHS} ; do
         RUN_TESTS=false
       fi
       RES="SKIP"
+      RES_ADDONS="SKIP"
       if $RUN_TESTS ; then
         #Run relvals if cmssw is an IB
         if $CMSSW_IB ; then run_the_matrix ; fi
+        run_addons
         echo "RESULT: $RES"
       fi
       echo "${SCRAM_ARCH}.${cmssw_ver}.TEST.${RES}" >> $WORKSPACE/res.txt
+      echo "${SCRAM_ARCH}.${cmssw_ver}.TEST_ADDONS.${RES_ADDONS}" >> $WORKSPACE/res.txt
     )
     rm -rf $SCRAM_ARCH
   else
