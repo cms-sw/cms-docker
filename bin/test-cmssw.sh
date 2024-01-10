@@ -148,8 +148,10 @@ for arch in ${ARCHS} ; do
       if [ "${boot_repo}" = "cms.sw" ]; then boot_repo=cms.$(echo $v | cut -d/ -f6); fi
       break
     done
+    CMSSW_IB=true
     if [ "${cmssw_ver}" = "" ] ; then
       cmssw_ver=$(source /cvmfs/cms.cern.ch/cmsset_default.sh >/dev/null 2>&1; scram -a $SCRAM_ARCH list -c CMSSW | grep /cvmfs/cms.cern.ch/ | grep -v '/cmssw-patch/' | tail -1 | awk '{print $2}')
+      CMSSW_IB=false
     fi
     if ! sh -ex $WORKSPACE/inst/bootstrap.sh -server ${CMSREP} -r ${boot_repo} -a $SCRAM_ARCH setup ; then
       echo ${SCRAM_ARCH}.BOOT.ERR >> $WORKSPACE/res.txt
@@ -221,7 +223,8 @@ for arch in ${ARCHS} ; do
       cd ${cmssw_ver}
       eval `scram run -sh` >/dev/null 2>&1
       if $RUN_TESTS ; then
-        run_the_matrix
+        #Run relvals if cmssw is an IB
+        if $CMSSW_IB ; then run_the_matrix ; fi
         run_addons
       fi
     fi
