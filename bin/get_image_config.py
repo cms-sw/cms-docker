@@ -126,7 +126,12 @@ def process_tags(setup, data, images):
         images[-1][v] = get_key(v, img_data)
         if (not v in ['SKIP_TESTS', 'CVMFS_UNPACKED', 'BUILD_DATE', 'MAIL_TO', 'CMS_COMPATIBLE_OS', 'CI_TESTS']) and images[-1][v]:
           chkdata.append("%s=%s" % (v, images[-1][v]))
+
     config_dir = get_key('config_dir', img_data)
+    scripts_dir = config_dir
+    if get_key('BUILD_CONTEXT', img_data)  == "..":
+        scripts_dir = config_dir.rsplit("/", 1)[0]
+
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
     print("base man:",from_manifest)
     if watch_manifest: print("watch man:",watch_manifest)
@@ -139,7 +144,7 @@ def process_tags(setup, data, images):
           items = [i for i in line.split(" ") if i]
           if (items[0] not in ["ADD", "COPY"]) or (":" in items[1]):
             continue
-          xfile = join(config_dir, items[1])
+          xfile = join(scripts_dir, items[1])
           with open(xfile, encoding="utf-8") as xref:
             chkdata.append(hashlib.md5(xref.read().encode()).hexdigest())
           print("chksum:", xfile, chkdata[-1])
