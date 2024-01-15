@@ -61,6 +61,7 @@ def process_tags(setup, data, images):
     if setup['tags'][tag]:
       push_info(setup['tags'][tag], data)
     data[-1]['tag']=tag
+    BUILD_CONTEXT = ""
     img_data = expand(data)
     pop_info(data, cnt)
     image_name = get_key('container', img_data) + ":"+get_key('tag', img_data)
@@ -126,7 +127,11 @@ def process_tags(setup, data, images):
         images[-1][v] = get_key(v, img_data)
         if (not v in ['SKIP_TESTS', 'CVMFS_UNPACKED', 'BUILD_DATE', 'MAIL_TO', 'CMS_COMPATIBLE_OS', 'CI_TESTS']) and images[-1][v]:
           chkdata.append("%s=%s" % (v, images[-1][v]))
+
     config_dir = get_key('config_dir', img_data)
+    if BUILD_CONTEXT == "..":
+        config_dir = config_dir.rsplit("/")[0]
+
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
     print("base man:",from_manifest)
     if watch_manifest: print("watch man:",watch_manifest)
