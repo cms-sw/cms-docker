@@ -114,10 +114,13 @@ def process_tags(setup, data, images):
     images[-1]['TEST_SCRIPT']=get_key('script', img_data)
     images[-1]['TEST_NODE']=get_key('node', img_data)
     images[-1]['ARCHITECTURE']=arch
-    for xkey in ['delete_pattern', 'expires_days']:
+    for xkey in ['delete_pattern', 'expires_days', 'build_context']:
       val = get_key(xkey, img_data)
       if val:
         images[-1][xkey.upper()]=val
+
+    print("[DEBUG]: Build context is ", images[-1]['BUILD_CONTEXT'])
+
     chkdata = [from_manifest]
     if watch_manifest:
       chkdata.append(watch_manifest)
@@ -128,9 +131,12 @@ def process_tags(setup, data, images):
           chkdata.append("%s=%s" % (v, images[-1][v]))
 
     config_dir = get_key('config_dir', img_data)
-    scripts_dir = config_dir
-    if get_key('BUILD_CONTEXT', img_data)  == "..":
-        scripts_dir = config_dir.rsplit("/", 1)[0]
+    scripts_dir = config_dir + "/" + images[-1]['BUILD_CONTEXT']
+
+    print("[DEBUG]: Scripts path is ", scripts_dir)
+
+    #if get_key('BUILD_CONTEXT', img_data)  == "..":
+    #    scripts_dir = config_dir.rsplit("/", 1)[0]
 
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
     print("base man:",from_manifest)

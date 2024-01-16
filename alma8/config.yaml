@@ -4,6 +4,7 @@ delete_pattern: tmp-${group1}.*-(2[0-9]{7,})
 expires_days: 7
 daily: d$${now.strftime("%Y%m%d")}
 architecture: ${group1}
+build_context: ..
 test:
   script: test-cmssw.sh
   node:   singularity
@@ -11,7 +12,6 @@ variables:
   CMS_COMPATIBLE_OS: el8
   DEFAULT_PACKAGES: coreutils-single
   EPEL_PACKAGES:
-  BUILD_CONTEXT: ..
 groups:
   bootstrap:
     docker: Dockerfile.${group0}
