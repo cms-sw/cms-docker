@@ -114,7 +114,8 @@ def process_tags(setup, data, images):
     images[-1]['TEST_SCRIPT']=get_key('script', img_data)
     images[-1]['TEST_NODE']=get_key('node', img_data)
     images[-1]['ARCHITECTURE']=arch
-    for xkey in ['delete_pattern', 'expires_days']:
+    images[-1]['BUILD_CONTEXT']="."
+    for xkey in ['delete_pattern', 'expires_days', 'build_context']:
       val = get_key(xkey, img_data)
       if val:
         images[-1][xkey.upper()]=val
@@ -126,7 +127,9 @@ def process_tags(setup, data, images):
         images[-1][v] = get_key(v, img_data)
         if (not v in ['SKIP_TESTS', 'CVMFS_UNPACKED', 'BUILD_DATE', 'MAIL_TO', 'CMS_COMPATIBLE_OS', 'CI_TESTS']) and images[-1][v]:
           chkdata.append("%s=%s" % (v, images[-1][v]))
+
     config_dir = get_key('config_dir', img_data)
+    scripts_dir = config_dir + "/" + images[-1]['BUILD_CONTEXT']
     docFile = join(config_dir, images[-1]['DOCKER_FILE'])
     print("base man:",from_manifest)
     if watch_manifest: print("watch man:",watch_manifest)
@@ -139,7 +142,7 @@ def process_tags(setup, data, images):
           items = [i for i in line.split(" ") if i]
           if (items[0] not in ["ADD", "COPY"]) or (":" in items[1]):
             continue
-          xfile = join(config_dir, items[1])
+          xfile = join(scripts_dir, items[1])
           with open(xfile, encoding="utf-8") as xref:
             chkdata.append(hashlib.md5(xref.read().encode()).hexdigest())
           print("chksum:", xfile, chkdata[-1])

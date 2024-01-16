@@ -1,5 +1,9 @@
 FROM @BASE_IMAGE_NAME@
-RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel \
+
+ADD bin/rpm-pkg-info.sh /tmp/rpm-pkg-info.sh
+
+RUN dnf install -y bash && ./tmp/rpm-pkg-info.sh BASE &&\
+      dnf install -y @DEFAULT_PACKAGES@ automake bzip2 bzip2-libs bzip2-devel \
       file file-libs fontconfig freetype gcc-c++  git glibc krb5-libs libaio \
       libcom_err libgomp libICE libidn \
       libSM libX11 libX11-devel libxcrypt libXcursor libXext \
@@ -32,10 +36,11 @@ RUN dnf install -y @DEFAULT_PACKAGES@ automake bash bzip2 bzip2-libs bzip2-devel
     echo el8 > /etc/cmsos &&\
     dnf clean all
 
-ADD krb5.conf /etc/krb5.conf
-ADD ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
-ADD fix_ssh_config.sh /tmp/fix_ssh_config.sh
+ADD share/krb5.conf /etc/krb5.conf
+ADD share/ca-bundle.crt /etc/pki/tls/certs/ca-bundle.crt
+ADD share/fix_ssh_config.sh /tmp/fix_ssh_config.sh
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
     touch /etc/tnsnames.ora &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
-    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
+    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf &&\
+    ./tmp/rpm-pkg-info.sh IMAGE
