@@ -115,12 +115,10 @@ def process_tags(setup, data, images):
     images[-1]['TEST_NODE']=get_key('node', img_data)
     images[-1]['ARCHITECTURE']=arch
     images[-1]['BUILD_CONTEXT']="."
-
     for xkey in ['delete_pattern', 'expires_days', 'build_context']:
       val = get_key(xkey, img_data)
       if val:
         images[-1][xkey.upper()]=val
-
     chkdata = [from_manifest]
     if watch_manifest:
       chkdata.append(watch_manifest)
