@@ -7,7 +7,7 @@
 rhel6-itb: rhel6-m20211005
 rhel7-itb: rhel7-m20220512
 rhel8-itb: cmssw/el8:x86_64-d20240109
-rhel9-itb: cmssw/el9:x86_64-d20240110
+rhel9-itb: cmssw/el9:x86_64-d20240125
 
 #itb x86_64
 rhel6-itb-x86_64: rhel6-itb
@@ -17,7 +17,7 @@ rhel9-itb-x86_64: rhel9-itb
 
 #itb aarch64
 rhel8-itb-aarch64: cmssw/el8:aarch64-d20240110
-rhel9-itb-aarch64: cmssw/el9:aarch64-d20240110
+rhel9-itb-aarch64: cmssw/el9:aarch64-d20240126
 
 #itb ppc64le
 rhel8-itb-ppc64le: cmssw/el8:ppc64le-d20240110
@@ -28,7 +28,7 @@ rhel8-itb-ppc64le: cmssw/el8:ppc64le-d20240110
 rhel6: rhel6-m20211005
 rhel7: rhel7-m20220331
 rhel8: cmssw/el8:x86_64-d20231016
-rhel9: cmssw/el9:x86_64-d20240110
+rhel9: cmssw/el9:x86_64-d20240125
 
 #x86_64
 rhel6-x86_64: rhel6
@@ -38,7 +38,7 @@ rhel9-x86_64: rhel9
 
 #aarch64
 rhel8-aarch64: cmssw/el8:aarch64-d20240110
-rhel9-aarch64: cmssw/el9:aarch64-d20240110
+rhel9-aarch64: cmssw/el9:aarch64-d20240126
 
 #ppc64le
 rhel8-ppc64le: cmssw/el8:ppc64le-d20240110
