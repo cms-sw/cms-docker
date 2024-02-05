@@ -12,6 +12,8 @@ groups:
   latest:
     alias: ${group1}-${daily}
     from: quay.io/centos/centos:stream9
+    variables:
+      MAIL_TO: externals-l2
     groups:
       x86_64:
         variables:
