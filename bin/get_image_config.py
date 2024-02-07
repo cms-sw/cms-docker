@@ -115,6 +115,7 @@ def process_tags(setup, data, images):
     images[-1]['TEST_NODE']=get_key('node', img_data)
     images[-1]['ARCHITECTURE']=arch
     images[-1]['BUILD_CONTEXT']="."
+    images[-1]['NOTIFY_TO']="all"
     for xkey in ['delete_pattern', 'expires_days', 'build_context']:
       val = get_key(xkey, img_data)
       if val:
@@ -125,7 +126,7 @@ def process_tags(setup, data, images):
     if ".variables" in data[0]:
       for v in data[0][".variables"]:
         images[-1][v] = get_key(v, img_data)
-        if (not v in ['SKIP_TESTS', 'CVMFS_UNPACKED', 'BUILD_DATE', 'MAIL_TO', 'CMS_COMPATIBLE_OS', 'CI_TESTS', 'BUILD_CONTEXT']) and images[-1][v]:
+        if (not v in ['SKIP_TESTS', 'CVMFS_UNPACKED', 'BUILD_DATE', 'NOTIFY_TO', 'CMS_COMPATIBLE_OS', 'CI_TESTS', 'BUILD_CONTEXT']) and images[-1][v]:
           chkdata.append("%s=%s" % (v, images[-1][v]))
 
     config_dir = get_key('config_dir', img_data)
