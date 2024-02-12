@@ -58,7 +58,11 @@ def add_tags(name):
       # tag_last_update = datetime.datetime.strptime(tag['updated_at'], '%Y-%m-%dT%H:%M:%SZ').date()
       gh_sha[tag_name] = tag['name']  # In GitHub, tag['name'] contains the sha value
 
-  moving_tags = ["latest", "x86_64", "aarch64", "ppc64le", "x86_64-bootstrap", "aarch64-bootstrap", "ppc64le-bootstrap"]
+  moving_tags = ["latest"]
+  for arch in [ "x86_64", "aarch64", "ppc64le"]:
+      moving_tags.append(arch)
+      for layer in ["grid", "runtime", "bootstrap"]:
+          moving_tags.append("%s-%s" %(arch, layer))
 
   # Check #1: Check if tag already exists in GitHub based on the tag name
   for tag in hub_tags:
