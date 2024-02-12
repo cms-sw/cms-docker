@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-import sys, yaml
+import sys, yaml, re
 from argparse import ArgumentParser
 from subprocess import getstatusoutput as run_cmd
 from os.path import join, dirname, abspath, expanduser
@@ -58,12 +58,10 @@ def add_tags(name):
       # tag_last_update = datetime.datetime.strptime(tag['updated_at'], '%Y-%m-%dT%H:%M:%SZ').date()
       gh_sha[tag_name] = tag['name']  # In GitHub, tag['name'] contains the sha value
 
-  moving_tags = ["latest"]
-  for arch in [ "x86_64", "aarch64", "ppc64le"]:
-      moving_tags.append(arch)
-      for layer in ["grid", "runtime", "bootstrap"]:
-          moving_tags.append("%s-%s" %(arch, layer))
-
+  moving_tags = ["^latest$"]
+  moving_tags.append("^(x86_64|aarch64|ppc64le)(-grid|-runtime|-bootstrap|)$")
+  moving_tags.append("^(rhel[0-9]+)(-itb|)(-x86_64|-aarch64|-ppc64le|)$")
+  
   # Check #1: Check if tag already exists in GitHub based on the tag name
   for tag in hub_tags:
     try:
@@ -76,7 +74,7 @@ def add_tags(name):
         continue
     tag_name = tag['name']  # In DockerHub, tag['name'] contains the tag name
     #tag_last_update = datetime.datetime.strptime(tag['tag_last_pushed'], '%Y-%m-%dT%H:%M:%S.%fZ').date()
-    if (not tag_name in moving_tags) and (tag_name in gh_sha):
+    if (not [exp for exp in moving_tags if re.match(exp, tag_name)]) and (tag_name in gh_sha):
       if full_run == "true":  ## 
         print("  Tag exists: ", tag_name)
         continue
