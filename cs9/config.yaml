@@ -12,8 +12,6 @@ groups:
   latest:
     alias: ${group1}-${daily}
     from: quay.io/centos/centos:stream9
-    variables:
-      NOTIFY_TO: cms-sw/externals-l2
     groups:
       x86_64:
         variables:
