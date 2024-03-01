@@ -64,6 +64,8 @@ groups:
   latest:
     alias: ${group1}-${daily}
     from: ${container}:${group1}-grid
+    variables:
+      NOTIFY_TO: hlt
     groups:
       x86_64:
         variables:
