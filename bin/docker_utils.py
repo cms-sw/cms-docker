@@ -23,7 +23,13 @@ def hub_request(uri, data=None, params=None, headers=None, method='GET', json=Fa
 
 def http_request(url, data=None, params=None, headers=None, method = 'GET', json=False):
   response = request(method=method, url=url, data=data,  params=params, headers=headers)
-  return response.json() if json else response
+  if json:
+    try:
+      response = response.json()
+    except ValueError as e:
+      print("No json response returned: ", e)
+      response = response.text
+  return response
 
 # get token for docker Registry API
 def get_registry_token(repo):
@@ -163,7 +169,12 @@ def delete_tag(repo, tag):
 
 def logout():
   uri = '/logout/'
-  return hub_request(uri, method='POST', json=True)['detail']
+  response = hub_request(uri, method='POST', json=True)
+  try:
+    response = loads(response)['detail']
+  except ValueError as e:
+    print("Logout request error: ", e)
+  return response
 
 def get_digest(image, arch, debug=False):
   tag = image.split(":")[-1]

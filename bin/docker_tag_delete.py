@@ -42,7 +42,7 @@ for repo in find_repos():
         tags = []
         print('Docker Hub user "%s" does not contain image "%s"'%(args.dockerUser, repo))
         break
-    print("Wroking on %s/%s" % (repo, image['IMAGE_TAG']))
+    print("Working on %s/%s" % (repo, image['IMAGE_TAG']))
     ntags = []
     for tag in tags:
       ntags.append(tag)
