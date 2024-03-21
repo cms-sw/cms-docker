@@ -5,7 +5,7 @@ from os.path import dirname, abspath
 from get_image_config import get_docker_images
 from datetime import datetime
 from argparse import ArgumentParser
-from docker_utils import get_token, delete_tag, logout, get_tags
+from docker_utils import get_token, delete_tag, get_tags
 import sys, re, yaml, os, glob
 
 def find_repos():
