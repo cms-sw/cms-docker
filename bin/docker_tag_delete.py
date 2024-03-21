@@ -5,7 +5,7 @@ from os.path import dirname, abspath
 from get_image_config import get_docker_images
 from datetime import datetime
 from argparse import ArgumentParser
-from docker_utils import get_token, delete_tag, logout, get_tags
+from docker_utils import get_token, delete_tag, get_tags
 import sys, re, yaml, os, glob
 
 def find_repos():
@@ -42,7 +42,7 @@ for repo in find_repos():
         tags = []
         print('Docker Hub user "%s" does not contain image "%s"'%(args.dockerUser, repo))
         break
-    print("Wroking on %s/%s" % (repo, image['IMAGE_TAG']))
+    print("Working on %s/%s" % (repo, image['IMAGE_TAG']))
     ntags = []
     for tag in tags:
       ntags.append(tag)
@@ -59,4 +59,3 @@ for repo in find_repos():
         ntags.remove(tag)
     tags = ntags[:]
 
-logout()

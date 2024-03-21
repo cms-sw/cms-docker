@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 
 from __future__ import print_function
-from docker_utils import (get_repos, get_teams, get_permissions, get_members, logout, create_repo, create_team, 
+from docker_utils import (get_repos, get_teams, get_permissions, get_members, create_repo, create_team,
                           add_permissions, add_member, delete_repo, delete_team, delete_permissions, delete_member)
 from argparse import ArgumentParser
 import yaml
@@ -137,7 +137,6 @@ for team_name in hub_teams:
       print('No members found in yaml config file for "%s"' % team_name)
       members_in_yaml = []
     update_dockerhub(members_in_yaml, hub_team_members[1], team_name=team_name, what_to_sync='members')
-logout()
 if args.dryrun and changes_applied:
   print('\nDOCKER HUB CONFIGURATION CHANGED\n')
   sys.exit(1)
