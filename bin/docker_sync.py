@@ -137,7 +137,6 @@ for team_name in hub_teams:
       print('No members found in yaml config file for "%s"' % team_name)
       members_in_yaml = []
     update_dockerhub(members_in_yaml, hub_team_members[1], team_name=team_name, what_to_sync='members')
-logout()
 if args.dryrun and changes_applied:
   print('\nDOCKER HUB CONFIGURATION CHANGED\n')
   sys.exit(1)

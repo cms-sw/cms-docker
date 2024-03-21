@@ -167,15 +167,6 @@ def delete_tag(repo, tag):
   response = hub_request(uri, method = 'DELETE')
   return (False, response, response.reason, response.text) if not response.ok else (response.ok,)
 
-def logout():
-  uri = '/logout/'
-  response = hub_request(uri, method='POST', json=True)
-  try:
-    response = loads(response)['detail']
-  except ValueError as e:
-    print("Logout request error: ", e)
-  return response
-
 def get_digest(image, arch, debug=False):
   tag = image.split(":")[-1]
   repo = image.split(":")[0]
@@ -262,7 +253,6 @@ def generate_yaml(username):
   docker_config = dict.fromkeys(['repositories', 'teams'])
   docker_config['teams'] = teams_dict
   docker_config['repositories'] = repositories_dict
-  logout()
   yaml_location = join(dirname(dirname(abspath(__file__))), 'generated-docker-config.yaml')
   with open(yaml_location, 'w') as file:
     yaml.safe_dump(docker_config, file, encoding='utf-8', allow_unicode=True, default_flow_style=False)

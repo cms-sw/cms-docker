@@ -59,4 +59,3 @@ for repo in find_repos():
         ntags.remove(tag)
     tags = ntags[:]
 
-logout()
