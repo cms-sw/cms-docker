@@ -9,7 +9,7 @@ ADD bin/rpm-pkg-info.sh         /tmp/rpm-pkg-info.sh
 
 RUN dnf install -y bash && /tmp/rpm-pkg-info.sh BASE &&\
     dnf install -y @DEFAULT_PACKAGES@ tcsh zsh tar glibc glibc-devel libgcc libxcrypt openssl-libs libcom_err krb5-libs ncurses-libs \
-    perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl &&\
+    perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl sssd-client &&\
     dnf install -y python3 which procps-ng &&\
     dnf install -y epel-release &&\
     dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer python3-requests python3-psutil python3-pip  &&\
