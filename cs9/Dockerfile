@@ -12,7 +12,7 @@ RUN dnf install -y bash && /tmp/rpm-pkg-info.sh BASE &&\
     libglvnd-opengl mesa-libGL mesa-libGLU mesa-libGLU-devel \
     java-1.8.0-openjdk-devel libtool m4 make \
     ncurses ncurses-libs ncurses-devel nspr nss nss-devel nss-util \
-    openssl openssl-devel openssl-libs \
+    openssl openssl-devel openssl-libs sssd-client \
     patch popt popt-devel python3 readline readline-devel rpm-build \
     rsync tcl tcsh time tk wget which zlib zsh tcl-devel tk-devel krb5-devel \
     bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
