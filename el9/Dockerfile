@@ -9,7 +9,7 @@ RUN /tmp/rpm-pkg-info.sh BASE &&\
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
 	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool libdrm gcc-c++ libXmu \
  	krb5-devel coreutils-single libcom_err-devel \
-        python3-cryptography && dnf clean all
+        python3-cryptography jq && dnf clean all
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake \
