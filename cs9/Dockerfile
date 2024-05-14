@@ -1,7 +1,5 @@
 FROM @BASE_IMAGE_NAME@
 
-ADD bin/rpm-pkg-info.sh /tmp/rpm-pkg-info.sh
-
 RUN dnf install -y automake bzip2 bzip2-libs bzip2-devel coreutils-single e2fsprogs \
     e2fsprogs-libs perl file file-libs fontconfig freetype gcc-c++ git glibc krb5-libs \
     libaio libcom_err libcom_err-devel libgomp libICE \
