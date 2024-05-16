@@ -3,8 +3,7 @@ LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 
 # Dependencies on libidn libXmu libstdc++-static might be cleaned up in the future
-RUN /tmp/rpm-pkg-info.sh BASE &&\
-	dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter \
+RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter \
 	perl-File-Path perl-File-Temp perl-Getopt-Long perl-IO perl-Text-ParseWords perl-constant \
 	perl-Digest-MD5 perl-PathTools perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
 	perl-File-Temp perl-Getopt-Long perl-File-Which perl-Scalar-List-Utils perl-Term-ANSIColor \
@@ -29,7 +28,6 @@ RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
 	dnf update -y ca-certificates &&\
 	dnf clean all &&\
 	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
-	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
-        /tmp/rpm-pkg-info.sh IMAGE True
+	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 
 LABEL build-date="@BUILD_DATE@"
