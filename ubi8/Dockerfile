@@ -1,10 +1,7 @@
 FROM @BASE_IMAGE_NAME@
 
-ADD bin/rpm-pkg-info.sh /tmp/rpm-pkg-info.sh
-
 RUN sed -i -e 's|enabled=1|enabled=0|' /etc/dnf/plugins/subscription-manager.conf &&\
-      dnf install -y bash && /tmp/rpm-pkg-info.sh BASE &&\
-      dnf install -y automake bzip2 bzip2-libs bzip2-devel coreutils-single file \
+      dnf install -y bash automake bzip2 bzip2-libs bzip2-devel coreutils-single file \
       file-libs fontconfig freetype gcc-c++ libstdc++-static git glibc krb5-libs libaio \
       libcom_err libgomp libICE libidn \
       libSM libX11 libX11-devel libxcrypt libXcursor libXext \
@@ -43,5 +40,4 @@ RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool 
     touch /etc/tnsnames.ora &&\
     echo el8 > /etc/cmsos &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
-    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf &&\
-    /tmp/rpm-pkg-info.sh IMAGE
+    sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
