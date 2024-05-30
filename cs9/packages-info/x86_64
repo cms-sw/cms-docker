@@ -1,6 +1,6 @@
-# Build date: 2024-05-21
+# Build date: 2024-05-30
 ModemManager-glib 1.20.2-1.el9
-NetworkManager-libnm 1.47.90-1.el9
+NetworkManager-libnm 1.47.91-1.el9
 abattis-cantarell-fonts 0.301-4.el9
 acl 2.3.1-4.el9
 adobe-mappings-cmap 20171205-12.el9
@@ -42,6 +42,7 @@ centos-stream-repos 9.0-26.el9
 checkpolicy 3.6-1.el9
 cmake-filesystem 3.26.5-2.el9
 colord-libs 1.4.5-4.el9
+composefs-libs 1.0.3-2.el9
 copy-jdk-configs 4.0-3.el9
 coreutils-single 8.32-35.el9
 cpio 2.13-16.el9
@@ -66,7 +67,7 @@ device-mapper-libs 1.02.197-2.el9
 diffutils 3.7-12.el9
 dnf 4.14.0-11.el9
 dnf-data 4.14.0-11.el9
-dnf-plugins-core 4.3.0-13.el9
+dnf-plugins-core 4.3.0-15.el9
 doxygen 1.9.1-11.el9
 dwz 0.14-3.el9
 e2fsprogs 1.46.5-5.el9
@@ -192,7 +193,7 @@ json-glib 1.6.6-1.el9
 kbd 2.4.0-9.el9
 kbd-legacy 2.4.0-9.el9
 kbd-misc 2.4.0-9.el9
-kernel-headers 5.14.0-447.el9
+kernel-headers 5.14.0-452.el9
 kernel-srpm-macros 1.0-13.el9
 keyutils-libs 1.6.3-1.el9
 keyutils-libs-devel 1.6.3-1.el9
@@ -259,7 +260,7 @@ libcomps 0.1.18-1.el9
 libcurl-minimal 7.76.1-29.el9
 libdatrie 0.2.13-4.el9
 libdb 5.3.28-53.el9
-libdnf 0.69.0-10.el9
+libdnf 0.69.0-11.el9
 libdrm 2.4.117-1.el9
 libeconf 0.4.1-4.el9
 libedit 3.1-38.20210216cvs.el9
@@ -424,7 +425,7 @@ opus 1.3.1-10.el9
 orc 0.4.31-6.el9
 osinfo-db 20231215-1.el9
 osinfo-db-tools 1.10.0-1.el9
-ostree-libs 2024.5-2.el9
+ostree-libs 2024.6-1.el9
 p11-kit 0.25.3-2.el9
 p11-kit-server 0.25.3-2.el9
 p11-kit-trust 0.25.3-2.el9
@@ -686,9 +687,9 @@ policycoreutils-python-utils 3.6-2.1.el9
 polkit 0.117-11.el9
 polkit-libs 0.117-11.el9
 polkit-pkla-compat 0.1-21.el9
-poppler 21.01.0-19.el9
+poppler 21.01.0-20.el9
 poppler-data 0.4.9-9.el9
-poppler-glib 21.01.0-19.el9
+poppler-glib 21.01.0-20.el9
 popt 1.18-8.el9
 popt-devel 1.18-8.el9
 procps-ng 3.3.17-14.el9
@@ -703,12 +704,12 @@ python3-dateutil 2.8.1-7.el9
 python3-dbus 1.2.18-2.el9
 python3-distro 1.5.0-7.el9
 python3-dnf 4.14.0-11.el9
-python3-dnf-plugins-core 4.3.0-13.el9
+python3-dnf-plugins-core 4.3.0-15.el9
 python3-gpg 1.15.1-6.el9
-python3-hawkey 0.69.0-10.el9
+python3-hawkey 0.69.0-11.el9
 python3-idna 2.10-7.el9.1
 python3-libcomps 0.1.18-1.el9
-python3-libdnf 0.69.0-10.el9
+python3-libdnf 0.69.0-11.el9
 python3-libs 3.9.18-3.el9
 python3-libselinux 3.6-1.el9
 python3-libsemanage 3.6-1.el9
@@ -789,7 +790,7 @@ vim-filesystem 8.2.2637-20.el9
 vim-minimal 8.2.2637-20.el9
 voms 2.1.0-0.34.rc4.el9
 voms-clients-cpp 2.1.0-0.34.rc4.el9
-webkit2gtk3-jsc 2.44.1-1.el9
+webkit2gtk3-jsc 2.44.2-1.el9
 webrtc-audio-processing 0.3.1-8.el9
 wget 1.21.1-7.el9
 which 2.21-29.el9
