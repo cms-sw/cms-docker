@@ -11,7 +11,7 @@ RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper 
 	perl-YAML perl-IO-Compress rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
 	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool libdrm gcc-c++ libidn libXmu \
-        python3-cryptography &&\
+        python3-cryptography jq &&\
 	dnf clean all
 
 # Please add user packages in the RUN command below
