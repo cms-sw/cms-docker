@@ -20,6 +20,7 @@ RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-devel libgcc
     dnf install -y cern-gpg-keys CERN-CA-certs &&\
     update-ca-trust &&\
     dnf update -y ca-certificates &&\
+    update-crypto-policies --set DEFAULT:SHA1 &&\
     dnf clean all &&\
     mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms /etc/ssh &&\
     mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage /scratch &&\
