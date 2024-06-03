@@ -2,14 +2,12 @@ FROM @BASE_IMAGE_NAME@
 LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Grid packages"
 
-RUN /tmp/rpm-pkg-info.sh BASE &&\
-    dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util xrootd-client openldap-compat &&\
+RUN dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util xrootd-client openldap-compat &&\
     dnf install -y @EPEL_PACKAGES@ myproxy &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
     /root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
-    echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt &&\
-    /tmp/rpm-pkg-info.sh IMAGE True
+    echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 
 LABEL build-date="@BUILD_DATE@"
