@@ -7,9 +7,9 @@ LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 RUN /tmp/rpm-pkg-info.sh BASE &&\
 	dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
-	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel libtool libdrm gcc-c++ libXmu \
- 	krb5-devel coreutils-single libcom_err-devel \
-        python3-cryptography jq && dnf clean all
+	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk libtool libdrm \
+ 	gcc-c++ libXmu krb5-devel coreutils-single libcom_err-devel \
+  python3-cryptography jq && dnf clean all
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake \
