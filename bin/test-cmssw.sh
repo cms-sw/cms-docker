@@ -115,7 +115,7 @@ for arch in ${ARCHS} ; do
   if $RUN_TESTS ; then
     touch $WORKSPACE/cmssw.rel.filtered
     for v in $(cat $WORKSPACE/cmssw.rel); do
-      if [ -e $v/build-errors ] ; then continue ; fi
+      #if [ -e $v/build-errors ] ; then continue ; fi
       ver=$(basename $v)
       rel_queue=$(echo $ver | sed 's|_X_.*|_X|')
       if [ ! -e ${rel_queue}.json ] ; then
@@ -142,7 +142,7 @@ for arch in ${ARCHS} ; do
     cmssw_ver=""
     boot_repo="cms"
     for v in $(cat $WORKSPACE/cmssw.rel) ; do
-      if [ -e $v/build-errors ] ; then continue ; fi
+      #if [ -e $v/build-errors ] ; then continue ; fi
       cmssw_ver=$(basename $v)
       boot_repo=cms.$(echo $v | cut -d/ -f4)
       if [ "${boot_repo}" = "cms.sw" ]; then boot_repo=cms.$(echo $v | cut -d/ -f6); fi
