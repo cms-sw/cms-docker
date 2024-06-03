@@ -118,10 +118,10 @@ for arch in ${ARCHS} ; do
       if [ -e $v/build-errors ] ; then continue ; fi
       ver=$(basename $v)
       rel_queue=$(echo $ver | sed 's|_X_.*|_X|')
-      if [ ! -e ${release_cycle}.json ] ; then
+      if [ ! -e ${rel_queue}.json ] ; then
         curl -L https://raw.githubusercontent.com/cms-sw/cms-sw.github.io/master/data/${rel_queue}.json > ${rel_queue}.json
       fi
-      if [ $(grep -B 5 "/${SCRAM_ARCH}/.*/${ver}/pyRelValMatrixLogs/run/" ${rel_queue}.json | grep '"done": *true' |wc -l) -gt 0 ] ; then
+      if [ $(grep -A 3 -B 3 "/${SCRAM_ARCH}/.*/${ver}/pyRelValMatrixLogs/run/" ${rel_queue}.json | grep '"done": *true' |wc -l) -gt 0 ] ; then
         echo "$v" >> $WORKSPACE/cmssw.rel.filtered
       fi
     done
