@@ -1,3 +1,4 @@
+# Build date: 2024-06-03
 acl 2.3.1-4.el9
 almalinux-gpg-keys 9.4-1.el9
 almalinux-release 9.4-1.el9
@@ -33,9 +34,9 @@ findutils 4.8.0-6.el9
 gawk 5.1.0-6.el9
 gdbm-libs 1.19-4.el9
 glib2 2.68.4-14.el9
-glibc 2.34-100.el9
-glibc-common 2.34-100.el9
-glibc-minimal-langpack 2.34-100.el9
+glibc 2.34-100.el9_4.2
+glibc-common 2.34-100.el9_4.2
+glibc-minimal-langpack 2.34-100.el9_4.2
 gmp 6.2.0-13.el9
 gnupg2 2.3.3-4.el9
 gnutls 3.8.3-4.el9_4
