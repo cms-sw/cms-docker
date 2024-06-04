@@ -17,10 +17,10 @@ rhel9-itb-x86_64: rhel9-itb
 
 #itb aarch64
 rhel8-itb-aarch64: cmssw/el8:aarch64-d20240601
-rhel9-itb-aarch64: cmssw/el9:aarch64-d20240603
+rhel9-itb-aarch64: cmssw/el9:aarch64-d20240604
 
 #itb ppc64le
-rhel8-itb-ppc64le: cmssw/el8:ppc64le-d20240110
+rhel8-itb-ppc64le: cmssw/el8:ppc64le-d20240531
 
 ########################
 #Production images
@@ -38,7 +38,7 @@ rhel9-x86_64: rhel9
 
 #aarch64
 rhel8-aarch64: cmssw/el8:aarch64-d20240601
-rhel9-aarch64: cmssw/el9:aarch64-d20240603
+rhel9-aarch64: cmssw/el9:aarch64-d20240604
 
 #ppc64le
-rhel8-ppc64le: cmssw/el8:ppc64le-d20240110
+rhel8-ppc64le: cmssw/el8:ppc64le-d20240531
