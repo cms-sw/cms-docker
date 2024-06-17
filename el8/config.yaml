@@ -27,6 +27,7 @@ groups:
         tags:
           ${group1}-${group0}:
       ppc64le:
+        disabled: true
         tags:
           ${group1}-${group0}:
   runtime:
@@ -40,6 +41,7 @@ groups:
         tags:
           ${group1}-${group0}:
       ppc64le:
+        disabled: true
         tags:
           ${group1}-${group0}:
   grid:
@@ -55,6 +57,7 @@ groups:
         tags:
           ${group1}-${group0}:
       ppc64le:
+        disabled: true
         tags:
           ${group1}-${group0}:
   latest:
@@ -72,5 +75,6 @@ groups:
         tags:
           ${group1}:
       ppc64le:
+        disabled: true
         tags:
           ${group1}:
