@@ -1,9 +1,9 @@
-# Build date: 2024-05-31
+# Build date: 2024-06-27
 CERN-CA-certs 20230604-1.al8.cern
 CGSI-gSOAP 1.3.11-7.el8
 acl 2.2.53-3.el8
 almalinux-release 8.10-1.el8
-apptainer 1.3.1-1.el8
+apptainer 1.3.2-1.el8
 audit-libs 3.1.2-1.el8
 basesystem 11-5.el8
 bash 4.4.20-5.el8
@@ -115,7 +115,7 @@ info 6.5-7.el8
 iputils 20180629-11.el8
 isa-l 2.31.0-1.el8
 json-c 0.13.1-3.el8
-kernel-headers 4.18.0-553.el8_10
+kernel-headers 4.18.0-553.5.1.el8_10
 keyutils-libs 1.5.10-9.el8
 kmod-libs 25-20.el8
 krb5-libs 1.18.2-27.el8_10
@@ -433,8 +433,8 @@ tzdata 2024a-1.el8
 unzip 6.0-46.el8
 util-linux 2.32.1-46.el8
 vim-minimal 8.0.1763-19.el8_6.4
-voms 2.1.0-0.34.rc4.el8
-voms-clients-cpp 2.1.0-0.34.rc4.el8
+voms 2.1.0-0.35.rc5.el8
+voms-clients-cpp 2.1.0-0.35.rc5.el8
 which 2.21-20.el8
 xrootd-client 5.6.9-1.el8
 xrootd-client-libs 5.6.9-1.el8
