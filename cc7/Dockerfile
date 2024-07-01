@@ -6,7 +6,8 @@ ADD krb5.conf               /etc/krb5.conf
 ADD cern.repo               /tmp/cern.repo
 ADD RPM-GPG-KEY-cern        /tmp/RPM-GPG-KEY-cern
 
-RUN yum install -y \
+RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|' /etc/yum.repos.d/CentOS-Base.repo &&\
+    yum install -y \
         java-1.8.0-openjdk python-devel java-1.8.0-openjdk-devel java-11-openjdk-devel ntp \
         git subversion bc finger zip unzip which bzip2 \
         zlib nss nspr popt nss-util \
@@ -20,10 +21,10 @@ RUN yum install -y \
         perl-constant perl-File-Temp perl-Socket perl-Time-Local perl-Storable glibc-headers perl-threads \
         perl-Thread-Queue perl-Module-ScanDeps perl-Test-Harness perl-Env perl-Switch perl-ExtUtils-Embed \
         ncurses-libs perl-libs file wget perl-LWP-Protocol-https python-setuptools \
-        libaio tcl-devel tk-devel man-db \
+        libaio tcl-devel tk-devel man-db vim \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python3 strace &&\
     yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
-    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil libstdc++-static &&\
+    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil libstdc++-static jq &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && yum install -y @EXTRA_PACKAGES@ || true) &&\
     yum install -y xrootd-client &&\
     cp /tmp/cern.repo /etc/yum.repos.d/cern.repo &&\
