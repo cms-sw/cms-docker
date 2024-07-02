@@ -1,8 +1,8 @@
-# Build date: 2024-06-03
+# Build date: 2024-07-02
 CERN-CA-certs 20230604-1.al9.cern
 CGSI-gSOAP 1.3.11-13.el9
 ModemManager-glib 1.20.2-1.el9
-NetworkManager-libnm 1.46.0-4.el9_4
+NetworkManager-libnm 1.46.0-8.el9_4
 abattis-cantarell-fonts 0.301-4.el9
 acl 2.3.1-4.el9
 adobe-mappings-cmap 20171205-12.el9
@@ -17,7 +17,7 @@ almalinux-repos 9.4-1.el9
 alsa-lib 1.2.10-2.el9
 alternatives 1.24-1.el9
 annobin 12.31-2.el9
-apptainer 1.3.1-1.el9
+apptainer 1.3.2-1.el9
 at-spi2-atk 2.38.0-4.el9
 at-spi2-core 2.40.3-1.el9
 atk 2.36.0-5.el9
@@ -48,6 +48,7 @@ cmake-data 3.26.5-2.el9
 cmake-filesystem 3.26.5-2.el9
 cmake-rpm-macros 3.26.5-2.el9
 colord-libs 1.4.5-4.el9
+composefs-libs 1.0.3-2.el9
 copy-jdk-configs 4.0-3.el9
 coreutils-single 8.32-35.el9
 cpio 2.13-16.el9
@@ -102,8 +103,8 @@ file-libs 5.39-16.el9
 filesystem 3.16-2.el9
 findutils 4.8.0-6.el9
 flac-libs 1.3.3-10.el9_2.1
-flatpak 1.12.8-1.el9
-flatpak-session-helper 1.12.8-1.el9
+flatpak 1.12.9-1.el9_4
+flatpak-session-helper 1.12.9-1.el9_4
 fontconfig 2.14.0-2.el9_1
 fontconfig-devel 2.14.0-2.el9_1
 fonts-filesystem 2.0.5-7.el9.1
@@ -122,8 +123,8 @@ gcc-plugin-annobin 11.4.1-3.el9.alma.1
 gd 2.3.2-3.el9
 gdb-minimal 10.2-13.el9
 gdbm-libs 1.19-4.el9
-gdk-pixbuf2 2.42.6-3.el9
-gdk-pixbuf2-modules 2.42.6-3.el9
+gdk-pixbuf2 2.42.6-4.el9_4
+gdk-pixbuf2-modules 2.42.6-4.el9_4
 geoclue2 2.6.0-7.el9
 gettext 0.21-8.el9
 gettext-libs 0.21-8.el9
@@ -139,9 +140,9 @@ gfal2-plugin-xrootd 2.22.2-1.el9
 gfal2-util-scripts 1.8.1-1.el9
 ghc-srpm-macros 1.5.0-6.el9
 giflib 5.2.1-9.el9
-git 2.43.0-1.el9
-git-core 2.43.0-1.el9
-git-core-doc 2.43.0-1.el9
+git 2.43.5-1.el9_4
+git-core 2.43.5-1.el9_4
+git-core-doc 2.43.5-1.el9_4
 gl-manpages 1.1-24.20190306.el9
 glib-networking 2.68.3-3.el9
 glib2 2.68.4-14.el9
@@ -229,7 +230,7 @@ json-glib 1.6.6-1.el9
 kbd 2.4.0-9.el9
 kbd-legacy 2.4.0-9.el9
 kbd-misc 2.4.0-9.el9
-kernel-headers 5.14.0-427.18.1.el9_4
+kernel-headers 5.14.0-427.22.1.el9_4
 kernel-srpm-macros 1.0-13.el9
 keyutils-libs 1.6.3-1.el9
 keyutils-libs-devel 1.6.3-1.el9
@@ -273,7 +274,7 @@ libXv 1.0.11-16.el9
 libXxf86vm 1.1.4-18.el9
 libacl 2.3.1-4.el9
 libaio 0.3.111-13.el9
-libappstream-glib 0.7.18-4.el9
+libappstream-glib 0.7.18-5.el9_4
 libarchive 3.5.3-4.el9
 libassuan 2.5.5-3.el9
 libasyncns 0.8-22.el9
@@ -319,7 +320,7 @@ libglvnd-glx 1.3.4-1.el9
 libglvnd-opengl 1.3.4-1.el9
 libgomp 11.4.1-3.el9.alma.1
 libgpg-error 1.42-5.el9
-libgs 9.54.0-14.el9_3
+libgs 9.54.0-16.el9_4
 libgsf 1.14.47-5.el9
 libgudev 237-1.el9
 libgusb 0.3.8-2.el9
@@ -420,12 +421,12 @@ lzo 2.10-7.el9
 m4 1.4.19-1.el9
 make 4.3-8.el9
 man-db 2.9.3-7.el9
-mesa-libEGL 23.3.3-1.el9
-mesa-libGL 23.3.3-1.el9
+mesa-libEGL 23.3.3-1.el9.alma.1
+mesa-libGL 23.3.3-1.el9.alma.1
 mesa-libGLU 9.0.1-6.el9
 mesa-libGLU-devel 9.0.1-6.el9
-mesa-libgbm 23.3.3-1.el9
-mesa-libglapi 23.3.3-1.el9
+mesa-libgbm 23.3.3-1.el9.alma.1
+mesa-libglapi 23.3.3-1.el9.alma.1
 mkfontscale 1.2.1-3.el9
 mpfr 4.1.0-7.el9
 myproxy 6.2.16-1.el9
@@ -450,8 +451,8 @@ openblas-srpm-macros 2-11.el9
 openjpeg2 2.4.0-7.el9
 openldap 2.6.6-3.el9
 openldap-compat 2.6.6-3.el9
-openssh 8.7p1-38.el9
-openssh-clients 8.7p1-38.el9
+openssh 8.7p1-38.el9.alma.2
+openssh-clients 8.7p1-38.el9.alma.2
 openssl 3.0.7-27.el9
 openssl-devel 3.0.7-27.el9
 openssl-libs 3.0.7-27.el9
@@ -459,7 +460,7 @@ opus 1.3.1-10.el9
 orc 0.4.31-6.el9
 osinfo-db 20231215-1.el9
 osinfo-db-tools 1.10.0-1.el9
-ostree-libs 2024.4-3.el9_4
+ostree-libs 2024.6-1.el9_4
 p11-kit 0.25.3-2.el9
 p11-kit-server 0.25.3-2.el9
 p11-kit-trust 0.25.3-2.el9
@@ -556,7 +557,7 @@ perl-FindBin 1.51-481.el9
 perl-GDBM_File 1.18-481.el9
 perl-Getopt-Long 2.52-4.el9
 perl-Getopt-Std 1.12-481.el9
-perl-Git 2.43.0-1.el9
+perl-Git 2.43.5-1.el9_4
 perl-HTTP-Tiny 0.076-462.el9
 perl-Hash-Util 0.23-481.el9
 perl-Hash-Util-FieldHash 1.20-481.el9
@@ -738,7 +739,7 @@ pugixml 1.13-1.el9
 pulseaudio-libs 15.0-2.el9
 pyproject-srpm-macros 1.12.0-1.el9
 python-srpm-macros 3.9-53.el9
-python3 3.9.18-3.el9
+python3 3.9.18-3.el9_4.1
 python3-cffi 1.14.5-5.el9
 python3-chardet 4.0.0-5.el9
 python3-cryptography 36.0.1-4.el9
@@ -750,10 +751,10 @@ python3-gfal2 1.12.2-1.el9
 python3-gfal2-util 1.8.1-1.el9
 python3-gpg 1.15.1-6.el9
 python3-hawkey 0.69.0-8.el9.alma.1
-python3-idna 2.10-7.el9
+python3-idna 2.10-7.el9_4.1
 python3-libcomps 0.1.18-1.el9
 python3-libdnf 0.69.0-8.el9.alma.1
-python3-libs 3.9.18-3.el9
+python3-libs 3.9.18-3.el9_4.1
 python3-pip 21.2.3-8.el9
 python3-pip-wheel 21.2.3-8.el9
 python3-ply 3.11-14.el9
@@ -767,6 +768,7 @@ python3-setuptools 53.0.0-12.el9
 python3-setuptools-wheel 53.0.0-12.el9
 python3-six 1.15.0-9.el9
 python3-systemd 234-18.el9
+python3-tkinter 3.9.18-3.el9_4.1
 python3-urllib3 1.26.5-5.el9
 qt5-srpm-macros 5.15.9-1.el9
 readline 8.1-4.el9
@@ -837,8 +839,8 @@ vim-common 8.2.2637-20.el9_1
 vim-enhanced 8.2.2637-20.el9_1
 vim-filesystem 8.2.2637-20.el9_1
 vim-minimal 8.2.2637-20.el9_1
-voms 2.1.0-0.34.rc4.el9
-voms-clients-cpp 2.1.0-0.34.rc4.el9
+voms 2.1.0-0.35.rc5.el9
+voms-clients-cpp 2.1.0-0.35.rc5.el9
 webkit2gtk3-jsc 2.42.5-1.el9
 webrtc-audio-processing 0.3.1-8.el9
 wget 1.21.1-7.el9
