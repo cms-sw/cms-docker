@@ -45,7 +45,7 @@ for reponame in repos:
   for element in images_list:
     name = element["BASE_DOCKER_REPOSITORY"]
     arch = element["ARCHITECTURE"]
-    if name != "cmssw":
+    if (name != "cmssw") or (element['BASE_IMAGE_NAME'] in ['cmssw/cc7:aarch64-d20240110', 'cmssw/cc7:x86_64-d20240110']):
         base_dict[arch] = element["BASE_UPSTREAM_CHECKSUM"]
 
   for img in images_list:
