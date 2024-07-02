@@ -26,7 +26,7 @@ groups:
           ${group1}-${group0}:
   latest:
     alias: ${group1}-${daily}
-    from: library/centos:7
+    from: cmssw/cc7:${group1}-d20240110
     groups:
       x86_64:
         variables:
