@@ -9,6 +9,7 @@ daily: d$${now.strftime("%Y%m%d")}
 architecture: ${group1}
 groups:
   bootstrap:
+    disabled: true
     docker: Dockerfile.${group0}
     from: ${container}:${group1}
     variables:
