@@ -7,7 +7,7 @@ ADD GPG-KEY-EUGridPMA-RPM-3 /etc/pki/rpm-gpg/GPG-KEY-EUGridPMA-RPM-3
 
 RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|;s|mirror.centos.org|vault.centos.org|' /etc/yum.repos.d/CentOS-Base.repo &&\
     yum update -y && \
-    yum install -y http://linuxsoft.cern.ch/epel/epel-release-latest-6.noarch.rpm && \
+    yum install -y https://dl.fedoraproject.org/pub/archive/epel/6/x86_64/epel-release-6-8.noarch.rpm && \
     yum install -y git-core openssl glibc-devel.x86_64 mesa-libGL-devel.x86_64 mesa-libGLU-devel.x86_64 \
                    libXext-devel tcsh zsh tcl tk e2fsprogs perl-ExtUtils-Embed compat-libstdc++-33 libXmu e2fsprogs-libs \
                    libXpm bc libaio tar patch krb5-devel gcc unzip zip perl-libwww-perl libXpm-devel libXft-devel svn \
