@@ -10,7 +10,7 @@ from: library/centos:centos6
 docker: Dockerfile
 architecture: ${group0}
 groups:
-  amd64:
-    alias: ${group}-${daily} ${group} x86_64
+  x86_64:
+    alias: ${group}-${daily} ${group} amd64
     tags:
       ${group}-latest:
