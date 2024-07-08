@@ -1,4 +1,4 @@
-override: false
+override: true
 push:     true
 test:
   script: test-cmssw.sh
