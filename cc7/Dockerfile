@@ -10,7 +10,7 @@ RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|;s|mirror.cento
     yum install -y \
         java-1.8.0-openjdk python-devel java-1.8.0-openjdk-devel java-11-openjdk-devel ntp \
         git subversion bc finger zip unzip which bzip2 \
-        zlib nss nspr popt nss-util \
+        zlib nss nspr popt nss-util libnss-sss \
         openssl openssl-devel openssl-libs \
         glibc coreutils bash tcsh zsh perl tcl tk readline readline-devel ncurses e2fsprogs krb5-libs freetype fontconfig \
         libstdc++ libidn libX11 libXmu libSM libICE libXcursor libXext libXrandr libXft mesa-libGLU mesa-libGL \
