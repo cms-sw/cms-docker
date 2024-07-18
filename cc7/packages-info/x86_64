@@ -267,6 +267,8 @@ libsepol-devel 2.5-10.el7
 libsmartcols 2.23.2-65.el7_9.1
 libss 1.42.9-19.el7
 libssh2 1.8.0-4.el7
+libsss_idmap 1.16.5-10.el7_9.16
+libsss_nss_idmap 1.16.5-10.el7_9.16
 libstdc++ 4.8.5-44.el7
 libstdc++-devel 4.8.5-44.el7
 libstdc++-static 4.8.5-44.el7
@@ -513,6 +515,7 @@ shared-mime-info 1.8-5.el7
 sqlite 3.7.17-8.el7_7.1
 squashfs-tools 4.3-0.21.gitaae0aff4.el7
 srm-ifce 1.24.6-1.el7
+sssd-client 1.16.5-10.el7_9.16
 strace 4.24-7.el7_9
 subversion 1.7.14-16.el7
 subversion-libs 1.7.14-16.el7
