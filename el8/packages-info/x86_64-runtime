@@ -1,8 +1,7 @@
-# Build date: 2024-06-27
 CERN-CA-certs 20230604-1.al8.cern
 acl 2.2.53-3.el8
 almalinux-release 8.10-1.el8
-apptainer 1.3.2-1.el8
+apptainer 1.3.3-1.el8
 audit-libs 3.1.2-1.el8
 basesystem 11-5.el8
 bash 4.4.20-5.el8
@@ -76,12 +75,12 @@ ima-evm-utils 1.3.2-12.el8
 info 6.5-7.el8
 iputils 20180629-11.el8
 json-c 0.13.1-3.el8
-kernel-headers 4.18.0-553.5.1.el8_10
+kernel-headers 4.18.0-553.8.1.el8_10
 keyutils-libs 1.5.10-9.el8
 kmod-libs 25-20.el8
-krb5-libs 1.18.2-27.el8_10
+krb5-libs 1.18.2-28.el8_10
 langpacks-en 1.0-12.el8
-less 530-2.el8_9
+less 530-3.el8_10
 libX11 1.6.8-8.el8
 libX11-common 1.6.8-8.el8
 libX11-xcb 1.6.8-8.el8
@@ -119,7 +118,7 @@ libidn2 2.2.0-1.el8
 libksba 1.3.5-9.el8_7
 libmodulemd 2.13.0-1.el8
 libmount 2.32.1-46.el8
-libnghttp2 1.33.0-5.el8_9
+libnghttp2 1.33.0-6.el8_10.1
 libnsl 2.28-251.el8_10.2
 libnsl2 1.2.0-2.20180605git4a062cf.el8
 libpciaccess 0.14-1.el8
@@ -136,7 +135,7 @@ libsmartcols 2.32.1-46.el8
 libsolv 0.7.20-6.el8
 libstdc++ 8.5.0-22.el8_10
 libtasn1 4.13-4.el8_7
-libtirpc 1.1.4-10.el8
+libtirpc 1.1.4-12.el8_10
 libunistring 0.9.9-3.el8
 libusbx 1.0.23-4.el8
 libutempter 1.1.6-14.el8
@@ -144,7 +143,7 @@ libuuid 2.32.1-46.el8
 libverto 0.3.2-2.el8
 libxcb 1.13.1-1.el8
 libxcrypt 4.1.1-6.el8
-libxml2 2.9.7-18.el8_9
+libxml2 2.9.7-18.el8_10.1
 libxshmfence 1.3-2.el8
 libyaml 0.1.7-5.el8
 libzstd 1.4.4-1.el8
@@ -152,9 +151,9 @@ lua-libs 5.3.4-12.el8
 lz4-libs 1.8.3-3.el8_4
 lzo 2.08-14.el8
 make 4.2.1-11.el8
-mesa-libGL 23.1.4-2.el8
+mesa-libGL 23.1.4-2.el8.alma.1
 mesa-libGLU 9.0.0-15.el8
-mesa-libglapi 23.1.4-2.el8
+mesa-libglapi 23.1.4-2.el8.alma.1
 mpfr 3.1.6-1.el8
 ncurses 6.1-10.20180224.el8
 ncurses-base 6.1-10.20180224.el8
@@ -163,12 +162,12 @@ nettle 3.4.1-7.el8
 npth 1.5-4.el8
 ocaml-srpm-macros 5-4.el8
 openblas-srpm-macros 2-2.el8
-openldap 2.4.46-18.el8
+openldap 2.4.46-19.el8_10
 openssl 1.1.1k-12.el8_9
 openssl-libs 1.1.1k-12.el8_9
 p11-kit 0.23.22-2.el8
 p11-kit-trust 0.23.22-2.el8
-pam 1.3.1-33.el8
+pam 1.3.1-34.el8_10
 pcre 8.42-6.el8
 pcre2 10.32-3.el8_6
 perl 5.26.3-422.el8.0.1
@@ -342,7 +341,7 @@ python3-dnf 4.7.0-20.el8.alma
 python3-dnf-plugins-core 4.0.21-25.el8
 python3-gpg 1.13.1-12.el8
 python3-hawkey 0.63.0-19.el8.alma.2
-python3-idna 2.5-5.el8
+python3-idna 2.5-7.el8_10
 python3-libcomps 0.1.18-1.el8
 python3-libdnf 0.63.0-19.el8.alma.2
 python3-libs 3.6.8-62.el8_10.alma.1
@@ -373,9 +372,9 @@ setup 2.12.2-9.el8
 shadow-utils 4.6-22.el8
 sqlite-libs 3.26.0-19.el8_9
 squashfs-tools 4.3-21.el8
-systemd 239-82.el8
-systemd-libs 239-82.el8
-systemd-pam 239-82.el8
+systemd 239-82.el8_10.1
+systemd-libs 239-82.el8_10.1
+systemd-pam 239-82.el8_10.1
 systemtap-sdt-devel 4.9-3.el8
 tar 1.30-9.el8
 tcl 8.6.8-2.el8
@@ -386,8 +385,8 @@ tzdata 2024a-1.el8
 unzip 6.0-46.el8
 util-linux 2.32.1-46.el8
 vim-minimal 8.0.1763-19.el8_6.4
-voms 2.1.0-0.35.rc5.el8
-voms-clients-cpp 2.1.0-0.35.rc5.el8
+voms 2.1.0-1.el8
+voms-clients-cpp 2.1.0-1.el8
 which 2.21-20.el8
 xz 5.2.4-4.el8_6
 xz-libs 5.2.4-4.el8_6
