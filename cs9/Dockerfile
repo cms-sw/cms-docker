@@ -7,7 +7,7 @@ RUN dnf install -y automake bzip2 bzip2-libs bzip2-devel coreutils-single e2fspr
     libXext-devel libXft libXft-devel libXi libXinerama \
     libXmu libXpm libXpm-devel libXrandr libXrender \
     libglvnd-opengl mesa-libGL mesa-libGLU mesa-libGLU-devel \
-    java-1.8.0-openjdk-devel libtool m4 make \
+    java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel libtool m4 make \
     ncurses ncurses-libs ncurses-devel nspr nss nss-devel nss-util \
     openssl openssl-devel openssl-libs sssd-client \
     patch popt popt-devel python3 readline readline-devel rpm-build \
@@ -15,7 +15,7 @@ RUN dnf install -y automake bzip2 bzip2-libs bzip2-devel coreutils-single e2fspr
     bc strace tar zip unzip hostname nano libnsl procps-ng environment-modules && \
     dnf -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-9.noarch.rpm &&\
     dnf install -y voms-clients-cpp krb5-workstation python3-psutil myproxy apptainer \
-        python3-requests &&\
+        python3-requests openldap-compat python3-cryptography jq &&\
     dnf update -y ca-certificates &&\
     dnf install -y dnf-plugins-core &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && dnf -y install @EXTRA_PACKAGES@ || true) &&\
