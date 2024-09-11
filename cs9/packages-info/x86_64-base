@@ -28,9 +28,9 @@ gawk 5.1.0-6.el9
 gdb-gdbserver 14.2-3.el9
 gdbm-libs 1.23-1.el9
 glib2 2.68.4-15.el9
-glibc 2.34-120.el9
-glibc-common 2.34-120.el9
-glibc-minimal-langpack 2.34-120.el9
+glibc 2.34-122.el9
+glibc-common 2.34-122.el9
+glibc-minimal-langpack 2.34-122.el9
 gmp 6.2.0-13.el9
 gnupg2 2.3.3-4.el9
 gnutls 3.8.3-4.el9
@@ -92,7 +92,7 @@ ncurses-libs 6.2-10.20210508.el9
 nettle 3.9.1-1.el9
 npth 1.6-8.el9
 openldap 2.6.6-3.el9
-openssl-libs 3.2.2-4.el9
+openssl-libs 3.2.2-6.el9
 p11-kit 0.25.3-2.el9
 p11-kit-trust 0.25.3-2.el9
 pcre 8.44-4.el9
