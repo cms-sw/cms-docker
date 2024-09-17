@@ -7,6 +7,8 @@ delete_pattern: tmp-${group1}.*-(2[0-9]{7,})
 expires_days: 7
 daily: d$${now.strftime("%Y%m%d")}
 architecture: ${group1}
+variables:
+  BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
 groups:
   bootstrap:
     disabled: true
