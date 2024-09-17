@@ -57,7 +57,8 @@ def expand(data):
 
 def get_checksum(xfile, xdir, scripts_dir):
   if isdir(xfile):
-    cmd = "cd %s ; find %s -type f -exec md5sum {} \; | md5sum | sed 's| .*||'" % (scripts_dir, xdir)
+    cmd = "export LC_ALL=C; cd %s ; find %s -type f | find extra -type f | sort | xargs -l1 md5sum | md5sum | sed 's| .*||'" % (scripts_dir, xdir)
+    print(cmd)
     e, out = run_cmd(cmd)
     if e:
       print("CMD: ",cmd)
