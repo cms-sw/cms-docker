@@ -16,8 +16,9 @@ RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper 
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace perf xauth vim cmake \
-        krb5-workstation glibc-langpack-en environment-modules xdg-utils squid tmux &&\
-	dnf clean all
+        krb5-workstation glibc-langpack-en environment-modules xdg-utils squid tmux emacs &&\
+    dnf install -y screen &&\
+    dnf clean all
 
 RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static &&\
 	epel_pkgs="@EPEL_PACKAGES@" &&\
