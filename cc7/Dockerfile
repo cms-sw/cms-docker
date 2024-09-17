@@ -46,4 +46,7 @@ RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|;s|mirror.cento
 # Gfal packages needed for CRAB
 RUN yum install -y python3-pip python2-pip gfal2-util-scripts gfal2-all python3-gfal2-util python2-gfal2-util && yum clean all
 
+#User packages
+RUN yum install -y emacs screen && yum clean all
+
 LABEL build-date="@BUILD_DATE@"
