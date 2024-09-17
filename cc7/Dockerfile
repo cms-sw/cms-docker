@@ -4,6 +4,8 @@ LABEL name="CMS Worker Node on EL"
 
 ADD krb5.conf               /etc/krb5.conf
 ADD cern.repo               /tmp/cern.repo
+ADD epel.repo               /tmp/epel.repo
+ADD epel-testing.repo       /tmp/epel-testing.repo
 ADD RPM-GPG-KEY-cern        /tmp/RPM-GPG-KEY-cern
 
 RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|;s|mirror.centos.org|vault.centos.org|' /etc/yum.repos.d/CentOS-Base.repo &&\
@@ -23,7 +25,8 @@ RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|;s|mirror.cento
         ncurses-libs perl-libs file wget perl-LWP-Protocol-https python-setuptools \
         libaio tcl-devel tk-devel man-db vim \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python3 strace &&\
-    yum -y install https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm && \
+    cp /tmp/epel.repo /etc/yum.repos.d/ &&\
+    cp /tmp/epel-testing.repo /etc/yum.repos.d/ &&\
     yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil libstdc++-static jq &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && yum install -y @EXTRA_PACKAGES@ || true) &&\
     yum install -y xrootd-client &&\
@@ -36,7 +39,7 @@ RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|;s|mirror.cento
     mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /data /pool /build &&\
     mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage &&\
     touch /etc/tnsnames.ora &&\
-    rm -f /tmp/cern.repo /tmp/RPM-GPG-KEY-cern &&\
+    rm -f /tmp/cern.repo /tmp/epel.repo /tmp/epel-testing.repo /tmp/RPM-GPG-KEY-cern &&\
     conf=/etc/singularity/singularity.conf &&\
     [ ! -f /etc/apptainer/apptainer.conf ] || conf=/etc/apptainer/apptainer.conf &&\
     echo "Timestamp: @BUILD_DATE@"   > /image-build-info.txt &&\
