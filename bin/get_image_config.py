@@ -2,9 +2,10 @@
 from __future__ import print_function
 import yaml
 import sys, re
-from os.path import exists, join, dirname, abspath
+from os.path import exists, join, dirname, abspath, isdir
 from docker_utils import get_digest
 from datetime import datetime
+from subprocess import getstatusoutput as run_cmd
 import hashlib
 now = datetime.now()
 
@@ -53,6 +54,18 @@ def expand(data):
       k = expand_var(k, data)
       nbuilds[-1][k] = expand_var(str(v), data)
   return nbuilds
+
+def get_checksum(xfile):
+  if isdir(xfile):
+    cmd = "find %s -type f -exec md5sum {} \; | md5sum | sed 's| .*||'" % xfile
+    e, out = run_cmd(cmd)
+    if e:
+      print("CMD: ",cmd)
+      print(out)
+      sys.exit(1)
+    return out.split("\n")[0]
+  with open(xfile, encoding="utf-8") as xref:
+    return hashlib.md5(xref.read().encode()).hexdigest()
 
 def process_tags(setup, data, images):
   if 'tags' not in setup: return
@@ -144,8 +157,7 @@ def process_tags(setup, data, images):
           if (items[0] not in ["ADD", "COPY"]) or (":" in items[1]):
             continue
           xfile = join(scripts_dir, items[1])
-          with open(xfile, encoding="utf-8") as xref:
-            chkdata.append(hashlib.md5(xref.read().encode()).hexdigest())
+          chkdata.append(get_checksum(xfile))
           print("chksum:", xfile, chkdata[-1])
     print("Full checksum",chkdata)
     images[-1]['BUILD_CHECKSUM'] = hashlib.md5(("\n".join(chkdata)).encode()).hexdigest()
