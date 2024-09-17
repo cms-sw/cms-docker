@@ -12,9 +12,9 @@ RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl-
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake \
-	krb5-workstation environment-modules xdg-utils squid tmux \
-        emacs screen &&\
- 	dnf clean all
+	krb5-workstation environment-modules xdg-utils squid tmux emacs &&\
+    dnf install -y screen &&\
+    dnf clean all
 
 RUN dnf --enablerepo=crb install -y texinfo &&\
 	epel_pkgs="@EPEL_PACKAGES@" &&\
