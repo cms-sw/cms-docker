@@ -55,9 +55,9 @@ def expand(data):
       nbuilds[-1][k] = expand_var(str(v), data)
   return nbuilds
 
-def get_checksum(xfile):
+def get_checksum(xfile, xdir, scripts_dir):
   if isdir(xfile):
-    cmd = "find %s -type f -exec md5sum {} \; | md5sum | sed 's| .*||'" % xfile
+    cmd = "cd %s ; find %s -type f -exec md5sum {} \; | md5sum | sed 's| .*||'" % (scripts_dir, xdir)
     e, out = run_cmd(cmd)
     if e:
       print("CMD: ",cmd)
@@ -157,7 +157,7 @@ def process_tags(setup, data, images):
           if (items[0] not in ["ADD", "COPY"]) or (":" in items[1]):
             continue
           xfile = join(scripts_dir, items[1])
-          chkdata.append(get_checksum(xfile))
+          chkdata.append(get_checksum(xfile), items[1], scripts_dir)
           print("chksum:", xfile, chkdata[-1])
     print("Full checksum",chkdata)
     images[-1]['BUILD_CHECKSUM'] = hashlib.md5(("\n".join(chkdata)).encode()).hexdigest()
