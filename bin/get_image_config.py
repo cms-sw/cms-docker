@@ -157,7 +157,7 @@ def process_tags(setup, data, images):
           if (items[0] not in ["ADD", "COPY"]) or (":" in items[1]):
             continue
           xfile = join(scripts_dir, items[1])
-          chkdata.append(get_checksum(xfile), items[1], scripts_dir)
+          chkdata.append(get_checksum(xfile, items[1], scripts_dir))
           print("chksum:", xfile, chkdata[-1])
     print("Full checksum",chkdata)
     images[-1]['BUILD_CHECKSUM'] = hashlib.md5(("\n".join(chkdata)).encode()).hexdigest()
