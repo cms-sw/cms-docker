@@ -16,7 +16,7 @@ RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake
     dnf install -y screen &&\
     dnf clean all
 
-RUN dnf --enablerepo=crb install -y texinfo &&\
+RUN dnf --enablerepo=crb install -y texinfo libstdc++-static &&\
 	epel_pkgs="@EPEL_PACKAGES@" &&\
 	if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
 	xcmd="@EXTRA_COMMAND@" &&\
