@@ -9,8 +9,10 @@ from requests.exceptions import HTTPError
 import os, glob
 
 DOCKER_REGISTRY_API='https://registry-1.docker.io/v2'
+DOCKER_REGISTRY_API='https://registry.hub.docker.com/v2'
 DOCKER_HUB_API='https://hub.docker.com/v2'
 DOCKER_HUB_TOKEN = None
+DOCKER_REGISTRY_TOKEN = {}
 DOCKER_IMAGE_CACHE = {}
 
 def hub_request(uri, data=None, params=None, headers=None, method='GET', json=False):
@@ -21,24 +23,32 @@ def hub_request(uri, data=None, params=None, headers=None, method='GET', json=Fa
   headers['Authorization'] = 'JWT %s' % DOCKER_HUB_TOKEN
   return http_request('%s%s' %(DOCKER_HUB_API, uri), data, params, headers, method, json)
 
-def http_request(url, data=None, params=None, headers=None, method = 'GET', json=False):
-  response = request(method=method, url=url, data=data,  params=params, headers=headers)
+def http_request(url, data=None, params=None, headers=None, method = 'GET', json=False, auth=None):
+  response = request(method=method, url=url, data=data,  params=params, headers=headers, auth=auth)
   return response.json() if json else response
 
+def read_docker_credential(filepath=expanduser("~/.docker-token")):
+  return loads(open(filepath).read().strip())
+
 # get token for docker Registry API
-def get_registry_token(repo):
+def get_registry_token(repo, filepath=expanduser("~/.docker-token")):
+  if repo in DOCKER_REGISTRY_TOKEN:
+      return DOCKER_REGISTRY_TOKEN[repo]
   uri = 'https://auth.docker.io/token'
   payload = {
     'service' : 'registry.docker.io',
-    'scope' : 'repository:%s:pull' % repo
+    'scope' : 'repository:%s:*' % repo
   }
-  return http_request(uri, params = payload, json = True)['token']
+  secret = read_docker_credential(filepath)
+  auth=(secret['username'], secret['password'])
+  DOCKER_REGISTRY_TOKEN[repo] = http_request(uri, params = payload, json = True, auth=auth)['token']
+  return DOCKER_REGISTRY_TOKEN[repo]
 
 # get token for Docker HUB API:
 def get_token(filepath=expanduser("~/.docker-token")):
   uri = '%s/users/login/' % DOCKER_HUB_API
-  secret = open(filepath).read().strip()
-  response = http_request(uri, loads(secret), method = 'POST', json=True)
+  secret = read_docker_credential(filepath)
+  response = http_request(uri, secret, method = 'POST', json=True)
   try: return response['token']
   except: return response
 
@@ -192,22 +202,33 @@ def get_digest(image, arch, debug=False):
     return (False, "")
   except: return (False, hub_request(uri).text)
 
-def get_manifest(image):
-  global DOCKER_IMAGE_CACHE
-  if image in DOCKER_IMAGE_CACHE:
-    return DOCKER_IMAGE_CACHE[image]
+def image_to_repo(image):
   repo = image.split(":",1)[0]
-  if '/' not in repo:
-    repo = 'library/'+repo
-  tag = image.split(":",1)[-1]
-  if repo==tag: tag="latest"
-  url = '%s/%s/manifests/%s' % (DOCKER_REGISTRY_API, repo, tag)
+  if '/' not in repo: repo = 'library/'+repo
+  return repo
+
+def request_registry(image, uri, json=True):
+  global DOCKER_IMAGE_CACHE
+  repo = image_to_repo(image)
+  url = '%s/%s%s' % (DOCKER_REGISTRY_API, repo, uri)
+  if url in DOCKER_IMAGE_CACHE:
+    return DOCKER_IMAGE_CACHE[url]
   token = get_registry_token(repo)
   headers = {}
   headers['Accept'] = 'application/vnd.docker.distribution.manifest.list.v2+json'
   headers['Authorization'] = 'Bearer %s' % token
-  DOCKER_IMAGE_CACHE[image] = http_request(url, None, None, headers, json=True)
-  return DOCKER_IMAGE_CACHE[image]
+  DOCKER_IMAGE_CACHE[url] = http_request(url, None, None, headers, json=json)
+  return DOCKER_IMAGE_CACHE[url]
+
+def get_digest_blob(image, digest):
+  repo = image_to_repo(image)
+  return request_registry(image, "/blobs/%s" % digest)
+
+def get_manifest(image):
+  repo = image_to_repo(image)
+  tag = image.split(":",1)[-1]
+  if repo==tag: tag="latest"
+  return request_registry(image, "/manifests/%s" % tag)
 
 def get_labels(image):
   manifest = get_manifest(image)
@@ -215,6 +236,9 @@ def get_labels(image):
     print(manifest)
   if ('errors' in manifest) and (manifest[u'errors'][0][u'code'] == 'MANIFEST_UNKNOWN'):
     return {}
+  if ('config' in manifest) and ('digest' in manifest['config']):
+    conf_digest = manifest['config']['digest']
+    return get_digest_blob(image, conf_digest)['config']['Labels']
   try:
       return loads(manifest['history'][0]['v1Compatibility'])['container_config']['Labels']
   except KeyError:
