@@ -16,10 +16,10 @@ DOCKER_HUB_TOKEN = None
 DOCKER_REGISTRY_TOKEN = {}
 DOCKER_IMAGE_CACHE = {}
 
-def check_rate_limit(headers):
+def check_rate_limit(url, headers):
   if not 'ratelimit-remaining' in headers: return
   ratelimit = int(headers['ratelimit-remaining'].split(";")[0])
-  print("Rate limit remaining",ratelimit)
+  print("Rate limit remaining",url,ratelimit)
   if ratelimit<10:
     sleep (3600)
   elif ratelimit<20:
@@ -42,7 +42,7 @@ def hub_request(uri, data=None, params=None, headers=None, method='GET', json=Fa
 
 def http_request(url, data=None, params=None, headers=None, method = 'GET', json=False, auth=None):
   response = request(method=method, url=url, data=data,  params=params, headers=headers, auth=auth)
-  check_rate_limit(response.headers)
+  check_rate_limit(url, response.headers)
   return response.json() if json else response
 
 def read_docker_credential(filepath=expanduser("~/.docker-token")):
