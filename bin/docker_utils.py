@@ -25,6 +25,7 @@ def hub_request(uri, data=None, params=None, headers=None, method='GET', json=Fa
 
 def http_request(url, data=None, params=None, headers=None, method = 'GET', json=False, auth=None):
   response = request(method=method, url=url, data=data,  params=params, headers=headers, auth=auth)
+  print("DEBUG:",url,response.headers)
   return response.json() if json else response
 
 def read_docker_credential(filepath=expanduser("~/.docker-token")):
