@@ -5,6 +5,7 @@ from json import loads
 from os.path import dirname, abspath, join
 from requests import request
 from os.path import expanduser
+from time import sleep
 from requests.exceptions import HTTPError
 import os, glob
 
@@ -14,6 +15,22 @@ DOCKER_HUB_API='https://hub.docker.com/v2'
 DOCKER_HUB_TOKEN = None
 DOCKER_REGISTRY_TOKEN = {}
 DOCKER_IMAGE_CACHE = {}
+
+def check_rate_limit(headers):
+  if not 'ratelimit-remaining' in headers: return
+  ratelimit = int(headers['ratelimit-remaining'].split(";")[0])
+  print("Rate limit remaining",ratelimit)
+  if ratelimit<10:
+    sleep (3600)
+  elif ratelimit<20:
+    sleep (1800)
+  elif ratelimit<50:
+    sleep (900)
+  elif ratelimit<75:
+    sleep (300)
+  elif ratelimit<100:
+    sleep (60)
+  return
 
 def hub_request(uri, data=None, params=None, headers=None, method='GET', json=False):
   global DOCKER_HUB_TOKEN
@@ -25,7 +42,7 @@ def hub_request(uri, data=None, params=None, headers=None, method='GET', json=Fa
 
 def http_request(url, data=None, params=None, headers=None, method = 'GET', json=False, auth=None):
   response = request(method=method, url=url, data=data,  params=params, headers=headers, auth=auth)
-  print("DEBUG:",url,response.headers)
+  check_rate_limit(response.headers)
   return response.json() if json else response
 
 def read_docker_credential(filepath=expanduser("~/.docker-token")):
