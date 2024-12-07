@@ -29,9 +29,9 @@ gawk 5.1.0-6.el9
 gdb-gdbserver 14.2-3.el9
 gdbm-libs 1.23-1.el9
 glib2 2.68.4-16.el9
-glibc 2.34-140.el9
-glibc-common 2.34-140.el9
-glibc-minimal-langpack 2.34-140.el9
+glibc 2.34-143.el9
+glibc-common 2.34-143.el9
+glibc-minimal-langpack 2.34-143.el9
 gmp 6.2.0-13.el9
 gnupg2 2.3.3-4.el9
 gnutls 3.8.3-4.el9
@@ -104,7 +104,7 @@ python3 3.9.20-1.el9
 python3-dateutil 2.8.1-7.el9
 python3-dbus 1.2.18-2.el9
 python3-dnf 4.14.0-21.el9
-python3-dnf-plugins-core 4.3.0-17.el9
+python3-dnf-plugins-core 4.3.0-18.el9
 python3-gpg 1.15.1-6.el9
 python3-hawkey 0.69.0-12.el9
 python3-libcomps 0.1.18-1.el9
