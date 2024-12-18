@@ -1,4 +1,4 @@
-CERN-CA-certs 20220329-1.el7.cern
+CERN-CA-certs 20230604-1.el7.cern
 CGSI-gSOAP 1.3.11-1.el7
 GConf2 3.2.6-8.el7
 ImageMagick 6.9.10.68-7.el7_9
@@ -468,6 +468,7 @@ perl-Text-Unidecode 0.04-20.el7
 perl-Thread-Queue 3.02-2.el7
 perl-Time-HiRes 1.9725-3.el7
 perl-Time-Local 1.2300-2.el7
+perl-Time-Piece 1.20.1-299.el7_9
 perl-TimeDate 2.30-2.el7
 perl-URI 1.60-9.el7
 perl-WWW-Curl 4.15-13.el7
