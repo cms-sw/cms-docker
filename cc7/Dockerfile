@@ -19,7 +19,7 @@ RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|;s|mirror.cento
         perl-constant perl-File-Temp perl-Socket perl-Time-Local perl-Storable glibc-headers perl-threads \
         perl-Thread-Queue perl-Module-ScanDeps perl-Test-Harness perl-Env perl-Switch perl-ExtUtils-Embed \
         ncurses-libs perl-libs file wget perl-LWP-Protocol-https python-setuptools \
-        libaio tcl-devel tk-devel man-db vim \
+        libaio tcl-devel tk-devel man-db vim perl-Time-Piece \
         setroubleshoot-server autofs gdb attr python-requests-kerberos libgfortran time python3 strace &&\
     mv /tmp/extra/krb5.conf /etc/krb5.conf &&\
     mv /tmp/extra/epel.repo /etc/yum.repos.d/ &&\
