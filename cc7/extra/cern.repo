@@ -1,6 +1,6 @@
 [cern]
-name=CentOS-7 - CERN [20241216]
-baseurl=http://linuxsoft.cern.ch/internal/yumsnapshot/20241216/cern/centos/7/cern/x86_64
+name=CentOS-7 - CERN [20250107]
+baseurl=http://linuxsoft.cern.ch/internal/yumsnapshot/20250107/cern/centos/7/cern/x86_64
 enabled=1
 gpgcheck=1
 gpgkey=file:///etc/pki/rpm-gpg/RPM-GPG-KEY-cern
