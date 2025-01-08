@@ -12,7 +12,7 @@ variables:
   CI_TESTS: stageout
   DEFAULT_PACKAGES:
   BUILD_DATE: $${now.strftime("%Y%m%d-%H%M%S")}
-  EPEL_PACKAGES:
+  EPEL_PACKAGES: imake
   EXTRA_COMMAND:
 groups:
   bootstrap:
