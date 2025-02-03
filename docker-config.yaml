@@ -25,6 +25,8 @@ repositories:
     cmssw: write
   el9:
     cmssw: write
+  el10:
+    cmssw: write
   fc39:
     cmssw: write
   cms:
