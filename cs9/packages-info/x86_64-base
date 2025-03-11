@@ -29,9 +29,9 @@ gawk 5.1.0-6.el9
 gdb-gdbserver 14.2-4.el9
 gdbm-libs 1.23-1.el9
 glib2 2.68.4-16.el9
-glibc 2.34-168.el9
-glibc-common 2.34-168.el9
-glibc-minimal-langpack 2.34-168.el9
+glibc 2.34-170.el9
+glibc-common 2.34-170.el9
+glibc-minimal-langpack 2.34-170.el9
 gmp 6.2.0-13.el9
 gnupg2 2.3.3-4.el9
 gnutls 3.8.3-6.el9
