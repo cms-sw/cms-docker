@@ -38,7 +38,7 @@ gnutls 3.8.3-6.el9
 gpgme 1.15.1-6.el9
 grep 3.6-5.el9
 gzip 1.12-1.el9
-ima-evm-utils 1.5-3.el9
+ima-evm-utils 1.6.2-1.el9
 json-c 0.14-11.el9
 keyutils 1.6.3-1.el9
 keyutils-libs 1.6.3-1.el9
