@@ -12,8 +12,13 @@ RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl-
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake \
-	krb5-workstation environment-modules xdg-utils squid tmux emacs &&\
+	krb5-workstation environment-modules xdg-utils squid tmux emacs copy-jdk-configs &&\
     dnf install -y screen &&\
+    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.10.0.7/1.el10+2/x86_64/java-17-openjdk-devel-17.0.10.0.7-1.el10+2.x86_64.rpm &&\
+    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.10.0.7/1.el10+2/x86_64/java-17-openjdk-17.0.10.0.7-1.el10+2.x86_64.rpm &&\
+    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.10.0.7/1.el10+2/x86_64/java-17-openjdk-headless-17.0.10.0.7-1.el10+2.x86_64.rpm &&\
+    rpm -Uvh java-17-openjdk*.rpm &&\
+    rm -f java-17-openjdk*.rpm &&\
     dnf clean all
 
 RUN dnf --enablerepo=crb install -y texinfo libstdc++-static &&\
