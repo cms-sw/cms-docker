@@ -43,6 +43,7 @@ cmake-data 3.30.5-2.el10
 cmake-filesystem 3.30.5-2.el10
 cmake-rpm-macros 3.30.5-2.el10
 colord-libs 1.4.7-6.el10
+copy-jdk-configs 4.1-7.el10
 coreutils-single 9.5-6.el10
 cpio 2.15-3.el10
 cpp 14.2.1-7.el10.alma.1
@@ -82,7 +83,7 @@ elfutils-libs 0.192-5.el10
 emacs 29.4-10.el10
 emacs-common 29.4-10.el10
 emacs-filesystem 29.4-10.el10
-enchant2 2.6.7-3.el10
+enchant2 2.6.9-1.el10
 environment-modules 5.3.1-8.el10
 epel-release 10-2.el10
 exempi 2.6.4-7.el10
@@ -195,6 +196,9 @@ iputils 20240905-2.el10
 isa-l 2.31.1-5.el10_1
 iso-codes 4.16.0-6.el10
 jansson 2.14-3.el10
+java-17-openjdk 17.0.10.0.7-1.el10+2
+java-17-openjdk-devel 17.0.10.0.7-1.el10+2
+java-17-openjdk-headless 17.0.10.0.7-1.el10+2
 java-21-openjdk 21.0.6.0.7-3.el10.alma.1
 java-21-openjdk-devel 21.0.6.0.7-3.el10.alma.1
 java-21-openjdk-headless 21.0.6.0.7-3.el10.alma.1
@@ -390,7 +394,9 @@ libzstd 1.5.5-9.el10
 lksctp-tools 1.0.21-1.el10
 llvm-libs 19.1.7-2.el10.alma.1
 low-memory-monitor 2.1-12.el10
+lua 5.4.6-7.el10
 lua-libs 5.4.6-7.el10
+lua-posix 36.2.1-8.el10
 lua-srpm-macros 1-15.el10
 lz4-libs 1.9.4-8.el10
 lzo 2.10-14.el10
