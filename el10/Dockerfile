@@ -4,7 +4,7 @@ LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 
 # Dependency on libXmu might be cleaned up in the future
 # Extra packages comparing with el8: krb5-devel libcom_err-devel (coreutils-single in el8 config file)
-RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
+RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl openssl-devel ncurses-devel \
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
 	libXpm-devel java-21-openjdk-devel libtool libdrm \
  	gcc-c++ libXmu krb5-devel coreutils-single libcom_err-devel \
