@@ -364,7 +364,7 @@ libtasn1 4.20.0-1.el10
 libtdb 1.4.12-102.el10
 libthai 0.1.29-10.el10
 libtheora 1.1.1-39.el10
-libtiff 4.6.0-5.el10
+libtiff 4.6.0-6.el10
 libtool 2.4.7-13.el10
 libtool-ltdl 2.4.7-13.el10
 libtracker-sparql 3.7.3-4.el10
@@ -446,6 +446,7 @@ openldap 2.6.8-3.el10
 openldap-compat 2.6.8-3.el10
 openssh 9.9p1-7.el10
 openssh-clients 9.9p1-7.el10
+openssl 3.2.2-16.el10.alma.1
 openssl-devel 3.2.2-16.el10.alma.1
 openssl-libs 3.2.2-16.el10.alma.1
 opus 1.4-6.el10
@@ -762,7 +763,7 @@ python3-urllib3 1.26.19-2.el10
 qt6-srpm-macros 6.8.1-4.el10
 readline 8.2-11.el10
 readline-devel 8.2-11.el10
-redhat-mono-vf-fonts 4.0.3-14.el10
+redhat-mono-vf-fonts 4.1.0-1.el10
 redhat-rpm-config 288-1.el10.alma.2
 redhat-text-vf-fonts 4.0.3-14.el10
 rootfiles 8.1-41.el10
@@ -811,7 +812,7 @@ tracker 3.7.3-4.el10
 tracker-miners 3.7.3-4.el10
 ttmkfdir 3.0.9-72.el10
 tzdata 2025a-1.el10
-tzdata-java 2025a-1.el10
+tzdata-java 2025b-1.el10
 unzip 6.0-66.el10
 upower 1.90.6-2.el10
 upower-libs 1.90.6-2.el10
