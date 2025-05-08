@@ -3,6 +3,7 @@ LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 
 # Dependencies on libidn libXmu libstdc++-static might be cleaned up in the future
+# install python39 and python311
 RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter \
 	perl-File-Path perl-File-Temp perl-Getopt-Long perl-IO perl-Text-ParseWords perl-constant \
 	perl-Digest-MD5 perl-PathTools perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
@@ -11,7 +12,8 @@ RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper 
 	perl-YAML perl-IO-Compress rpm-build git nspr nss rsync wget openssl-devel ncurses-devel \
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
 	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel libtool libdrm \
-        gcc-c++ libidn libXmu python3-cryptography jq &&\
+	gcc-c++ libidn libXmu python3-cryptography jq \
+	python39 python3.11 &&\
 	dnf clean all
 
 # Please add user packages in the RUN command below
