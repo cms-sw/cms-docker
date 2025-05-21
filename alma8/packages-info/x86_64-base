@@ -26,7 +26,7 @@ dnf-data 4.7.0-21.el8_10.alma.1
 elfutils-default-yama-scope 0.190-2.el8
 elfutils-libelf 0.190-2.el8
 elfutils-libs 0.190-2.el8
-expat 2.2.5-16.el8_10
+expat 2.2.5-17.el8_10
 file-libs 5.33-26.el8
 filesystem 3.8-6.el8
 findutils 4.6.0-23.el8_10
@@ -34,12 +34,12 @@ gawk 4.2.1-4.el8
 gdbm 1.18-2.el8
 gdbm-libs 1.18-2.el8
 glib2 2.56.4-165.el8_10
-glibc 2.28-251.el8_10.14
-glibc-common 2.28-251.el8_10.14
-glibc-minimal-langpack 2.28-251.el8_10.14
+glibc 2.28-251.el8_10.16
+glibc-common 2.28-251.el8_10.16
+glibc-minimal-langpack 2.28-251.el8_10.16
 gmp 6.1.2-11.el8
 gnupg2 2.2.20-3.el8_6
-gnutls 3.6.16-8.el8_9.3
+gnutls 3.6.16-8.el8_10.3
 gpg-pubkey 3abb34f8-5ffd890e
 gpg-pubkey ced7258b-6525146f
 gpgme 1.13.1-12.el8
@@ -90,7 +90,7 @@ libsigsegv 2.11-5.el8
 libsmartcols 2.32.1-46.el8
 libsolv 0.7.20-6.el8
 libstdc++ 8.5.0-26.el8_10.alma.1
-libtasn1 4.13-4.el8_7
+libtasn1 4.13-5.el8_10
 libtirpc 1.1.4-12.el8_10
 libunistring 0.9.9-3.el8
 libusbx 1.0.23-4.el8
@@ -136,9 +136,9 @@ sed 4.5-5.el8
 setup 2.12.2-9.el8
 shadow-utils 4.6-22.el8
 sqlite-libs 3.26.0-19.el8_9
-systemd 239-82.el8_10.4
-systemd-libs 239-82.el8_10.4
-systemd-pam 239-82.el8_10.4
+systemd 239-82.el8_10.5
+systemd-libs 239-82.el8_10.5
+systemd-pam 239-82.el8_10.5
 tar 1.30-9.el8
 tpm2-tss 2.3.2-6.el8
 tzdata 2025b-1.el8
