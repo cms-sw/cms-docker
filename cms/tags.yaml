@@ -5,7 +5,7 @@
 #ITB images
 ########################
 rhel6-itb: rhel6-m20211005
-rhel7-itb: rhel7-m20220512
+rhel7-itb: cmssw/cc7:x86_64-d20250108
 rhel8-itb: cmssw/el8:x86_64-d20250312
 rhel9-itb: cmssw/el9:x86_64-d20250311
 
@@ -16,6 +16,7 @@ rhel8-itb-x86_64: rhel8-itb
 rhel9-itb-x86_64: rhel9-itb
 
 #itb aarch64
+rhel7-itb-aarch64: cmssw/cc7:aarch64-d20250108
 rhel8-itb-aarch64: cmssw/el8:aarch64-d20250312
 rhel9-itb-aarch64: cmssw/el9:aarch64-d20250311
 
