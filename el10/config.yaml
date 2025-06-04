@@ -29,7 +29,7 @@ groups:
           ${group1}-${group0}:
   runtime:
     docker: Dockerfile.${group0}
-    from: library/almalinux:10-kitten
+    from: library/almalinux:10
     groups:
       x86_64:
         tags:
