@@ -14,11 +14,12 @@ RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl 
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake \
 	krb5-workstation environment-modules xdg-utils squid tmux emacs lua &&\
     dnf install -y screen &&\
-    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/lua-posix/36.2.1/8.el10/x86_64/lua-posix-36.2.1-8.el10.x86_64.rpm &&\
+    arch=$(uname -m) &&\
+    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/lua-posix/36.2.1/8.el10/${arch}/lua-posix-36.2.1-8.el10.${arch}.rpm &&\
     wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/copy-jdk-configs/4.1/7.el10/noarch/copy-jdk-configs-4.1-7.el10.noarch.rpm &&\
-    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.11.0.9/2.el10/x86_64/java-17-openjdk-devel-17.0.11.0.9-2.el10.x86_64.rpm &&\
-    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.11.0.9/2.el10/x86_64/java-17-openjdk-17.0.11.0.9-2.el10.x86_64.rpm &&\
-    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.11.0.9/2.el10/x86_64/java-17-openjdk-headless-17.0.11.0.9-2.el10.x86_64.rpm &&\
+    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.11.0.9/2.el10/${arch}/java-17-openjdk-devel-17.0.11.0.9-2.el10.${arch}.rpm &&\
+    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.11.0.9/2.el10/${arch}/java-17-openjdk-17.0.11.0.9-2.el10.${arch}.rpm &&\
+    wget https://kojihub.stream.centos.org/kojifiles/vol/koji02/packages/java-17-openjdk/17.0.11.0.9/2.el10/${arch}/java-17-openjdk-headless-17.0.11.0.9-2.el10.${arch}.rpm &&\
     rpm -Uvh lua-posix*.rpm copy-jdk-configs*.rpm java-17-openjdk*.rpm &&\
     rm -f lua-posix*.rpm copy-jdk-configs*.rpm java-17-openjdk*.rpm &&\
     dnf clean all
