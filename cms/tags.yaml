@@ -4,16 +4,10 @@
 ########################
 #ITB images
 ########################
-rhel6-itb: cmssw/slc6:amd64-d20240708
-rhel7-itb: cmssw/cc7:x86_64-d20250108
-rhel8-itb: cmssw/el8:x86_64-d20250521
-rhel9-itb: cmssw/el9:x86_64-d20250606
-
-#itb x86_64
-rhel6-itb-x86_64: rhel6-itb
-rhel7-itb-x86_64: rhel7-itb
-rhel8-itb-x86_64: rhel8-itb
-rhel9-itb-x86_64: rhel9-itb
+rhel6-itb-x86_64: cmssw/slc6:amd64-d20240708
+rhel7-itb-x86_64: cmssw/cc7:x86_64-d20250108
+rhel8-itb-x86_64: cmssw/el8:x86_64-d20250521
+rhel9-itb-x86_64: cmssw/el9:x86_64-d20250606
 
 #itb aarch64
 rhel7-itb-aarch64: cmssw/cc7:aarch64-d20250108
@@ -23,19 +17,20 @@ rhel9-itb-aarch64: cmssw/el9:aarch64-d20250609
 #itb ppc64le
 rhel8-itb-ppc64le: cmssw/el8:ppc64le-d20240531
 
+#itb x86_64: Old style tags
+rhel6-itb: rhel6-itb-x86_64
+rhel7-itb: rhel7-itb-x86_64
+rhel8-itb: rhel8-itb-x86_64
+rhel9-itb: rhel9-itb-x86_64
+
+
 ########################
 #Production images
 ########################
-rhel6: rhel6-m20211005
-rhel7: cmssw/cc7:x86_64-d20250108
-rhel8: cmssw/el8:x86_64-d20250312
-rhel9: cmssw/el9:x86_64-d20250311
-
-#x86_64
-rhel6-x86_64: rhel6
-rhel7-x86_64: rhel7
-rhel8-x86_64: rhel8
-rhel9-x86_64: rhel9
+rhel6-x86_64: rhel6-m20211005
+rhel7-x86_64: cmssw/cc7:x86_64-d20250108
+rhel8-x86_64: cmssw/el8:x86_64-d20250312
+rhel9-x86_64: cmssw/el9:x86_64-d20250311
 
 #aarch64
 rhel8-aarch64: cmssw/el8:aarch64-d20250312
@@ -43,3 +38,9 @@ rhel9-aarch64: cmssw/el9:aarch64-d20250311
 
 #ppc64le
 rhel8-ppc64le: cmssw/el8:ppc64le-d20240531
+
+#x86_64: Old style tags
+rhel6: rhel6-x86_64
+rhel7: rhel7-x86_64
+rhel8: rhel8-x86_64
+rhel9: rhel9-x86_64
