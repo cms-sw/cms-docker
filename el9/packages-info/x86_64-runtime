@@ -57,12 +57,12 @@ gcc-plugin-annobin 11.5.0-5.el9_5.alma.1
 gdbm-libs 1.23-1.el9
 ghc-srpm-macros 1.5.0-6.el9
 glib2 2.68.4-16.el9
-glibc 2.34-168.el9_6.14.alma.1
-glibc-common 2.34-168.el9_6.14.alma.1
-glibc-devel 2.34-168.el9_6.14.alma.1
-glibc-gconv-extra 2.34-168.el9_6.14.alma.1
-glibc-headers 2.34-168.el9_6.14.alma.1
-glibc-minimal-langpack 2.34-168.el9_6.14.alma.1
+glibc 2.34-168.el9_6.19
+glibc-common 2.34-168.el9_6.19
+glibc-devel 2.34-168.el9_6.19
+glibc-gconv-extra 2.34-168.el9_6.19
+glibc-headers 2.34-168.el9_6.19
+glibc-minimal-langpack 2.34-168.el9_6.19
 gmp 6.2.0-13.el9
 gnupg2 2.3.3-4.el9
 gnutls 3.8.3-6.el9
@@ -82,7 +82,7 @@ ima-evm-utils 1.5-3.el9
 imake 1.0.8-6.el9
 iputils 20210202-11.el9
 json-c 0.14-11.el9
-kernel-headers 5.14.0-570.19.1.el9_6
+kernel-headers 5.14.0-570.21.1.el9_6
 kernel-srpm-macros 1.0-13.el9
 keyutils 1.6.3-1.el9
 keyutils-libs 1.6.3-1.el9
@@ -134,7 +134,7 @@ libmodulemd 2.13.0-2.el9
 libmount 2.37.4-21.el9
 libmpc 1.2.1-4.el9
 libnghttp2 1.43.0-6.el9
-libnsl 2.34-168.el9_6.14.alma.1
+libnsl 2.34-168.el9_6.19
 libpciaccess 0.16-7.el9
 libpkgconf 1.7.3-10.el9
 libpng 1.6.37-12.el9
