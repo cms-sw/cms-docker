@@ -4,7 +4,7 @@
 ########################
 #ITB images
 ########################
-rhel6-itb-x86_64: cmssw/slc6:amd64-d20240708
+rhel6-itb-x86_64: cmssw/slc6:x86_64-grid
 rhel7-itb-x86_64: cmssw/cc7:x86_64-d20250108
 rhel8-itb-x86_64: cmssw/el8:x86_64-d20250521
 rhel9-itb-x86_64: cmssw/el9:x86_64-d20250606
