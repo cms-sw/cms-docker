@@ -14,6 +14,7 @@ bc 1.06.95-1.el6
 bind-libs 9.8.2-0.68.rc1.el6_10.8
 bind-utils 9.8.2-0.68.rc1.el6_10.8
 binutils 2.20.51.0.2-5.48.el6_10.1
+boost-python 1.41.0-28.el6
 bzip2 1.0.5-7.el6_0
 bzip2-libs 1.0.5-7.el6_0
 ca-certificates 2020.2.41-65.1.el6_10
@@ -81,6 +82,8 @@ gfal2-plugin-rfio 2.18.1-1.el6
 gfal2-plugin-sftp 2.18.1-1.el6
 gfal2-plugin-srm 2.18.1-1.el6
 gfal2-plugin-xrootd 2.18.1-1.el6
+gfal2-python 1.9.5-1.el6
+gfal2-util 1.5.3-1.el6
 giflib 4.1.6-3.1.el6
 git 1.7.1-10.el6_10
 glib2 2.28.8-10.el6
@@ -306,6 +309,7 @@ pth 2.0.7-9.3.el6
 pugixml 1.0-3.el6
 pygpgme 0.1-18.20090824bzr68.el6
 python 2.6.6-68.el6_10
+python-argparse 1.2.1-2.1.el6
 python-backports 1.0-5.el6
 python-backports-ssl_match_hostname 3.4.0.2-5.el6
 python-chardet 2.2.1-1.el6
