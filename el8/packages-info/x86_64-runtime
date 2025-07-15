@@ -1,4 +1,4 @@
-CERN-CA-certs 20230604-1.al8.cern
+CERN-CA-certs 20230604-2.al8.cern
 acl 2.2.53-3.el8
 almalinux-release 8.10-1.el8
 apptainer 1.4.1-1.el8
@@ -75,7 +75,7 @@ ima-evm-utils 1.3.2-12.el8
 info 6.5-7.el8
 iputils 20180629-11.el8
 json-c 0.13.1-3.el8
-kernel-headers 4.18.0-553.56.1.el8_10
+kernel-headers 4.18.0-553.60.1.el8_10
 keyutils-libs 1.5.10-9.el8
 kmod-libs 25-20.el8
 krb5-libs 1.18.2-32.el8_10
@@ -143,7 +143,7 @@ libuuid 2.32.1-46.el8
 libverto 0.3.2-2.el8
 libxcb 1.13.1-1.el8
 libxcrypt 4.1.1-6.el8
-libxml2 2.9.7-19.el8_10
+libxml2 2.9.7-21.el8_10.1
 libxshmfence 1.3-2.el8
 libyaml 0.1.7-5.el8
 libzstd 1.4.4-1.el8
@@ -167,7 +167,7 @@ openssl 1.1.1k-14.el8_6
 openssl-libs 1.1.1k-14.el8_6
 p11-kit 0.23.22-2.el8
 p11-kit-trust 0.23.22-2.el8
-pam 1.3.1-36.el8_10
+pam 1.3.1-37.el8_10
 pcre 8.42-6.el8
 pcre2 10.32-3.el8_6
 perl 5.26.3-422.el8.0.1
@@ -311,7 +311,7 @@ perl-threads 2.21-2.el8
 perl-threads-shared 1.58-2.el8
 perl-utils 5.26.3-422.el8.0.1
 perl-version 0.99.24-1.el8
-platform-python 3.6.8-69.el8_10.alma.1
+platform-python 3.6.8-70.el8_10.alma.1
 platform-python-pip 9.0.3-24.el8
 platform-python-setuptools 39.2.0-8.el8_10
 popt 1.18-1.el8
@@ -344,7 +344,7 @@ python3-hawkey 0.63.0-21.el8_10.alma.1
 python3-idna 2.5-7.el8_10
 python3-libcomps 0.1.18-1.el8
 python3-libdnf 0.63.0-21.el8_10.alma.1
-python3-libs 3.6.8-69.el8_10.alma.1
+python3-libs 3.6.8-70.el8_10.alma.1
 python3-pip 9.0.3-24.el8
 python3-pip-wheel 9.0.3-24.el8
 python3-psutil 5.4.3-11.el8
