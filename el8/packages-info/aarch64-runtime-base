@@ -34,9 +34,9 @@ gawk 4.2.1-4.el8
 gdbm 1.18-2.el8
 gdbm-libs 1.18-2.el8
 glib2 2.56.4-165.el8_10
-glibc 2.28-251.el8_10.16
-glibc-common 2.28-251.el8_10.16
-glibc-minimal-langpack 2.28-251.el8_10.16
+glibc 2.28-251.el8_10.22
+glibc-common 2.28-251.el8_10.22
+glibc-minimal-langpack 2.28-251.el8_10.22
 gmp 6.1.2-11.el8
 gnupg2 2.2.20-3.el8_6
 gnutls 3.6.16-8.el8_10.3
@@ -52,7 +52,7 @@ iputils 20180629-11.el8
 json-c 0.13.1-3.el8
 keyutils-libs 1.5.10-9.el8
 kmod-libs 25-20.el8
-krb5-libs 1.18.2-31.el8_10
+krb5-libs 1.18.2-32.el8_10
 langpacks-en 1.0-12.el8
 less 530-3.el8_10
 libacl 2.2.53-3.el8
@@ -62,7 +62,7 @@ libattr 2.4.48-3.el8
 libblkid 2.32.1-46.el8
 libcap 2.48-6.el8_9
 libcap-ng 0.7.11-1.el8
-libcom_err 1.45.6-5.1.el8.alma.1
+libcom_err 1.45.6-6.el8_10
 libcomps 0.1.18-1.el8
 libcurl-minimal 7.61.1-34.el8_10.3
 libdb 5.3.28-42.el8_4
@@ -84,7 +84,7 @@ librepo 1.14.2-5.el8
 libreport-filesystem 2.9.5-15.el8.alma.1
 libseccomp 2.5.2-1.el8
 libselinux 2.9-10.el8_10
-libsemanage 2.9-11.el8_10
+libsemanage 2.9-12.el8_10
 libsepol 2.9-3.el8
 libsigsegv 2.11-5.el8
 libsmartcols 2.32.1-46.el8
@@ -98,7 +98,7 @@ libutempter 1.1.6-14.el8
 libuuid 2.32.1-46.el8
 libverto 0.3.2-2.el8
 libxcrypt 4.1.1-6.el8
-libxml2 2.9.7-19.el8_10
+libxml2 2.9.7-21.el8_10.1
 libyaml 0.1.7-5.el8
 libzstd 1.4.4-1.el8
 lua-libs 5.3.4-12.el8
@@ -112,10 +112,10 @@ openldap 2.4.46-21.el8_10
 openssl-libs 1.1.1k-14.el8_6
 p11-kit 0.23.22-2.el8
 p11-kit-trust 0.23.22-2.el8
-pam 1.3.1-36.el8_10
+pam 1.3.1-37.el8_10
 pcre 8.42-6.el8
 pcre2 10.32-3.el8_6
-platform-python 3.6.8-69.el8_10.alma.1
+platform-python 3.6.8-70.el8_10.alma.1
 platform-python-setuptools 39.2.0-8.el8_10
 popt 1.18-1.el8
 python3-dnf 4.7.0-21.el8_10.alma.1
@@ -123,7 +123,7 @@ python3-gpg 1.13.1-12.el8
 python3-hawkey 0.63.0-21.el8_10.alma.1
 python3-libcomps 0.1.18-1.el8
 python3-libdnf 0.63.0-21.el8_10.alma.1
-python3-libs 3.6.8-69.el8_10.alma.1
+python3-libs 3.6.8-70.el8_10.alma.1
 python3-pip-wheel 9.0.3-24.el8
 python3-rpm 4.14.3-32.el8_10
 python3-setuptools-wheel 39.2.0-8.el8_10
@@ -139,7 +139,7 @@ sqlite-libs 3.26.0-19.el8_9
 systemd 239-82.el8_10.5
 systemd-libs 239-82.el8_10.5
 systemd-pam 239-82.el8_10.5
-tar 1.30-9.el8
+tar 1.30-10.el8_10
 tpm2-tss 2.3.2-6.el8
 tzdata 2025b-1.el8
 util-linux 2.32.1-46.el8
