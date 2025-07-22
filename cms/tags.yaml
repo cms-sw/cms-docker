@@ -4,7 +4,7 @@
 ########################
 #ITB images
 ########################
-rhel6-itb-x86_64: cmssw/slc6:x86_64-grid-d20250621
+rhel6-itb-x86_64: cmssw/slc6:x86_64-grid-d20250722
 rhel7-itb-x86_64: cmssw/cc7:x86_64-d20250108
 rhel8-itb-x86_64: cmssw/el8:x86_64-d20250521
 rhel9-itb-x86_64: cmssw/el9:x86_64-d20250606
@@ -27,7 +27,7 @@ rhel9-itb: rhel9-itb-x86_64
 ########################
 #Production images
 ########################
-rhel6-x86_64: cmssw/slc6:x86_64-grid-d20250621
+rhel6-x86_64: cmssw/slc6:x86_64-grid-d20250722
 rhel7-x86_64: cmssw/cc7:x86_64-d20250108
 rhel8-x86_64: cmssw/el8:x86_64-d20250312
 rhel9-x86_64: cmssw/el9:x86_64-d20250311
