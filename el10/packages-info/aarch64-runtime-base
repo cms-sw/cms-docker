@@ -11,8 +11,8 @@ binutils-gold 2.41-53.el10.alma.1
 bzip2-libs 1.0.8-25.el10
 ca-certificates 2024.2.69_v8.0.303-102.3.el10
 coreutils-single 9.5-6.el10
-crypto-policies 20250214-1.gitfd9b9b9.el10
-crypto-policies-scripts 20250214-1.gitfd9b9b9.el10
+crypto-policies 20250214-1.gitfd9b9b9.el10_0.1
+crypto-policies-scripts 20250214-1.gitfd9b9b9.el10_0.1
 curl 8.9.1-5.el10
 dbus 1.14.10-5.el10
 dbus-broker 36-1.el10
@@ -29,10 +29,10 @@ filesystem 3.18-16.el10
 findutils 4.10.0-5.el10
 gawk 5.3.0-6.el10
 gdbm-libs 1.23-12.el10_0
-glib2 2.80.4-4.el10
-glibc 2.39-37.el10.alma.1
-glibc-common 2.39-37.el10.alma.1
-glibc-minimal-langpack 2.39-37.el10.alma.1
+glib2 2.80.4-4.el10_0.6
+glibc 2.39-46.el10_0.alma.1
+glibc-common 2.39-46.el10_0.alma.1
+glibc-minimal-langpack 2.39-46.el10_0.alma.1
 gmp 6.2.1-10.el10
 gnutls 3.8.9-9.el10
 gpg-pubkey c2a1e572-668fe8ef
@@ -48,7 +48,7 @@ keyutils-libs 1.6.3-5.el10
 krb5-libs 1.21.3-8.el10_0
 less 661-3.el10
 libacl 2.3.2-4.el10
-libarchive 3.7.7-3.el10_0
+libarchive 3.7.7-4.el10_0
 libattr 2.5.2-5.el10
 libblkid 2.40.2-10.el10
 libcap 2.69-7.el10
@@ -79,7 +79,7 @@ libunistring 1.1-10.el10
 libuuid 2.40.2-10.el10
 libverto 0.3.2-10.el10
 libxcrypt 4.4.36-10.el10
-libxml2 2.12.5-7.el10_0
+libxml2 2.12.5-9.el10_0
 libyaml 0.2.5-16.el10
 libzstd 1.5.5-9.el10
 lua-libs 5.4.6-7.el10
@@ -113,7 +113,7 @@ rpm-sign-libs 4.19.1.1-12.el10.alma.1
 sed 4.9-3.el10
 setup 2.14.5-4.el10
 shadow-utils 4.15.0-5.el10
-sqlite-libs 3.46.1-4.el10_0
+sqlite-libs 3.46.1-5.el10_0
 systemd 257-9.el10_0.1.alma.1
 systemd-libs 257-9.el10_0.1.alma.1
 systemd-pam 257-9.el10_0.1.alma.1
