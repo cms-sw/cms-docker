@@ -5,6 +5,7 @@ LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 # Dependency on libXmu might be cleaned up in the future
 # Extra packages comparing with el8: krb5-devel libcom_err-devel (coreutils-single in el8 config file)
 # Aded python3.11
+
 RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl openssl-devel ncurses-devel \
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
 	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel libtool libdrm \
@@ -28,8 +29,5 @@ RUN dnf --enablerepo=crb install -y texinfo libstdc++-static &&\
 	dnf clean all &&\
         /root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
 	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
-
-ADD https://raw.githubusercontent.com/fermitools/htgettoken/e7d1d46528566d9e43120ac83153894054d75ad1/htdecodetoken /usr/bin/
-RUN chmod +x /usr/bin/htdecodetoken
 
 LABEL build-date="@BUILD_DATE@"

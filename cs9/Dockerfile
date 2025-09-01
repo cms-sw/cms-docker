@@ -22,9 +22,13 @@ RUN dnf install -y automake bzip2 bzip2-libs bzip2-devel coreutils-single e2fspr
     yum clean all
 
 ADD share/fix_ssh_config.sh /tmp/fix_ssh_config.sh
+ADD https://raw.githubusercontent.com/fermitools/htgettoken/e7d1d46528566d9e43120ac83153894054d75ad1/htdecodetoken /usr/bin/
+
 RUN mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms &&\
     touch /etc/tnsnames.ora &&\
     echo el9 > /etc/cmsos &&\
+    chmod +x /usr/bin/htdecodetoken &&\
     /tmp/fix_ssh_config.sh /etc/ssh/ssh_config && rm -f /tmp/fix_ssh_config.sh &&\
     sed -i -e s'|^ *allow  *setuid.*|allow setuid = no|;s|^ *enable  *overlay.*|enable overlay = no|;s|^ *enable  *underlay.*|enable underlay = yes|' /etc/apptainer/apptainer.conf
+
 WORKDIR /build
