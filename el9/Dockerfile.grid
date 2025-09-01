@@ -4,7 +4,7 @@ LABEL name="CMS Worker Node on EL - Grid packages"
 
 ADD https://raw.githubusercontent.com/fermitools/htgettoken/e7d1d46528566d9e43120ac83153894054d75ad1/htdecodetoken /usr/bin/
 
-RUN chmod +x /usr/bin/htdecodetoken
+RUN chmod +x /usr/bin/htdecodetoken &&\
     dnf install -y gfal2-util-scripts gfal2-all python3-gfal2-util xrootd-client openldap-compat &&\
     dnf install -y @EPEL_PACKAGES@ myproxy &&\
     xcmd="@EXTRA_COMMAND@" &&\
