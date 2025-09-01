@@ -29,4 +29,7 @@ RUN dnf --enablerepo=crb install -y texinfo libstdc++-static &&\
         /root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
 	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 
+ADD https://raw.githubusercontent.com/fermitools/htgettoken/e7d1d46528566d9e43120ac83153894054d75ad1/htdecodetoken /usr/bin/
+RUN chmod +x /usr/bin/htdecodetoken
+
 LABEL build-date="@BUILD_DATE@"
