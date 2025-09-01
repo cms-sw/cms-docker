@@ -50,4 +50,7 @@ RUN yum install -y python3-pip python2-pip gfal2-util-scripts gfal2-all python3-
 #User packages
 RUN yum install -y emacs screen && yum clean all
 
+ADD https://raw.githubusercontent.com/fermitools/htgettoken/e7d1d46528566d9e43120ac83153894054d75ad1/htdecodetoken /usr/bin/
+RUN chmod +x /usr/bin/htdecodetoken
+
 LABEL build-date="@BUILD_DATE@"
