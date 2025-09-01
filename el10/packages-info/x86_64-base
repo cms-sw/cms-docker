@@ -95,7 +95,7 @@ hostname 3.23-14.el10
 hwdata 0.379-10.4.el10
 ima-evm-utils 1.6.2-1.el10
 iputils 20240905-2.el10_0.1
-isa-l 2.31.1-5.el10_0
+isa-l 2.31.1-7.el10_0
 jansson 2.14-3.el10
 json-c 0.18-3.el10
 kernel-headers 6.12.0-55.28.1.el10_0
