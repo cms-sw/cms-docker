@@ -98,7 +98,9 @@ gawk 4.2.1-4.el8
 gc 7.6.4-3.el8
 gcc 8.5.0-28.el8_10.alma.1
 gcc-c++ 8.5.0-28.el8_10.alma.1
+gcc-gdb-plugin 8.5.0-28.el8_10.alma.1
 gcc-plugin-annobin 8.5.0-28.el8_10.alma.1
+gdb 8.2-20.el8
 gdb-headless 8.2-20.el8
 gdbm 1.18-2.el8
 gdbm-libs 1.18-2.el8
@@ -205,7 +207,7 @@ json-glib 1.4.4-1.el8
 kbd 2.0.4-11.el8
 kbd-legacy 2.0.4-11.el8
 kbd-misc 2.0.4-11.el8
-kernel-headers 4.18.0-553.71.1.el8_10
+kernel-headers 4.18.0-553.72.1.el8_10
 keyutils-libs 1.5.10-9.el8
 keyutils-libs-devel 1.5.10-9.el8
 kmod 25-20.el8
@@ -268,6 +270,7 @@ libdb 5.3.28-42.el8_4
 libdb-utils 5.3.28-42.el8_4
 libdnf 0.63.0-21.el8_10.alma.1
 libdrm 2.4.115-2.el8
+libdrm-devel 2.4.115-2.el8
 libecap 1.0.1-2.module_el8.6.0+2741+01592ae8
 libedit 3.1-23.20170329cvs.el8
 libepoxy 1.5.8-1.el8
@@ -416,7 +419,7 @@ pcre2 10.32-3.el8_6
 pcre2-devel 10.32-3.el8_6
 pcre2-utf16 10.32-3.el8_6
 pcre2-utf32 10.32-3.el8_6
-perf 4.18.0-553.71.1.el8_10
+perf 4.18.0-553.72.1.el8_10
 perl 5.26.3-423.el8_10
 perl-Algorithm-Diff 1.1903-9.el8
 perl-Archive-Tar 2.30-1.el8
@@ -692,6 +695,11 @@ tzdata 2025b-1.el8
 tzdata-java 2025b-1.el8
 unzip 6.0-48.el8_10
 util-linux 2.32.1-46.el8
+valgrind 3.22.0-3.el8_10
+valgrind-devel 3.22.0-3.el8_10
+valgrind-docs 3.22.0-3.el8_10
+valgrind-gdb 3.22.0-3.el8_10
+valgrind-scripts 3.22.0-3.el8_10
 vim-common 8.0.1763-19.el8_6.4
 vim-enhanced 8.0.1763-19.el8_6.4
 vim-filesystem 8.0.1763-19.el8_6.4
