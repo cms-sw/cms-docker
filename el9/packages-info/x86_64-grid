@@ -39,10 +39,10 @@ dnf-data 4.14.0-25.el9.alma.1
 dnf-plugins-core 4.3.0-20.el9
 dwz 0.14-3.el9
 efi-srpm-macros 6-2.el9_0.0.1
-elfutils-debuginfod-client 0.192-6.el9_6
-elfutils-default-yama-scope 0.192-6.el9_6
-elfutils-libelf 0.192-6.el9_6
-elfutils-libs 0.192-6.el9_6
+elfutils-debuginfod-client 0.192-6.el9_6.alma.1
+elfutils-default-yama-scope 0.192-6.el9_6.alma.1
+elfutils-libelf 0.192-6.el9_6.alma.1
+elfutils-libs 0.192-6.el9_6.alma.1
 epel-release 9-9.el9
 expat 2.5.0-5.el9_6
 fakeroot 1.37-1.el9
@@ -122,7 +122,7 @@ imake 1.0.8-6.el9
 iputils 20210202-11.el9_6.1
 isa-l 2.31.1-7.el9
 json-c 0.14-11.el9
-kernel-headers 5.14.0-570.37.1.el9_6
+kernel-headers 5.14.0-570.39.1.el9_6
 kernel-srpm-macros 1.0-13.el9
 keyutils 1.6.3-1.el9
 keyutils-libs 1.6.3-1.el9
@@ -237,7 +237,7 @@ openssl 3.2.2-6.el9_5.1
 openssl-libs 3.2.2-6.el9_5.1
 p11-kit 0.25.3-3.el9_5
 p11-kit-trust 0.25.3-3.el9_5
-pam 1.5.1-25.el9_6
+pam 1.5.1-26.el9_6
 pcre 8.44-4.el9
 pcre2 10.40-6.el9
 pcre2-syntax 10.40-6.el9
@@ -501,7 +501,6 @@ python3-setuptools 53.0.0-13.el9_6.1
 python3-setuptools-wheel 53.0.0-13.el9_6.1
 python3-six 1.15.0-9.el9
 python3-systemd 234-19.el9
-python3-tkinter 3.9.21-2.el9_6.2
 python3-urllib3 1.26.5-6.el9
 qt5-srpm-macros 5.15.9-1.el9
 readline 8.1-4.el9
