@@ -17,12 +17,12 @@ crypto-policies 20230731-1.git3177e06.el8
 cryptsetup-libs 2.3.7-7.el8
 curl 7.61.1-34.el8_10.3
 cyrus-sasl-lib 2.1.27-6.el8_5
-dbus 1.12.8-26.el8
-dbus-common 1.12.8-26.el8
-dbus-daemon 1.12.8-26.el8
+dbus 1.12.8-27.el8_10
+dbus-common 1.12.8-27.el8_10
+dbus-daemon 1.12.8-27.el8_10
 dbus-glib 0.110-2.el8
-dbus-libs 1.12.8-26.el8
-dbus-tools 1.12.8-26.el8
+dbus-libs 1.12.8-27.el8_10
+dbus-tools 1.12.8-27.el8_10
 dejavu-fonts-common 2.35-7.el8
 dejavu-sans-fonts 2.35-7.el8
 device-mapper 1.02.181-15.el8_10.2
@@ -32,9 +32,9 @@ dnf-data 4.7.0-21.el8_10.alma.1
 dnf-plugins-core 4.0.21-25.el8
 dwz 0.12-10.el8
 efi-srpm-macros 3-3.el8
-elfutils-default-yama-scope 0.190-2.el8
-elfutils-libelf 0.190-2.el8
-elfutils-libs 0.190-2.el8
+elfutils-default-yama-scope 0.190-2.el8.alma.1
+elfutils-libelf 0.190-2.el8.alma.1
+elfutils-libs 0.190-2.el8.alma.1
 epel-release 8-21.el8
 expat 2.2.5-17.el8_10
 fakeroot 1.33-1.el8
@@ -75,7 +75,7 @@ ima-evm-utils 1.3.2-12.el8
 info 6.5-7.el8
 iputils 20180629-11.el8
 json-c 0.13.1-3.el8
-kernel-headers 4.18.0-553.72.1.el8_10
+kernel-headers 4.18.0-553.74.1.el8_10
 keyutils-libs 1.5.10-9.el8
 kmod-libs 25-20.el8
 krb5-libs 1.18.2-32.el8_10
@@ -108,7 +108,7 @@ libdnf 0.63.0-21.el8_10.alma.1
 libdrm 2.4.115-2.el8
 libfdisk 2.32.1-46.el8
 libffi 3.1-24.el8
-libgcc 8.5.0-26.el8_10.alma.1
+libgcc 8.5.0-28.el8_10.alma.1
 libgcrypt 1.8.5-7.el8_6
 libglvnd 1.3.4-2.el8
 libglvnd-glx 1.3.4-2.el8
@@ -133,7 +133,7 @@ libsepol 2.9-3.el8
 libsigsegv 2.11-5.el8
 libsmartcols 2.32.1-46.el8
 libsolv 0.7.20-6.el8
-libstdc++ 8.5.0-26.el8_10.alma.1
+libstdc++ 8.5.0-28.el8_10.alma.1
 libtasn1 4.13-5.el8_10
 libtirpc 1.1.4-12.el8_10
 libunistring 0.9.9-3.el8
@@ -167,7 +167,7 @@ openssl 1.1.1k-14.el8_6
 openssl-libs 1.1.1k-14.el8_6
 p11-kit 0.23.22-2.el8
 p11-kit-trust 0.23.22-2.el8
-pam 1.3.1-37.el8_10
+pam 1.3.1-38.el8_10
 pcre 8.42-6.el8
 pcre2 10.32-3.el8_6
 perl 5.26.3-423.el8_10
@@ -311,7 +311,7 @@ perl-threads 2.21-2.el8
 perl-threads-shared 1.58-2.el8
 perl-utils 5.26.3-423.el8_10
 perl-version 0.99.24-1.el8
-platform-python 3.6.8-70.el8_10.alma.1
+platform-python 3.6.8-71.el8_10.alma.1
 platform-python-pip 9.0.3-24.el8
 platform-python-setuptools 39.2.0-9.el8_10
 popt 1.18-1.el8
@@ -344,7 +344,7 @@ python3-hawkey 0.63.0-21.el8_10.alma.1
 python3-idna 2.5-7.el8_10
 python3-libcomps 0.1.18-1.el8
 python3-libdnf 0.63.0-21.el8_10.alma.1
-python3-libs 3.6.8-70.el8_10.alma.1
+python3-libs 3.6.8-71.el8_10.alma.1
 python3-pip 9.0.3-24.el8
 python3-pip-wheel 9.0.3-24.el8
 python3-psutil 5.4.3-11.el8
