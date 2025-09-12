@@ -3,12 +3,12 @@ LABEL maintainer="CMS Build"
 LABEL name="CMS Worker Node on EL - Runtime"
 
 ADD share/el10-CERN.repo        /tmp/CERN.repo
-ADD share/RPM-GPG-KEY-kojiv2    /tmp/RPM-GPG-KEY-kojiv2
+ADD share/RPM-GPG-KEY-kojiv3    /tmp/RPM-GPG-KEY-kojiv3
 ADD share/fix_ssh_config.sh     /root/fix_ssh_config.sh
 
 RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-devel libgcc libxcrypt openssl-libs libcom_err krb5-libs ncurses-libs \
     perl perl-libs libX11 readline tcl tk mesa-libGLU libglvnd-glx libglvnd-opengl libXext libXft libXpm libaio libnsl libdrm sssd-client &&\
-    dnf install -y python3 which procps-ng &&\
+    dnf install -y python3 which procps-ng openssh-clients &&\
     dnf install -y epel-release &&\
     dnf install -y @EPEL_PACKAGES@ voms-clients-cpp apptainer python3-requests python3-psutil python3-pip  &&\
     xcmd="@EXTRA_COMMAND@" &&\
@@ -16,11 +16,11 @@ RUN dnf install -y @DEFAULT_PACKAGES@ bash tcsh zsh tar glibc glibc-devel libgcc
     eval $xcmd &&\
     echo el10 > /etc/cmsos &&\
     cp /tmp/CERN.repo /etc/yum.repos.d/CERN.repo &&\
-    rpm --import /tmp/RPM-GPG-KEY-kojiv2 &&\
+    rpm --import /tmp/RPM-GPG-KEY-kojiv3 &&\
     dnf install -y cern-gpg-keys CERN-CA-certs &&\
     update-ca-trust &&\
     dnf update -y ca-certificates &&\
-    update-crypto-policies --set DEFAULT:SHA1 &&\
+    update-crypto-policies --set LEGACY &&\
     dnf clean all &&\
     mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms /etc/ssh &&\
     mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage /scratch &&\
