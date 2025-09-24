@@ -106,7 +106,7 @@ python3 3.9.23-2.el9
 python3-dateutil 2.8.1-7.el9
 python3-dbus 1.2.18-2.el9
 python3-dnf 4.14.0-31.el9
-python3-dnf-plugins-core 4.3.0-22.el9
+python3-dnf-plugins-core 4.3.0-23.el9
 python3-gpg 1.15.1-6.el9
 python3-hawkey 0.69.0-16.el9
 python3-libcomps 0.1.18-1.el9
