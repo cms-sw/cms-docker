@@ -6,7 +6,7 @@ LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 # Extra packages comparing with el8: krb5-devel libcom_err-devel (coreutils-single in el8 config file)
 # Aded python3.11
 
-RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl openssl-devel ncurses-devel \
+RUN dnf install --disablerepo=epel -y rpm-build tini git nspr nss rsync wget openssl openssl-devel ncurses-devel \
 	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
 	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel libtool libdrm-devel \
  	gcc-c++ libXmu krb5-devel coreutils-single libcom_err-devel \
