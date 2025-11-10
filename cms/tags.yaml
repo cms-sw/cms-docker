@@ -28,13 +28,13 @@ rhel9-itb: rhel9-itb-x86_64
 #Production images
 ########################
 rhel6-x86_64: cmssw/slc6:x86_64-grid-d20250722
-rhel7-x86_64: cmssw/cc7:x86_64-d20250108
-rhel8-x86_64: cmssw/el8:x86_64-d20250312
-rhel9-x86_64: cmssw/el9:x86_64-d20250311
+rhel7-x86_64: cmssw/cc7:x86_64-d20250902
+rhel8-x86_64: cmssw/el8:x86_64-d20250902
+rhel9-x86_64: cmssw/el9:x86_64-d20250901
 
 #aarch64
-rhel8-aarch64: cmssw/el8:aarch64-d20250312
-rhel9-aarch64: cmssw/el9:aarch64-d20250311
+rhel8-aarch64: cmssw/el8:aarch64-d20250902
+rhel9-aarch64: cmssw/el9:aarch64-d20250901
 
 #ppc64le
 rhel8-ppc64le: cmssw/el8:ppc64le-d20240531
