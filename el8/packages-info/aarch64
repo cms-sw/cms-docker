@@ -199,6 +199,9 @@ java-11-openjdk-headless 11.0.25.0.9-2.el8
 java-17-openjdk 17.0.17.0.10-1.el8
 java-17-openjdk-devel 17.0.17.0.10-1.el8
 java-17-openjdk-headless 17.0.17.0.10-1.el8
+java-21-openjdk 21.0.9.0.10-1.el8
+java-21-openjdk-devel 21.0.9.0.10-1.el8
+java-21-openjdk-headless 21.0.9.0.10-1.el8
 javapackages-filesystem 5.3.0-1.module_el8.4.0+2212+6f56d9a6
 jbigkit-libs 2.1-14.el8
 jq 1.6-11.el8_10
@@ -334,7 +337,7 @@ libstdc++-devel 8.5.0-28.el8_10.alma.1
 libstdc++-static 8.5.0-28.el8_10.alma.1
 libtasn1 4.13-5.el8_10
 libthai 0.1.27-2.el8
-libtiff 4.0.9-35.el8_10
+libtiff 4.0.9-36.el8_10
 libtirpc 1.1.4-12.el8_10
 libtool 2.4.6-25.el8
 libtool-ltdl 2.4.6-25.el8
