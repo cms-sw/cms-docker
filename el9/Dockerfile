@@ -7,8 +7,9 @@ LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 # Aded python3.11
 
 RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl openssl-devel ncurses-devel \
-	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel \
-	libXpm-devel java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel libtool libdrm-devel \
+	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel libXpm-devel \
+	java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel java-21-openjdk-devel  \
+	libtool libdrm-devel \
  	gcc-c++ libXmu krb5-devel coreutils-single libcom_err-devel \
     python3-cryptography jq python3.11 &&\
   dnf clean all
