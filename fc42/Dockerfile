@@ -27,6 +27,9 @@ RUN dnf install -y \
       git nss java-21-openjdk-devel squid apptainer \
       libgfortran openssl gcc-gfortran elfutils-libelf-devel gettext-devel libatomic &&\
     dnf clean all
+RUN dnf install -y \
+       elfutils-devel &&\
+    dnf clean all
 RUN echo fc42 > /etc/cmsos &&\
     mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms /etc/ssh &&\
     mkdir -p /hdfs /mnt/hadoop /hadoop /cms /etc/cvmfs/SITECONF /lfs_roots /storage /scratch &&\
