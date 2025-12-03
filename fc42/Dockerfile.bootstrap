@@ -1,0 +1,5 @@
+FROM docker.io/cmssw/fc42:riscv64
+RUN dnf install -y bzip2-devel file popt-devel nspr-devel nss-devel \
+        rpm-build autoconf automake libtool gettext-devel \
+        python3-devel cmake bison && \
+    dnf clean all
