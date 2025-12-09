@@ -29,6 +29,8 @@ repositories:
     cmssw: write
   fc39:
     cmssw: write
+  fc42:
+    cmssw: write
   cms:
     cmssw: write
   docker-vtune:
