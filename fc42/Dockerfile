@@ -25,7 +25,8 @@ RUN dnf install -y \
     dnf clean all
 RUN dnf install -y \
       git nss java-21-openjdk-devel squid apptainer \
-      libgfortran openssl gcc-gfortran elfutils-libelf-devel gettext-devel libatomic &&\
+      libgfortran openssl gcc-gfortran elfutils-libelf-devel gettext-devel libatomic \
+      gdb elfutils-devel &&\
     dnf clean all
 RUN dnf install -y \
        elfutils-devel &&\
