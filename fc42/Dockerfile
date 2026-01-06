@@ -29,7 +29,7 @@ RUN dnf install -y \
       gdb elfutils-devel &&\
     dnf clean all
 RUN dnf install -y \
-       elfutils-devel &&\
+       gmp-devel mpfr-devel elfutils-devel &&\
     dnf clean all
 RUN echo fc42 > /etc/cmsos &&\
     mkdir -p /cvmfs /afs /eos /etc/vomses /etc/grid-security /build /data /pool /opt/cms /etc/ssh &&\
