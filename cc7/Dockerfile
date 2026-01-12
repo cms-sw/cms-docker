@@ -25,7 +25,7 @@ RUN sed -i -e 's|^mirrorlist=|#mirrorlist=|;s|#baseurl=|baseurl=|;s|mirror.cento
     mv /tmp/extra/epel.repo /etc/yum.repos.d/ &&\
     mv /tmp/extra/epel-testing.repo /etc/yum.repos.d/ &&\
     rpm --import /tmp/extra/RPM-GPG-KEY-EPEL-7 &&\
-    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil libstdc++-static jq &&\
+    yum install -y voms-clients-cpp krb5-workstation myproxy fetch-crl python2-psutil python36-psutil libstdc++-static jq &&\
     ([ "@EXTRA_PACKAGES@" != "" ] && yum install -y @EXTRA_PACKAGES@ || true) &&\
     yum install -y xrootd-client &&\
     mv /tmp/extra/cern.repo /etc/yum.repos.d/cern.repo &&\
