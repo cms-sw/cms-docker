@@ -45,7 +45,7 @@ crypto-policies 20230731-1.git3177e06.el8
 crypto-policies-scripts 20230731-1.git3177e06.el8
 cryptopp 8.8.0-1.el8
 cryptsetup-libs 2.3.7-7.el8
-cups-libs 2.2.6-64.el8_10
+cups-libs 2.2.6-66.el8_10
 curl 7.61.1-34.el8_10.9
 cyrus-sasl-lib 2.1.27-6.el8_5
 davix-libs 0.8.10-1.el8
@@ -433,7 +433,7 @@ pcre2 10.32-3.el8_6
 pcre2-devel 10.32-3.el8_6
 pcre2-utf16 10.32-3.el8_6
 pcre2-utf32 10.32-3.el8_6
-perf 4.18.0-553.89.1.el8_10
+perf 4.18.0-553.92.1.el8_10
 perl 5.26.3-423.el8_10
 perl-Algorithm-Diff 1.1903-9.el8
 perl-Archive-Tar 2.30-1.el8
