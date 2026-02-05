@@ -31,8 +31,8 @@ dcap-libs 2.47.14-7.el8
 dcap-tunnel-gsi 2.47.14-7.el8
 dejavu-fonts-common 2.35-7.el8
 dejavu-sans-fonts 2.35-7.el8
-device-mapper 1.02.181-15.el8_10.2
-device-mapper-libs 1.02.181-15.el8_10.2
+device-mapper 1.02.181-15.el8_10.3
+device-mapper-libs 1.02.181-15.el8_10.3
 dnf 4.7.0-21.el8_10.alma.1
 dnf-data 4.7.0-21.el8_10.alma.1
 dnf-plugins-core 4.0.21-25.el8
@@ -67,7 +67,7 @@ gfal2-plugin-srm 2.23.5-1.el8
 gfal2-plugin-xrootd 2.23.5-1.el8
 gfal2-util-scripts 1.9.1-1.el8
 ghc-srpm-macros 1.4.2-7.el8
-glib2 2.56.4-167.el8_10
+glib2 2.56.4-168.el8_10
 glibc 2.28-251.el8_10.27
 glibc-common 2.28-251.el8_10.27
 glibc-gconv-extra 2.28-251.el8_10.27
@@ -83,7 +83,7 @@ globus-gsi-callback 6.2-1.el8
 globus-gsi-cert-utils 10.11-1.el8
 globus-gsi-credential 8.5-1.el8
 globus-gsi-openssl-error 4.4-1.el8
-globus-gsi-proxy-core 9.8-1.el8
+globus-gsi-proxy-core 9.9-1.el8
 globus-gsi-proxy-ssl 6.6-1.el8
 globus-gsi-sysconfig 9.6-1.el8
 globus-gss-assist 12.7-1.el8
@@ -96,7 +96,7 @@ globus-xio 6.6-1.el8
 globus-xio-gsi-driver 5.4-1.el8
 globus-xio-popen-driver 4.1-5.el8
 gmp 6.1.2-11.el8
-gnupg2 2.2.20-3.el8_6
+gnupg2 2.2.20-4.el8_10
 gnutls 3.6.16-8.el8_10.4
 go-srpm-macros 2-17.el8
 gpg-pubkey 2f4f9f6e-555ddaa1
@@ -114,7 +114,7 @@ info 6.5-7.el8
 iputils 20180629-11.el8
 isa-l 2.31.1-7.el8
 json-c 0.13.1-3.el8
-kernel-headers 4.18.0-553.89.1.el8_10
+kernel-headers 4.18.0-553.100.1.el8_10
 keyutils-libs 1.5.10-9.el8
 kmod-libs 25-20.el8
 krb5-libs 1.18.2-32.el8_10
@@ -207,7 +207,6 @@ openblas-srpm-macros 2-2.el8
 openldap 2.4.46-21.el8_10
 openssl 1.1.1k-14.el8_10
 openssl-libs 1.1.1k-14.el8_10
-openssl-pkcs11 0.4.10-3.el8
 p11-kit 0.23.22-2.el8
 p11-kit-trust 0.23.22-2.el8
 pam 1.3.1-39.el8_10
@@ -403,7 +402,7 @@ python3-setuptools 39.2.0-9.el8_10
 python3-setuptools-wheel 39.2.0-9.el8_10
 python3-six 1.11.0-8.el8
 python3-systemd 234-8.el8
-python3-urllib3 1.24.2-8.el8_10
+python3-urllib3 1.24.2-9.el8_10
 python36 3.6.8-39.module_el8.10.0+3769+3838165b
 qt5-srpm-macros 5.15.3-1.el8
 readline 7.0-10.el8
@@ -419,9 +418,9 @@ shadow-utils 4.6-23.el8_10
 shadow-utils-subid 4.6-23.el8_10
 sqlite-libs 3.26.0-20.el8_10
 srm-ifce 1.24.8-1.el8
-systemd 239-82.el8_10.8
-systemd-libs 239-82.el8_10.8
-systemd-pam 239-82.el8_10.8
+systemd 239-82.el8_10.13
+systemd-libs 239-82.el8_10.13
+systemd-pam 239-82.el8_10.13
 systemtap-sdt-devel 4.9-3.el8
 tar 1.30-11.el8_10
 tcl 8.6.8-2.el8
