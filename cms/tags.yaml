@@ -6,13 +6,14 @@
 ########################
 rhel6-itb-x86_64: cmssw/slc6:x86_64-grid-d20250722
 rhel7-itb-x86_64: cmssw/cc7:x86_64-d20250902
-rhel8-itb-x86_64: cmssw/el8:x86_64-d20251112
-rhel9-itb-x86_64: cmssw/el9:x86_64-d20251113
+rhel8-itb-x86_64: cmssw/el8:x86_64-d20260205
+rhel9-itb-x86_64: cmssw/el9:x86_64-d20260205
+rhel10-itb-x86_64: cmssw/el10:x86_64-d20260204
 
 #itb aarch64
 rhel7-itb-aarch64: cmssw/cc7:aarch64-d20250902
-rhel8-itb-aarch64: cmssw/el8:aarch64-d20251112
-rhel9-itb-aarch64: cmssw/el9:aarch64-d20251113
+rhel8-itb-aarch64: cmssw/el8:aarch64-d20260205
+rhel9-itb-aarch64: cmssw/el9:aarch64-d20260202
 
 #itb ppc64le
 rhel8-itb-ppc64le: cmssw/el8:ppc64le-d20240531
@@ -29,12 +30,12 @@ rhel9-itb: rhel9-itb-x86_64
 ########################
 rhel6-x86_64: cmssw/slc6:x86_64-grid-d20250722
 rhel7-x86_64: cmssw/cc7:x86_64-d20250902
-rhel8-x86_64: cmssw/el8:x86_64-d20250902
-rhel9-x86_64: cmssw/el9:x86_64-d20250901
+rhel8-x86_64: cmssw/el8:x86_64-d20251112
+rhel9-x86_64: cmssw/el9:x86_64-d20251113
 
 #aarch64
-rhel8-aarch64: cmssw/el8:aarch64-d20250902
-rhel9-aarch64: cmssw/el9:aarch64-d20250901
+rhel8-aarch64: cmssw/el8:aarch64-d20251112
+rhel9-aarch64: cmssw/el9:aarch64-d20251113
 
 #ppc64le
 rhel8-ppc64le: cmssw/el8:ppc64le-d20240531
