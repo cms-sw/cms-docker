@@ -69,7 +69,7 @@ groups:
     groups:
       x86_64:
         variables:
-          EXTRA_COMMAND: dnf --enablerepo=crb install -y doxygen
+          EXTRA_COMMAND: dnf --enablerepo=crb install -y doxygen rocm-smi
         tags:
           ${group1}:
       aarch64:
