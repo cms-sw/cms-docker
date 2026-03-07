@@ -45,7 +45,7 @@ def add_tags(name):
     Compares the tags for a given package from GitHub
     and DockerHub, and pushes any new tags to GitHub using the `push_tag` function.
   """
-  rname = "cmssw%%2F%s" % name
+  rname = "cmssw/%s" % name
   res, hub_tags = get_tags(rname, full=True)
 
   if not res: return res
