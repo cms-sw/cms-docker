@@ -46,7 +46,8 @@ def add_tags(name):
     and DockerHub, and pushes any new tags to GitHub using the `push_tag` function.
   """
   rname = "cmssw/%s" % name
-  res, hub_tags = get_tags(rname, full=True)
+  
+  res, hub_tags = get_tags("cmssw%%2F%s" % name, full=True)
 
   if not res: return res
   gh_tags = get_org_package_versions("cms-sw", package=rname, token_file=token_file)
