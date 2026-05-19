@@ -423,7 +423,7 @@ pcre2 10.32-3.el8_6
 pcre2-devel 10.32-3.el8_6
 pcre2-utf16 10.32-3.el8_6
 pcre2-utf32 10.32-3.el8_6
-perf 4.18.0-553.124.1.el8_10
+perf 4.18.0-553.124.4.el8_10
 perl 5.26.3-423.el8_10
 perl-Algorithm-Diff 1.1903-9.el8
 perl-Archive-Tar 2.30-1.el8
