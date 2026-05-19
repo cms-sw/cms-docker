@@ -4,7 +4,6 @@ LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 
 # Dependencies on libidn libXmu libstdc++-static might be cleaned up in the future
 # install python39 and python311
-# Force build: 20260519
 RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper perl-Errno perl-Exporter \
 	perl-File-Path perl-File-Temp perl-Getopt-Long perl-IO perl-Text-ParseWords perl-constant \
 	perl-Digest-MD5 perl-PathTools perl-Data-Dumper perl-Digest-MD5 perl-Exporter perl-File-Path \
