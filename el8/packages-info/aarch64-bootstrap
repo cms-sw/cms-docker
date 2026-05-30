@@ -7,7 +7,7 @@ adwaita-icon-theme 3.28.0-3.el8
 almalinux-release 8.10-1.el8
 alsa-lib 1.2.10-2.el8
 annobin 11.13-2.el8
-apptainer 1.4.5-3.el8
+apptainer 1.5.0-1.el8
 at-spi2-atk 2.26.2-1.el8
 at-spi2-core 2.28.0-1.el8
 atk 2.28.1-1.el8
@@ -129,14 +129,14 @@ git-core 2.43.7-1.el8_10
 git-core-doc 2.43.7-1.el8_10
 gl-manpages 1.1-15.20161227.el8
 glib-networking 2.56.1-1.1.el8
-glib2 2.56.4-168.el8_10
-glibc 2.28-251.el8_10.34
-glibc-common 2.28-251.el8_10.34
-glibc-devel 2.28-251.el8_10.34
-glibc-gconv-extra 2.28-251.el8_10.34
-glibc-headers 2.28-251.el8_10.34
-glibc-langpack-en 2.28-251.el8_10.34
-glibc-minimal-langpack 2.28-251.el8_10.34
+glib2 2.56.4-169.el8_10
+glibc 2.28-251.el8_10.37
+glibc-common 2.28-251.el8_10.37
+glibc-devel 2.28-251.el8_10.37
+glibc-gconv-extra 2.28-251.el8_10.37
+glibc-headers 2.28-251.el8_10.37
+glibc-langpack-en 2.28-251.el8_10.37
+glibc-minimal-langpack 2.28-251.el8_10.37
 globus-callout 4.3-1.el8
 globus-common 18.15-1.el8
 globus-ftp-client 9.9-1.el8
@@ -214,7 +214,7 @@ json-glib 1.4.4-1.el8
 kbd 2.0.4-11.el8
 kbd-legacy 2.0.4-11.el8
 kbd-misc 2.0.4-11.el8
-kernel-headers 4.18.0-553.124.1.el8_10
+kernel-headers 4.18.0-553.126.1.el8_10
 keyutils-libs 1.5.10-9.el8
 keyutils-libs-devel 1.5.10-9.el8
 kmod 25-20.el8
@@ -311,7 +311,7 @@ libmodulemd 2.13.0-1.el8
 libmount 2.32.1-48.el8_10
 libmpc 1.1.0-9.1.el8
 libnghttp2 1.33.0-6.el8_10.2
-libnsl 2.28-251.el8_10.34
+libnsl 2.28-251.el8_10.37
 libnsl2 1.2.0-2.20180605git4a062cf.el8
 libotf 0.9.13-11.el8
 libpipeline 1.5.0-2.el8
@@ -339,6 +339,7 @@ libssh2 1.10.0-1.el8
 libstdc++ 8.5.0-28.el8_10.alma.1
 libstdc++-devel 8.5.0-28.el8_10.alma.1
 libstdc++-static 8.5.0-28.el8_10.alma.1
+libtalloc 2.4.1-0.el8
 libtasn1 4.13-5.el8_10
 libthai 0.1.27-2.el8
 libtiff 4.0.9-37.el8_10
@@ -431,7 +432,7 @@ pcre2 10.32-3.el8_6
 pcre2-devel 10.32-3.el8_6
 pcre2-utf16 10.32-3.el8_6
 pcre2-utf32 10.32-3.el8_6
-perf 4.18.0-553.124.4.el8_10
+perf 4.18.0-553.126.1.el8_10
 perl 5.26.3-423.el8_10
 perl-Algorithm-Diff 1.1903-9.el8
 perl-Archive-Tar 2.30-1.el8
@@ -602,6 +603,7 @@ platform-python-setuptools 39.2.0-9.el8_10
 popt 1.18-1.el8
 popt-devel 1.18-1.el8
 procps-ng 3.3.15-14.el8
+protobuf-c 1.3.0-8.el8
 publicsuffix-list-dafsa 20180723-1.el8
 pugixml 1.13-1.el8
 python-rpm-macros 3-45.el8
@@ -708,7 +710,7 @@ tmux 2.7-3.el8
 tpm2-tss 2.3.2-6.el8
 ttmkfdir 3.0.9-54.el8
 tzdata 2026a-1.el8
-tzdata-java 2026a-1.el8
+tzdata-java 2026b-1.el8
 unzip 6.0-48.el8_10
 util-linux 2.32.1-48.el8_10
 valgrind 3.22.0-3.el8_10
