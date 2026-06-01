@@ -187,7 +187,7 @@ libsepol 3.6-3.el9
 libsigsegv 2.13-4.el9
 libsmartcols 2.37.4-25.el9
 libsolv 0.7.24-4.el9
-libssh2 1.11.1-1.el9
+libssh2 1.11.1-6.el9
 libsss_idmap 2.9.8-4.el9_8
 libsss_nss_idmap 2.9.8-4.el9_8
 libstdc++ 11.5.0-14.el9.alma.1
