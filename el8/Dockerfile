@@ -15,13 +15,13 @@ RUN dnf install --disablerepo=epel -y perl-Carp perl-PathTools perl-Data-Dumper 
 	libtool libdrm-devel \
 	gcc-c++ libidn libXmu python3-cryptography jq \
 	python39 python3.11 &&\
-	dnf clean all
+	dnf clean all && rm -rf /var/cache/yum /var/cache/dnf
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace perf xauth vim cmake \
         krb5-workstation glibc-langpack-en environment-modules xdg-utils squid tmux emacs &&\
     dnf install -y screen &&\
-    dnf clean all
+    dnf clean all && rm -rf /var/cache/yum /var/cache/dnf
 
 RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static imake &&\
 	epel_pkgs="@EPEL_PACKAGES@" &&\
@@ -30,7 +30,7 @@ RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static imake &&\
 	if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
 	eval $xcmd &&\
 	dnf update -y ca-certificates &&\
-	dnf clean all &&\
+	dnf clean all && rm -rf /var/cache/yum /var/cache/dnf &&\
 	/root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
 	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 
