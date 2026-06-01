@@ -10,6 +10,7 @@ RUN chmod 0755 /usr/bin/htdecodetoken &&\
     xcmd="@EXTRA_COMMAND@" &&\
     if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
     eval $xcmd &&\
+    dnf clean all && rm -rf /var/cache/yum /var/cache/dnf &&\
     /root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
     echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 

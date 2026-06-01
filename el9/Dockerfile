@@ -7,28 +7,28 @@ LABEL name="CMS Worker Node on EL - Buildtime dependencies"
 # Aded python3.11
 
 RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl openssl-devel ncurses-devel \
-	libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel libXpm-devel \
-	java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel java-21-openjdk-devel  \
-	libtool libdrm-devel \
- 	gcc-c++ libXmu krb5-devel coreutils-single libcom_err-devel \
+    libX11-devel readline-devel tcl-devel tk-devel mesa-libGLU-devel libXext-devel libXft-devel libXpm-devel \
+    java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel java-21-openjdk-devel  \
+    libtool libdrm-devel \
+    gcc-c++ libXmu krb5-devel coreutils-single libcom_err-devel \
     python3-cryptography jq python3.11 &&\
-  dnf clean all
+  dnf clean all && rm -rf /var/cache/yum /var/cache/dnf
 
 # Please add user packages in the RUN command below
 RUN dnf install --disablerepo=epel -y man-db time bc nano strace xauth vim cmake \
-	krb5-workstation environment-modules xdg-utils squid tmux emacs &&\
-    dnf install -y screen tini &&\
-    dnf clean all
+    krb5-workstation environment-modules xdg-utils squid tmux emacs &&\
+  dnf install -y screen tini &&\
+  dnf clean all && rm -rf /var/cache/yum /var/cache/dnf
 
 RUN dnf --enablerepo=crb install -y texinfo libstdc++-static &&\
-	epel_pkgs="@EPEL_PACKAGES@" &&\
-	if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
-	xcmd="@EXTRA_COMMAND@" &&\
-	if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
-	eval $xcmd &&\
-	dnf update -y ca-certificates &&\
-	dnf clean all &&\
-        /root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
-	echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
+  epel_pkgs="@EPEL_PACKAGES@" &&\
+  if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
+  xcmd="@EXTRA_COMMAND@" &&\
+  if [ "$xcmd" = "" ] ; then xcmd=true; fi &&\
+  eval $xcmd &&\
+  dnf update -y ca-certificates &&\
+  dnf clean all && rm -rf /var/cache/yum /var/cache/dnf &&\
+  /root/fix_ssh_config.sh /etc/ssh/ssh_config &&\
+  echo "Timestamp: @BUILD_DATE@" > /image-build-info.txt
 
 LABEL build-date="@BUILD_DATE@"
