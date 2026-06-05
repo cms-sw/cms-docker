@@ -24,7 +24,7 @@ cracklib-dicts 2.9.11-8.el10
 crypto-policies 20260216-1.git0e54016.el10.alma.1
 crypto-policies-scripts 20260216-1.git0e54016.el10.alma.1
 curl 8.12.1-4.el10
-cyrus-sasl-lib 2.1.28-29.el10
+cyrus-sasl-lib 2.1.28-30.el10_2
 dbus 1.14.10-5.el10
 dbus-broker 36-4.el10
 dbus-common 1.14.10-5.el10
@@ -80,7 +80,7 @@ globus-openssl-module 5.2-8.el10_0
 globus-proxy-utils 7.4-1.el10_2
 gmp 6.2.1-12.el10
 gnupg2 2.4.5-4.el10_1
-gnutls 3.8.10-3.el10_1
+gnutls 3.8.10-4.el10_2
 go-srpm-macros 3.8.0-1.el10
 google-noto-fonts-common 20240401-5.el10
 google-noto-sans-vf-fonts 20240401-5.el10
@@ -99,7 +99,7 @@ iputils 20240905-5.el10
 isa-l 2.32.0-1.el10_2
 jansson 2.14-3.el10
 json-c 0.18-3.el10
-kernel-headers 6.12.0-211.7.3.el10_2
+kernel-headers 6.12.0-211.7.4.el10_2
 kernel-srpm-macros 1.0-27.el10
 keyutils 1.6.3-5.el10
 keyutils-libs 1.6.3-5.el10
@@ -206,8 +206,8 @@ openldap 2.6.10-1.el10
 openldap-compat 2.6.10-1.el10
 openssh 9.9p1-23.el10_2.alma.1
 openssh-clients 9.9p1-23.el10_2.alma.1
-openssl-fips-provider 3.5.5-2.el10_2.alma.1
-openssl-libs 3.5.5-2.el10_2.alma.1
+openssl-fips-provider 3.5.5-3.el10_2.alma.1
+openssl-libs 3.5.5-3.el10_2.alma.1
 p11-kit 0.26.2-1.el10
 p11-kit-trust 0.26.2-1.el10
 package-notes-srpm-macros 0.5-13.el10
@@ -497,7 +497,7 @@ tcsh 6.24.10-5.el10
 tinyxml 2.6.2-30.el10_0
 tk 8.6.13-5.el10
 tpm2-tss 4.1.3-6.el10
-tzdata 2026a-1.el10.alma.1
+tzdata 2026b-1.el10.alma.1
 unzip 6.0-69.el10
 util-linux 2.40.2-18.el10
 util-linux-core 2.40.2-18.el10
