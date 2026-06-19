@@ -32,12 +32,12 @@ rhel9-itb: rhel9-itb-x86_64
 rhel6-x86_64: cmssw/slc6:x86_64-grid-d20250722
 rhel7-x86_64: cmssw/cc7:x86_64-d20250902
 rhel8-x86_64: cmssw/el8:x86_64-d20260506
-rhel9-x86_64: cmssw/el9:x86_64-d20260513
+rhel9-x86_64: cmssw/el9:x86_64-d20260604
 rhel10-x86_64: cmssw/el10:x86_64-d20260606
 
 #aarch64
 rhel8-aarch64: cmssw/el8:aarch64-d20260506
-rhel9-aarch64: cmssw/el9:aarch64-d20260513
+rhel9-aarch64: cmssw/el9:aarch64-d20260604
 rhel10-aarch64: cmssw/el10:aarch64-d20260606
 
 #ppc64le
