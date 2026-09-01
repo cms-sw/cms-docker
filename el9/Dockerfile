@@ -11,7 +11,7 @@ RUN dnf install --disablerepo=epel -y rpm-build git nspr nss rsync wget openssl 
     java-1.8.0-openjdk-devel java-11-openjdk-devel java-17-openjdk-devel java-21-openjdk-devel  \
     libtool libdrm-devel \
     gcc-c++ libXmu krb5-devel coreutils-single libcom_err-devel \
-    python3-cryptography jq python3.11 &&\
+    python3-cryptography jq python3.11 git-lfs &&\
   dnf clean all && rm -rf /var/cache/yum /var/cache/dnf
 
 # Please add user packages in the RUN command below
