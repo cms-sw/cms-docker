@@ -145,6 +145,7 @@ libarchive 3.5.3-11.el9_8
 libassuan 2.5.5-3.el9
 libattr 2.6.0-1.el9_8
 libblkid 2.37.4-25.el9
+libblkid-devel 2.37.4-25.el9
 libbrotli 1.0.9-10.el9_8
 libcap 2.48-10.el9_8.1
 libcap-ng 0.8.2-7.el9
@@ -171,6 +172,7 @@ libidn2 2.3.0-7.el9
 libksba 1.5.1-7.el9
 libmodulemd 2.13.0-2.el9
 libmount 2.37.4-25.el9
+libmount-devel 2.37.4-25.el9
 libmpc 1.2.1-4.el9
 libnghttp2 1.43.0-6.el9_8.2
 libnsl 2.34-283.el9_8
@@ -182,8 +184,10 @@ librepo 1.19.0-1.el9
 libreport-filesystem 2.15.2-6.el9.alma
 libseccomp 2.5.2-2.el9
 libselinux 3.6-3.el9
+libselinux-devel 3.6-3.el9
 libsemanage 3.6-5.el9_6
 libsepol 3.6-3.el9
+libsepol-devel 3.6-3.el9
 libsigsegv 2.13-4.el9
 libsmartcols 2.37.4-25.el9
 libsolv 0.7.24-6.el9_8
@@ -240,7 +244,10 @@ p11-kit-trust 0.26.4-1.el9_8
 pam 1.5.1-28.el9_8.1
 pcre 8.44-4.el9
 pcre2 10.40-6.el9
+pcre2-devel 10.40-6.el9
 pcre2-syntax 10.40-6.el9
+pcre2-utf16 10.40-6.el9
+pcre2-utf32 10.40-6.el9
 perl 5.32.1-484.el9_8
 perl-Algorithm-Diff 1.2010-4.el9
 perl-Archive-Tar 2.38-6.el9_8.2
