@@ -82,7 +82,7 @@ emacs 29.4-13.el10_2
 emacs-common 29.4-13.el10_2
 emacs-filesystem 29.4-13.el10_2
 enchant2 2.6.9-1.el10
-environment-modules 5.6.1-2.el10
+environment-modules 5.6.1-2.el10_2.1
 epel-release 10-6.el10
 exempi 2.6.4-7.el10
 exiv2 0.28.3-5.el10
@@ -208,7 +208,7 @@ json-glib 1.8.0-5.el10
 kbd 2.6.4-8.el10_2
 kbd-legacy 2.6.4-8.el10_2
 kbd-misc 2.6.4-8.el10_2
-kernel-headers 6.12.0-211.64.1.el10_2
+kernel-headers 6.12.0-211.65.1.el10_2
 kernel-srpm-macros 1.0-27.el10
 keyutils 1.6.3-5.el10
 keyutils-libs 1.6.3-5.el10
