@@ -23,7 +23,7 @@ RUN dnf install --disablerepo=epel -y man-db time bc nano strace perf xauth vim 
     dnf install -y screen &&\
     dnf clean all && rm -rf /var/cache/yum /var/cache/dnf
 
-RUN dnf --enablerepo=powertools install -y texinfo libstdc++-static imake &&\
+RUN dnf --enablerepo=powertools install -y libmount-devel texinfo libstdc++-static imake &&\
 	epel_pkgs="@EPEL_PACKAGES@" &&\
 	if [ -n "$epel_pkgs" ] ; then dnf install -y $epel_pkgs; fi &&\
 	xcmd="@EXTRA_COMMAND@" &&\
